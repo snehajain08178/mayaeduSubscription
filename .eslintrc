@@ -1,0 +1,38 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "settings": {
+    "react": {
+      "version": "17.0.2"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "paths": ["src"]
+      },
+      "webpack": {}
+    }
+  },
+  "rules": {
+    "global-require": 0,
+    "function-paren-newline": 0,
+    "react/forbid-prop-types": 0,
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0,
+    "import/no-webpack-loader-syntax": 0,
+    "camelcase": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "react/no-danger": 0,
+    "no-nested-ternary": 0,
+    "prefer-rest-params": 0,
+    "operator-linebreak": 0
+  },
+  "extends": ["airbnb-base", "plugin:react/recommended"]
+}

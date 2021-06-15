@@ -1,0 +1,4 @@
+export const LOGIN_USER_START = 'LOGIN_USER_START';
+export const LOGIN_USER_END = 'LOGIN_USER_END';
+export const ERROR_USER_LOGIN = 'ERROR_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';

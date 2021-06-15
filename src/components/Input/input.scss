@@ -1,0 +1,30 @@
+.Components___Input {
+  position: relative;
+  width: 100%;
+  
+  .Input__Label {
+    font-size: 0.85rem;
+    margin-bottom: 0px;
+  }
+
+  .Input {
+    font-weight: normal;
+    font-size: 0.90rem;
+  }
+
+  .Error {
+    color: red;
+  }
+
+  .Error--Border {
+    border: 1px solid red;
+  }
+
+  .Input__Error {
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: -17px;
+    left: 0;
+    color: red;
+  }
+}
