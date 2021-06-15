@@ -1,6 +1,7 @@
 export default {
+  home: '/',
   dashboard: '/dashboard',
   login: '/login',
-  singup: '/signup',
+  signup: '/signup',
   payment: '/payment'
 };
