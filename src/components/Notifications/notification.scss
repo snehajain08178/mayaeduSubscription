@@ -1,0 +1,43 @@
+.Toastify__toast--success {
+  background: white !important;
+  color: green;
+  font-size: 12px;
+  .header {
+    font-weight: bold;
+  }
+
+  .sucess {
+    color: green;
+  }
+  .error {
+    color: red;
+  }
+  
+  .description {
+    color: black;
+  }
+}
+
+.Toastify__close-button {
+  color: black !important;
+}
+
+.Toastify__toast--error {
+  background: white !important;
+  color: red;
+  font-size: 12px;
+  .header {
+    font-weight: bold;
+  }
+  .description {
+    color: black;
+  }
+}
+
+.Toastify__toast-body {
+  margin: 0px 0px !important;
+}
+
+.Toastify__progress-bar {
+  background-color: darkblue !important;
+} 

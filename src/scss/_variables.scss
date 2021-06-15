@@ -1,0 +1,8 @@
+// Your variable overrides
+$primary: maroon;
+$secondary: lightpink;
+$color: red;
+$text-primary:black;
+$dark : black;
+// CoreUI and its default variables
+@import "../node_modules/@coreui/coreui/scss/coreui";

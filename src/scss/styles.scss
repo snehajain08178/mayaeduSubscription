@@ -1,0 +1,75 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import CoreUI styles
+@import "~@coreui/coreui/scss/coreui.scss";
+
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  color: $text-primary;
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Display--Flex {
+  display: flex;
+}
+
+.Border-Bottom--Gray {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.Font-Size--14px {
+  font-size: 14px;
+}
+
+.Font-Size--20px {
+  font-size: 20px;
+}
+
+.Font-Size--40 {
+  font-size: 40px;
+}
+
+.Font-Weight--Bold {
+  font-weight: bold;
+}
+
+// margins
+
+.Mt--8 {
+  margin-top: 8px;
+}
+
+.Mt--10 {
+  margin-top: 10px;
+}
+
+.Ml--10 {
+  margin-left: 10px;
+}
+
+.Mt--5 {
+  margin-top: 5px;
+}
+
+.Mt--20 {
+  margin-top: 20px;
+}
+
+// paddings
+.Pt--10 {
+  padding-top: 10px;
+}
