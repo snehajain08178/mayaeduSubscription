@@ -2,8 +2,11 @@ import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
 import './header.scss';
+import endpoints from '../../routes/endpoints';
+import { redirectTo } from '../../libs/common';
 
-export default function Header({ route }) {
+export default function Header(props) {
+  const { route, history } = props;
   return (
     <>
       <div className="Layouts__Header">
@@ -39,7 +42,8 @@ export default function Header({ route }) {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-white font-weight-bold" href="#">
+                <a className="nav-link text-white font-weight-bold"
+                  onClick={() => redirectTo(history, endpoints.singup)}>
                   <h5 className="font-weight-bold">Sing Up</h5>
                 </a>
               </li>
@@ -54,4 +58,5 @@ export default function Header({ route }) {
 
 Header.propTypes = {
   route: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
