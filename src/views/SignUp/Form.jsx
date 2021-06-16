@@ -15,10 +15,19 @@ import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import { validateEmail, validatePassword } from '../../helpers/validators';
+import SelectDrop from '../../components/SelectDrop/SelectDrop';
+import { countries } from '../../libs/constants';
+// TODO
+// onfocus colour baby purple
+// reponsive
 
 const fieldNames = {
-  EMAIL_ID: 'email',
-  PASSWORD: 'password',
+  EMAIL: 'email',
+  FULL_NAME: 'fullName',
+  CONTACT_INFO: 'contactInfo',
+  NEW_PASSWORD: 'newPassword',
+  CONFIRM_NEW_PASSWORD: 'confirmNewPassword',
+  COUNTRY: 'country',
 };
 
 function handleChange(event, preValues) {
@@ -26,12 +35,29 @@ function handleChange(event, preValues) {
   return { ...preValues, [name]: value };
 }
 
+function handleSelect(event, preValues) {
+  const { name, value } = event || {};
+  return { ...preValues, [name]: value };
+}
+
 const fields = {
-  [fieldNames.EMAIL_ID]: {
+  [fieldNames.EMAIL]: {
     handleChange,
   },
-  [fieldNames.PASSWORD]: {
+  [fieldNames.FULL_NAME]: {
     handleChange,
+  },
+  [fieldNames.CONTACT_INFO]: {
+    handleChange,
+  },
+  [fieldNames.NEW_PASSWORD]: {
+    handleChange,
+  },
+  [fieldNames.CONFIRM_NEW_PASSWORD]: {
+    handleChange,
+  },
+  [fieldNames.COUNTRY]: {
+    handleSelect,
   }
 };
 
@@ -41,20 +67,28 @@ function handleSubmit(values) {
 
 function validate({ values = {} }) {
   const errors = {};
-  if (!(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter required field';
-  } else if (!validateEmail(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter valid email id';
+  if (!(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL] = 'Please enter required field';
+  } else if (!validateEmail(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL] = 'Please enter valid email id';
   }
-  if (!values[fieldNames.PASSWORD]) {
-    errors[fieldNames.PASSWORD] = 'Please enter required field';
+  if (!(values[fieldNames.FULL_NAME])) {
+    errors[fieldNames.FULL_NAME] = 'Please enter required field';
+  }
+  if (!(values[fieldNames.NEW_PASSWORD])) {
+    errors[fieldNames.NEW_PASSWORD] = 'Please enter required field';
+  } else if (!validatePassword(values[fieldNames.PASSWORD])) {
+    errors[fieldNames.PASSWORD] = 'Please enter valid password';
+  }
+  if (!(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = 'Please enter required field';
   } else if (!validatePassword(values[fieldNames.PASSWORD])) {
     errors[fieldNames.PASSWORD] = 'Please enter valid password';
   }
   return errors;
 }
 
-function Form({ isProcessing, ...restProps }) {
+function Form({ isReadonly, isProcessing, ...restProps }) {
   const {
     values, errors, events,
   } = useForm({
@@ -65,7 +99,7 @@ function Form({ isProcessing, ...restProps }) {
   });
 
   const {
-    onBlur, onKeyUp, onChange, onSubmit
+    onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
 
   return (
@@ -78,54 +112,121 @@ function Form({ isProcessing, ...restProps }) {
               <Card className="p-4">
                 <CCardBody>
                   <CForm>
-                  <h1 className="text-center font-weight-bold">MayaEdu</h1>
-                  <h5 className="text-center">For Medical Students</h5>
-                    <p className="text-muted text-center">Sign In to your account</p>
+                    <div className="Field col-4">
+                      <SelectDrop
+                        id="Country"
+                        labelText="Country*"
+                        name={fieldNames.COUNTRY}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        selectedItem={values[fieldNames.COUNTRY]}
+                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                        value={values[fieldNames.COUNTRY] || ''}
+                        errorText={errors[fieldNames.COUNTRY]}
+                        isReadonly={isReadonly}
+                        MultiSelectDrop
+                        dropListValues={countries}
+                      />
+                    </div>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
                       <Input
-                        name={fieldNames.EMAIL_ID}
-                        labelText="Email Id"
-                        placeholder="Enter email id"
-                        value={values[fieldNames.EMAIL_ID] || ''}
-                        errorText={errors[fieldNames.EMAIL_ID]}
+                        name={fieldNames.FULL_NAME}
+                        labelText="Full Name*"
+                        placeholder="Enter full name"
+                        value={values[fieldNames.FULL_NAME] || ''}
+                        errorText={errors[fieldNames.FULL_NAME]}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
                           onChange={onChange}
                           disabled={isProcessing}
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4">
+                    <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
                       <Input
-                        labelText="Password"
-                        type="password"
-                        placeholder="Enter password"
-                        name={fieldNames.PASSWORD}
-                        value={values[fieldNames.PASSWORD] || ''}
-                        errorText={errors[fieldNames.PASSWORD]}
+                        name={fieldNames.CONTACT_INFO}
+                        labelText="Contact info"
+                        placeholder="Enter Contact no."
+                        value={values[fieldNames.CONTACT_INFO] || ''}
+                        errorText={errors[fieldNames.CONTACT_INFO]}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        disabled={isProcessing}
-                        maxLength={14}
+                          onChange={onChange}
+                          disabled={isProcessing}
                       />
-                      </CInputGroup>
-                      <CRow>
-                        <CCol xs="6">
+                    </CInputGroup>
+                    <CInputGroup className="mb-3">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.EMAIL}
+                        labelText="Email*"
+                        placeholder="Enter Email"
+                        value={values[fieldNames.EMAIL] || ''}
+                        errorText={errors[fieldNames.EMAIL]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                          onChange={onChange}
+                          disabled={isProcessing}
+                      />
+                    </CInputGroup>
+                    <CInputGroup className="mb-3">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.NEW_PASSWORD}
+                        labelText="New Password*"
+                        placeholder="Enter Password"
+                        value={values[fieldNames.NEW_PASSWORD] || ''}
+                        errorText={errors[fieldNames.NEW_PASSWORD]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                          onChange={onChange}
+                          disabled={isProcessing}
+                      />
+                    </CInputGroup>
+                    <div>
+                      <p className='text-center'>Password should meet following creteria: </p>
+                      <CRow className="justify-content-between mx-auto">
+                        <p>Uppercase</p>
+                        <p>Lowercase</p>
+                      </CRow>
+                      <CRow className="justify-content-between mx-auto">
+                        <p>Numeric</p>
+                        <p>Min 8 characters</p>
+                      </CRow>
+                      <CRow className="justify-content-between mx-auto">
+                        <p>Special character</p>
+                        <p>Passwords must Match</p>
+                      </CRow>
+                    </div>
+                    <CInputGroup className="mb-3">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.CONFIRM_NEW_PASSWORD}
+                        labelText="Confirm New Password*"
+                        placeholder="Enter Confirm Password"
+                        value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
+                        errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                          onChange={onChange}
+                          disabled={isProcessing}
+                      />
+                    </CInputGroup>
+                    <p>Accept the Terms & Conditions</p>
+                      <CRow className="justify-content-center">
                           <Button
                             color="primary"
                             className="px-4"
                             onClick={onSubmit}
                             disabled={isProcessing}
-                            >Login
+                            >SignUp
                           </Button>
-                        </CCol>
-                        <CCol xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </CCol>
                       </CRow>
                     </CForm>
                   </CCardBody>
@@ -141,9 +242,11 @@ function Form({ isProcessing, ...restProps }) {
 
 Form.defaultProps = {
   isProcessing: false,
+  isReadonly: false,
 };
 
 Form.propTypes = {
+  isReadonly: PropTypes.bool,
   isProcessing: PropTypes.bool,
 };
 
