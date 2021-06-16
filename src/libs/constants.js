@@ -736,6 +736,13 @@ export const countries = [
   }
 ];
 
+export const professionalCategory = [
+  { name: 'Health Professional' },
+  { name: 'Student' },
+  { name: 'Intern' }
+];
+
 export default {
   countries,
+  professionalCategory
 };

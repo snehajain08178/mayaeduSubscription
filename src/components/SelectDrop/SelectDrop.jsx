@@ -107,7 +107,7 @@ export default function SelectDrop({
         style={isReadonly ? {
           fontWeight: 'bold',
           fontSize: '14px',
-        } : {} }
+        } : { width: '150px' } }
         >{labelText}</div>
       }
       {

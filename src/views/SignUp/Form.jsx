@@ -16,10 +16,11 @@ import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import { validateEmail, validatePassword } from '../../helpers/validators';
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
-import { countries } from '../../libs/constants';
+import { countries, professionalCategory } from '../../libs/constants';
 // TODO
 // onfocus colour baby purple
 // reponsive
+// Automatic login and free trial automatic hit
 
 const fieldNames = {
   EMAIL: 'email',
@@ -28,6 +29,7 @@ const fieldNames = {
   NEW_PASSWORD: 'newPassword',
   CONFIRM_NEW_PASSWORD: 'confirmNewPassword',
   COUNTRY: 'country',
+  PROFESSIONAL_DETAILS: 'professionalDetails',
 };
 
 function handleChange(event, preValues) {
@@ -57,6 +59,9 @@ const fields = {
     handleChange,
   },
   [fieldNames.COUNTRY]: {
+    handleSelect,
+  },
+  [fieldNames.PROFESSIONAL_DETAILS]: {
     handleSelect,
   }
 };
@@ -218,6 +223,22 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                           disabled={isProcessing}
                       />
                     </CInputGroup>
+                    <div className="Field col-4">
+                      <SelectDrop
+                        id="ProfesionalDetails"
+                        labelText="Professional Details"
+                        name={fieldNames.PROFESSIONAL_DETAILS}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
+                        onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
+                        value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
+                        errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
+                        isReadonly={isReadonly}
+                        MultiSelectDrop
+                        dropListValues={professionalCategory}
+                      />
+                    </div>
                     <p>Accept the Terms & Conditions</p>
                       <CRow className="justify-content-center">
                           <Button
