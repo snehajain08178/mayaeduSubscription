@@ -34,15 +34,25 @@ import SVG from '../../assets/img/svg';
 // Add strings in constant file
 // required fields common on top of page
 // Styling for select drop down
+// Accept terms and conditionss mandatory
+// Check signup validations from mayaedu
+
+let passwordCriteria = {
+  upper: false,
+  lower: false,
+  number: false,
+  specialCharacter: false,
+  textLen: false,
+};
 
 const fieldNames = {
   EMAIL: 'email',
-  FULL_NAME: 'fullName',
-  CONTACT_INFO: 'contactInfo',
-  NEW_PASSWORD: 'newPassword',
+  FULL_NAME: 'name',
+  CONTACT_INFO: 'mobileNumber',
+  NEW_PASSWORD: 'password',
   CONFIRM_NEW_PASSWORD: 'confirmNewPassword',
   COUNTRY: 'country',
-  PROFESSIONAL_DETAILS: 'professionalDetails',
+  PROFESSIONAL_DETAILS: 'profession',
 };
 
 function handleChange(event, preValues) {
@@ -52,7 +62,11 @@ function handleChange(event, preValues) {
 
 function handleSelect(event, preValues) {
   const { name, value } = event || {};
-  return { ...preValues, [name]: value };
+  return {
+    ...preValues,
+    [name]: name === fieldNames.COUNTRY ? { name: value.name, code: value.code } :
+      name === fieldNames.PROFESSIONAL_DETAILS ? value.name : value
+  };
 }
 
 const fields = {
@@ -105,13 +119,14 @@ function validate({ values = {} }) {
   }
   if (!(values[fieldNames.NEW_PASSWORD])) {
     errors[fieldNames.NEW_PASSWORD] = 'Please enter required field';
-  } else if (!validatePassword(values[fieldNames.PASSWORD])) {
+  } else if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
+    && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
     errors[fieldNames.PASSWORD] = 'Please enter valid password';
   }
   if (!(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
     errors[fieldNames.CONFIRM_NEW_PASSWORD] = 'Please enter required field';
-  } else if (!validatePassword(values[fieldNames.PASSWORD])) {
-    errors[fieldNames.PASSWORD] = 'Please enter valid password';
+  } else if (!validatePassword(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = 'Please enter valid password';
   }
   return errors;
 }
@@ -139,14 +154,8 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
   const {
     onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
-  const [passwordCriteria, setPasswordCriteria] = useState({
-    upper: false,
-    lower: false,
-    number: false,
-    specialCharacter: false,
-    textLen: false,
-  });
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   const isPassCriteriaMatch = (text) => {
     let upper = false;
@@ -169,9 +178,10 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
     if (text && text.length >= 8) {
       textLen = true;
     }
-    setPasswordCriteria((prevCriteria) => ({
-      ...prevCriteria, upper, lower, number, specialCharacter, textLen
-    }));
+    passwordCriteria = {
+      ...passwordCriteria, upper, lower, number, specialCharacter, textLen
+    };
+    setForceUpdate(!forceUpdate);
   };
 
   React.useEffect(() => {
