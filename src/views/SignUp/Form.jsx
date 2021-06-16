@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
@@ -7,20 +7,32 @@ import {
   CContainer,
   CInputGroup,
   CInputGroupPrepend,
-  CRow
+  CRow,
+  CImg
 } from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
-import { validateEmail, validatePassword } from '../../helpers/validators';
+import {
+  validateEmail, validatePassword, validateName, validateNumber,
+  validateUpperCase,
+  validateLowerCase,
+  validateSpecialCharacters,
+  validateNumberExist
+} from '../../helpers/validators';
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
 import { countries, professionalCategory } from '../../libs/constants';
+import SVG from '../../assets/img/svg';
+
 // TODO
 // onfocus colour baby purple
-// reponsive
+// reponsive and styling
 // Automatic login and free trial automatic hit
+// background colour baby purple
+// Add strings in constant file
+// required fields common on top of page
 
 const fieldNames = {
   EMAIL: 'email',
@@ -72,6 +84,9 @@ function handleSubmit(values) {
 
 function validate({ values = {} }) {
   const errors = {};
+  if (!(values[fieldNames.COUNTRY])) {
+    errors[fieldNames.COUNTRY] = 'Please enter required field';
+  }
   if (!(values[fieldNames.EMAIL])) {
     errors[fieldNames.EMAIL] = 'Please enter required field';
   } else if (!validateEmail(values[fieldNames.EMAIL])) {
@@ -79,6 +94,13 @@ function validate({ values = {} }) {
   }
   if (!(values[fieldNames.FULL_NAME])) {
     errors[fieldNames.FULL_NAME] = 'Please enter required field';
+  } else if (!validateName(values[fieldNames.FULL_NAME])) {
+    errors[fieldNames.FULL_NAME] = 'Please enter a valid name!';
+  }
+  if ((values[fieldNames.CONTACT_INFO] < 9)
+  || ((!validateNumber(values[fieldNames.CONTACT_INFO])
+  && (values[fieldNames.CONTACT_INFO].length > 1)))) {
+    errors[fieldNames.CONTACT_INFO] = 'Please enter a valid contact number!';
   }
   if (!(values[fieldNames.NEW_PASSWORD])) {
     errors[fieldNames.NEW_PASSWORD] = 'Please enter required field';
@@ -93,6 +115,17 @@ function validate({ values = {} }) {
   return errors;
 }
 
+function CreteriaView(label, isTrue = false) {
+  return (
+    <div className="d-flex flex-row col-5 align-items-start">
+      <CImg
+        src={isTrue ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
+      />
+      <p>{label}</p>
+    </div>
+  );
+}
+
 function Form({ isReadonly, isProcessing, ...restProps }) {
   const {
     values, errors, events,
@@ -102,10 +135,46 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
     fields,
     validate: validate.bind(restProps),
   });
-
   const {
     onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    upper: false,
+    lower: false,
+    number: false,
+    specialCharacter: false,
+    textLen: false,
+  });
+
+  const isPassCriteriaMatch = (text) => {
+    let upper = false;
+    let lower = false;
+    let number = false;
+    let specialCharacter = false;
+    let textLen = false;
+    if (validateUpperCase(text)) {
+      upper = true;
+    }
+    if (validateLowerCase(text)) {
+      lower = true;
+    }
+    if (validateNumberExist(text)) {
+      number = true;
+    }
+    if (validateSpecialCharacters(text)) {
+      specialCharacter = true;
+    }
+    if (text && text.length >= 8) {
+      textLen = true;
+    }
+    setPasswordCriteria((prevCriteria) => ({
+      ...prevCriteria, upper, lower, number, specialCharacter, textLen
+    }));
+  };
+
+  React.useEffect(() => {
+    isPassCriteriaMatch(values[fieldNames.NEW_PASSWORD]);
+  }, [values[fieldNames.NEW_PASSWORD]]);
 
   return (
     <div className="Login__Form">
@@ -195,17 +264,17 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                     </CInputGroup>
                     <div>
                       <p className='text-center'>Password should meet following creteria: </p>
-                      <CRow className="justify-content-between mx-auto">
-                        <p>Uppercase</p>
-                        <p>Lowercase</p>
+                      <CRow>
+                      {(CreteriaView('Uppercase', passwordCriteria.upper))}
+                      {(CreteriaView('Lowercase', passwordCriteria.lower))}
                       </CRow>
-                      <CRow className="justify-content-between mx-auto">
-                        <p>Numeric</p>
-                        <p>Min 8 characters</p>
+                      <CRow>
+                      {(CreteriaView('Numeric', passwordCriteria.number))}
+                      {(CreteriaView('Min 8 characters', passwordCriteria.textLen))}
                       </CRow>
-                      <CRow className="justify-content-between mx-auto">
-                        <p>Special character</p>
-                        <p>Passwords must Match</p>
+                      <CRow>
+                      {(CreteriaView('Special character', passwordCriteria.specialCharacter))}
+                      {(CreteriaView('Passwords must Match', values[fieldNames.NEW_PASSWORD] && values[fieldNames.NEW_PASSWORD] === values[fieldNames.CONFIRM_NEW_PASSWORD]))}
                       </CRow>
                     </div>
                     <CInputGroup className="mb-3">
