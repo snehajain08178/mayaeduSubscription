@@ -33,6 +33,7 @@ import SVG from '../../assets/img/svg';
 // background colour baby purple
 // Add strings in constant file
 // required fields common on top of page
+// Styling for select drop down
 
 const fieldNames = {
   EMAIL: 'email',
@@ -145,6 +146,7 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
     specialCharacter: false,
     textLen: false,
   });
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const isPassCriteriaMatch = (text) => {
     let upper = false;
@@ -308,7 +310,15 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                         dropListValues={professionalCategory}
                       />
                     </div>
-                    <p>Accept the Terms & Conditions</p>
+                    <div
+                      className="d-flex flex-row justify-content-center"
+                      onClick={() => setTermsAccepted(!termsAccepted)}
+                    >
+                      <CImg
+                        src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                      />
+                      <p>Accept the Terms & Conditions</p>
+                    </div>
                       <CRow className="justify-content-center">
                           <Button
                             color="primary"
