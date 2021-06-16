@@ -6,6 +6,7 @@ import Login from 'views/Login';
 import endpoints from './endpoints';
 import SignUp from '../views/SignUp';
 import Header from '../layouts/Header';
+import LogoutContainer from '../layouts/LogoutContainer';
 
 export default [
   {
@@ -18,7 +19,7 @@ export default [
         routes: [
           {
             path: '/',
-            component: Header,
+            component: LogoutContainer,
             exact: true,
             routes: [
               {
@@ -40,7 +41,7 @@ export default [
         ]
       },
       {
-        path: endpoints.singup,
+        path: endpoints.signup,
         exact: true,
         component: LogoutRequired,
         routes: [

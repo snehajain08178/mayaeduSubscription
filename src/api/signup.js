@@ -4,7 +4,7 @@ import endPoints from './endPoints';
 export function signup({ payload }) {
   return apiCall({
     method: 'post',
-    endpoint: `${endPoints.singup}`,
+    endpoint: `${endPoints.signup}`,
     payload
   });
 }
