@@ -35,13 +35,12 @@ import {
   invalidNumber,
   passwordFormat
 } from '../../libs/strings';
+import '../../components/Button/button.scss';
 
 // TODO
-// reponsive and styling
 // Automatic login and free trial automatic hit
 // Accept terms and conditionss mandatory
 // Check signup validations from mayaedu
-// Header import
 
 let passwordCriteria = {
   upper: false,
@@ -325,8 +324,9 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                         </div>
                           <CRow className="justify-content-center">
                               <Button
-                                color="primary"
-                                className="px-4"
+                                color='primary'
+                                shape="rounded-pill"
+                                className="px-4 Button"
                                 onClick={onSubmit}
                                 disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
                                   values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
