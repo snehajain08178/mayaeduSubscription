@@ -104,7 +104,7 @@ export default function SelectDrop({
   }, []);
 
   return (
-    <div className="Flex Flex-Direction-Column SelectDrop">
+    <div className="SelectDrop">
       {
         labelText
         && <div className="LabelText"

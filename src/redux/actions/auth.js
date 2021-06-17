@@ -63,9 +63,13 @@ export function raiseErrorSignupUser() {
 }
 
 export function signUpUser(payload = {}, callBack) {
+  const data = payload;
+  if (!payload.mobileNumber) {
+    delete data.mobileNumber;
+  }
   return (dispatch) => {
     dispatch(signupUserStart());
-    signupApi({ payload })
+    signupApi(data)
       .then((res = {}) => {
         dispatch(signupUserEnd(res.body));
         callBack();

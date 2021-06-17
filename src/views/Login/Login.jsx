@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { redirectTo } from 'libs/common';
 import Form from './Form';
-
 import { loginUser } from '../../redux/actions/auth';
 import endpoints from '../../routes/endpoints';
+import './login.scss';
 
 function Login(props) {
   const { history, auth } = props;

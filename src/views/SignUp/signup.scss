@@ -12,18 +12,18 @@
   top: 0;
   .Signup_Form {
     .Card_View {
-      padding: 70px 20px 70px 20px;
-      border-radius: 15px;
+      padding: 70px 20px;
+    }
+    .card {
+      border-radius: 16px;
+    }
+    .Button__Signup {
+      padding: 6px 32px !important;
+      border-radius: 22px !important;
     }
   }
 }
 
-.Button {
-  border-radius: 30px !important;
-  margin-top: 28px;
-  width: 175px;
-}
-
 .svgIcon {
-  margin: 0px 10px 0px 10px;
+  margin: 0px 5px 0px 5px;
 }

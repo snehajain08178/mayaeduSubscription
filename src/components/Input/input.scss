@@ -1,32 +1,53 @@
+@import '../../scss/variables';
+
 .Components___Input {
   position: relative;
   width: 100%;
   
   .Input__Label {
+    margin-bottom: 4px;
+    font-weight: 700;
     font-size: 0.75rem;
-    margin-bottom: 0px;
-    margin-left: 23px;
+    margin-left: 16px;
+  }
+
+  .Box--Shadow {
+    box-shadow: 0 4px 8px 0 $shadow;
   }
 
   .Input {
-    font-weight: normal;
-    font-size: 0.90rem;
+    outline: none;
+    padding: .375rem .75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+    border: 1px solid;
     border-radius: 22px;
+    border-color: $input-border;
+    color: $input-color;
+    background-color: $input-background;
   }
 
   .Error {
-    color: red;
+    color: $error;
   }
 
   .Error--Border {
-    border: 1px solid red;
+    border: 1px solid $error;
   }
 
   .Input__Error {
     font-size: 0.75rem;
     position: absolute;
-    bottom: -17px;
-    left: 23px;
-    color: red;
+    bottom: -18px;
+    left: 16px;
+    color: $error;
   }
+}
+
+.svgInputIcons {
+  position: absolute;
+  right: 15px;
+  top: 48%
 }
