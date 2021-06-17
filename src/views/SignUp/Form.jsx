@@ -36,6 +36,7 @@ import {
   passwordFormat
 } from '../../libs/strings';
 import '../../components/Button/button.scss';
+import '../../assets/img/svg/svg.scss';
 
 // TODO
 // Automatic login and free trial automatic hit
@@ -319,8 +320,9 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                         >
                           <CImg
                             src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                            className="svgIcon"
                           />
-                          <p>Accept the Terms & Conditions</p>
+                          <p>Accept the <u>Terms & Conditions</u></p>
                         </div>
                           <CRow className="justify-content-center">
                               <Button
