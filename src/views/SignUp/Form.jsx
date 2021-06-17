@@ -33,7 +33,13 @@ import {
   invalidEmail,
   nameValidation,
   invalidNumber,
-  passwordFormat
+  passwordFormat,
+  uppercase,
+  lowercase,
+  numeric,
+  minCharacters,
+  specialChar,
+  passwordMismatch
 } from '../../libs/strings';
 
 let passwordCriteria = {
@@ -119,14 +125,16 @@ function validate({ values = {} }) {
   return errors;
 }
 
-function CreteriaView(label, isTrue = false) {
+function CriteriaView(label, check = false) {
   return (
-    <div className="d-flex flex-row col-5 align-items-start">
-      <CImg
-        src={isTrue ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
-      />
-      <p>{label}</p>
-    </div>
+    <CCol>
+      <CRow>
+        <CImg
+          src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
+        />
+        <p className="pl-2">{label}</p>
+      </CRow>
+    </CCol>
   );
 }
 
@@ -184,7 +192,7 @@ function Form({ isProcessing, ...restProps }) {
     <div className="Signup_Form">
       <CContainer>
             <CRow className="justify-content-center">
-              <CCol sm="12" md="10" lg="8" xl="7" xxl="6" className="Card_View">
+              <CCol sm="12" md="10" lg="9" xl="8" xxl="7" className="Card_View">
                 <CCardGroup>
                   <Card className="p-4 Card_View">
                     <CCardBody>
@@ -272,19 +280,22 @@ function Form({ isProcessing, ...restProps }) {
                             })}
                           />
                         </CInputGroup>
-                        <div>
-                          <p className='text-center'>Password should meet following creteria: </p>
-                          <CRow>
-                          {(CreteriaView('Uppercase', passwordCriteria.upper))}
-                          {(CreteriaView('Lowercase', passwordCriteria.lower))}
+                        <div className="my-4">
+                          <CRow className="my-2 font-weight-bold justify-content-center">Password should meet following criteria:</CRow>
+                          <CRow className="ml-1 justify-content-between">
+                          {(CriteriaView(uppercase, passwordCriteria.upper))}
+                          {(CriteriaView(lowercase, passwordCriteria.lower))}
                           </CRow>
-                          <CRow>
-                          {(CreteriaView('Numeric', passwordCriteria.number))}
-                          {(CreteriaView('Min 8 characters', passwordCriteria.textLen))}
+                          <CRow className="ml-1 justify-content-between">
+                          {(CriteriaView(numeric, passwordCriteria.number))}
+                          {(CriteriaView(minCharacters, passwordCriteria.textLen))}
                           </CRow>
-                          <CRow>
-                          {(CreteriaView('Special character', passwordCriteria.specialCharacter))}
-                          {(CreteriaView('Passwords must Match', values[fieldNames.NEW_PASSWORD] && values[fieldNames.NEW_PASSWORD] === values[fieldNames.CONFIRM_NEW_PASSWORD]))}
+                          <CRow className="ml-1 justify-content-between">
+                          {(CriteriaView(specialChar, passwordCriteria.specialCharacter))}
+                          {(CriteriaView(passwordMismatch,
+                            values[fieldNames.NEW_PASSWORD] &&
+                            values[fieldNames.NEW_PASSWORD] ===
+                            values[fieldNames.CONFIRM_NEW_PASSWORD]))}
                           </CRow>
                         </div>
                         <CInputGroup className="mb-3">
@@ -322,16 +333,20 @@ function Form({ isProcessing, ...restProps }) {
                             dropListValues={professionalCategory}
                           />
                         </CInputGroup>
-                        <div
-                          className="d-flex flex-row justify-content-center"
+                        <CRow
+                          className="py-2 justify-content-center"
                           onClick={() => setTermsAccepted(!termsAccepted)}
                         >
-                          <CImg
-                            src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
-                            className="svgIcon"
-                          />
-                          <p>Accept the <u>Terms & Conditions</u></p>
-                        </div>
+                          <CRow>
+                            <CImg
+                              src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                              className='svgIcon'
+                            />
+                            <a data-toggle="modal" data-target="#exampleModalLong">
+                              Accept the Terms & Conditions
+                            </a>
+                          </CRow>
+                        </CRow>
                           <CRow className="justify-content-center">
                               <Button
                                 color='primary'
