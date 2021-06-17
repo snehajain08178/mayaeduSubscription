@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CInput } from '@coreui/react';
+import { CInput, CImg } from '@coreui/react';
 import './input.scss';
+import SVG from '../../assets/img/svg';
 
 function Input({
-  labelText, className, errorText, isReadonly, ...restProps
+  icon, labelText, className, errorText, isReadonly, ...restProps
 }) {
   return (
     <div className="Components___Input">
@@ -21,6 +22,7 @@ function Input({
           )
           : (
             <>
+              <div className="d-flex flex-row">
               <CInput
                 autoComplete="new-password"
                 className={`Input Box--Shadow ${errorText && 'Error--Border'} ${className}`}
@@ -29,6 +31,13 @@ function Input({
               {
                 errorText && <span className="Input__Error">{errorText}</span>
               }
+              {icon &&
+                <CImg
+                  src={SVG[icon]}
+                  className="svgInputIcons"
+                />
+              }
+              </div>
             </>
           )
       }
@@ -42,6 +51,7 @@ Input.defaultProps = {
   maxLength: 30,
   className: '',
   isReadonly: false,
+  icon: ''
 };
 
 Input.propTypes = {
@@ -50,6 +60,7 @@ Input.propTypes = {
   maxLength: PropTypes.number,
   className: PropTypes.string,
   isReadonly: PropTypes.bool,
+  icon: PropTypes.string,
 };
 
 export default Input;

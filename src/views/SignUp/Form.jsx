@@ -40,6 +40,8 @@ import {
 // Automatic login and free trial automatic hit
 // Accept terms and conditionss mandatory
 // Check signup validations from mayaedu
+// Call icon
+// Contact number max length
 
 let passwordCriteria = {
   upper: false,
@@ -216,8 +218,9 @@ function Form({ isProcessing, ...restProps }) {
                             errorText={errors[fieldNames.FULL_NAME]}
                             onBlur={onBlur}
                             onKeyUp={onKeyUp}
-                              onChange={onChange}
-                              disabled={isProcessing}
+                            onChange={onChange}
+                            disabled={isProcessing}
+                            icon={'profileIcon'}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">
@@ -231,8 +234,9 @@ function Form({ isProcessing, ...restProps }) {
                             errorText={errors[fieldNames.CONTACT_INFO]}
                             onBlur={onBlur}
                             onKeyUp={onKeyUp}
-                              onChange={onChange}
-                              disabled={isProcessing}
+                            onChange={onChange}
+                            disabled={isProcessing}
+                            icon={'profileIcon'}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">
@@ -246,8 +250,9 @@ function Form({ isProcessing, ...restProps }) {
                             errorText={errors[fieldNames.EMAIL]}
                             onBlur={onBlur}
                             onKeyUp={onKeyUp}
-                              onChange={onChange}
-                              disabled={isProcessing}
+                            onChange={onChange}
+                            disabled={isProcessing}
+                            icon={'emailIcon'}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">
@@ -261,8 +266,9 @@ function Form({ isProcessing, ...restProps }) {
                             errorText={errors[fieldNames.NEW_PASSWORD]}
                             onBlur={onBlur}
                             onKeyUp={onKeyUp}
-                              onChange={onChange}
-                              disabled={isProcessing}
+                            onChange={onChange}
+                            disabled={isProcessing}
+                            icon={'profileIcon'}
                           />
                         </CInputGroup>
                         <div>
@@ -291,8 +297,9 @@ function Form({ isProcessing, ...restProps }) {
                             errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
                             onBlur={onBlur}
                             onKeyUp={onKeyUp}
-                              onChange={onChange}
-                              disabled={isProcessing}
+                            onChange={onChange}
+                            disabled={isProcessing}
+                            icon={'profileIcon'}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">
