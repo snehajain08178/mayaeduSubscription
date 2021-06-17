@@ -187,7 +187,7 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
     <div className="Signup_Form">
       <CContainer>
             <CRow className="justify-content-center">
-              <CCol md="6" className="Card_View">
+              <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
                 <CCardGroup>
                   <Card className="p-4 Card_View">
                     <CCardBody>
