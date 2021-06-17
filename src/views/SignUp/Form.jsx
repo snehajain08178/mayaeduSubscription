@@ -98,6 +98,10 @@ const fields = {
 };
 
 function handleSubmit(values) {
+  if (!values[fieldNames.CONTACT_INFO]) {
+    // eslint-disable-next-line no-param-reassign
+    delete values[fieldNames.CONTACT_INFO];
+  }
   this.onSubmit(values);
 }
 
@@ -109,7 +113,7 @@ function validate({ values = {} }) {
   if (!validateName(values[fieldNames.FULL_NAME])) {
     errors[fieldNames.FULL_NAME] = nameValidation;
   }
-  if ((values[fieldNames.CONTACT_INFO] < 9)
+  if ((values[fieldNames.CONTACT_INFO] && values[fieldNames.CONTACT_INFO] < 9)
     || ((!validateNumber(values[fieldNames.CONTACT_INFO])
     && (values[fieldNames.CONTACT_INFO].length > 1)))) {
     errors[fieldNames.CONTACT_INFO] = invalidNumber;
