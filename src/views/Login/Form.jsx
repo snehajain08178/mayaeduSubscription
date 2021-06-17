@@ -73,7 +73,7 @@ function Form({ isProcessing, ...restProps }) {
               <Card className="p-4">
                 <CCardBody>
                   <CForm>
-                  <h1 className="text-center font-weight-bold">{signIn}</h1>
+                  <h1 className="font-weight-bold pb-4">{signIn}</h1>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
@@ -108,13 +108,13 @@ function Form({ isProcessing, ...restProps }) {
                         setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
                       />
                       </CInputGroup>
-                      <CRow className="d-flex justify-content-end">
-                        <p className="forgetPassword"><u>{forgetPassword}</u></p>
+                      <CRow className="d-flex justify-content-end pt-2">
+                        <p className="font-weight-bold forgetPassword"><u>{forgetPassword}</u></p>
                       </CRow>
-                      <CRow className="justify-content-center Button">
+                      <CRow className="justify-content-center pt-5">
                         <Button
                           color="primary"
-                          className="px-4"
+                          className="px-4 Button_Login"
                           onClick={onSubmit}
                           disabled={isProcessing || !(values[fieldNames.EMAIL_ID] &&
                             values[fieldNames.PASSWORD])}
