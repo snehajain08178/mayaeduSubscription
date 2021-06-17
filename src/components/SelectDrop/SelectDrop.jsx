@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { CInput } from '@coreui/react';
+import {
+  CInput,
+  CImg
+} from '@coreui/react';
 import SelectedItem from './SelectedItem';
 import DropListItemMulti from './DropListItemMulti';
 import DropListItem from './DropListItem';
 import { findObjectIndex } from '../../helpers/collecionUtils';
 import ScrollBar from '../Scrollbar';
+import SVG from '../../assets/img/svg';
 
 import './selectDrop.scss';
 
@@ -132,13 +136,16 @@ export default function SelectDrop({
                   )
                   : (
                     <div
-                      className={`Select ${disabled ? 'Disabled' : ''} ${(errorText && !isDropVisible) ? 'Error-Border' : ''}`}
+                      className={`d-flex justify-content-between Select ${disabled ? 'Disabled' : ''} ${(errorText && !isDropVisible) ? 'Error-Border' : ''}`}
                       onClick={handleSelectFocus}
                       tabIndex={0}
                       role="button"
                       onKeyPress={handleKeyPress}
                     >
                       {selectedItem.name || selectedItem || 'Select'}
+                      <CImg
+                        src={SVG.dropdownIcon}
+                      />
                     </div>
                   )
               }
