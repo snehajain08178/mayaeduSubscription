@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { redirectTo } from 'libs/common';
 import Form from './Form';
-
+import './signup.scss';
 import { signUpUser } from '../../redux/actions/auth';
 import endpoints from '../../routes/endpoints';
 

@@ -16,7 +16,10 @@ import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import {
-  validateEmail, validatePassword, validateName, validateNumber,
+  validateEmail,
+  validatePassword,
+  validateName,
+  validateNumber,
   validateUpperCase,
   validateLowerCase,
   validateSpecialCharacters,
@@ -25,17 +28,20 @@ import {
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
 import { countries, professionalCategory } from '../../libs/constants';
 import SVG from '../../assets/img/svg';
+import './signup.scss';
+import {
+  invalidEmail,
+  nameValidation,
+  invalidNumber,
+  passwordFormat
+} from '../../libs/strings';
 
 // TODO
-// onfocus colour baby purple
 // reponsive and styling
 // Automatic login and free trial automatic hit
-// background colour baby purple
-// Add strings in constant file
-// required fields common on top of page
-// Styling for select drop down
 // Accept terms and conditionss mandatory
 // Check signup validations from mayaedu
+// Header import
 
 let passwordCriteria = {
   upper: false,
@@ -99,34 +105,23 @@ function handleSubmit(values) {
 
 function validate({ values = {} }) {
   const errors = {};
-  if (!(values[fieldNames.COUNTRY])) {
-    errors[fieldNames.COUNTRY] = 'Please enter required field';
+  if (!validateEmail(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL] = invalidEmail;
   }
-  if (!(values[fieldNames.EMAIL])) {
-    errors[fieldNames.EMAIL] = 'Please enter required field';
-  } else if (!validateEmail(values[fieldNames.EMAIL])) {
-    errors[fieldNames.EMAIL] = 'Please enter valid email id';
-  }
-  if (!(values[fieldNames.FULL_NAME])) {
-    errors[fieldNames.FULL_NAME] = 'Please enter required field';
-  } else if (!validateName(values[fieldNames.FULL_NAME])) {
-    errors[fieldNames.FULL_NAME] = 'Please enter a valid name!';
+  if (!validateName(values[fieldNames.FULL_NAME])) {
+    errors[fieldNames.FULL_NAME] = nameValidation;
   }
   if ((values[fieldNames.CONTACT_INFO] < 9)
-  || ((!validateNumber(values[fieldNames.CONTACT_INFO])
-  && (values[fieldNames.CONTACT_INFO].length > 1)))) {
-    errors[fieldNames.CONTACT_INFO] = 'Please enter a valid contact number!';
+    || ((!validateNumber(values[fieldNames.CONTACT_INFO])
+    && (values[fieldNames.CONTACT_INFO].length > 1)))) {
+    errors[fieldNames.CONTACT_INFO] = invalidNumber;
   }
-  if (!(values[fieldNames.NEW_PASSWORD])) {
-    errors[fieldNames.NEW_PASSWORD] = 'Please enter required field';
-  } else if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
-    && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
-    errors[fieldNames.PASSWORD] = 'Please enter valid password';
+  if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
+      && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
+    errors[fieldNames.PASSWORD] = passwordFormat;
   }
-  if (!(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
-    errors[fieldNames.CONFIRM_NEW_PASSWORD] = 'Please enter required field';
-  } else if (!validatePassword(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
-    errors[fieldNames.CONFIRM_NEW_PASSWORD] = 'Please enter valid password';
+  if (!validatePassword(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordFormat;
   }
   return errors;
 }
@@ -189,164 +184,165 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
   }, [values[fieldNames.NEW_PASSWORD]]);
 
   return (
-    <div className="Login__Form">
-      <div className="c-app c-default-layout flex-row align-items-center">
+    <div className="Signup_Form">
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md="6">
-            <CCardGroup>
-              <Card className="p-4">
-                <CCardBody>
-                  <CForm>
-                    <div className="Field col-4">
-                      <SelectDrop
-                        id="Country"
-                        labelText="Country*"
-                        name={fieldNames.COUNTRY}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={values[fieldNames.COUNTRY]}
-                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
-                        value={values[fieldNames.COUNTRY] || ''}
-                        errorText={errors[fieldNames.COUNTRY]}
-                        isReadonly={isReadonly}
-                        MultiSelectDrop
-                        dropListValues={countries}
-                      />
-                    </div>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.FULL_NAME}
-                        labelText="Full Name*"
-                        placeholder="Enter full name"
-                        value={values[fieldNames.FULL_NAME] || ''}
-                        errorText={errors[fieldNames.FULL_NAME]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.CONTACT_INFO}
-                        labelText="Contact info"
-                        placeholder="Enter Contact no."
-                        value={values[fieldNames.CONTACT_INFO] || ''}
-                        errorText={errors[fieldNames.CONTACT_INFO]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.EMAIL}
-                        labelText="Email*"
-                        placeholder="Enter Email"
-                        value={values[fieldNames.EMAIL] || ''}
-                        errorText={errors[fieldNames.EMAIL]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.NEW_PASSWORD}
-                        labelText="New Password*"
-                        placeholder="Enter Password"
-                        value={values[fieldNames.NEW_PASSWORD] || ''}
-                        errorText={errors[fieldNames.NEW_PASSWORD]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                      />
-                    </CInputGroup>
-                    <div>
-                      <p className='text-center'>Password should meet following creteria: </p>
-                      <CRow>
-                      {(CreteriaView('Uppercase', passwordCriteria.upper))}
-                      {(CreteriaView('Lowercase', passwordCriteria.lower))}
-                      </CRow>
-                      <CRow>
-                      {(CreteriaView('Numeric', passwordCriteria.number))}
-                      {(CreteriaView('Min 8 characters', passwordCriteria.textLen))}
-                      </CRow>
-                      <CRow>
-                      {(CreteriaView('Special character', passwordCriteria.specialCharacter))}
-                      {(CreteriaView('Passwords must Match', values[fieldNames.NEW_PASSWORD] && values[fieldNames.NEW_PASSWORD] === values[fieldNames.CONFIRM_NEW_PASSWORD]))}
-                      </CRow>
-                    </div>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.CONFIRM_NEW_PASSWORD}
-                        labelText="Confirm New Password*"
-                        placeholder="Enter Confirm Password"
-                        value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
-                        errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                      />
-                    </CInputGroup>
-                    <div className="Field col-4">
-                      <SelectDrop
-                        id="ProfesionalDetails"
-                        labelText="Professional Details"
-                        name={fieldNames.PROFESSIONAL_DETAILS}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
-                        onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
-                        value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
-                        errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
-                        isReadonly={isReadonly}
-                        MultiSelectDrop
-                        dropListValues={professionalCategory}
-                      />
-                    </div>
-                    <div
-                      className="d-flex flex-row justify-content-center"
-                      onClick={() => setTermsAccepted(!termsAccepted)}
-                    >
-                      <CImg
-                        src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
-                      />
-                      <p>Accept the Terms & Conditions</p>
-                    </div>
-                      <CRow className="justify-content-center">
-                          <Button
-                            color="primary"
-                            className="px-4"
-                            onClick={onSubmit}
-                            disabled={isProcessing}
-                            >SignUp
-                          </Button>
-                      </CRow>
-                    </CForm>
-                  </CCardBody>
-                </Card>
-              </CCardGroup>
-            </CCol>
-          </CRow>
-        </CContainer>
-      </div>
-    </div>
+            <CRow className="justify-content-center">
+              <CCol md="6" className="Card_View">
+                <CCardGroup>
+                  <Card className="p-4 Card_View">
+                    <CCardBody>
+                      <CForm>
+                        <CInputGroup className="mb-3">
+                          <SelectDrop
+                            id="Country"
+                            labelText="Country*"
+                            name={fieldNames.COUNTRY}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                            selectedItem={values[fieldNames.COUNTRY]}
+                            onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                            value={values[fieldNames.COUNTRY] || ''}
+                            errorText={errors[fieldNames.COUNTRY]}
+                            isReadonly={isReadonly}
+                            MultiSelectDrop
+                            dropListValues={countries}
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupPrepend>
+                          </CInputGroupPrepend>
+                          <Input
+                            name={fieldNames.FULL_NAME}
+                            labelText="Full Name*"
+                            placeholder="Enter full name"
+                            value={values[fieldNames.FULL_NAME] || ''}
+                            errorText={errors[fieldNames.FULL_NAME]}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                              onChange={onChange}
+                              disabled={isProcessing}
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupPrepend>
+                          </CInputGroupPrepend>
+                          <Input
+                            name={fieldNames.CONTACT_INFO}
+                            labelText="Contact info"
+                            placeholder="Enter Contact no."
+                            value={values[fieldNames.CONTACT_INFO] || ''}
+                            errorText={errors[fieldNames.CONTACT_INFO]}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                              onChange={onChange}
+                              disabled={isProcessing}
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupPrepend>
+                          </CInputGroupPrepend>
+                          <Input
+                            name={fieldNames.EMAIL}
+                            labelText="Email*"
+                            placeholder="Enter Email"
+                            value={values[fieldNames.EMAIL] || ''}
+                            errorText={errors[fieldNames.EMAIL]}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                              onChange={onChange}
+                              disabled={isProcessing}
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupPrepend>
+                          </CInputGroupPrepend>
+                          <Input
+                            name={fieldNames.NEW_PASSWORD}
+                            labelText="New Password*"
+                            placeholder="Enter Password"
+                            value={values[fieldNames.NEW_PASSWORD] || ''}
+                            errorText={errors[fieldNames.NEW_PASSWORD]}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                              onChange={onChange}
+                              disabled={isProcessing}
+                          />
+                        </CInputGroup>
+                        <div>
+                          <p className='text-center'>Password should meet following creteria: </p>
+                          <CRow>
+                          {(CreteriaView('Uppercase', passwordCriteria.upper))}
+                          {(CreteriaView('Lowercase', passwordCriteria.lower))}
+                          </CRow>
+                          <CRow>
+                          {(CreteriaView('Numeric', passwordCriteria.number))}
+                          {(CreteriaView('Min 8 characters', passwordCriteria.textLen))}
+                          </CRow>
+                          <CRow>
+                          {(CreteriaView('Special character', passwordCriteria.specialCharacter))}
+                          {(CreteriaView('Passwords must Match', values[fieldNames.NEW_PASSWORD] && values[fieldNames.NEW_PASSWORD] === values[fieldNames.CONFIRM_NEW_PASSWORD]))}
+                          </CRow>
+                        </div>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupPrepend>
+                          </CInputGroupPrepend>
+                          <Input
+                            name={fieldNames.CONFIRM_NEW_PASSWORD}
+                            labelText="Confirm New Password*"
+                            placeholder="Enter Confirm Password"
+                            value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
+                            errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                              onChange={onChange}
+                              disabled={isProcessing}
+                          />
+                        </CInputGroup>
+                        <CInputGroup className="mb-3">
+                          <SelectDrop
+                            id="ProfesionalDetails"
+                            labelText="Professional Details"
+                            name={fieldNames.PROFESSIONAL_DETAILS}
+                            onBlur={onBlur}
+                            onKeyUp={onKeyUp}
+                            selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
+                            onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
+                            value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
+                            errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
+                            isReadonly={isReadonly}
+                            MultiSelectDrop
+                            dropListValues={professionalCategory}
+                          />
+                        </CInputGroup>
+                        <div
+                          className="d-flex flex-row justify-content-center"
+                          onClick={() => setTermsAccepted(!termsAccepted)}
+                        >
+                          <CImg
+                            src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                          />
+                          <p>Accept the Terms & Conditions</p>
+                        </div>
+                          <CRow className="justify-content-center">
+                              <Button
+                                color="primary"
+                                className="px-4"
+                                onClick={onSubmit}
+                                disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
+                                  values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
+                                  && values[fieldNames.NEW_PASSWORD] &&
+                                  values[fieldNames.CONFIRM_NEW_PASSWORD])}
+                                >SignUp
+                              </Button>
+                          </CRow>
+                        </CForm>
+                      </CCardBody>
+                    </Card>
+                  </CCardGroup>
+                </CCol>
+              </CRow>
+          </CContainer>
+        </div>
   );
 }
 

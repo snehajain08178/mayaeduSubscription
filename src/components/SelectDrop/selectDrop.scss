@@ -9,7 +9,7 @@
     margin-bottom: 5px;
   }
   .SelectWrap {
-    width: 275px;
+    width: 100%;
     position: relative;
   }
   .DropList {
@@ -50,7 +50,7 @@
     padding: 10px;
   }
   .Select{
-    width: 275px;
+    width: 100%;
     height: 36px;
     border: none;
     outline: none;
@@ -72,7 +72,7 @@
     cursor: not-allowed;
   }
   .Selected-ReadOnly {
-    width: 275px;
+    width: 100%;
   }
   .SelectedItemsWrap {
     max-height: 92px;
