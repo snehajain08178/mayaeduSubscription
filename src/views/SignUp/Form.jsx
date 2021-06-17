@@ -17,7 +17,6 @@ import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import {
   validateEmail,
-  validatePassword,
   validateName,
   validateNumber,
   validateUpperCase,
@@ -119,7 +118,7 @@ function validate({ values = {} }) {
       && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
     errors[fieldNames.PASSWORD] = passwordFormat;
   }
-  if (!validatePassword(values[fieldNames.CONFIRM_NEW_PASSWORD])) {
+  if (values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]) {
     errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordFormat;
   }
   return errors;
