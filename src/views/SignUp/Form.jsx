@@ -35,8 +35,6 @@ import {
   invalidNumber,
   passwordFormat
 } from '../../libs/strings';
-import '../../components/Button/button.scss';
-import '../../assets/img/svg/svg.scss';
 
 // TODO
 // Automatic login and free trial automatic hit
@@ -137,7 +135,7 @@ function CreteriaView(label, isTrue = false) {
   );
 }
 
-function Form({ isReadonly, isProcessing, ...restProps }) {
+function Form({ isProcessing, ...restProps }) {
   const {
     values, errors, events,
   } = useForm({
@@ -203,7 +201,6 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                             onChangeSelect={onSelect(fieldNames.COUNTRY)}
                             value={values[fieldNames.COUNTRY] || ''}
                             errorText={errors[fieldNames.COUNTRY]}
-                            isReadonly={isReadonly}
                             MultiSelectDrop
                             dropListValues={countries}
                           />
@@ -309,7 +306,6 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
                             onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
                             value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
                             errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
-                            isReadonly={isReadonly}
                             MultiSelectDrop
                             dropListValues={professionalCategory}
                           />
@@ -350,11 +346,9 @@ function Form({ isReadonly, isProcessing, ...restProps }) {
 
 Form.defaultProps = {
   isProcessing: false,
-  isReadonly: false,
 };
 
 Form.propTypes = {
-  isReadonly: PropTypes.bool,
   isProcessing: PropTypes.bool,
 };
 
