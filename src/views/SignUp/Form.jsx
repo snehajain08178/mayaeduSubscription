@@ -45,6 +45,8 @@ import {
   acceptThe,
   termsAndConditions
 } from '../../libs/strings';
+import Modal from '../../components/Modal';
+import TermAndConditions from '../../components/TermsAndConditions';
 
 let passwordCriteria = {
   upper: false,
@@ -160,6 +162,7 @@ function Form({ isProcessing, ...restProps }) {
     newPassword: false,
     confirmNewPassword: false
   });
+  const [visible, setVisible] = useState(false);
 
   const isPassCriteriaMatch = (text) => {
     let upper = false;
@@ -341,13 +344,13 @@ function Form({ isProcessing, ...restProps }) {
                     </CInputGroup>
                     <CRow
                       className="my-3 justify-content-center pt-4"
-                      onClick={() => setTermsAccepted(!termsAccepted)}
                     >
                       <CRow>
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                          onClick={() => setTermsAccepted(!termsAccepted)}
                         />
-                        <p className="pl-2">{acceptThe}<u className="font-weight-bold" data-toggle="modal" data-target="#tandc">{termsAndConditions}</u></p>
+                        <p className="pl-2" onClick={() => setVisible(true)}>{acceptThe}<u className="font-weight-bold pl-1" >{termsAndConditions}</u></p>
                       </CRow>
                     </CRow>
                     <CRow className="my-4 justify-content-center">
@@ -368,6 +371,13 @@ function Form({ isProcessing, ...restProps }) {
             </CCardGroup>
           </CCol>
         </CRow>
+        <Modal
+          show={visible}
+          onClose={() => setVisible(false)}
+          title={termsAndConditions}
+        >
+          <TermAndConditions />
+        </Modal>
       </CContainer>
     </div>
   );
