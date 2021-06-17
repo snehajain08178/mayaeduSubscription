@@ -12,3 +12,7 @@ export const specialChar = 'Special character';
 export const passwordMismatch = 'Passwords must Match';
 export const signIn = 'Sign In';
 export const invalidEmailPassword = 'Invalid Email / Password';
+export const signup = 'Signup';
+export const passwordCreteriaStat = 'Password should meet following criteria:';
+export const acceptTermsCond = 'Accept the Terms & Conditions';
+export const forgetPassword = 'Forgot password?';

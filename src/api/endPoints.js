@@ -1,4 +1,4 @@
 export default {
-  login: 'public/admin/login',
+  login: 'public/login',
   signup: 'public/users/web'
 };
