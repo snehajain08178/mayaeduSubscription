@@ -41,7 +41,9 @@ import {
   passwordMismatch,
   signup,
   passwordCreteriaStat,
-  acceptTermsCond
+  passwordNotMatched,
+  acceptThe,
+  termsAndConditions
 } from '../../libs/strings';
 
 let passwordCriteria = {
@@ -119,10 +121,10 @@ function validate({ values = {} }) {
   }
   if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
       && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
-    errors[fieldNames.PASSWORD] = passwordFormat;
+    errors[fieldNames.NEW_PASSWORD] = passwordFormat;
   }
   if (values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]) {
-    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordFormat;
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordNotMatched;
   }
   return errors;
 }
@@ -338,16 +340,14 @@ function Form({ isProcessing, ...restProps }) {
                       />
                     </CInputGroup>
                     <CRow
-                      className="my-3 justify-content-center"
+                      className="my-3 justify-content-center pt-4"
                       onClick={() => setTermsAccepted(!termsAccepted)}
                     >
                       <CRow>
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
                         />
-                        <a className="pl-2 font-weight-bold" data-toggle="modal" data-target="#tandc">
-                          {acceptTermsCond}
-                        </a>
+                        <p className="pl-2">{acceptThe}<u className="font-weight-bold" data-toggle="modal" data-target="#tandc">{termsAndConditions}</u></p>
                       </CRow>
                     </CRow>
                     <CRow className="my-4 justify-content-center">
