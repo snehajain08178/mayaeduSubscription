@@ -1,6 +1,10 @@
 import {
-  login as loginApi
+  login as loginApi,
 } from '../../api/login';
+
+import {
+  signup as signupApi
+} from '../../api/signup';
 
 import { notify } from './notification';
 
@@ -9,6 +13,9 @@ import {
   ERROR_USER_LOGIN,
   LOGIN_USER_END,
   LOGOUT_USER,
+  SIGNUP_USER_START,
+  SIGNUP_USER_END,
+  ERROR_USER_SIGNUP
 } from '../constants/auth';
 
 export function loginUserStart() {
@@ -39,18 +46,33 @@ export function loginUser(payload = {}, callBack) {
   };
 }
 
+/**
+ * Signup
+ */
+
+export function signupUserStart() {
+  return ({ type: SIGNUP_USER_START });
+}
+
+export function signupUserEnd(payload = {}) {
+  return ({ type: SIGNUP_USER_END, payload });
+}
+
+export function raiseErrorSignupUser() {
+  return ({ type: ERROR_USER_SIGNUP });
+}
+
 export function signUpUser(payload = {}, callBack) {
   return (dispatch) => {
-    dispatch(loginUserStart());
-    loginApi({ payload })
+    dispatch(signupUserStart());
+    signupApi({ payload })
       .then((res = {}) => {
-        dispatch(loginUserEnd(res.header.authorization));
-        localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
+        dispatch(signupUserEnd(res.body));
         callBack();
       })
       .catch((error) => {
         dispatch(notify(error));
-        dispatch(raiseErrorLoginUser());
+        dispatch(raiseErrorSignupUser());
       });
   };
 }

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { redirectTo } from 'libs/common';
 import Form from './Form';
-
+import './signup.scss';
 import { signUpUser } from '../../redux/actions/auth';
 import endpoints from '../../routes/endpoints';
+import Header from '../../layouts/Header';
 
 function SignUp(props) {
   const { history, auth } = props;
@@ -17,12 +18,15 @@ function SignUp(props) {
   }
 
   return (
-    <div className="View__SignUp">
-      <Form
-        onSubmit={handleSignUpSubmit}
-        isProcessing={isProcessing}
-      />
-    </div>
+    <>
+      <Header />
+      <div className="View__SignUp">
+        <Form
+          onSubmit={handleSignUpSubmit}
+          isProcessing={isProcessing}
+        />
+      </div>
+    </>
   );
 }
 
