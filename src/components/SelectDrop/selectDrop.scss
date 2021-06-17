@@ -2,11 +2,13 @@
 
 .SelectDrop {
   position: relative;
-  min-height: 80px;
+  min-height: 54px;
   width: 100%;
   .LabelText {
+    font-weight: 700;
     font-size: 0.75rem;
-    margin-left: 23px;
+    margin-left: 16px;
+    margin-bottom: 4px;
   }
   .SelectWrap {
     width: 100%;
@@ -17,7 +19,7 @@
     min-height: 36px;
     background: $white;
     border-radius: 12px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 $shadow;
     position: absolute !important;
     left: 0;
     right: 0;

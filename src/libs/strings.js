@@ -10,3 +10,5 @@ export const numeric = 'Numeric';
 export const minCharacters = 'Min 8 characters';
 export const specialChar = 'Special character';
 export const passwordMismatch = 'Passwords must Match';
+export const signIn = 'Sign In';
+export const invalidEmailPassword = 'Invalid Email / Password';

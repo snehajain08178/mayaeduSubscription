@@ -1,17 +1,25 @@
+@import '../../scss/variables';
+
 .Components___Input {
   position: relative;
   width: 100%;
   
   .Input__Label {
+    margin-bottom: 4px;
+    font-weight: 700;
     font-size: 0.75rem;
-    margin-bottom: 0px;
-    margin-left: 23px;
+    margin-left: 16px;
+  }
+
+  .Box--Shadow {
+    box-shadow: 0 4px 8px 0 $shadow;
   }
 
   .Input {
     font-weight: normal;
     font-size: 0.90rem;
     border-radius: 22px;
+    padding-left: 16px;
   }
 
   .Error {
