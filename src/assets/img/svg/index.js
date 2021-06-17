@@ -9,6 +9,8 @@ import checkSquareIcon from './CheckSquare.svg';
 import dropdownIcon from './Dropdown.svg';
 import profileIcon from './Profile.svg';
 import emailIcon from './Email.svg';
+import viewPasswordSvgIcon from './ViewPassword.svg';
+import hidePasswordSvgIcon from './HidePassword.svg';
 
 export default {
   checkCircleIcon,
@@ -17,5 +19,7 @@ export default {
   checkSquareIcon,
   dropdownIcon,
   profileIcon,
-  emailIcon
+  emailIcon,
+  viewPasswordSvgIcon,
+  hidePasswordSvgIcon
 };

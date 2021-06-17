@@ -36,13 +36,6 @@ import {
   passwordFormat
 } from '../../libs/strings';
 
-// TODO
-// Automatic login and free trial automatic hit
-// Accept terms and conditionss mandatory
-// Check signup validations from mayaedu
-// Call icon
-// Contact number max length
-
 let passwordCriteria = {
   upper: false,
   lower: false,
@@ -151,6 +144,10 @@ function Form({ isProcessing, ...restProps }) {
   } = events;
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    newPassword: false,
+    confirmNewPassword: false
+  });
 
   const isPassCriteriaMatch = (text) => {
     let upper = false;
@@ -187,7 +184,7 @@ function Form({ isProcessing, ...restProps }) {
     <div className="Signup_Form">
       <CContainer>
             <CRow className="justify-content-center">
-              <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
+              <CCol sm="12" md="10" lg="8" xl="7" xxl="6" className="Card_View">
                 <CCardGroup>
                   <Card className="p-4 Card_View">
                     <CCardBody>
@@ -268,7 +265,11 @@ function Form({ isProcessing, ...restProps }) {
                             onKeyUp={onKeyUp}
                             onChange={onChange}
                             disabled={isProcessing}
-                            icon={'profileIcon'}
+                            icon={passwordVisibility.newPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                            type={passwordVisibility.newPassword ? 'password' : ''}
+                            setPasswordVisibility={() => setPasswordVisibility({
+                              newPassword: !passwordVisibility.newPassword
+                            })}
                           />
                         </CInputGroup>
                         <div>
@@ -299,7 +300,11 @@ function Form({ isProcessing, ...restProps }) {
                             onKeyUp={onKeyUp}
                             onChange={onChange}
                             disabled={isProcessing}
-                            icon={'profileIcon'}
+                            icon={passwordVisibility.confirmNewPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                            type={passwordVisibility.confirmNewPassword ? 'password' : ''}
+                            setPasswordVisibility={() => setPasswordVisibility({
+                              confirmNewPassword: !passwordVisibility.confirmNewPassword
+                            })}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">

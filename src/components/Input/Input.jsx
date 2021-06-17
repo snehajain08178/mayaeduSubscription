@@ -5,7 +5,7 @@ import './input.scss';
 import SVG from '../../assets/img/svg';
 
 function Input({
-  icon, labelText, className, errorText, isReadonly, ...restProps
+  setPasswordVisibility, icon, labelText, className, errorText, isReadonly, ...restProps
 }) {
   return (
     <div className="Components___Input">
@@ -32,10 +32,17 @@ function Input({
                 errorText && <span className="Input__Error">{errorText}</span>
               }
               {icon &&
+              <div>
                 <CImg
                   src={SVG[icon]}
                   className="svgInputIcons"
+                  onClick={() => {
+                    if (setPasswordVisibility) {
+                      setPasswordVisibility();
+                    }
+                  }}
                 />
+              </div>
               }
               </div>
             </>
@@ -51,7 +58,7 @@ Input.defaultProps = {
   maxLength: 30,
   className: '',
   isReadonly: false,
-  icon: ''
+  icon: '',
 };
 
 Input.propTypes = {
@@ -61,6 +68,7 @@ Input.propTypes = {
   className: PropTypes.string,
   isReadonly: PropTypes.bool,
   icon: PropTypes.string,
+  setPasswordVisibility: PropTypes.func,
 };
 
 export default Input;
