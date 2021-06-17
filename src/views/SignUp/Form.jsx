@@ -349,23 +349,23 @@ function Form({ isProcessing, ...restProps }) {
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
                         />
-                        <a className="pl-2" data-toggle="modal" data-target="#tandc">
+                        <a className="pl-2 font-weight-bold" data-toggle="modal" data-target="#tandc">
                           {acceptTermsCond}
                         </a>
                       </CRow>
                     </CRow>
-                    <CRow className="justify-content-center">
+                    <CRow className="my-4 justify-content-center">
                       <Button
                         color='primary'
-                        className="px-4 Button"
+                        className="Button__Signup"
                         onClick={onSubmit}
                         disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
-                          values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
-                          && values[fieldNames.NEW_PASSWORD] &&
-                          values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted)}
+                        values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
+                        && values[fieldNames.NEW_PASSWORD] &&
+                        values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted)}
                         >{signup}
                       </Button>
-                    </CRow>
+                      </CRow>
                   </CForm>
                 </CCardBody>
               </Card>

@@ -8,5 +8,9 @@ $info: #69013b;
 $error: red;
 $light-primary: #f7f2f5;
 $shadow: rgba(0, 0, 0, 0.2);
+$input-color: black;
+$input-background: white;
+$input-border: #d8dbe0;
+
 // CoreUI and its default variables
 @import "../node_modules/@coreui/coreui/scss/coreui";

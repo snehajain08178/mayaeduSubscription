@@ -16,26 +16,33 @@
   }
 
   .Input {
-    font-weight: normal;
-    font-size: 0.90rem;
+    outline: none;
+    padding: .375rem .75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+    border: 1px solid;
     border-radius: 22px;
-    padding-left: 16px;
+    border-color: $input-border;
+    color: $input-color;
+    background-color: $input-background;
   }
 
   .Error {
-    color: red;
+    color: $error;
   }
 
   .Error--Border {
-    border: 1px solid red;
+    border: 1px solid $error;
   }
 
   .Input__Error {
     font-size: 0.75rem;
     position: absolute;
-    bottom: -17px;
-    left: 23px;
-    color: red;
+    bottom: -18px;
+    left: 16px;
+    color: $error;
   }
 }
 
