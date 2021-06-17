@@ -241,7 +241,8 @@ function Form({ isProcessing, ...restProps }) {
                             onKeyUp={onKeyUp}
                             onChange={onChange}
                             disabled={isProcessing}
-                            icon={'profileIcon'}
+                            icon={'CallIcon'}
+                            maxLength={12}
                           />
                         </CInputGroup>
                         <CInputGroup className="mb-3">
@@ -356,7 +357,7 @@ function Form({ isProcessing, ...restProps }) {
                                 disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
                                   values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
                                   && values[fieldNames.NEW_PASSWORD] &&
-                                  values[fieldNames.CONFIRM_NEW_PASSWORD])}
+                                  values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted)}
                                 >SignUp
                               </Button>
                           </CRow>
