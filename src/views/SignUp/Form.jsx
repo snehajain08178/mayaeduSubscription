@@ -101,10 +101,6 @@ const fields = {
 };
 
 function handleSubmit(values) {
-  if (!values[fieldNames.CONTACT_INFO]) {
-    // eslint-disable-next-line no-param-reassign
-    delete values[fieldNames.CONTACT_INFO];
-  }
   this.onSubmit(values);
 }
 
