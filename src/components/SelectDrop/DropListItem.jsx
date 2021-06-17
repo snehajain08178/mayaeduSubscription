@@ -15,7 +15,7 @@ export default function DropListItem({
   }
   return (
     <div
-      className={`DropListItem Border-Bottom--Gray Cursor-Pointer ${(index % 2) ? 'Bg-Gray' : ''}`}
+      className={`DropListItem Cursor-Pointer ${(index % 2) ? 'Bg-Gray' : ''}`}
       onClick={handleClick}
       role="button"
       onKeyPress={handleKeyPress}
