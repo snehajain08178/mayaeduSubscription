@@ -5,8 +5,13 @@ import Home from 'views/Home';
 import Login from 'views/Login';
 import endpoints from './endpoints';
 import SignUp from '../views/SignUp';
-import Header from '../layouts/Header';
 import LogoutContainer from '../layouts/LogoutContainer';
+import Plans from '../views/Plans';
+import LoginContainer from '../layouts/LoginContainer';
+import Profile from '../views/Profile';
+import withPropProvider from '../common/providers/withPropProvider';
+import Payment from '../views/Payment';
+import Cards from '../views/Cards';
 
 export default [
   {
@@ -19,15 +24,15 @@ export default [
         routes: [
           {
             path: '/',
-            component: LogoutContainer,
+            component: LoginContainer,
             exact: true,
             routes: [
               {
-                component: Home
-              }
-            ]
+                component: Home,
+              },
+            ],
           },
-        ]
+        ],
       },
       {
         path: endpoints.login,
@@ -35,10 +40,17 @@ export default [
         component: LogoutRequired,
         routes: [
           {
-            component: Login,
-            exact: true
-          }
-        ]
+            component: withPropProvider(LoginContainer, {
+              isLogin: true,
+            }),
+            exact: true,
+            routes: [
+              {
+                component: Login,
+              },
+            ],
+          },
+        ],
       },
       {
         path: endpoints.signup,
@@ -46,27 +58,98 @@ export default [
         component: LogoutRequired,
         routes: [
           {
-            component: SignUp,
-            exact: true
-          }
-        ]
-      },
-      {
-        path: endpoints.dashboard,
-        component: LoginRequired,
-        routes: [
-          {
-            path: endpoints.dashboard,
-            component: Header,
+            component: withPropProvider(LoginContainer, {
+              isSignUp: true,
+            }),
             exact: true,
             routes: [
               {
-                component: Home
-              }
-            ]
+                component: SignUp,
+              },
+            ],
           },
-        ]
+        ],
       },
-    ]
-  }
+      {
+        path: endpoints.plans,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.plans,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: Plans,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.profile,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.profile,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: Profile,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.profile,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.profile,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: Profile,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.payment,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.payment,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: Payment,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.cards,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.cards,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: Cards,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];

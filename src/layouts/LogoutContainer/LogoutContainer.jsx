@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
-import Header from '../Header/Header';
 import Footer from '../Footer';
+import './logoutContainer.scss';
+import LogoutHeader from '../Header/LogoutHeader';
 
 const LogoutContainer = ({ route }) => (
-    <>
-      <Header />
+  <>
+    <LogoutHeader />
+    <div className="w-100 Bg--Color-lightPink Layouts__LogoutContainer">
       {renderRoutes(route.routes)}
-      <Footer />
-    </>
+    </div>
+    <Footer />
+  </>
 );
 
 LogoutContainer.propTypes = {

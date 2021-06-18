@@ -11,7 +11,7 @@ function LogoutRequired(props) {
   return (
     <Route render={
       () => (isTokenAvailable() ? (
-        <Redirect to={endpoints.dashboard} />
+        <Redirect to={endpoints.profile} />
       ) : (
         renderRoutes(route.routes, { ...props })
       ))

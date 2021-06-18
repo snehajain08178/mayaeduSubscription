@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import loaderImage from '../../assets/img';
+import Spinner from '../Spinner';
+import './contentWrap.scss';
 
 export default function ContentWrap({
-  isFetching, isError, children,
+  isFetching, isError, children, style,
 }) {
   if (isError) {
     return (<div className="ContentWrap">Something went wrong...</div>);
@@ -11,8 +12,8 @@ export default function ContentWrap({
 
   if (isFetching) {
     return (
-      <div className="ContentWrap">
-        <img src={loaderImage} alt="loading..." />
+      <div className="ContentWrap" style={style}>
+        <Spinner />
       </div>
     );
   }
@@ -21,9 +22,11 @@ export default function ContentWrap({
 
 ContentWrap.defaultProps = {
   isError: false,
+  style: {},
 };
 
 ContentWrap.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   children: PropTypes.element.isRequired,
+  style: PropTypes.object,
 };

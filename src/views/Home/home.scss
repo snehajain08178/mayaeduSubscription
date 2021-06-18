@@ -16,12 +16,16 @@
   .View__Home__Container {
     position: relative;
     margin: 0;
-    padding: 75px;
+    padding: 25px;
   }
 
   .View__Home__Button {
     max-width: 350px;
     border-radius: 25px;
     min-width: 200px;
+  }
+
+  .View__Home__Container__Left {
+    margin-top: 30px;
   }
 }
