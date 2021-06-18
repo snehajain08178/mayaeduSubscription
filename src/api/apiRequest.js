@@ -1,6 +1,8 @@
 import superagent from 'superagent';
 import config from 'config';
 import { getToken } from 'libs/auth';
+import { getReduxStoreRef } from '../helpers/reduxStore';
+import { API_ERROR_INVALID_TOKEN } from '../redux/store/constants';
 
 /*
  * @function "call" common method that makes api requests
@@ -17,6 +19,7 @@ export default function call({
   type = 'application/json'
 }) {
   const { API } = config;
+  const store = getReduxStoreRef();
   const _url = url || `${API.BASE_URL}/${endpoint}`;
   const _apiRequest = superagent(method, _url);
 
@@ -34,6 +37,9 @@ export default function call({
         .then(resolve)
         .catch((error) => {
           const errorBody = (error.response && error.response.body) || {};
+          if (errorBody && errorBody.code === 'UNAUTHORIZED') {
+            store.dispatch({ type: API_ERROR_INVALID_TOKEN });
+          }
           reject(errorBody);
         });
     })

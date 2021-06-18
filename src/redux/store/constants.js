@@ -1,0 +1,5 @@
+export const API_ERROR_INVALID_TOKEN = 'API_ERROR_INVALID_TOKEN';
+
+export default {
+  API_ERROR_INVALID_TOKEN,
+};
