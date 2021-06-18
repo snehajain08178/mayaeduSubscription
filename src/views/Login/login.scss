@@ -21,12 +21,12 @@
             border-radius: 16px;
         }
         .Button_Login {
-            padding: 6px 32px !important;
             border-radius: 22px !important;
-            width: 100%;
+            width: calc(100% - 32px);
         }
         .forgetPassword {
-            color: $primary
+            color: $primary;
+            padding-right: 16px;
         }
     } 
 }

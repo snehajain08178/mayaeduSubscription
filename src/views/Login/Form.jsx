@@ -67,7 +67,7 @@ function Form({ isProcessing, ...restProps }) {
     <div className="Login__Form">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol sm="12" md="10" lg="9" xl="8" xxl="7" className="Card_View">
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
             <CCardGroup>
               <Card>
                 <CCardBody>
