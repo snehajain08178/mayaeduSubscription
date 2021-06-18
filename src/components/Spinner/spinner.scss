@@ -1,0 +1,26 @@
+.Loader-Overlay {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9999;
+  background-color: rgba(243, 239, 239, 0.568);
+
+  .Overlay__Inner {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    position: absolute;
+  }
+
+  .Overlay__Content {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 10009;
+    transform: translate(-50%, -50%);
+  }
+}

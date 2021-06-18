@@ -86,6 +86,7 @@ function Form({ isProcessing, ...restProps }) {
                         onKeyUp={onKeyUp}
                           onChange={onChange}
                           disabled={isProcessing}
+                          maxLength={100}
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">

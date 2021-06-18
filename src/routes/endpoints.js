@@ -3,5 +3,9 @@ export default {
   dashboard: '/dashboard',
   login: '/login',
   signup: '/signup',
-  payment: '/payment'
+  payment: '/payment',
+  profile: '/profile',
+  plans: '/plans',
+  cards: '/cards',
+  updateCard: '/update-card'
 };

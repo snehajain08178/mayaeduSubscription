@@ -8,11 +8,12 @@
 body {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
-  min-height: 100vh;
   background: #fff;
   margin: 0;
   padding: 0;
   color: $text-primary;
+  min-height: 100vh;
+  height: 100%;
 }
 
 p,
@@ -72,4 +73,13 @@ ol {
 // paddings
 .Pt--10 {
   padding-top: 10px;
+}
+
+.Bg--Color-lightPink {
+  background-color: $secondary;
+  background-size: cover;
+}
+
+.Color-LightGray {
+  color: $light-gray;
 }

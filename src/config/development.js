@@ -1,6 +1,6 @@
 const API = {
   BASE_URL: 'https://edu-dev.mayamd.ai',
-  WEB_API_KEY: 'webapikey'
+  WEB_API_KEY: 'android'
 };
 
 const DEV_TOOLS = {
