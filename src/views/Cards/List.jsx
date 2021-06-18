@@ -16,21 +16,25 @@ const List = ({
       </div>
       <div className="mt-4">
         {(cardsList && cardsList.length) ||
-        (defaultCard && Object.keys(defaultCard).length)
-          ? [{ ...defaultCard, isDefault: true }, ...cardsList].map(
-            (cardDetail, index) => (
-                <CardAction
-                  key={index * 2 + 1}
-                  details={cardDetail}
-                  name={name}
-                  onChange={onChange}
-                  checked={value === cardDetail.id}
-                  onDeleteClick={onDeleteClick}
-                  isDefault={cardDetail.isDefault || false}
-                />
+        (defaultCard && Object.keys(defaultCard).length) ? (
+            [{ ...defaultCard, isDefault: true }, ...cardsList].map(
+              (cardDetail, index) => (
+              <CardAction
+                key={index * 2 + 1}
+                details={cardDetail}
+                name={name}
+                onChange={onChange}
+                checked={value === cardDetail.id}
+                onDeleteClick={onDeleteClick}
+                isDefault={cardDetail.isDefault || false}
+              />
+              )
             )
-          )
-          : null}
+          ) : (
+          <div className="text-primary font-weight-bold justify-content-center text-center">
+            No Card Available
+          </div>
+          )}
       </div>
     </div>
   );

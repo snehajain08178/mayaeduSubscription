@@ -32,7 +32,9 @@ function Plans({
     }
   }, []);
 
-  const { planType, status, planSession } =
+  const {
+    planType, status, planSession, isCancel
+  } =
     (subscriptions && subscriptions.length && subscriptions[0]) || {};
 
   return (
@@ -69,20 +71,20 @@ function Plans({
                       color="primary"
                       type="link"
                       disabled={
-                        (planType === 'basic' &&
+                        ((planType === 'basic' &&
                           status === 'Active' &&
                           planSession === 'month') ||
                         (planType === 'basic' &&
                           status === 'Active' &&
-                          planSession === 'year')
+                          planSession === 'year')) && !isCancel
                       }
                       style={
-                        (planType === 'basic' &&
+                        ((planType === 'basic' &&
                           status === 'Active' &&
                           planSession === 'month') ||
                         (planType === 'basic' &&
                           status === 'Active' &&
-                          planSession === 'year')
+                          planSession === 'year')) && !isCancel
                           ? { pointerEvents: 'none' }
                           : {}
                       }
@@ -121,14 +123,14 @@ function Plans({
                       color="primary"
                       type="link"
                       disabled={
-                        planType === 'basic' &&
+                        (planType === 'basic' &&
                         status === 'Active' &&
-                        planSession === 'year'
+                        planSession === 'year') && !isCancel
                       }
                       style={
-                        planType === 'basic' &&
+                        (planType === 'basic' &&
                         status === 'Active' &&
-                        planSession === 'year'
+                        planSession === 'year') && !isCancel
                           ? { pointerEvents: 'none' }
                           : {}
                       }

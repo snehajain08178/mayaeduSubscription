@@ -12,7 +12,7 @@ function Login(props) {
   const { isProcessing } = auth;
   function handleLoginSubmit(values) {
     props.loginUser(values, () => {
-      redirectTo(history, endpoints.plans);
+      redirectTo(history, endpoints.profile);
     });
   }
 

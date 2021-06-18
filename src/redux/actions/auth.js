@@ -71,6 +71,7 @@ export function signUpUser(payload = {}, callBack) {
     dispatch(signupUserStart());
     signupApi(data)
       .then((res = {}) => {
+        localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
         dispatch(signupUserEnd(res.body));
         callBack();
       })

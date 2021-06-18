@@ -12,6 +12,7 @@ import withStripeProvider from './withStripeProvider';
 import Form from './Form';
 import { notify } from '../../redux/actions/notification';
 import { deleteCard, updateCard } from '../../api/card';
+import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -66,6 +67,7 @@ const UpdateCard = ({
   card,
   notify: notifyAction,
 }) => {
+  const [isLoading, setLoading] = useState(false);
   const { isFetching, isError, info } = card || {};
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
@@ -84,19 +86,23 @@ const UpdateCard = ({
       return;
     }
     if (val.pmId === 'NEW_PM_ID') {
+      setLoading(true);
       const { paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: elements.getElement(CardNumberElement),
       });
       pmId = paymentMethod.id;
+      setLoading(false);
     } else if (val.pmId) {
       pmId = val.pmId;
     } else {
       notifyAction();
     }
-
+    setLoading(true);
     updateCard({ pm: pmId })
       .then(() => {
+        setLoading(false);
+        fetchCardAction();
         notifyAction({
           isError: false,
           message: 'Card updated successfully',
@@ -104,13 +110,16 @@ const UpdateCard = ({
       })
       .catch((err) => {
         notifyAction(err);
+        setLoading(false);
       });
   };
 
   function handleCardDeleteClick(delVal) {
+    setLoading(true);
     deleteCard({ fingerprint: delVal })
       .then(() => {
         fetchCardAction();
+        setLoading(false);
         notifyAction({
           isError: false,
           message: 'Card deleted successfully',
@@ -118,21 +127,28 @@ const UpdateCard = ({
       })
       .catch((err) => {
         notifyAction(err);
+        setLoading(false);
       });
   }
 
   return (
     <div className="w-100">
+      {isLoading && (<SpinnerWithOverLay />)}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <Form
-            info={info}
-            onSubmit={handleSubmit}
-            options={options}
-            initialValues={{ pmId: defaultCardPmId }}
-            onDeleteClick={handleCardDeleteClick}
-            isUpdate
-          />
+          <div className="col w-100 pt-3 p-0">
+            <h2 className="font-weight-bold p-0 pt-2">Cards</h2>
+          </div>
+          <div className="col w-100">
+            <Form
+              info={info}
+              onSubmit={handleSubmit}
+              options={options}
+              initialValues={{ pmId: defaultCardPmId }}
+              onDeleteClick={handleCardDeleteClick}
+              isUpdate
+            />
+          </div>
         </ContentWrap>
       </div>
     </div>
