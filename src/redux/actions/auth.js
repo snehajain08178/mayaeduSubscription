@@ -1,6 +1,7 @@
 import {
   login as loginApi,
 } from '../../api/login';
+import history from '../../libs/history';
 
 import {
   signup as signupApi
@@ -83,8 +84,8 @@ export function signUpUser(payload = {}, callBack) {
 }
 
 // Logout /Clear Profile
-export const logoutUser = (callBack) => (dispatch) => {
-  callBack();
+export const logoutUser = () => (dispatch) => {
+  history.push('/');
   dispatch({ type: LOGOUT_USER });
   dispatch(notify({ message: 'You logout sucessfully', isError: false }));
 };

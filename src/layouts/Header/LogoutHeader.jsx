@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import PropTypes from 'prop-types';
 import { ImSwitch } from 'react-icons/im';
+import { connect } from 'react-redux';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
-import { redirectTo } from '../../libs/common';
+import { logoutUser } from '../../redux/actions/auth';
 
-function LogoutHeader({ history }) {
+function LogoutHeader({ logoutUser: logoutUserAction }) {
   function handleLogout() {
-    localStorage.removeItem('AUTH_ACCESS_TOKEN');
-    redirectTo(history, endpoints.login);
+    logoutUserAction();
   }
   return (
     <>
@@ -48,7 +48,9 @@ function LogoutHeader({ history }) {
                 >
                   <h5 className="font-weight-bold px-4 align-items-center d-flex">
                     <ImSwitch color="white" />
-                    <span className="ml-2 mt-1" onClick={handleLogout}>Logout</span>
+                    <span className="ml-2 mt-1" onClick={handleLogout}>
+                      Logout
+                    </span>
                   </h5>
                 </Link>
               </li>
@@ -62,6 +64,11 @@ function LogoutHeader({ history }) {
 
 LogoutHeader.propTypes = {
   history: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
 };
 
-export default LogoutHeader;
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, { logoutUser })(LogoutHeader);
