@@ -6,6 +6,9 @@ import {
   ERROR_USER_LOGIN,
   LOGIN_USER_END,
   LOGOUT_USER,
+  SIGNUP_USER_START,
+  SIGNUP_USER_END,
+  ERROR_USER_SIGNUP
 } from '../constants/auth';
 
 // ------------------------------------
@@ -32,6 +35,22 @@ export default function authReducer(state = initialState, action) {
         isProcessing: false,
       };
     case ERROR_USER_LOGIN:
+    case SIGNUP_USER_START:
+      return {
+        ...initialState,
+        isProcessing: true,
+      };
+    case SIGNUP_USER_END:
+      return {
+        ...state,
+        ...payload,
+        isProcessing: false,
+      };
+    case ERROR_USER_SIGNUP:
+      return {
+        ...state,
+        isProcessing: false,
+      };
     case LOGOUT_USER:
       localStorage.removeItem('AUTH_ACCESS_TOKEN');
       return {

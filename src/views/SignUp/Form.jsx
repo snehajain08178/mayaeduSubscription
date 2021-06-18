@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
@@ -7,18 +7,59 @@ import {
   CContainer,
   CInputGroup,
   CInputGroupPrepend,
-  CRow
+  CRow,
+  CImg
 } from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
-import { validateEmail, validatePassword } from '../../helpers/validators';
+import {
+  validateEmail,
+  validateName,
+  validateNumber,
+  validateUpperCase,
+  validateLowerCase,
+  validateSpecialCharacters,
+  validateNumberExist
+} from '../../helpers/validators';
+import SelectDrop from '../../components/SelectDrop/SelectDrop';
+import { countries, professionalCategory } from '../../libs/constants';
+import SVG from '../../assets/img/svg';
+import './signup.scss';
+import {
+  invalidEmail,
+  nameValidation,
+  invalidNumber,
+  passwordFormat,
+  uppercase,
+  lowercase,
+  numeric,
+  minCharacters,
+  specialChar,
+  passwordMismatch,
+  signup,
+  passwordCreteriaStat,
+  acceptTermsCond
+} from '../../libs/strings';
+
+let passwordCriteria = {
+  upper: false,
+  lower: false,
+  number: false,
+  specialCharacter: false,
+  textLen: false,
+};
 
 const fieldNames = {
-  EMAIL_ID: 'email',
-  PASSWORD: 'password',
+  EMAIL: 'email',
+  FULL_NAME: 'name',
+  CONTACT_INFO: 'mobileNumber',
+  NEW_PASSWORD: 'password',
+  CONFIRM_NEW_PASSWORD: 'confirmNewPassword',
+  COUNTRY: 'country',
+  PROFESSIONAL_DETAILS: 'profession',
 };
 
 function handleChange(event, preValues) {
@@ -26,12 +67,36 @@ function handleChange(event, preValues) {
   return { ...preValues, [name]: value };
 }
 
+function handleSelect(event, preValues) {
+  const { name, value } = event || {};
+  return {
+    ...preValues,
+    [name]: name === fieldNames.COUNTRY ? { name: value.name, code: value.code } :
+      name === fieldNames.PROFESSIONAL_DETAILS ? value.name : value
+  };
+}
+
 const fields = {
-  [fieldNames.EMAIL_ID]: {
+  [fieldNames.EMAIL]: {
     handleChange,
   },
-  [fieldNames.PASSWORD]: {
+  [fieldNames.FULL_NAME]: {
     handleChange,
+  },
+  [fieldNames.CONTACT_INFO]: {
+    handleChange,
+  },
+  [fieldNames.NEW_PASSWORD]: {
+    handleChange,
+  },
+  [fieldNames.CONFIRM_NEW_PASSWORD]: {
+    handleChange,
+  },
+  [fieldNames.COUNTRY]: {
+    handleSelect,
+  },
+  [fieldNames.PROFESSIONAL_DETAILS]: {
+    handleSelect,
   }
 };
 
@@ -41,17 +106,38 @@ function handleSubmit(values) {
 
 function validate({ values = {} }) {
   const errors = {};
-  if (!(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter required field';
-  } else if (!validateEmail(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter valid email id';
+  if (!validateEmail(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL] = invalidEmail;
   }
-  if (!values[fieldNames.PASSWORD]) {
-    errors[fieldNames.PASSWORD] = 'Please enter required field';
-  } else if (!validatePassword(values[fieldNames.PASSWORD])) {
-    errors[fieldNames.PASSWORD] = 'Please enter valid password';
+  if (!validateName(values[fieldNames.FULL_NAME])) {
+    errors[fieldNames.FULL_NAME] = nameValidation;
+  }
+  if ((values[fieldNames.CONTACT_INFO] && values[fieldNames.CONTACT_INFO] < 9)
+    || ((!validateNumber(values[fieldNames.CONTACT_INFO])
+    && (values[fieldNames.CONTACT_INFO].length > 1)))) {
+    errors[fieldNames.CONTACT_INFO] = invalidNumber;
+  }
+  if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
+      && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
+    errors[fieldNames.PASSWORD] = passwordFormat;
+  }
+  if (values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]) {
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordFormat;
   }
   return errors;
+}
+
+function CriteriaView(label, check = false) {
+  return (
+    <CCol>
+      <CRow>
+        <CImg
+          src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
+        />
+        <p className="pl-2">{label}</p>
+      </CRow>
+    </CCol>
+  );
 }
 
 function Form({ isProcessing, ...restProps }) {
@@ -63,78 +149,226 @@ function Form({ isProcessing, ...restProps }) {
     fields,
     validate: validate.bind(restProps),
   });
-
   const {
-    onBlur, onKeyUp, onChange, onSubmit
+    onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState({
+    newPassword: false,
+    confirmNewPassword: false
+  });
+
+  const isPassCriteriaMatch = (text) => {
+    let upper = false;
+    let lower = false;
+    let number = false;
+    let specialCharacter = false;
+    let textLen = false;
+    if (validateUpperCase(text)) {
+      upper = true;
+    }
+    if (validateLowerCase(text)) {
+      lower = true;
+    }
+    if (validateNumberExist(text)) {
+      number = true;
+    }
+    if (validateSpecialCharacters(text)) {
+      specialCharacter = true;
+    }
+    if (text && text.length >= 8) {
+      textLen = true;
+    }
+    passwordCriteria = {
+      ...passwordCriteria, upper, lower, number, specialCharacter, textLen
+    };
+    setForceUpdate(!forceUpdate);
+  };
+
+  React.useEffect(() => {
+    isPassCriteriaMatch(values[fieldNames.NEW_PASSWORD]);
+  }, [values[fieldNames.NEW_PASSWORD]]);
 
   return (
-    <div className="Login__Form">
-      <div className="c-app c-default-layout flex-row align-items-center">
+    <div className="Signup_Form">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="6">
+          <CCol sm="12" md="10" lg="9" xl="8" xxl="7" className="Card_View">
             <CCardGroup>
-              <Card className="p-4">
+              <Card>
                 <CCardBody>
+                  <h1 className="text-center font-weight-bold">{signup}</h1>
                   <CForm>
-                  <h1 className="text-center font-weight-bold">MayaEdu</h1>
-                  <h5 className="text-center">For Medical Students</h5>
-                    <p className="text-muted text-center">Sign In to your account</p>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.EMAIL_ID}
-                        labelText="Email Id"
-                        placeholder="Enter email id"
-                        value={values[fieldNames.EMAIL_ID] || ''}
-                        errorText={errors[fieldNames.EMAIL_ID]}
+                    <CInputGroup className="my-4">
+                      <SelectDrop
+                        id="Country"
+                        labelText="Country*"
+                        name={fieldNames.COUNTRY}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
+                        selectedItem={values[fieldNames.COUNTRY]}
+                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                        value={values[fieldNames.COUNTRY] || ''}
+                        errorText={errors[fieldNames.COUNTRY]}
+                        MultiSelectDrop
+                        dropListValues={countries}
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4">
+                    <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
                       <Input
-                        labelText="Password"
-                        type="password"
-                        placeholder="Enter password"
-                        name={fieldNames.PASSWORD}
-                        value={values[fieldNames.PASSWORD] || ''}
-                        errorText={errors[fieldNames.PASSWORD]}
+                        name={fieldNames.FULL_NAME}
+                        labelText="Full Name*"
+                        placeholder="Enter full name"
+                        value={values[fieldNames.FULL_NAME] || ''}
+                        errorText={errors[fieldNames.FULL_NAME]}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
                         onChange={onChange}
                         disabled={isProcessing}
-                        maxLength={14}
+                        icon={'profileIcon'}
                       />
-                      </CInputGroup>
-                      <CRow>
-                        <CCol xs="6">
-                          <Button
-                            color="primary"
-                            className="px-4"
-                            onClick={onSubmit}
-                            disabled={isProcessing}
-                            >Login
-                          </Button>
-                        </CCol>
-                        <CCol xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </CCol>
+                    </CInputGroup>
+                    <CInputGroup className="my-4">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.CONTACT_INFO}
+                        labelText="Contact info"
+                        placeholder="Enter Contact no."
+                        value={values[fieldNames.CONTACT_INFO] || ''}
+                        errorText={errors[fieldNames.CONTACT_INFO]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        disabled={isProcessing}
+                        icon={'CallIcon'}
+                        maxLength={12}
+                      />
+                    </CInputGroup>
+                    <CInputGroup className="my-4">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.EMAIL}
+                        labelText="Email*"
+                        placeholder="Enter Email"
+                        value={values[fieldNames.EMAIL] || ''}
+                        errorText={errors[fieldNames.EMAIL]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        disabled={isProcessing}
+                        icon={'emailIcon'}
+                      />
+                    </CInputGroup>
+                    <CInputGroup className="my-4">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.NEW_PASSWORD}
+                        labelText="New Password*"
+                        placeholder="Enter Password"
+                        value={values[fieldNames.NEW_PASSWORD] || ''}
+                        errorText={errors[fieldNames.NEW_PASSWORD]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        disabled={isProcessing}
+                        icon={passwordVisibility.newPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                        type={passwordVisibility.newPassword ? 'password' : ''}
+                        setPasswordVisibility={() => setPasswordVisibility({
+                          newPassword: !passwordVisibility.newPassword
+                        })}
+                      />
+                    </CInputGroup>
+                    <div className="my-4">
+                      <CRow className="my-2 font-weight-bold justify-content-center">{passwordCreteriaStat}</CRow>
+                      <CRow className="ml-1 justify-content-between">
+                        {(CriteriaView(uppercase, passwordCriteria.upper))}
+                        {(CriteriaView(lowercase, passwordCriteria.lower))}
                       </CRow>
-                    </CForm>
-                  </CCardBody>
-                </Card>
-              </CCardGroup>
-            </CCol>
-          </CRow>
-        </CContainer>
-      </div>
+                      <CRow className="ml-1 justify-content-between">
+                        {(CriteriaView(numeric, passwordCriteria.number))}
+                        {(CriteriaView(minCharacters, passwordCriteria.textLen))}
+                      </CRow>
+                      <CRow className="ml-1 justify-content-between">
+                        {(CriteriaView(specialChar, passwordCriteria.specialCharacter))}
+                        {(CriteriaView(passwordMismatch,
+                          values[fieldNames.NEW_PASSWORD] &&
+                          values[fieldNames.NEW_PASSWORD] ===
+                          values[fieldNames.CONFIRM_NEW_PASSWORD]))}
+                      </CRow>
+                      </div>
+                    <CInputGroup className="my-4">
+                      <CInputGroupPrepend>
+                      </CInputGroupPrepend>
+                      <Input
+                        name={fieldNames.CONFIRM_NEW_PASSWORD}
+                        labelText="Confirm New Password*"
+                        placeholder="Enter Confirm Password"
+                        value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
+                        errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
+                        disabled={isProcessing}
+                        icon={passwordVisibility.confirmNewPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                        type={passwordVisibility.confirmNewPassword ? 'password' : ''}
+                        setPasswordVisibility={() => setPasswordVisibility({
+                          confirmNewPassword: !passwordVisibility.confirmNewPassword
+                        })}
+                      />
+                    </CInputGroup>
+                    <CInputGroup className="my-4">
+                      <SelectDrop
+                        id="ProfesionalDetails"
+                        labelText="Professional Details"
+                        name={fieldNames.PROFESSIONAL_DETAILS}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
+                        onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
+                        value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
+                        errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
+                        MultiSelectDrop
+                        dropListValues={professionalCategory}
+                      />
+                    </CInputGroup>
+                    <CRow
+                      className="my-3 justify-content-center"
+                      onClick={() => setTermsAccepted(!termsAccepted)}
+                    >
+                      <CRow>
+                        <CImg
+                          src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                        />
+                        <a className="pl-2 font-weight-bold" data-toggle="modal" data-target="#tandc">
+                          {acceptTermsCond}
+                        </a>
+                      </CRow>
+                    </CRow>
+                    <CRow className="my-4 justify-content-center">
+                      <Button
+                        color='primary'
+                        className="Button__Signup"
+                        onClick={onSubmit}
+                        disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
+                        values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
+                        && values[fieldNames.NEW_PASSWORD] &&
+                        values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted)}
+                        >{signup}
+                      </Button>
+                      </CRow>
+                  </CForm>
+                </CCardBody>
+              </Card>
+            </CCardGroup>
+          </CCol>
+        </CRow>
+      </CContainer>
     </div>
   );
 }

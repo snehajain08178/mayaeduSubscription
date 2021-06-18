@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
@@ -14,7 +14,9 @@ import Button from '../../components/Button';
 import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
-import { validateEmail, validatePassword } from '../../helpers/validators';
+import { validateEmail } from '../../helpers/validators';
+import { signIn, invalidEmailPassword, forgetPassword } from '../../libs/strings';
+import './login.scss';
 
 const fieldNames = {
   EMAIL_ID: 'email',
@@ -41,15 +43,8 @@ function handleSubmit(values) {
 
 function validate({ values = {} }) {
   const errors = {};
-  if (!(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter required field';
-  } else if (!validateEmail(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = 'Please enter valid email id';
-  }
-  if (!values[fieldNames.PASSWORD]) {
-    errors[fieldNames.PASSWORD] = 'Please enter required field';
-  } else if (!validatePassword(values[fieldNames.PASSWORD])) {
-    errors[fieldNames.PASSWORD] = 'Please enter valid password';
+  if (!validateEmail(values[fieldNames.EMAIL_ID])) {
+    errors[fieldNames.EMAIL_ID] = invalidEmailPassword;
   }
   return errors;
 }
@@ -63,10 +58,10 @@ function Form({ isProcessing, ...restProps }) {
     fields,
     validate: validate.bind(restProps),
   });
-
   const {
     onBlur, onKeyUp, onChange, onSubmit
   } = events;
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   return (
     <div className="Login__Form">
@@ -78,9 +73,7 @@ function Form({ isProcessing, ...restProps }) {
               <Card className="p-4">
                 <CCardBody>
                   <CForm>
-                  <h1 className="text-center font-weight-bold">MayaEdu</h1>
-                  <h5 className="text-center">For Medical Students</h5>
-                    <p className="text-muted text-center">Sign In to your account</p>
+                  <h1 className="text-center font-weight-bold">{signIn}</h1>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
@@ -102,7 +95,6 @@ function Form({ isProcessing, ...restProps }) {
                       </CInputGroupPrepend>
                       <Input
                         labelText="Password"
-                        type="password"
                         placeholder="Enter password"
                         name={fieldNames.PASSWORD}
                         value={values[fieldNames.PASSWORD] || ''}
@@ -112,22 +104,24 @@ function Form({ isProcessing, ...restProps }) {
                         onChange={onChange}
                         disabled={isProcessing}
                         maxLength={14}
+                        icon={passwordVisibility ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                        type={passwordVisibility ? 'password' : ''}
+                        setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
                       />
                       </CInputGroup>
-                      <CRow>
-                        <CCol xs="6">
-                          <Button
-                            color="primary"
-                            className="px-4"
-                            onClick={onSubmit}
-                            disabled={isProcessing}
-                            >Login
-                          </Button>
-                        </CCol>
-                        <CCol xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
-                        </CCol>
+                      <CRow className="d-flex justify-content-end">
+                        <p className="forgetPassword"><u>{forgetPassword}</u></p>
                       </CRow>
+                      <CRow className="justify-content-center Button">
+                        <Button
+                          color="primary"
+                          className="px-4"
+                          onClick={onSubmit}
+                          disabled={isProcessing || !(values[fieldNames.EMAIL_ID] &&
+                            values[fieldNames.PASSWORD])}
+                          >{signIn}
+                        </Button>
+                    </CRow>
                     </CForm>
                   </CCardBody>
                 </Card>
