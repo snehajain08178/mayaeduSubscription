@@ -3,9 +3,9 @@
 .View__Login {
     width: 100%;
     height: 100%;
-    background: url('../../assets/img/landingBackground.png') !important;
+    background: url('../../assets/img/loginBackground.png') !important;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     left: 0;
     right: 0;
     bottom: 0;
@@ -22,7 +22,9 @@
         }
         .Button_Login {
             border-radius: 22px !important;
-            width: calc(100% - 32px);
+            padding: 6px 32px !important;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
         .forgetPassword {
             color: $primary;
