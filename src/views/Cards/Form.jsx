@@ -55,6 +55,7 @@ const Form = ({
           name={fieldNames.PM_ID}
           onChange={onChange}
           value={values[fieldNames.PM_ID]}
+          onDeleteClick={restProps.onDeleteClick}
         />
       </div>
       <div className="col-md-6">
@@ -62,9 +63,6 @@ const Form = ({
           <div
             type="button"
             className="container w-75 shadow-sm p-3 pointer d-flex"
-            onClick={() => {
-              setAddFormVisible(!isAddFormVisible);
-            }}
           >
             <div className="col-8">
               <h6>Add Debit/Credit Card</h6>
@@ -75,6 +73,9 @@ const Form = ({
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
                 name={fieldNames.PM_ID}
+                onClick={() => {
+                  setAddFormVisible(!isAddFormVisible);
+                }}
               />
             </div>
           </div>
@@ -102,7 +103,7 @@ const Form = ({
         <div className="row w-100 mt-4">
           <div className="container w-75 d-flex justify-content-center">
             <Button color="primary" className="w-100" onClick={onSubmit}>
-              Pay
+              {restProps.isUpdate ? 'Update' : 'Pay'}
             </Button>
           </div>
         </div>

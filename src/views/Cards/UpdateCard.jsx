@@ -8,13 +8,10 @@ import {
 } from '@stripe/react-stripe-js';
 import { fetchCard } from '../../redux/actions/card';
 import ContentWrap from '../../components/ContentWrap';
-import { createSubscription } from '../../api/subscription';
 import withStripeProvider from './withStripeProvider';
 import Form from './Form';
 import { notify } from '../../redux/actions/notification';
-import { deleteCard } from '../../api/card';
-import history from '../../libs/history';
-import endpoints from '../../routes/endpoints';
+import { deleteCard, updateCard } from '../../api/card';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -64,10 +61,9 @@ const useOptions = () => {
   return options;
 };
 
-const Cards = ({
+const UpdateCard = ({
   fetchCard: fetchCardAction,
   card,
-  paymentId,
   notify: notifyAction,
 }) => {
   const { isFetching, isError, info } = card || {};
@@ -81,36 +77,6 @@ const Cards = ({
   const stripe = useStripe();
   const elements = useElements();
   const options = useOptions();
-
-  function confirmCardPayment(clientSecret, pmId) {
-    stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: pmId,
-      })
-      .then((result) => {
-        if (result.paymentIntent.status === 'succeeded') {
-          notifyAction({
-            isError: false,
-            message: 'Payment succeeded',
-          });
-        } else {
-          notifyAction({
-            isError: true,
-            message: 'Payment Faliure',
-          });
-        }
-      })
-      .catch((error) => {
-        if (error.code !== 'cancelled') {
-          notifyAction({
-            isError: true,
-            message: 'Payment failure',
-          });
-        } else {
-          notifyAction();
-        }
-      });
-  }
 
   const handleSubmit = async (val) => {
     let pmId = null;
@@ -128,31 +94,17 @@ const Cards = ({
     } else {
       notifyAction();
     }
-    createSubscription({
-      planIds: [paymentId],
-      pm: pmId,
-    }).then((res) => {
-      const payment = res.body.data || {};
-      if (payment[0].status === 'active') {
-        fetchCardAction();
-        notifyAction({ isError: false, message: 'Payment Success' });
-        history.push(endpoints.profile);
-      } else if (
-        payment[0].latest_invoice.payment_intent.status === 'requires_action'
-      ) {
-        confirmCardPayment(
-          payment[0].latest_invoice.payment_intent.client_secret
-        );
-      } else if (
-        payment[0].latest_invoice.payment_intent.status ===
-        'requires_payment_method'
-      ) {
+
+    updateCard({ pm: pmId })
+      .then(() => {
         notifyAction({
-          isError: true,
-          message: 'Payment decline',
+          isError: false,
+          message: 'Card updated successfully',
         });
-      }
-    });
+      })
+      .catch((err) => {
+        notifyAction(err);
+      });
   };
 
   function handleCardDeleteClick(delVal) {
@@ -173,25 +125,21 @@ const Cards = ({
     <div className="w-100">
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 pt-3">
-            <h2 className="font-weight-bold pt-2">Payment</h2>
-          </div>
-          <div className="col w-100">
-            <Form
-              info={info}
-              onSubmit={handleSubmit}
-              options={options}
-              initialValues={{ pmId: defaultCardPmId }}
-              onDeleteClick={handleCardDeleteClick}
-            />
-          </div>
+          <Form
+            info={info}
+            onSubmit={handleSubmit}
+            options={options}
+            initialValues={{ pmId: defaultCardPmId }}
+            onDeleteClick={handleCardDeleteClick}
+            isUpdate
+          />
         </ContentWrap>
       </div>
     </div>
   );
 };
 
-Cards.propTypes = {
+UpdateCard.propTypes = {
   card: PropTypes.object.isRequired,
   fetchCard: PropTypes.func.isRequired,
   paymentId: PropTypes.string.isRequired,
@@ -203,5 +151,5 @@ function mapStateToProps({ card }) {
 }
 
 export default connect(mapStateToProps, { fetchCard, notify })(
-  withStripeProvider(Cards)
+  withStripeProvider(UpdateCard)
 );

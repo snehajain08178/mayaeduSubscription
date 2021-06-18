@@ -10,8 +10,8 @@ import Plans from '../views/Plans';
 import LoginContainer from '../layouts/LoginContainer';
 import Profile from '../views/Profile';
 import withPropProvider from '../common/providers/withPropProvider';
-import Payment from '../views/Payment';
 import Cards from '../views/Cards';
+import UpdateCard from '../views/Cards/UpdateCard';
 
 export default [
   {
@@ -119,22 +119,6 @@ export default [
         ],
       },
       {
-        path: endpoints.payment,
-        component: LoginRequired,
-        routes: [
-          {
-            path: endpoints.payment,
-            component: LogoutContainer,
-            exact: true,
-            routes: [
-              {
-                component: Payment,
-              },
-            ],
-          },
-        ],
-      },
-      {
         path: endpoints.cards,
         component: LoginRequired,
         routes: [
@@ -145,6 +129,22 @@ export default [
             routes: [
               {
                 component: Cards,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.updateCard,
+        component: LoginRequired,
+        routes: [
+          {
+            path: endpoints.updateCard,
+            component: LogoutContainer,
+            exact: true,
+            routes: [
+              {
+                component: UpdateCard,
               },
             ],
           },

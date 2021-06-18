@@ -7,6 +7,22 @@ export function fetchCard() {
   });
 }
 
+export function deleteCard(payload) {
+  return apiCall({
+    endpoint: `${endPoints.card}`,
+    method: 'delete',
+    payload
+  });
+}
+
+export function updateCard(payload) {
+  return apiCall({
+    endpoint: `${endPoints.card}`,
+    method: 'put',
+    payload
+  });
+}
+
 export default {
   fetchCard,
 };

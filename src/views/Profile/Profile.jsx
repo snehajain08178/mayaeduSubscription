@@ -15,6 +15,12 @@ import './profile.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
 import img from '../../assets/img';
 
+const basicPlanString = [
+  'Unlimited patient diagnosis with AI Assiatance',
+  'Clinical Cases with feedback everyday to prepare you for the unpredictable.',
+  'Active Cases to help you improve diagnosis skills',
+];
+
 function Profile({
   fetchCard: fetchCardAction,
   fetchUserDetails: fetchUserDetailsAction,
@@ -96,8 +102,8 @@ function Profile({
             </div>
             <div className="col pt-2">
               <div className="shadow p-3 bg-white rounded">
-                <div className="row d-flex align-items-center">
-                  <div className="col-md-2">
+                <div className="row d-flex">
+                  <div className="col-md-2 d-flex align-items-center">
                     <h5 className="text-primary font-weight-bold">
                       Subscription
                     </h5>
@@ -116,7 +122,7 @@ function Profile({
                       <span className="text-primary font-weight-bold">
                         Plan Value:{' '}
                       </span>
-                      {planValue}
+                      {planValue / 100}
                     </h6>
                     <h6>
                       <span className="text-primary font-weight-bold">
@@ -147,15 +153,14 @@ function Profile({
                     </h6>
                   </div>
                   <div className="col-md-4">
-                    <h5 className="font-weight-bold Color-LightGray pt-2 pt-md-0">
+                    <h5 className="font-weight-bold Color-LightGray pt-md-0">
                       Plan Features
                     </h5>
-                    <h6>Plan Type: Premium</h6>
-                    <h6>Period: Monthly</h6>
-                    <h6>Validity: 20/07/2021- 20/08/2021 </h6>
-                    <h6>Amount: Rs.300 </h6>
+                    {basicPlanString.map((data, index) => (
+                      <h6 key={index * 2 + 1}>{data}</h6>
+                    ))}
                   </div>
-                  <div className="col-md-2 d-flex justify-content-md-end justify-content-center">
+                  <div className="col-md-2 d-flex justify-content-md-end justify-content-center align-items-center">
                     <Button color="secondary" type="link">
                       <Link
                         to={endpoints.plans}
@@ -200,7 +205,7 @@ function Profile({
                   <div className="col-md-2 d-flex justify-content-md-end justify-content-center">
                     <Button color="secondary">
                       <Link
-                        to={endpoints.cards}
+                        to={endpoints.updateCard}
                         className="text-decoration-none"
                       >
                         Update

@@ -6,12 +6,11 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import initStore from 'redux/store';
 import routes from 'routes/routes';
 import { ConnectedRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
 import Notification from './components/Notifications';
 
 import './scss/styles.scss';
+import history from './libs/history';
 
-const history = createBrowserHistory();
 const initialState = {};
 const store = initStore(initialState, history);
 

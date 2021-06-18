@@ -4,7 +4,7 @@ import Card from './component/Card';
 import CardAction from './component/CardAction';
 
 const List = ({
-  details, name, onChange, value
+  details, name, onChange, value, onDeleteClick
 }) => {
   const { defaultCard, cardsList } = details || {};
   return (
@@ -17,15 +17,19 @@ const List = ({
       <div className="mt-4">
         {(cardsList && cardsList.length) ||
         (defaultCard && Object.keys(defaultCard).length)
-          ? [defaultCard, ...cardsList].map((cardDetail, index) => (
-              <CardAction
-                key={index * 2 + 1}
-                details={cardDetail}
-                name={name}
-                onChange={onChange}
-                checked={value === cardDetail.id}
-              />
-          ))
+          ? [{ ...defaultCard, isDefault: true }, ...cardsList].map(
+            (cardDetail, index) => (
+                <CardAction
+                  key={index * 2 + 1}
+                  details={cardDetail}
+                  name={name}
+                  onChange={onChange}
+                  checked={value === cardDetail.id}
+                  onDeleteClick={onDeleteClick}
+                  isDefault={cardDetail.isDefault || false}
+                />
+            )
+          )
           : null}
       </div>
     </div>
@@ -37,6 +41,7 @@ List.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };
 
 export default List;

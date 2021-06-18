@@ -4,15 +4,31 @@ import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
 
 const CardAction = ({
-  details, onChange, checked, name
+  details,
+  onChange,
+  checked,
+  name,
+  onDeleteClick,
 }) => {
-  const { card, billing_details, id } = details || {};
+  const {
+    card, billing_details, id, isDefault
+  } = details || {};
+  function handleDeleteClick() {
+    onDeleteClick(card.fingerprint);
+  }
   return (
     <div className="w-100 mt-4">
       <div className="container text-primary font-weight-bold rounded shadow-sm w-75">
         <div className="row d-flex align-items-center">
           <div className="col-2">
-            <CImg src={img.deleteIcon} width={20} height={20} />
+            {!isDefault && (
+              <CImg
+                src={img.deleteIcon}
+                width={20}
+                height={20}
+                onClick={handleDeleteClick}
+              />
+            )}
           </div>
           <div className="col-8">
             <div className="">XXXX XXXX XXXX {card.last4}</div>
@@ -46,6 +62,7 @@ CardAction.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   checked: PropTypes.string.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };
 
 export default CardAction;

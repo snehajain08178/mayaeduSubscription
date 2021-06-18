@@ -7,7 +7,6 @@ import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 
 export default function Header({ isLogin, isSignUp }) {
-  console.log(isLogin, isSignUp, 'hello');
   return (
     <>
       <div className="Layouts__Header">

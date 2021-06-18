@@ -6,5 +6,6 @@ export default {
   payment: '/payment',
   profile: '/profile',
   plans: '/plans',
-  cards: '/cards'
+  cards: '/cards',
+  updateCard: '/update-card'
 };
