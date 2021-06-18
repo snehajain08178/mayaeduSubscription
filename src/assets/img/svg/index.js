@@ -12,6 +12,8 @@ import emailIcon from './Email.svg';
 import viewPasswordSvgIcon from './ViewPassword.svg';
 import hidePasswordSvgIcon from './HidePassword.svg';
 import CallIcon from './Call.svg';
+import tickIcon from './Tick.svg';
+import crossIcon from './Cross.svg';
 
 export default {
   checkCircleIcon,
@@ -23,5 +25,7 @@ export default {
   emailIcon,
   viewPasswordSvgIcon,
   hidePasswordSvgIcon,
-  CallIcon
+  CallIcon,
+  tickIcon,
+  crossIcon
 };

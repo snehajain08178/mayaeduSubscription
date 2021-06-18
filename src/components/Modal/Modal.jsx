@@ -4,7 +4,7 @@ import {
   CModal,
   CModalHeader,
   CModalTitle,
-  CModalBody,
+  CModalBody
 } from '@coreui/react';
 
 /**
@@ -12,18 +12,20 @@ import {
  * overrided.
  */
 function Modal({
-  show, onClose, title, children
+  show, onClose, title, children, closeButton
 }) {
   return (
     <CModal show={show} onClose={() => onClose()}>
-    <CModalHeader closeButton>
-      <CModalTitle>
-        {title}
-      </CModalTitle>
-    </CModalHeader>
-    <CModalBody>
-      {children}
-    </CModalBody>
+      {title &&
+        <CModalHeader closeButton={closeButton}>
+          <CModalTitle>
+            {title}
+          </CModalTitle>
+        </CModalHeader>
+      }
+      <CModalBody>
+        {children}
+      </CModalBody>
   </CModal>
   );
 }
@@ -32,12 +34,14 @@ Modal.propTypes = {
   children: PropTypes.object.isRequired,
   show: PropTypes.bool,
   onClose: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
+  closeButton: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   title: '',
-  show: false
+  show: false,
+  closeButton: true
 };
 
 export default React.memo(Modal);

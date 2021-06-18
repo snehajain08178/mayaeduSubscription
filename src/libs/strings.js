@@ -18,3 +18,7 @@ export const forgetPassword = 'Forgot password?';
 export const passwordNotMatched = 'Your passwords do not match';
 export const acceptThe = 'Accept the';
 export const termsAndConditions = 'Terms & Conditioms';
+export const paymentSuccessfulMsg = 'Your Payment was successful, now you can start with your curriculum';
+export const paymentFailMsg = 'Your payment was unsucessful, kindly retry again';
+export const paymentSuccessful = 'Payment Successful';
+export const paymentFail = 'Payment Failed';
