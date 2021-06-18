@@ -150,6 +150,7 @@ const Cards = ({
       pm: pmId,
     }).then((res) => {
       const payment = res.body.data || {};
+      setLoading(false);
       if (payment[0].status === 'active') {
         fetchCardAction();
         notifyAction({ isError: false, message: 'Payment Success' });
