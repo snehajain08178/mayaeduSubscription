@@ -15,7 +15,7 @@ import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import { validateEmail } from '../../helpers/validators';
-import { signIn, invalidEmailPassword, forgetPassword } from '../../libs/strings';
+import { signIn, invalidEmailPassword } from '../../libs/strings';
 import './login.scss';
 
 const fieldNames = {
@@ -108,10 +108,11 @@ function Form({ isProcessing, ...restProps }) {
                         setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
                       />
                       </CInputGroup>
-                      <CRow className="justify-content-end my-4">
+                      {/* Will be used in future */}
+                      {/* <CRow className="justify-content-end my-4">
                         <p className="font-weight-bold forgetPassword"><u>{forgetPassword}</u></p>
-                      </CRow>
-                      <CRow className="justify-content-center my-4">
+                      </CRow> */}
+                      <CRow className="justify-content-center">
                         <Button
                           color="primary"
                           className="Button_Login"
