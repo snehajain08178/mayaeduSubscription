@@ -215,32 +215,43 @@ function Profile({
                     </h5>
                   </div>
                   <div className="col-md-8 text-capitalize">
-                    <h5 className="font-weight-bold Color-LightGray">
-                      {(cardDetails && cardDetails.funding) || 'Unknown'} Card:
-                    </h5>
-                    <h6>
-                      XXXX XXXX XXXX {cardDetails && cardDetails.last4}{' '}
-                      <CImg
-                        src={img.cardsIcon[cardDetails && cardDetails.brand]}
-                        alt={cardDetails && cardDetails.brand}
-                        width={40}
-                        height={15}
-                      />
-                    </h6>
-                    <h6>
-                      Valid Till:{' '}
-                      {(cardDetails && cardDetails.exp_month) || 'NA'}
-                      {' / '}
-                      {(cardDetails && cardDetails.exp_year) || 'NA'}
-                    </h6>
+                    {defaultCard && Object.keys(defaultCard).length ? (
+                      <>
+                        <h5 className="font-weight-bold Color-LightGray">
+                          {(cardDetails && cardDetails.funding) || 'Unknown'}{' '}
+                          Card:
+                        </h5>
+                        <h6>
+                          XXXX XXXX XXXX {cardDetails && cardDetails.last4}{' '}
+                          <CImg
+                            src={
+                              img.cardsIcon[cardDetails && cardDetails.brand]
+                            }
+                            alt={cardDetails && cardDetails.brand}
+                            width={40}
+                            height={15}
+                          />
+                        </h6>
+                        <h6>
+                          Valid Till:{' '}
+                          {(cardDetails && cardDetails.exp_month) || 'NA'}
+                          {' / '}
+                          {(cardDetails && cardDetails.exp_year) || 'NA'}
+                        </h6>
+                      </>
+                    ) : (
+                      <h6>Not Available!</h6>
+                    )}
                   </div>
                   <div className="col-md-2 d-flex justify-content-md-end justify-content-center align-items-center">
-                    <Button color="primary text-white m-0">
+                    <Button color="primary text-white m-0" type="link">
                       <Link
                         to={endpoints.updateCard}
                         className="text-decoration-none text-white"
                       >
-                        Update
+                        {defaultCard && Object.keys(defaultCard).length
+                          ? 'Update'
+                          : 'Add'}
                       </Link>
                     </Button>
                   </div>
