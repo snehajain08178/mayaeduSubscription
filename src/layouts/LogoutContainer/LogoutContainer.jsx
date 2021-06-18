@@ -5,9 +5,9 @@ import Footer from '../Footer';
 import './logoutContainer.scss';
 import LogoutHeader from '../Header/LogoutHeader';
 
-const LogoutContainer = ({ route }) => (
+const LogoutContainer = ({ route, ...restProps }) => (
   <>
-    <LogoutHeader />
+    <LogoutHeader {...restProps} />
     <div className="w-100 Bg--Color-lightPink Layouts__LogoutContainer">
       {renderRoutes(route.routes)}
     </div>

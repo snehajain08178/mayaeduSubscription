@@ -15,6 +15,7 @@ import { notify } from '../../redux/actions/notification';
 import { deleteCard } from '../../api/card';
 import history from '../../libs/history';
 import endpoints from '../../routes/endpoints';
+import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -70,6 +71,7 @@ const Cards = ({
   paymentId,
   notify: notifyAction,
 }) => {
+  const [isLoading, setLoading] = useState(false);
   const { isFetching, isError, info } = card || {};
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
@@ -83,12 +85,15 @@ const Cards = ({
   const options = useOptions();
 
   function confirmCardPayment(clientSecret, pmId) {
+    setLoading(true);
     stripe
       .confirmCardPayment(clientSecret, {
         payment_method: pmId,
       })
       .then((result) => {
+        setLoading(false);
         if (result.paymentIntent.status === 'succeeded') {
+          history.push(endpoints.profile);
           notifyAction({
             isError: false,
             message: 'Payment succeeded',
@@ -101,6 +106,7 @@ const Cards = ({
         }
       })
       .catch((error) => {
+        setLoading(false);
         if (error.code !== 'cancelled') {
           notifyAction({
             isError: true,
@@ -118,41 +124,50 @@ const Cards = ({
       return;
     }
     if (val.pmId === 'NEW_PM_ID') {
+      setLoading(true);
       const { paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: elements.getElement(CardNumberElement),
       });
+      setLoading(false);
       pmId = paymentMethod.id;
     } else if (val.pmId) {
       pmId = val.pmId;
     } else {
       notifyAction();
     }
+    setLoading(true);
     createSubscription({
       planIds: [paymentId],
       pm: pmId,
-    }).then((res) => {
-      const payment = res.body.data || {};
-      if (payment[0].status === 'active') {
-        fetchCardAction();
-        notifyAction({ isError: false, message: 'Payment Success' });
-        history.push(endpoints.profile);
-      } else if (
-        payment[0].latest_invoice.payment_intent.status === 'requires_action'
-      ) {
-        confirmCardPayment(
-          payment[0].latest_invoice.payment_intent.client_secret
-        );
-      } else if (
-        payment[0].latest_invoice.payment_intent.status ===
-        'requires_payment_method'
-      ) {
-        notifyAction({
-          isError: true,
-          message: 'Payment decline',
-        });
-      }
-    });
+    })
+      .then((res) => {
+        const payment = res.body.data || {};
+        setLoading(false);
+        if (payment[0].status === 'active') {
+          fetchCardAction();
+          notifyAction({ isError: false, message: 'Payment Success' });
+          history.push(endpoints.profile);
+        } else if (
+          payment[0].latest_invoice.payment_intent.status === 'requires_action'
+        ) {
+          confirmCardPayment(
+            payment[0].latest_invoice.payment_intent.client_secret
+          );
+        } else if (
+          payment[0].latest_invoice.payment_intent.status ===
+          'requires_payment_method'
+        ) {
+          notifyAction({
+            isError: true,
+            message: 'Payment decline',
+          });
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        notifyAction(err);
+      });
   };
 
   function handleCardDeleteClick(delVal) {
@@ -171,10 +186,11 @@ const Cards = ({
 
   return (
     <div className="w-100">
+      {isLoading && <SpinnerWithOverLay />}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 pt-3">
-            <h2 className="font-weight-bold pt-2">Payment</h2>
+          <div className="col w-100 p-0 pt-3">
+            <h2 className="font-weight-bold p-0 pt-2">Payment</h2>
           </div>
           <div className="col w-100">
             <Form

@@ -12,7 +12,7 @@ function SignUp(props) {
   const { isProcessing } = auth;
   function handleSignUpSubmit(values) {
     props.signUpUser(values, () => {
-      redirectTo(history, endpoints.dashboard);
+      redirectTo(history, endpoints.profile);
     });
   }
 

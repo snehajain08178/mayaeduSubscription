@@ -42,7 +42,7 @@ const CardAction = ({
               {(card && card.exp_year) || 'NA'}
             </div>
           </div>
-          <div className="col-2 justify-content-end d-flex">
+          <div className="col-2 justify-content-end d-flex align-items-center">
             <CInputRadio
               name={name}
               checked={checked}

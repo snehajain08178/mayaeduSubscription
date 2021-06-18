@@ -262,6 +262,7 @@ function Form({ isProcessing, ...restProps }) {
                         onChange={onChange}
                         disabled={isProcessing}
                         icon={'emailIcon'}
+                        maxLength={100}
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
