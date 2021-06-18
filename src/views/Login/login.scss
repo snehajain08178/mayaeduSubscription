@@ -10,13 +10,23 @@
     right: 0;
     bottom: 0;
     top: 0;
-    .forgetPassword {
-        color: $primary
-    }
-}
-
-.Button {
-    border-radius: 22px !important;
-    margin-top: 58px;
-    width: 90%;
+    .Login__Form {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        .Card_View {
+            padding: 70px 20px;
+        }
+        .card {
+            border-radius: 16px;
+        }
+        .Button_Login {
+            border-radius: 22px !important;
+            width: calc(100% - 32px);
+        }
+        .forgetPassword {
+            color: $primary;
+            padding-right: 16px;
+        }
+    } 
 }

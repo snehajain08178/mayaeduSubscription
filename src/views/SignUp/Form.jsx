@@ -41,8 +41,12 @@ import {
   passwordMismatch,
   signup,
   passwordCreteriaStat,
-  acceptTermsCond
+  passwordNotMatched,
+  acceptThe,
+  termsAndConditions
 } from '../../libs/strings';
+import Modal from '../../components/Modal';
+import TermAndConditions from '../../components/TermsAndConditions';
 
 let passwordCriteria = {
   upper: false,
@@ -119,10 +123,10 @@ function validate({ values = {} }) {
   }
   if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
       && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
-    errors[fieldNames.PASSWORD] = passwordFormat;
+    errors[fieldNames.NEW_PASSWORD] = passwordFormat;
   }
   if (values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]) {
-    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordFormat;
+    errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordNotMatched;
   }
   return errors;
 }
@@ -158,6 +162,7 @@ function Form({ isProcessing, ...restProps }) {
     newPassword: false,
     confirmNewPassword: false
   });
+  const [visible, setVisible] = useState(false);
 
   const isPassCriteriaMatch = (text) => {
     let upper = false;
@@ -194,11 +199,11 @@ function Form({ isProcessing, ...restProps }) {
     <div className="Signup_Form">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol sm="12" md="10" lg="9" xl="8" xxl="7" className="Card_View">
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
             <CCardGroup>
               <Card>
                 <CCardBody>
-                  <h1 className="text-center font-weight-bold">{signup}</h1>
+                  <h1 className="font-weight-bold">{signup}</h1>
                   <CForm>
                     <CInputGroup className="my-4">
                       <SelectDrop
@@ -284,7 +289,7 @@ function Form({ isProcessing, ...restProps }) {
                         })}
                       />
                     </CInputGroup>
-                    <div className="my-4">
+                    <div className="my-4 Criteria">
                       <CRow className="my-2 font-weight-bold justify-content-center">{passwordCreteriaStat}</CRow>
                       <CRow className="ml-1 justify-content-between">
                         {(CriteriaView(uppercase, passwordCriteria.upper))}
@@ -338,16 +343,14 @@ function Form({ isProcessing, ...restProps }) {
                       />
                     </CInputGroup>
                     <CRow
-                      className="my-3 justify-content-center"
-                      onClick={() => setTermsAccepted(!termsAccepted)}
+                      className="my-3 justify-content-center pt-4"
                     >
                       <CRow>
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
+                          onClick={() => setTermsAccepted(!termsAccepted)}
                         />
-                        <a className="pl-2 font-weight-bold" data-toggle="modal" data-target="#tandc">
-                          {acceptTermsCond}
-                        </a>
+                        <p className="pl-2" onClick={() => setVisible(true)}>{acceptThe}<u className="font-weight-bold pl-1" >{termsAndConditions}</u></p>
                       </CRow>
                     </CRow>
                     <CRow className="my-4 justify-content-center">
@@ -368,6 +371,13 @@ function Form({ isProcessing, ...restProps }) {
             </CCardGroup>
           </CCol>
         </CRow>
+        <Modal
+          show={visible}
+          onClose={() => setVisible(false)}
+          title={termsAndConditions}
+        >
+          <TermAndConditions />
+        </Modal>
       </CContainer>
     </div>
   );

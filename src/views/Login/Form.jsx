@@ -65,16 +65,15 @@ function Form({ isProcessing, ...restProps }) {
 
   return (
     <div className="Login__Form">
-      <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="6">
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
             <CCardGroup>
-              <Card className="p-4">
+              <Card>
                 <CCardBody>
                   <CForm>
-                  <h1 className="text-center font-weight-bold">{signIn}</h1>
-                    <CInputGroup className="mb-3">
+                  <h1 className="font-weight-bold pb-4">{signIn}</h1>
+                    <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
                       <Input
@@ -89,7 +88,7 @@ function Form({ isProcessing, ...restProps }) {
                           disabled={isProcessing}
                       />
                     </CInputGroup>
-                    <CInputGroup className="mb-4">
+                    <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
                       <Input
@@ -108,13 +107,13 @@ function Form({ isProcessing, ...restProps }) {
                         setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
                       />
                       </CInputGroup>
-                      <CRow className="d-flex justify-content-end">
-                        <p className="forgetPassword"><u>{forgetPassword}</u></p>
+                      <CRow className="justify-content-end my-4">
+                        <p className="font-weight-bold forgetPassword"><u>{forgetPassword}</u></p>
                       </CRow>
-                      <CRow className="justify-content-center Button">
+                      <CRow className="justify-content-center my-4">
                         <Button
                           color="primary"
-                          className="px-4"
+                          className="Button_Login"
                           onClick={onSubmit}
                           disabled={isProcessing || !(values[fieldNames.EMAIL_ID] &&
                             values[fieldNames.PASSWORD])}
@@ -129,7 +128,6 @@ function Form({ isProcessing, ...restProps }) {
           </CRow>
         </CContainer>
       </div>
-    </div>
   );
 }
 
