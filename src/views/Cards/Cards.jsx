@@ -15,6 +15,9 @@ import { notify } from '../../redux/actions/notification';
 import { deleteCard } from '../../api/card';
 import history from '../../libs/history';
 import endpoints from '../../routes/endpoints';
+import Modal from '../../components/Modal';
+import PaymentStatus from './component/PaymentStatus';
+import { paymentSuccessful, paymentFail } from '../../libs/strings';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -74,6 +77,8 @@ const Cards = ({
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
 
+  const [paymentStatus, setPaymentStatus] = useState('');
+
   useEffect(() => {
     fetchCardAction();
   }, []);
@@ -93,11 +98,13 @@ const Cards = ({
             isError: false,
             message: 'Payment succeeded',
           });
+          setPaymentStatus(paymentSuccessful);
         } else {
           notifyAction({
             isError: true,
-            message: 'Payment Faliure',
+            message: 'Payment failure',
           });
+          setPaymentStatus(paymentFail);
         }
       })
       .catch((error) => {
@@ -106,6 +113,7 @@ const Cards = ({
             isError: true,
             message: 'Payment failure',
           });
+          setPaymentStatus(paymentFail);
         } else {
           notifyAction();
         }
@@ -136,7 +144,7 @@ const Cards = ({
       if (payment[0].status === 'active') {
         fetchCardAction();
         notifyAction({ isError: false, message: 'Payment Success' });
-        history.push(endpoints.profile);
+        setPaymentStatus(paymentSuccessful);
       } else if (
         payment[0].latest_invoice.payment_intent.status === 'requires_action'
       ) {
@@ -151,6 +159,7 @@ const Cards = ({
           isError: true,
           message: 'Payment decline',
         });
+        setPaymentStatus(paymentFail);
       }
     });
   };
@@ -186,6 +195,22 @@ const Cards = ({
             />
           </div>
         </ContentWrap>
+        <p>{paymentStatus}</p>
+        <Modal
+          show={paymentStatus}
+          closeButton={false}
+        >
+          <PaymentStatus
+            status={paymentStatus}
+            planDuration={'monthly'}
+            amount={'1000'}
+            currency={'$'}
+            onClick={() => {
+              setPaymentStatus('');
+              history.push(endpoints.profile);
+            }}
+          />
+        </Modal>
       </div>
     </div>
   );

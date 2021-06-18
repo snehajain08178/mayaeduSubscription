@@ -742,7 +742,13 @@ export const professionalCategory = [
   { name: 'Intern' }
 ];
 
+export const dateFormat = 'MM/DD/YYYY';
+
+export const timeFormat = 'HH:mm A';
+
 export default {
   countries,
-  professionalCategory
+  professionalCategory,
+  dateFormat,
+  timeFormat
 };
