@@ -15,6 +15,14 @@ export function createSubscription(payload) {
   });
 }
 
+export function deleteSubscription(payload) {
+  return apiCall({
+    method: 'delete',
+    endpoint: `${endPoints.transactionSubscription}`,
+    payload,
+  });
+}
+
 export default {
   fetchSubscriptionDetails,
 };

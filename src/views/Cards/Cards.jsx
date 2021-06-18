@@ -18,6 +18,7 @@ import endpoints from '../../routes/endpoints';
 import Modal from '../../components/Modal';
 import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
+import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -73,6 +74,7 @@ const Cards = ({
   paymentId,
   notify: notifyAction,
 }) => {
+  const [isLoading, setLoading] = useState(false);
   const { isFetching, isError, info } = card || {};
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
@@ -88,12 +90,15 @@ const Cards = ({
   const options = useOptions();
 
   function confirmCardPayment(clientSecret, pmId) {
+    setLoading(true);
     stripe
       .confirmCardPayment(clientSecret, {
         payment_method: pmId,
       })
       .then((result) => {
+        setLoading(false);
         if (result.paymentIntent.status === 'succeeded') {
+          history.push(endpoints.profile);
           notifyAction({
             isError: false,
             message: 'Payment succeeded',
@@ -108,6 +113,7 @@ const Cards = ({
         }
       })
       .catch((error) => {
+        setLoading(false);
         if (error.code !== 'cancelled') {
           notifyAction({
             isError: true,
@@ -126,16 +132,19 @@ const Cards = ({
       return;
     }
     if (val.pmId === 'NEW_PM_ID') {
+      setLoading(true);
       const { paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: elements.getElement(CardNumberElement),
       });
+      setLoading(false);
       pmId = paymentMethod.id;
     } else if (val.pmId) {
       pmId = val.pmId;
     } else {
       notifyAction();
     }
+    setLoading(true);
     createSubscription({
       planIds: [paymentId],
       pm: pmId,
@@ -161,6 +170,9 @@ const Cards = ({
         });
         setPaymentStatus(paymentFail);
       }
+    }).catch((err) => {
+      setLoading(false);
+      notifyAction(err);
     });
   };
 
@@ -180,10 +192,11 @@ const Cards = ({
 
   return (
     <div className="w-100">
+      {isLoading && <SpinnerWithOverLay />}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 pt-3">
-            <h2 className="font-weight-bold pt-2">Payment</h2>
+          <div className="col w-100 p-0 pt-3">
+            <h2 className="font-weight-bold p-0 pt-2">Payment</h2>
           </div>
           <div className="col w-100">
             <Form

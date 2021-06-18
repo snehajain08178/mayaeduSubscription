@@ -2,11 +2,17 @@ import { CImg } from '@coreui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import PropTypes from 'prop-types';
 import { ImSwitch } from 'react-icons/im';
+import { connect } from 'react-redux';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
+import { logoutUser } from '../../redux/actions/auth';
 
-export default function LogoutHeader() {
+function LogoutHeader({ logoutUser: logoutUserAction }) {
+  function handleLogout() {
+    logoutUserAction();
+  }
   return (
     <>
       <div className="Layouts__LogoutHeader">
@@ -42,7 +48,9 @@ export default function LogoutHeader() {
                 >
                   <h5 className="font-weight-bold px-4 align-items-center d-flex">
                     <ImSwitch color="white" />
-                    <span className="ml-2 mt-1">Logout</span>
+                    <span className="ml-2 mt-1" onClick={handleLogout}>
+                      Logout
+                    </span>
                   </h5>
                 </Link>
               </li>
@@ -53,3 +61,14 @@ export default function LogoutHeader() {
     </>
   );
 }
+
+LogoutHeader.propTypes = {
+  history: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+};
+
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, { logoutUser })(LogoutHeader);

@@ -17,5 +17,5 @@ export default function createReducer(history) {
     card,
     plans,
   });
-  return reducer;
+  return (state, action) => reducer(action.type === 'LOGOUT_USER' ? undefined : state, action);
 }
