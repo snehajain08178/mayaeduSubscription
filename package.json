@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development --env.BUILD_ENV=development --history-api-fallback",
     "build-production": "webpack --mode production --env.BUILD_ENV=production",
-    "build-staging": "webpack --mode production --env.BUILD_ENV=staging",
+    "build": "webpack --mode production --env.BUILD_ENV=development",
     "lint": "eslint src/**/*.js src/**/*.jsx"
   },
   "keywords": [],
