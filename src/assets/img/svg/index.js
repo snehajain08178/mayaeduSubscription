@@ -14,6 +14,10 @@ import hidePasswordSvgIcon from './HidePassword.svg';
 import CallIcon from './Call.svg';
 import tickIcon from './Tick.svg';
 import crossIcon from './Cross.svg';
+import dollarRedIcon from './DollarRed.svg';
+import rupeeGreenIcon from './RupeeGreen.svg';
+import rupeeRedIcon from './RupeeRed.svg';
+import dollarGreenIcon from './DollarGreen.svg';
 
 export default {
   checkCircleIcon,
@@ -27,5 +31,9 @@ export default {
   hidePasswordSvgIcon,
   CallIcon,
   tickIcon,
-  crossIcon
+  crossIcon,
+  dollarRedIcon,
+  rupeeGreenIcon,
+  rupeeRedIcon,
+  dollarGreenIcon
 };

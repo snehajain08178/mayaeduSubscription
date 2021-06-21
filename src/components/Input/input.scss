@@ -29,6 +29,11 @@
     background-color: $input-background;
   }
 
+  .Input:focus {
+    border-color: $primary !important;
+    box-shadow: none;
+  }
+
   .Error {
     color: $error;
   }

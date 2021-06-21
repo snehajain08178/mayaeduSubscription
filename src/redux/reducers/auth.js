@@ -35,6 +35,11 @@ export default function authReducer(state = initialState, action) {
         isProcessing: false,
       };
     case ERROR_USER_LOGIN:
+      return {
+        ...state,
+        ...payload,
+        isProcessing: false,
+      };
     case SIGNUP_USER_START:
       return {
         ...initialState,
