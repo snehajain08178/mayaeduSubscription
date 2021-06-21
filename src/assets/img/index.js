@@ -1,4 +1,3 @@
-import { cilArrowLeft } from '@coreui/icons-react';
 import loaderImage from './spinner.gif';
 import landingBackgroundImg from './landingBackground.png';
 import footerIcon from './footerIcon.png';
@@ -25,5 +24,4 @@ export default {
   cardsIcon,
   chipIcon,
   deleteIcon,
-  cilArrowLeft
 };
