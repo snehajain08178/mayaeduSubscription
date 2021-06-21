@@ -30,6 +30,7 @@
     flex-direction: column;
     }
   }
+
   .DropListItem,
   .DropListItemMulti {
     font-weight: 500;
@@ -71,6 +72,11 @@
     background-color: $input-background;
     box-shadow: 0 4px 8px 0 $shadow;
   }
+
+  .Select:focus {
+    border-color: $primary !important;
+  }
+
   .Select.Disabled {
     opacity: 0.5;
     cursor: not-allowed;
