@@ -89,6 +89,10 @@ ol {
   color: $light-gray;
 }
 
+.Border-Radius--12px {
+  border-radius: 12px;
+}
+
 .Width__Phablet--100 {
   @include breakpoint(phablet) {
     width: 100% !important;

@@ -235,11 +235,11 @@ const Cards = ({
               'NA'
             }
             amount={
-              (paymentSuccessData.plan && paymentSuccessData.plan.amount) ||
+              (paymentSuccessData.plan && paymentSuccessData.plan.amount / 100) ||
               'NA'
             }
             currency={
-              (paymentSuccessData.plan && paymentSuccessData.plan.currency) ||
+              (paymentSuccessData.plan && (paymentSuccessData.plan.currency)) ||
               'NA'
             }
             onClick={() => {

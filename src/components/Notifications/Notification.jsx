@@ -10,10 +10,18 @@ function Notification({ messages = {}, isReset }) {
   const { isError, message } = messages;
 
   const notify = () => toastUtil.success(
-    <div>
-      <div className={`header ${isError ? 'error' : 'sucess'}`}>{ isError ? 'Error' : 'Success'}</div>
-      <div className="description">{ message }</div>
-    </div>
+      <div>
+        <div
+          className={`header ${
+            !isError && isError !== undefined ? 'success' : 'error'
+          }`}
+        >
+          {!isError && isError !== undefined ? 'Success' : 'Error'}
+        </div>
+        <div className="description">
+          {message || 'Something went wrong...'}
+        </div>
+      </div>
   );
 
   useEffect(() => {
@@ -30,10 +38,7 @@ function Notification({ messages = {}, isReset }) {
 
   return (
     <div>
-      <ToastContainer
-        autoClose={3000}
-        limit={1}
-      />
+      <ToastContainer autoClose={3000} limit={1} />
     </div>
   );
 }

@@ -72,6 +72,7 @@ function Profile({
         setLoading(false);
       });
     });
+    setLoading(true);
   }
 
   return (
