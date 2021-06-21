@@ -104,7 +104,7 @@ function Form({ isProcessing, ...restProps }) {
                         disabled={isProcessing}
                         maxLength={14}
                         icon={passwordVisibility ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
-                        type={passwordVisibility ? 'password' : ''}
+                        type={!passwordVisibility ? 'password' : ''}
                         setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
                       />
                       </CInputGroup>
@@ -114,6 +114,10 @@ function Form({ isProcessing, ...restProps }) {
                       </CRow> */}
                       <CRow className="justify-content-center">
                         <Button
+                          style={{
+                            opacity: isProcessing || !(values[fieldNames.EMAIL_ID] &&
+                            values[fieldNames.PASSWORD]) ? 0.5 : 1
+                          }}
                           color="primary"
                           className="Button_Login"
                           onClick={onSubmit}

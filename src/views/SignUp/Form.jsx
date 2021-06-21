@@ -284,7 +284,7 @@ function Form({ isProcessing, ...restProps }) {
                         onChange={onChange}
                         disabled={isProcessing}
                         icon={passwordVisibility.newPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
-                        type={passwordVisibility.newPassword ? 'password' : ''}
+                        type={!passwordVisibility.newPassword ? 'password' : ''}
                         setPasswordVisibility={() => setPasswordVisibility({
                           newPassword: !passwordVisibility.newPassword
                         })}
@@ -322,7 +322,7 @@ function Form({ isProcessing, ...restProps }) {
                         onChange={onChange}
                         disabled={isProcessing}
                         icon={passwordVisibility.confirmNewPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
-                        type={passwordVisibility.confirmNewPassword ? 'password' : ''}
+                        type={!passwordVisibility.confirmNewPassword ? 'password' : ''}
                         setPasswordVisibility={() => setPasswordVisibility({
                           confirmNewPassword: !passwordVisibility.confirmNewPassword
                         })}
@@ -356,6 +356,12 @@ function Form({ isProcessing, ...restProps }) {
                     </CRow>
                     <CRow className="my-4 justify-content-center">
                       <Button
+                        style={{
+                          opacity: isProcessing || !(values[fieldNames.COUNTRY] &&
+                            values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
+                            && values[fieldNames.NEW_PASSWORD] &&
+                            values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted) ? 0.5 : 1
+                        }}
                         color='primary'
                         className="Button__Signup"
                         onClick={onSubmit}

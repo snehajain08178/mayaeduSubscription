@@ -98,12 +98,11 @@ const Cards = ({
       .then((result) => {
         setLoading(false);
         if (result.paymentIntent.status === 'succeeded') {
-          history.push(endpoints.profile);
+          setPaymentStatus(paymentSuccessful);
           notifyAction({
             isError: false,
             message: 'Payment succeeded',
           });
-          setPaymentStatus(paymentSuccessful);
         } else {
           notifyAction({
             isError: true,
