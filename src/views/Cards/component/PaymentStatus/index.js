@@ -11,6 +11,7 @@ import { paymentFail, paymentFailMsg, paymentSuccessfulMsg } from '../../../../l
 import './paymentStatus.scss';
 import Button from '../../../../components/Button';
 import '../../../SignUp/signup.scss';
+import '../../../../scss/styles.scss';
 
 const PaymentStatus = (
   {
@@ -24,16 +25,21 @@ const PaymentStatus = (
             />
         </div>
         <div>
-            <h3 className="mt-4 text-center font-weight-bold">{status}</h3>
+            <p className="mt-4 text-center font-weight-bold Font-Size--16px">{status}</p>
             <p className="mt-2 text-center paraTag">{moment(new Date()).format(dateFormat)}, {moment(new Date()).format(timeFormat)}</p>
             <p className="mt-5 text-center font-weight-bold paraTag">{status === paymentFail ? paymentFailMsg : paymentSuccessfulMsg}</p>
             <div className="d-flex justify-content-between align-items-center information_View">
                 <div className="d-flex flex-column">
-                    <p className="text-center font-weight-bold">Basic</p>
+                    <p className="text-center font-weight-bold Font-Size--16px">Basic</p>
                     <p className="paraTag font-weight-bold">{planDuration}</p>
                 </div>
-                <div>
-                    <p className="paraTag font-weight-bold">{currency} {amount}</p>
+                <div className="d-flex">
+                    <CImg
+                        src={currency === 'inr' ? status === paymentFail ? SVG.rupeeRedIcon : SVG.rupeeGreenIcon :
+                          status === paymentFail ?
+                            SVG.dollarRedIcon : SVG.dollarGreenIcon}
+                    />
+                    <p className="paraTag font-weight-bold Font-Size--20px">{amount}</p>
                 </div>
             </div>
         </div>
