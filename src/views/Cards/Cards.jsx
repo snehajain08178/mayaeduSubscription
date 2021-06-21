@@ -217,7 +217,7 @@ const Cards = ({
             status={paymentStatus}
             planDuration={'monthly'}
             amount={'1000'}
-            currency={'$'}
+            currency={'inr'}
             onClick={() => {
               setPaymentStatus('');
               history.push(endpoints.profile);
