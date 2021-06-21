@@ -1,7 +1,8 @@
-import { CImg, CInputRadio } from '@coreui/react';
+import { CImg } from '@coreui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
+import Radio from '../../../../components/Radio/Radio';
 
 const CardAction = ({
   details,
@@ -11,7 +12,7 @@ const CardAction = ({
   onDeleteClick,
 }) => {
   const {
-    card, billing_details, id, isDefault
+    card, id, isDefault
   } = details || {};
   function handleDeleteClick() {
     onDeleteClick(card.fingerprint);
@@ -33,9 +34,6 @@ const CardAction = ({
           <div className="col-8">
             <div className="">XXXX XXXX XXXX {card.last4}</div>
             <div className="">
-              {(billing_details && billing_details.name) || 'NA'}
-            </div>
-            <div className="">
               {' '}
               Valid Till: {(card && card.exp_month) || 'NA'}
               {' / '}
@@ -43,7 +41,7 @@ const CardAction = ({
             </div>
           </div>
           <div className="col-2 justify-content-end d-flex align-items-center">
-            <CInputRadio
+            <Radio
               name={name}
               checked={checked}
               onChange={onChange}

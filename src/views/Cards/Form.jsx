@@ -5,10 +5,10 @@ import {
   CardCvcElement,
   CardExpiryElement,
 } from '@stripe/react-stripe-js';
-import { CInputRadio } from '@coreui/react';
 import List from './List';
 import Button from '../../components/Button';
 import useForm from '../../common/hooks/form';
+import Radio from '../../components/Radio/Radio';
 
 const fieldNames = {
   PM_ID: 'pmId',
@@ -38,6 +38,10 @@ const Form = ({
   info, options, initialValues, ...restProps
 }) => {
   const [isAddFormVisible, setAddFormVisible] = useState(false);
+  const [cardErrors, setCardErrors] = useState({
+    cardNumber: '',
+    cardExpiry: '',
+  });
   const { values, events } = useForm({
     initialValues: initialValues || {},
     handleSubmit: handleSubmit.bind(restProps),
@@ -68,7 +72,7 @@ const Form = ({
               <h6>Add Debit/Credit Card</h6>
             </div>
             <div className="col-4 d-flex justify-content-end">
-              <CInputRadio
+              <Radio
                 onChange={onChange}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
@@ -86,11 +90,27 @@ const Form = ({
               <form onSubmit={onSubmit} className="flex-column d-flex">
                 <label>
                   Card number
-                  <CardNumberElement options={options} />
+                  <CardNumberElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">{cardErrors.cardNumber}</div>
+                  )}
                 </label>
                 <label>
                   Expiration date
-                  <CardExpiryElement options={options} />
+                  <CardExpiryElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">{cardErrors.cardExpiry}</div>
+                  )}
                 </label>
                 <label>
                   CVC

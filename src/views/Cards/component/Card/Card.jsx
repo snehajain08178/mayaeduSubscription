@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
 
 const Card = ({ details }) => {
-  const { card, billing_details } = details || {};
+  const { card } = details || {};
   const { brand } = card || {};
   return (
     <div className="w-100">
@@ -14,10 +14,7 @@ const Card = ({ details }) => {
             <div className="p-2">
               <CImg src={img.chipIcon} width={40} height={30} />
             </div>
-            <div className="p-2">XXXX XXXX XXXX {card.last4}</div>
-            <div className="p-2">
-              {(billing_details && billing_details.name) || 'NA'}
-            </div>
+            <div className="p-2 mt-4">XXXX XXXX XXXX {card.last4}</div>
             <div className="p-2 pb-4">
               {' '}
               Valid Till: {(card && card.exp_month) || 'NA'}
