@@ -15,6 +15,9 @@ import { notify } from '../../redux/actions/notification';
 import { deleteCard } from '../../api/card';
 import history from '../../libs/history';
 import endpoints from '../../routes/endpoints';
+import Modal from '../../components/Modal';
+import PaymentStatus from './component/PaymentStatus';
+import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 
 function useResponsiveFontSize() {
@@ -76,6 +79,8 @@ const Cards = ({
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
 
+  const [paymentStatus, setPaymentStatus] = useState('');
+
   useEffect(() => {
     fetchCardAction();
   }, []);
@@ -93,7 +98,7 @@ const Cards = ({
       .then((result) => {
         setLoading(false);
         if (result.paymentIntent.status === 'succeeded') {
-          history.push(endpoints.profile);
+          setPaymentStatus(paymentSuccessful);
           notifyAction({
             isError: false,
             message: 'Payment succeeded',
@@ -101,8 +106,9 @@ const Cards = ({
         } else {
           notifyAction({
             isError: true,
-            message: 'Payment Faliure',
+            message: 'Payment failure',
           });
+          setPaymentStatus(paymentFail);
         }
       })
       .catch((error) => {
@@ -112,6 +118,7 @@ const Cards = ({
             isError: true,
             message: 'Payment failure',
           });
+          setPaymentStatus(paymentFail);
         } else {
           notifyAction();
         }
@@ -140,34 +147,33 @@ const Cards = ({
     createSubscription({
       planIds: [paymentId],
       pm: pmId,
-    })
-      .then((res) => {
-        const payment = res.body.data || {};
-        setLoading(false);
-        if (payment[0].status === 'active') {
-          fetchCardAction();
-          notifyAction({ isError: false, message: 'Payment Success' });
-          history.push(endpoints.profile);
-        } else if (
-          payment[0].latest_invoice.payment_intent.status === 'requires_action'
-        ) {
-          confirmCardPayment(
-            payment[0].latest_invoice.payment_intent.client_secret
-          );
-        } else if (
-          payment[0].latest_invoice.payment_intent.status ===
-          'requires_payment_method'
-        ) {
-          notifyAction({
-            isError: true,
-            message: 'Payment decline',
-          });
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        notifyAction(err);
-      });
+    }).then((res) => {
+      const payment = res.body.data || {};
+      setLoading(false);
+      if (payment[0].status === 'active') {
+        fetchCardAction();
+        notifyAction({ isError: false, message: 'Payment Success' });
+        setPaymentStatus(paymentSuccessful);
+      } else if (
+        payment[0].latest_invoice.payment_intent.status === 'requires_action'
+      ) {
+        confirmCardPayment(
+          payment[0].latest_invoice.payment_intent.client_secret
+        );
+      } else if (
+        payment[0].latest_invoice.payment_intent.status ===
+        'requires_payment_method'
+      ) {
+        notifyAction({
+          isError: true,
+          message: 'Payment decline',
+        });
+        setPaymentStatus(paymentFail);
+      }
+    }).catch((err) => {
+      setLoading(false);
+      notifyAction(err);
+    });
   };
 
   function handleCardDeleteClick(delVal) {
@@ -202,6 +208,22 @@ const Cards = ({
             />
           </div>
         </ContentWrap>
+        <p>{paymentStatus}</p>
+        <Modal
+          show={paymentStatus}
+          closeButton={false}
+        >
+          <PaymentStatus
+            status={paymentStatus}
+            planDuration={'monthly'}
+            amount={'1000'}
+            currency={'$'}
+            onClick={() => {
+              setPaymentStatus('');
+              history.push(endpoints.profile);
+            }}
+          />
+        </Modal>
       </div>
     </div>
   );
