@@ -6,6 +6,7 @@ import {
   useElements,
   CardNumberElement,
 } from '@stripe/react-stripe-js';
+import Icon from '@coreui/icons-react';
 import { fetchCard } from '../../redux/actions/card';
 import ContentWrap from '../../components/ContentWrap';
 import { createSubscription } from '../../api/subscription';
@@ -19,6 +20,7 @@ import Modal from '../../components/Modal';
 import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
+import './cards.scss';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -80,6 +82,7 @@ const Cards = ({
   const { id: defaultCardPmId } = defaultCard || {};
 
   const [paymentStatus, setPaymentStatus] = useState('');
+  const [paymentSuccessData, setPaymentSuccessData] = useState({});
 
   useEffect(() => {
     fetchCardAction();
@@ -147,33 +150,36 @@ const Cards = ({
     createSubscription({
       planIds: [paymentId],
       pm: pmId,
-    }).then((res) => {
-      const payment = res.body.data || {};
-      setLoading(false);
-      if (payment[0].status === 'active') {
-        fetchCardAction();
-        notifyAction({ isError: false, message: 'Payment Success' });
-        setPaymentStatus(paymentSuccessful);
-      } else if (
-        payment[0].latest_invoice.payment_intent.status === 'requires_action'
-      ) {
-        confirmCardPayment(
-          payment[0].latest_invoice.payment_intent.client_secret
-        );
-      } else if (
-        payment[0].latest_invoice.payment_intent.status ===
-        'requires_payment_method'
-      ) {
-        notifyAction({
-          isError: true,
-          message: 'Payment decline',
-        });
-        setPaymentStatus(paymentFail);
-      }
-    }).catch((err) => {
-      setLoading(false);
-      notifyAction(err);
-    });
+    })
+      .then((res) => {
+        const payment = res.body.data || {};
+        setPaymentSuccessData(payment[0]);
+        setLoading(false);
+        if (payment[0].status === 'active') {
+          fetchCardAction();
+          notifyAction({ isError: false, message: 'Payment Success' });
+          setPaymentStatus(paymentSuccessful);
+        } else if (
+          payment[0].latest_invoice.payment_intent.status === 'requires_action'
+        ) {
+          confirmCardPayment(
+            payment[0].latest_invoice.payment_intent.client_secret
+          );
+        } else if (
+          payment[0].latest_invoice.payment_intent.status ===
+          'requires_payment_method'
+        ) {
+          notifyAction({
+            isError: true,
+            message: 'Payment decline',
+          });
+          setPaymentStatus(paymentFail);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        notifyAction(err);
+      });
   };
 
   function handleCardDeleteClick(delVal) {
@@ -195,8 +201,20 @@ const Cards = ({
       {isLoading && <SpinnerWithOverLay />}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 p-0 pt-3">
+          <div className="col w-100 p-0 pt-3 d-flex justify-content-between">
             <h2 className="font-weight-bold p-0 pt-2">Payment</h2>
+            <div
+              onClick={() => {
+                history.push(endpoints.plans);
+              }}
+              role="button"
+            >
+              <Icon
+                name="cil-arrow-left"
+                size="xl"
+                className="font-weight-bold"
+              />
+            </div>
           </div>
           <div className="col w-100">
             <Form
@@ -209,15 +227,21 @@ const Cards = ({
           </div>
         </ContentWrap>
         <p>{paymentStatus}</p>
-        <Modal
-          show={paymentStatus}
-          closeButton={false}
-        >
+        <Modal show={paymentStatus} closeButton={false}>
           <PaymentStatus
             status={paymentStatus}
-            planDuration={'monthly'}
-            amount={'1000'}
-            currency={'inr'}
+            planDuration={
+              (paymentSuccessData.plan && paymentSuccessData.plan.interval) ||
+              'NA'
+            }
+            amount={
+              (paymentSuccessData.plan && paymentSuccessData.plan.amount) ||
+              'NA'
+            }
+            currency={
+              (paymentSuccessData.plan && paymentSuccessData.plan.currency) ||
+              'NA'
+            }
             onClick={() => {
               setPaymentStatus('');
               history.push(endpoints.profile);

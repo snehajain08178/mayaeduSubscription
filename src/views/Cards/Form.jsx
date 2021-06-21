@@ -5,10 +5,10 @@ import {
   CardCvcElement,
   CardExpiryElement,
 } from '@stripe/react-stripe-js';
-import { CInputRadio } from '@coreui/react';
 import List from './List';
 import Button from '../../components/Button';
 import useForm from '../../common/hooks/form';
+import Radio from '../../components/Radio/Radio';
 
 const fieldNames = {
   PM_ID: 'pmId',
@@ -38,6 +38,10 @@ const Form = ({
   info, options, initialValues, ...restProps
 }) => {
   const [isAddFormVisible, setAddFormVisible] = useState(false);
+  const [cardErrors, setCardErrors] = useState({
+    cardNumber: '',
+    cardExpiry: '',
+  });
   const { values, events } = useForm({
     initialValues: initialValues || {},
     handleSubmit: handleSubmit.bind(restProps),
@@ -62,13 +66,13 @@ const Form = ({
         <div className="row">
           <div
             type="button"
-            className="container w-75 shadow-sm p-3 pointer d-flex"
+            className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100"
           >
             <div className="col-8">
               <h6>Add Debit/Credit Card</h6>
             </div>
             <div className="col-4 d-flex justify-content-end">
-              <CInputRadio
+              <Radio
                 onChange={onChange}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
@@ -82,26 +86,42 @@ const Form = ({
         </div>
         <div className="row mt-4">
           {isAddFormVisible && (
-            <div className="container w-75 shadow-sm p-3">
+            <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
               <form onSubmit={onSubmit} className="flex-column d-flex">
                 <label>
                   Card number
-                  <CardNumberElement options={options} />
+                  <CardNumberElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">{cardErrors.cardNumber}</div>
+                  )}
                 </label>
                 <label>
                   Expiration date
-                  <CardExpiryElement options={options} />
+                  <CardExpiryElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">{cardErrors.cardExpiry}</div>
+                  )}
                 </label>
                 <label>
                   CVC
-                  <CardCvcElement />
+                  <CardCvcElement options={options} />
                 </label>
               </form>
             </div>
           )}
         </div>
         <div className="row w-100 mt-4">
-          <div className="container w-75 d-flex justify-content-center">
+          <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
             <Button color="primary" className="w-100" onClick={onSubmit}>
               {restProps.isUpdate ? 'Update' : 'Pay'}
             </Button>
