@@ -94,7 +94,7 @@ const Form = ({
                 </label>
                 <label>
                   CVC
-                  <CardCvcElement />
+                  <CardCvcElement options={options} />
                 </label>
               </form>
             </div>

@@ -5,6 +5,7 @@ import img from '../../../../assets/img';
 
 const Card = ({ details }) => {
   const { card, billing_details } = details || {};
+  const { brand } = card || {};
   return (
     <div className="w-100">
       <div className="container bg-primary text-white font-weight-bold rounded shadow w-75">
@@ -27,8 +28,8 @@ const Card = ({ details }) => {
           <div className="col-4 justify-content-end d-flex">
             <CImg
               className="mt-2 ml-lg-2"
-              src={img.cardsIcon.master}
-              width={40}
+              src={img.cardsIcon[brand]}
+              width={50}
               height={25}
             />
           </div>

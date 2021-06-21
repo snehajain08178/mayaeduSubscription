@@ -30,10 +30,10 @@ const PaymentStatus = (
             <div className="d-flex justify-content-between align-items-center information_View">
                 <div className="d-flex flex-column">
                     <p className="text-center font-weight-bold">Basic</p>
-                    <p className="paraTag font-weight-bold">{planDuration}</p>
+                    <p className="paraTag font-weight-bold text-uppercase">{planDuration}</p>
                 </div>
                 <div>
-                    <p className="paraTag font-weight-bold">{currency} {amount}</p>
+                    <p className="paraTag font-weight-bold text-capitalize">{currency} {amount}</p>
                 </div>
             </div>
         </div>

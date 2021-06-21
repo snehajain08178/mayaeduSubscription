@@ -38,6 +38,7 @@ export function loginUser(payload = {}, callBack) {
       .then((res = {}) => {
         dispatch(loginUserEnd(res.header.authorization));
         localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
+        localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
         callBack();
       })
       .catch((error) => {
@@ -73,6 +74,7 @@ export function signUpUser(payload = {}, callBack) {
     signupApi(data)
       .then((res = {}) => {
         localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
+        localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
         dispatch(signupUserEnd(res.body));
         callBack();
       })

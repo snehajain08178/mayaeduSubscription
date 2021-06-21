@@ -2,6 +2,7 @@ import { CImg } from '@coreui/react';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Icon from '@coreui/icons-react';
 import PropTypes from 'prop-types';
 import img from '../../assets/img';
 import Button from '../../components/Button';
@@ -17,6 +18,7 @@ function Plans({
   plans,
   fetchSubscription: fetchSubscriptionAction,
   subscriptionDetails,
+  history,
 }) {
   const { info, isFetching, isError } = plans || {};
   const { basic } = (info && info.plans) || {};
@@ -46,8 +48,20 @@ function Plans({
           isError={isError}
         >
           <div className="row flex-column pt-lg-5">
-            <div className="col w-100">
+            <div className="col w-100 d-flex justify-content-between">
               <h2 className="font-weight-bold">Choose Plan</h2>
+              <div
+                onClick={() => {
+                  history.push(endpoints.profile);
+                }}
+                role="button"
+              >
+                <Icon
+                  name="cil-arrow-left"
+                  size="xl"
+                  className="font-weight-bold"
+                />
+              </div>
             </div>
             <div className="col pt-lg-2">
               <div className="shadow p-3 bg-white rounded">
@@ -195,6 +209,7 @@ Plans.propTypes = {
   plans: PropTypes.object.isRequired,
   subscriptionDetails: PropTypes.object.isRequired,
   fetchSubscription: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps({ plans, subscriptionDetails }) {

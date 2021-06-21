@@ -52,6 +52,7 @@ function Profile({
     endDate,
     planCurrency,
     planSession,
+    startDate,
     subscriptionId,
     isCancel,
   } = (subscriptions && subscriptions.length && subscriptions[0]) || {};
@@ -62,6 +63,7 @@ function Profile({
       subsId: [subscriptionId],
     }).then(() => {
       setLoading(false);
+      fetchSubscriptionAction();
       notifyAction({
         isError: false,
         message: 'Subscription cancelled successfully',
@@ -87,9 +89,18 @@ function Profile({
           <div className="row flex-column pt-lg-5">
             <div className="col w-100">
               <h2 className="font-weight-bold">Profile</h2>
-              <h5 className="Color-LightGray font-weight-bold">
-                Purchased on 20/07/2021
-              </h5>
+              {planType === 'freeTrial' ? (
+                <h5 className="text-primary font-weight-bold">
+                  Freee Trial {' - '}
+                  {-moment().diff(moment(endDate, 'DD-MM-YYYY'), 'days')}
+                  {' '}
+                  days Remaining
+                </h5>
+              ) : (
+                <h5 className="Color-LightGray font-weight-bold">
+                  Purchased on {moment(startDate).format('MM-DD-YYYY')}
+                </h5>
+              )}
             </div>
             <div className="col pt-lg-2">
               <div className="shadow p-3 bg-white rounded">
@@ -147,7 +158,9 @@ function Profile({
                       {status}
                     </h6>
                     <h6>
-                      <span className="text-primary ">Currency: </span>
+                      <span className="text-primary font-weight-bold">
+                        Currency:{' '}
+                      </span>
                       <span className="text-uppercase">{planCurrency}</span>
                     </h6>
                     <h6>
@@ -156,12 +169,14 @@ function Profile({
                       </span>
                       {moment(endDate).format('MM-DD-YYYY')}
                     </h6>
-                    <h6>
-                      <span className="text-primary font-weight-bold">
-                        Plan Session:{' '}
-                      </span>
-                      {planSession}ly
-                    </h6>
+                    {planType !== 'freeTrial' && (
+                      <h6>
+                        <span className="text-primary font-weight-bold">
+                          Plan Session:{' '}
+                        </span>
+                        {planSession}ly
+                      </h6>
+                    )}
                   </div>
                   <div className="col-md-4">
                     <h5 className="font-weight-bold Color-LightGray pt-md-0">
@@ -176,7 +191,7 @@ function Profile({
                       </div>
                     ))}
                   </div>
-                  <div className="col-md-2 d-flex justify-content-center align-items-end flex-column text-white">
+                  <div className="col-md-2 d-flex justify-content-center align-items-center flex-column text-white">
                     <Link
                       to={endpoints.plans}
                       className="text-decoration-none text-white"
@@ -186,10 +201,13 @@ function Profile({
                         type="link"
                         className="m-0 Button"
                       >
-                        Upgrade
+                        {moment().date() > moment(endDate).date() ||
+                        planType === 'freeTrial'
+                          ? 'Buy'
+                          : 'Upgrade'}
                       </Button>
                     </Link>
-                    {!isCancel && (
+                    {!isCancel && planType !== 'freeTrial' && (
                       <Button
                         color="secondary"
                         type="link"

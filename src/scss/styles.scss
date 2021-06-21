@@ -83,3 +83,7 @@ ol {
 .Color-LightGray {
   color: $light-gray;
 }
+
+input[type='radio']:checked:after {
+  background-color: $primary;
+}
