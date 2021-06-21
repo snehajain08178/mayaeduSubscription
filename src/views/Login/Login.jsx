@@ -9,8 +9,7 @@ import './login.scss';
 
 function Login(props) {
   const { history, auth } = props;
-  const { isProcessing, isError } = auth;
-  console.log(isError);
+  const { isProcessing } = auth;
   function handleLoginSubmit(values) {
     props.loginUser(values, () => {
       redirectTo(history, endpoints.profile);
