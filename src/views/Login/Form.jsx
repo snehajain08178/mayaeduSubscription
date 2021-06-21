@@ -72,7 +72,7 @@ function Form({ isProcessing, ...restProps }) {
               <Card>
                 <CCardBody>
                   <CForm>
-                  <h1 className="font-weight-bold pb-4">{signIn}</h1>
+                  <h1 className="font-weight-bold pb-4 text-center">{signIn}</h1>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>

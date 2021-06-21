@@ -203,7 +203,7 @@ function Form({ isProcessing, ...restProps }) {
             <CCardGroup>
               <Card>
                 <CCardBody>
-                  <h1 className="font-weight-bold">{signup}</h1>
+                  <h1 className="font-weight-bold text-center">{signup}</h1>
                   <CForm>
                     <CInputGroup className="my-4">
                       <SelectDrop
