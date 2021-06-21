@@ -92,9 +92,14 @@ function Profile({
               {planType === 'freeTrial' ? (
                 <h5 className="text-primary font-weight-bold">
                   Freee Trial {' - '}
-                  {-moment().diff(moment(endDate, 'DD-MM-YYYY'), 'days')}
-                  {' '}
-                  days Remaining
+                  {moment
+                    .duration(
+                      moment(endDate, 'YYYY-MM-DD').diff(
+                        moment().startOf('day')
+                      )
+                    )
+                    .asDays()}{' '}
+                  Days Remaining
                 </h5>
               ) : (
                 <h5 className="Color-LightGray font-weight-bold">

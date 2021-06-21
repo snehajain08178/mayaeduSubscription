@@ -73,8 +73,9 @@ export function signUpUser(payload = {}, callBack) {
     dispatch(signupUserStart());
     signupApi(data)
       .then((res = {}) => {
-        localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
-        localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
+        // todo stripe key pending from api
+        // localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
+        // localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
         dispatch(signupUserEnd(res.body));
         callBack();
       })

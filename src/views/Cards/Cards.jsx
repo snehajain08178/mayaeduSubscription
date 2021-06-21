@@ -20,6 +20,7 @@ import Modal from '../../components/Modal';
 import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
+import './cards.scss';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');

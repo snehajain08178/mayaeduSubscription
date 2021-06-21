@@ -19,7 +19,7 @@ const CardAction = ({
   }
   return (
     <div className="w-100 mt-4">
-      <div className="container text-primary font-weight-bold rounded shadow-sm w-75">
+      <div className="container text-primary font-weight-bold rounded shadow-sm w-75 Width__Phablet--100">
         <div className="row d-flex align-items-center">
           <div className="col-2">
             {!isDefault && (

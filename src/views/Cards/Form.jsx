@@ -66,7 +66,7 @@ const Form = ({
         <div className="row">
           <div
             type="button"
-            className="container w-75 shadow-sm p-3 pointer d-flex"
+            className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100"
           >
             <div className="col-8">
               <h6>Add Debit/Credit Card</h6>
@@ -86,7 +86,7 @@ const Form = ({
         </div>
         <div className="row mt-4">
           {isAddFormVisible && (
-            <div className="container w-75 shadow-sm p-3">
+            <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
               <form onSubmit={onSubmit} className="flex-column d-flex">
                 <label>
                   Card number
@@ -121,7 +121,7 @@ const Form = ({
           )}
         </div>
         <div className="row w-100 mt-4">
-          <div className="container w-75 d-flex justify-content-center">
+          <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
             <Button color="primary" className="w-100" onClick={onSubmit}>
               {restProps.isUpdate ? 'Update' : 'Pay'}
             </Button>
