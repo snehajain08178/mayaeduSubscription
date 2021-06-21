@@ -14,12 +14,12 @@ export default function Footer() {
         </div>
         <div className="text-primary font-weight-bold p-3">
           <Link to={endpoints.login} className="text-decoration-none">
-            Sing In
+            {'Terms & Conditions'}
           </Link>
         </div>
         <div className="text-primary font-weight-bold p-3 text-decoration-none">
           <Link className="text-decoration-none" to={endpoints.signup}>
-            Sing Up
+            About Us
           </Link>
         </div>
       </div>

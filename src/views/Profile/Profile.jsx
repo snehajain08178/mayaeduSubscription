@@ -11,6 +11,7 @@ import { fetchSubscription } from '../../redux/actions/subscription';
 import { notify } from '../../redux/actions/notification';
 import endpoints from '../../routes/endpoints';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
+import svgImg from '../../assets/img/svg';
 
 import './profile.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
@@ -18,9 +19,9 @@ import img from '../../assets/img';
 import { deleteSubscription } from '../../api/subscription';
 
 const basicPlanString = [
-  'Unlimited patient diagnosis with AI Assiatance',
+  'Unlimited patient diagnosis with AI Assiatance.',
   'Clinical Cases with feedback everyday to prepare you for the unpredictable.',
-  'Active Cases to help you improve diagnosis skills',
+  'Active Cases to help you improve diagnosis skills.',
 ];
 
 function Profile({
@@ -47,9 +48,7 @@ function Profile({
   const { card: cardDetails } = defaultCard || {};
   const {
     planType,
-    planValue,
     status,
-    startDate,
     endDate,
     planCurrency,
     planSession,
@@ -143,36 +142,25 @@ function Profile({
                     </h6>
                     <h6>
                       <span className="text-primary font-weight-bold">
-                        Plan Value:{' '}
-                      </span>
-                      {planValue / 100}
-                    </h6>
-                    <h6>
-                      <span className="text-primary font-weight-bold">
                         Status:{' '}
                       </span>
                       {status}
                     </h6>
                     <h6>
-                      <span className="text-primary font-weight-bold">
-                        Currency:{' '}
-                      </span>
-                      {planCurrency}
+                      <span className="text-primary ">Currency: </span>
+                      <span className="text-uppercase">{planCurrency}</span>
                     </h6>
                     <h6>
                       <span className="text-primary font-weight-bold">
-                        Validitiy:{' '}
+                        Valid Till:{' '}
                       </span>
-                      {'from '}
-                      {moment(startDate).format('MM-DD-YYYY')}
-                      {' to '}
                       {moment(endDate).format('MM-DD-YYYY')}
                     </h6>
                     <h6>
                       <span className="text-primary font-weight-bold">
                         Plan Session:{' '}
                       </span>
-                      {planSession}
+                      {planSession}ly
                     </h6>
                   </div>
                   <div className="col-md-4">
@@ -180,23 +168,32 @@ function Profile({
                       Plan Features
                     </h5>
                     {basicPlanString.map((data, index) => (
-                      <h6 key={index * 2 + 1}>{data}</h6>
+                      <div div className="d-flex" key={index * 2 + 1}>
+                        <span className="d-flex align-items-center">
+                          <CImg src={svgImg.checkCircleIcon} />
+                        </span>
+                        <h6 className="ml-2 mt-2">{data}</h6>
+                      </div>
                     ))}
                   </div>
                   <div className="col-md-2 d-flex justify-content-center align-items-end flex-column text-white">
-                    <Button color="primary" type="link" className="m-0">
-                      <Link
-                        to={endpoints.plans}
-                        className="text-decoration-none text-white"
+                    <Link
+                      to={endpoints.plans}
+                      className="text-decoration-none text-white"
+                    >
+                      <Button
+                        color="primary"
+                        type="link"
+                        className="m-0 Button"
                       >
                         Upgrade
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                     {!isCancel && (
                       <Button
                         color="secondary"
                         type="link"
-                        className="m-0 mt-4"
+                        className="m-0 mt-4 Button"
                         onClick={handleDelete}
                       >
                         Cancel
@@ -214,10 +211,10 @@ function Profile({
                       Payment Method
                     </h5>
                   </div>
-                  <div className="col-md-8 text-capitalize">
+                  <div className="col-md-6">
                     {defaultCard && Object.keys(defaultCard).length ? (
                       <>
-                        <h5 className="font-weight-bold Color-LightGray">
+                        <h5 className="font-weight-bold Color-LightGray text-capitalize">
                           {(cardDetails && cardDetails.funding) || 'Unknown'}{' '}
                           Card:
                         </h5>
@@ -243,17 +240,17 @@ function Profile({
                       <h6>Not Available!</h6>
                     )}
                   </div>
-                  <div className="col-md-2 d-flex justify-content-md-end justify-content-center align-items-center">
-                    <Button color="primary text-white m-0" type="link">
-                      <Link
-                        to={endpoints.updateCard}
-                        className="text-decoration-none text-white"
-                      >
+                  <div className="col-md-4 d-flex justify-content-md-end justify-content-center align-items-center">
+                    <Link
+                      to={endpoints.updateCard}
+                      className="text-decoration-none text-white"
+                    >
+                      <Button color="primary text-white m-0 Button" type="link">
                         {defaultCard && Object.keys(defaultCard).length
                           ? 'Update'
                           : 'Add'}
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

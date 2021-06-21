@@ -10,6 +10,7 @@ import { fetchPlans } from '../../redux/actions/plans';
 import { fetchSubscription } from '../../redux/actions/subscription';
 import './plans.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
+import svg from '../../assets/img/svg';
 
 function Plans({
   fetchPlans: fetchPlansAction,
@@ -59,43 +60,61 @@ function Plans({
                 <hr />
                 <div className="row">
                   <div className="col-md-9">
-                    <p>Unlimited patient diagnosis with AI Assiatance</p>
                     <p>
-                      Clinical Cases with feedback everyday to prepare you for
-                      the unpredictable.
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="mt-2 ml-2">
+                        Unlimited patient diagnosis with AI Assiatance
+                      </span>
                     </p>
-                    <p>Active Cases to help you improve diagnosis skills</p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="mt-2 ml-2">
+                        Clinical Cases with feedback everyday to prepare you for
+                        the unpredictable.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Active Cases to help you improve diagnosis skills
+                      </span>
+                    </p>
                   </div>
-                  <div className="col-md-3 d-flex justify-content-center justify-content-md-end h-100">
-                    <Button
-                      color="primary"
-                      type="link"
-                      disabled={
-                        ((planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'month') ||
+                  <div
+                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
+                    style={
+                      ((planType === 'basic' &&
+                        status === 'Active' &&
+                        planSession === 'month') ||
                         (planType === 'basic' &&
                           status === 'Active' &&
-                          planSession === 'year')) && !isCancel
-                      }
-                      style={
-                        ((planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'month') ||
-                        (planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'year')) && !isCancel
-                          ? { pointerEvents: 'none' }
-                          : {}
-                      }
+                          planSession === 'year')) &&
+                      !isCancel
+                        ? { pointerEvents: 'none' }
+                        : {}
+                    }
+                  >
+                    <Link
+                      to={`${endpoints.cards}?id=${basicMonthly.id}`}
+                      className="text-decoration-none text-white"
                     >
-                      <Link
-                        to={`${endpoints.cards}?id=${basicMonthly.id}`}
-                        className="text-decoration-none text-white"
+                      <Button
+                        className="Button"
+                        color="primary"
+                        type="link"
+                        disabled={
+                          ((planType === 'basic' &&
+                            status === 'Active' &&
+                            planSession === 'month') ||
+                            (planType === 'basic' &&
+                              status === 'Active' &&
+                              planSession === 'year')) &&
+                          !isCancel
+                        }
                       >
                         {basicMonthly.currency} {basicMonthly.amount / 100}
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -111,37 +130,55 @@ function Plans({
                 <hr />
                 <div className="row">
                   <div className="col-md-9">
-                    <p>Unlimited patient diagnosis with AI Assiatance</p>
                     <p>
-                      Clinical Cases with feedback everyday to prepare you for
-                      the unpredictable.
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Unlimited patient diagnosis with AI Assiatance
+                      </span>
                     </p>
-                    <p>Active Cases to help you improve diagnosis skills</p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Clinical Cases with feedback everyday to prepare you for
+                        the unpredictable.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Active Cases to help you improve diagnosis skills
+                      </span>
+                    </p>
                   </div>
-                  <div className="col-md-3 d-flex justify-content-center justify-content-md-end h-100">
-                    <Button
-                      color="primary"
-                      type="link"
-                      disabled={
-                        (planType === 'basic' &&
-                        status === 'Active' &&
-                        planSession === 'year') && !isCancel
-                      }
-                      style={
-                        (planType === 'basic' &&
-                        status === 'Active' &&
-                        planSession === 'year') && !isCancel
-                          ? { pointerEvents: 'none' }
-                          : {}
-                      }
+                  <div
+                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
+                    style={
+                      planType === 'basic' &&
+                      status === 'Active' &&
+                      planSession === 'year' &&
+                      !isCancel
+                        ? { pointerEvents: 'none' }
+                        : {}
+                    }
+                  >
+                    <Link
+                      to={`${endpoints.cards}?id=${basicAnually.id}`}
+                      className="text-decoration-none text-white"
                     >
-                      <Link
-                        to={`${endpoints.cards}?id=${basicAnually.id}`}
-                        className="text-decoration-none text-white"
+                      <Button
+                        color="primary"
+                        type="link"
+                        className="Button"
+                        disabled={
+                          planType === 'basic' &&
+                          status === 'Active' &&
+                          planSession === 'year' &&
+                          !isCancel
+                        }
                       >
                         {basicAnually.currency} {basicAnually.amount / 100}
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
