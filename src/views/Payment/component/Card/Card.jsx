@@ -2,6 +2,7 @@ import { CImg } from '@coreui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
+import { getCardNumberFormat } from '../../../../helpers/collecionUtils';
 
 const Card = ({ details }) => {
   const { card } = details || {};
@@ -17,9 +18,11 @@ const Card = ({ details }) => {
             <div className="p-2 mt-4">XXXX XXXX XXXX {card.last4}</div>
             <div className="p-2 pb-4">
               {' '}
-              Valid Till: {(card && card.exp_month) || 'NA'}
-              {' / '}
-              {(card && card.exp_year) || 'NA'}
+              Valid Till:{' '}
+              {getCardNumberFormat(
+                card && card.exp_month,
+                card && card.exp_year
+              ) || 'NA'}
             </div>
           </div>
           <div className="col-4 justify-content-end d-flex">

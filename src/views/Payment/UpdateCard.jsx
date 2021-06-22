@@ -184,7 +184,7 @@ const UpdateCard = ({
               info={info}
               onSubmit={handleSubmit}
               options={options}
-              initialValues={{ pmId: defaultCardPmId }}
+              initialValues={{ pmId: defaultCardPmId || 'NEW_PM_ID' }}
               onDeleteClick={handleCardDeleteClick}
               isUpdate
             />

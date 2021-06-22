@@ -78,6 +78,7 @@ const Form = ({
                 }}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
+                checked={values[fieldNames.PM_ID] === 'NEW_PM_ID'}
                 name={fieldNames.PM_ID}
               />
             </div>
@@ -135,8 +136,19 @@ const Form = ({
         </div>
         <div className="row w-100 mt-4">
           <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
-            <Button color="primary" className="w-100" onClick={onSubmit}>
-              {restProps.isUpdate ? 'Update' : 'Pay'}
+            <Button
+              color="primary"
+              className="w-100"
+              onClick={onSubmit}
+              disabled={
+                values[fieldNames.PM_ID] &&
+                ((cardErrors.cardNumber &&
+                !cardErrors.cardNumber.complete) ||
+                (cardErrors.cardExpiry &&
+                !cardErrors.cardExpiry.complete))
+              }
+            >
+              {restProps.isUpdate ? (!info.default ? 'Add' : 'Update') : 'Pay'}
             </Button>
           </div>
         </div>
