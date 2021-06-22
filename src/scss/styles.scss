@@ -4,6 +4,7 @@
 // Import CoreUI styles
 @import "~@coreui/coreui/scss/coreui.scss";
 
+@import "./mixins";
 
 body {
   font-family: "Source Sans Pro", sans-serif;
@@ -86,4 +87,22 @@ ol {
 
 .Color-LightGray {
   color: $light-gray;
+}
+
+.Border-Radius--12px {
+  border-radius: 12px;
+}
+
+.Width__Phablet--100 {
+  @include breakpoint(phablet) {
+    width: 100% !important;
+  }
+
+  @include breakpoint(mobileonly) {
+    width: 100% !important;
+  }
+
+  @include breakpoint(tablet) {
+    width: 75% !important;
+  }
 }

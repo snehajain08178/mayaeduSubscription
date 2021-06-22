@@ -2,6 +2,7 @@ import { CImg } from '@coreui/react';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Icon from '@coreui/icons-react';
 import PropTypes from 'prop-types';
 import img from '../../assets/img';
 import Button from '../../components/Button';
@@ -10,12 +11,14 @@ import { fetchPlans } from '../../redux/actions/plans';
 import { fetchSubscription } from '../../redux/actions/subscription';
 import './plans.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
+import svg from '../../assets/img/svg';
 
 function Plans({
   fetchPlans: fetchPlansAction,
   plans,
   fetchSubscription: fetchSubscriptionAction,
   subscriptionDetails,
+  history,
 }) {
   const { info, isFetching, isError } = plans || {};
   const { basic } = (info && info.plans) || {};
@@ -45,8 +48,20 @@ function Plans({
           isError={isError}
         >
           <div className="row flex-column pt-lg-5">
-            <div className="col w-100">
+            <div className="col w-100 d-flex justify-content-between">
               <h2 className="font-weight-bold">Choose Plan</h2>
+              <div
+                onClick={() => {
+                  history.push(endpoints.profile);
+                }}
+                role="button"
+              >
+                <Icon
+                  name="cil-arrow-left"
+                  size="xl"
+                  className="font-weight-bold"
+                />
+              </div>
             </div>
             <div className="col pt-lg-2">
               <div className="shadow p-3 bg-white rounded">
@@ -59,43 +74,61 @@ function Plans({
                 <hr />
                 <div className="row">
                   <div className="col-md-9">
-                    <p>Unlimited patient diagnosis with AI Assiatance</p>
                     <p>
-                      Clinical Cases with feedback everyday to prepare you for
-                      the unpredictable.
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="mt-2 ml-2">
+                        Unlimited patient diagnosis with AI Assiatance
+                      </span>
                     </p>
-                    <p>Active Cases to help you improve diagnosis skills</p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="mt-2 ml-2">
+                        Clinical Cases with feedback everyday to prepare you for
+                        the unpredictable.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Active Cases to help you improve diagnosis skills
+                      </span>
+                    </p>
                   </div>
-                  <div className="col-md-3 d-flex justify-content-center justify-content-md-end h-100">
-                    <Button
-                      color="primary"
-                      type="link"
-                      disabled={
-                        ((planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'month') ||
+                  <div
+                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
+                    style={
+                      ((planType === 'basic' &&
+                        status === 'Active' &&
+                        planSession === 'month') ||
                         (planType === 'basic' &&
                           status === 'Active' &&
-                          planSession === 'year')) && !isCancel
-                      }
-                      style={
-                        ((planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'month') ||
-                        (planType === 'basic' &&
-                          status === 'Active' &&
-                          planSession === 'year')) && !isCancel
-                          ? { pointerEvents: 'none' }
-                          : {}
-                      }
+                          planSession === 'year')) &&
+                      !isCancel
+                        ? { pointerEvents: 'none' }
+                        : {}
+                    }
+                  >
+                    <Link
+                      to={`${endpoints.cards}?id=${basicMonthly.id}`}
+                      className="text-decoration-none text-white"
                     >
-                      <Link
-                        to={`${endpoints.cards}?id=${basicMonthly.id}`}
-                        className="text-decoration-none text-white"
+                      <Button
+                        className="Button"
+                        color="primary"
+                        type="link"
+                        disabled={
+                          ((planType === 'basic' &&
+                            status === 'Active' &&
+                            planSession === 'month') ||
+                            (planType === 'basic' &&
+                              status === 'Active' &&
+                              planSession === 'year')) &&
+                          !isCancel
+                        }
                       >
                         {basicMonthly.currency} {basicMonthly.amount / 100}
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -111,37 +144,55 @@ function Plans({
                 <hr />
                 <div className="row">
                   <div className="col-md-9">
-                    <p>Unlimited patient diagnosis with AI Assiatance</p>
                     <p>
-                      Clinical Cases with feedback everyday to prepare you for
-                      the unpredictable.
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Unlimited patient diagnosis with AI Assiatance
+                      </span>
                     </p>
-                    <p>Active Cases to help you improve diagnosis skills</p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Clinical Cases with feedback everyday to prepare you for
+                        the unpredictable.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                        Active Cases to help you improve diagnosis skills
+                      </span>
+                    </p>
                   </div>
-                  <div className="col-md-3 d-flex justify-content-center justify-content-md-end h-100">
-                    <Button
-                      color="primary"
-                      type="link"
-                      disabled={
-                        (planType === 'basic' &&
-                        status === 'Active' &&
-                        planSession === 'year') && !isCancel
-                      }
-                      style={
-                        (planType === 'basic' &&
-                        status === 'Active' &&
-                        planSession === 'year') && !isCancel
-                          ? { pointerEvents: 'none' }
-                          : {}
-                      }
+                  <div
+                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
+                    style={
+                      planType === 'basic' &&
+                      status === 'Active' &&
+                      planSession === 'year' &&
+                      !isCancel
+                        ? { pointerEvents: 'none' }
+                        : {}
+                    }
+                  >
+                    <Link
+                      to={`${endpoints.cards}?id=${basicAnually.id}`}
+                      className="text-decoration-none text-white"
                     >
-                      <Link
-                        to={`${endpoints.cards}?id=${basicAnually.id}`}
-                        className="text-decoration-none text-white"
+                      <Button
+                        color="primary"
+                        type="link"
+                        className="Button"
+                        disabled={
+                          planType === 'basic' &&
+                          status === 'Active' &&
+                          planSession === 'year' &&
+                          !isCancel
+                        }
                       >
                         {basicAnually.currency} {basicAnually.amount / 100}
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -158,6 +209,7 @@ Plans.propTypes = {
   plans: PropTypes.object.isRequired,
   subscriptionDetails: PropTypes.object.isRequired,
   fetchSubscription: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps({ plans, subscriptionDetails }) {

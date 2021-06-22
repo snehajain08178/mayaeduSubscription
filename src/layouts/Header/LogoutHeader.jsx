@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { ImSwitch } from 'react-icons/im';
 import { connect } from 'react-redux';
 import img from '../../assets/img';
-import endpoints from '../../routes/endpoints';
 import { logoutUser } from '../../redux/actions/auth';
 
 function LogoutHeader({ logoutUser: logoutUserAction }) {
@@ -42,17 +41,14 @@ function LogoutHeader({ logoutUser: logoutUserAction }) {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link
-                  className="nav-link text-white font-weight-bold"
-                  to={endpoints.login}
+                <h6
+                  className="font-weight-bold px-4 align-items-center d-flex"
+                  onClick={handleLogout}
+                  role="button"
                 >
-                  <h5 className="font-weight-bold px-4 align-items-center d-flex">
-                    <ImSwitch color="white" />
-                    <span className="ml-2 mt-1" onClick={handleLogout}>
-                      Logout
-                    </span>
-                  </h5>
-                </Link>
+                  <ImSwitch color="white" />
+                  <span className="ml-2 text-white">Logout</span>
+                </h6>
               </li>
             </ul>
           </div>

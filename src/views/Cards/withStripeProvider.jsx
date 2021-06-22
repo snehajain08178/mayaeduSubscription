@@ -2,10 +2,9 @@ import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLocation } from 'react-router';
+import { getStripePublicKey } from '../../libs/auth';
 
-const stripePromise = loadStripe(
-  'pk_test_51HwJgxDSkL3ExR1ZNlbUYFX79wffsdKU9q2RTwrwW2X9efpAHFI2YJyc29TdFGKjbpTJ7ZZCOWijOiXQ7FeWzT7U00eqsnRv7m'
-);
+const stripePromise = loadStripe(getStripePublicKey());
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

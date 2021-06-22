@@ -10,9 +10,12 @@ import Notification from './components/Notifications';
 
 import './scss/styles.scss';
 import history from './libs/history';
+import coreuiIcons from './assets/coreuiIcons';
 
 const initialState = {};
 const store = initStore(initialState, history);
+
+React.icons = coreuiIcons;
 
 ReactDOM.render(
   <ErrorBoundary>

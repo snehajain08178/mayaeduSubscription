@@ -43,7 +43,8 @@ export default function authReducer(state = initialState, action) {
     case SIGNUP_USER_START:
       return {
         ...initialState,
-        isProcessing: true,
+        isProcessing: false,
+        isError: true,
       };
     case SIGNUP_USER_END:
       return {
@@ -55,9 +56,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         isProcessing: false,
+        isError: true,
       };
     case LOGOUT_USER:
       localStorage.removeItem('AUTH_ACCESS_TOKEN');
+      localStorage.removeItem('STRIPE_PUBLIC_KEY');
       return {
         ...state,
         isProcessing: false,
