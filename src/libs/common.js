@@ -11,6 +11,13 @@ export function redirectTo(history, location, query) {
   history.push(redirect);
 }
 
+export function stringEllipisis(string = '', limit) {
+  if (string && string.length > limit) {
+    return `${string.substr(0, limit)} ...`;
+  }
+  return string;
+}
+
 export default {
   deepCloneObject,
   redirectTo,

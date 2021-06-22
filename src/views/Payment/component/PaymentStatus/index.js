@@ -7,7 +7,9 @@ import {
 } from '@coreui/react';
 import SVG from '../../../../assets/img/svg';
 import { dateFormat, timeFormat } from '../../../../libs/constants';
-import { paymentFail, paymentFailMsg, paymentSuccessfulMsg } from '../../../../libs/strings';
+import {
+  paymentFail, paymentFailMsg, paymentSuccessfulMsg, monthly, yearly
+} from '../../../../libs/strings';
 import './paymentStatus.scss';
 import Button from '../../../../components/Button';
 import '../../../SignUp/signup.scss';
@@ -24,22 +26,22 @@ const PaymentStatus = (
                 src={status === paymentFail ? SVG.crossIcon : SVG.tickIcon}
             />
         </div>
-        <div>
+        <div style={{ width: '100%' }}>
             <p className="mt-4 text-center font-weight-bold Font-Size--16px">{status}</p>
             <p className="mt-2 text-center paraTag">{moment(new Date()).format(dateFormat)}, {moment(new Date()).format(timeFormat)}</p>
             <p className="mt-5 text-center font-weight-bold paraTag">{status === paymentFail ? paymentFailMsg : paymentSuccessfulMsg}</p>
             <div className="d-flex justify-content-between align-items-center information_View">
                 <div className="d-flex flex-column">
                     <p className="text-center font-weight-bold Font-Size--16px">Basic</p>
-                    <p className="paraTag font-weight-bold text-capitalize">{planDuration}</p>
+                    <p className={`paraTag font-weight-bold text-capitalize ${status !== paymentFail ? 'Green' : 'Red'}`}>{planDuration === 'year' ? yearly : monthly}</p>
                 </div>
-                <div className="d-flex">
+                <div className="d-flex align-items-center justify-content-center">
                     <CImg
                         src={currency === 'inr' ? status === paymentFail ? SVG.rupeeRedIcon : SVG.rupeeGreenIcon :
                           status === paymentFail ?
                             SVG.dollarRedIcon : SVG.dollarGreenIcon}
                     />
-                    <p className="paraTag font-weight-bold Font-Size--20px">{amount}</p>
+                    <p className={`Font-Size--22px font-weight-bold align-items-center align-self-center ${status !== paymentFail ? 'Green' : 'Red'}`}>{amount}</p>
                 </div>
             </div>
         </div>

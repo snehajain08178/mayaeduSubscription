@@ -47,6 +47,8 @@ import {
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import TermAndConditions from '../../components/TermsAndConditions';
+import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
+import { stringEllipisis } from '../../libs/common';
 
 let passwordCriteria = {
   upper: false,
@@ -144,6 +146,8 @@ function CriteriaView(label, check = false) {
   );
 }
 
+const CountryWithData = withStaticSearchProvider(countries, SelectDrop);
+
 function Form({ isProcessing, ...restProps }) {
   const {
     values, errors, events,
@@ -206,19 +210,17 @@ function Form({ isProcessing, ...restProps }) {
                   <h1 className="font-weight-bold text-center">{signup}</h1>
                   <CForm>
                     <CInputGroup className="my-4">
-                      <SelectDrop
-                        id="Country"
-                        labelText="Country*"
-                        name={fieldNames.COUNTRY}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={values[fieldNames.COUNTRY]}
-                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
-                        value={values[fieldNames.COUNTRY] || ''}
-                        errorText={errors[fieldNames.COUNTRY]}
-                        MultiSelectDrop
-                        dropListValues={countries}
-                      />
+                    <CountryWithData
+                      id="Country"
+                      labelText="Country*"
+                      name={fieldNames.COUNTRY}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      selectedItem={stringEllipisis(values[fieldNames.COUNTRY], 40) || ''}
+                      onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                      value={values[fieldNames.COUNTRY] || ''}
+                      errorText={errors[fieldNames.COUNTRY]}
+                    />
                     </CInputGroup>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend>
