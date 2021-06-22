@@ -15,7 +15,7 @@ import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import { validateEmail } from '../../helpers/validators';
-import { signIn, invalidEmailPassword } from '../../libs/strings';
+import { signIn, invalidEmailPassword, invalidEmail } from '../../libs/strings';
 import './login.scss';
 
 const fieldNames = {
@@ -44,12 +44,12 @@ function handleSubmit(values) {
 function validate({ values = {} }) {
   const errors = {};
   if (!validateEmail(values[fieldNames.EMAIL_ID])) {
-    errors[fieldNames.EMAIL_ID] = invalidEmailPassword;
+    errors[fieldNames.EMAIL_ID] = invalidEmail;
   }
   return errors;
 }
 
-function Form({ isProcessing, ...restProps }) {
+function Form({ isProcessing, isError, ...restProps }) {
   const {
     values, errors, events,
   } = useForm({
@@ -62,6 +62,11 @@ function Form({ isProcessing, ...restProps }) {
     onBlur, onKeyUp, onChange, onSubmit
   } = events;
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  React.useEffect(() => {
+    setShowError(isError);
+  }, [isError]);
 
   return (
     <div className="Login__Form">
@@ -73,6 +78,7 @@ function Form({ isProcessing, ...restProps }) {
                 <CCardBody>
                   <CForm>
                   <h1 className="font-weight-bold pb-4 text-center">{signIn}</h1>
+                  <p className="errorMessage">{showError ? invalidEmailPassword : '' }</p>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
@@ -84,9 +90,12 @@ function Form({ isProcessing, ...restProps }) {
                         errorText={errors[fieldNames.EMAIL_ID]}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
-                          onChange={onChange}
-                          disabled={isProcessing}
-                          maxLength={100}
+                        onChange={onChange}
+                        disabled={isProcessing}
+                        maxLength={100}
+                        onFocus={() => {
+                          setShowError(false);
+                        }}
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
@@ -106,6 +115,9 @@ function Form({ isProcessing, ...restProps }) {
                         icon={passwordVisibility ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
                         type={!passwordVisibility ? 'password' : ''}
                         setPasswordVisibility={() => setPasswordVisibility(!passwordVisibility)}
+                        onFocus={() => {
+                          setShowError(false);
+                        }}
                       />
                       </CInputGroup>
                       {/* Will be used in future */}
@@ -143,6 +155,7 @@ Form.defaultProps = {
 
 Form.propTypes = {
   isProcessing: PropTypes.bool,
+  isError: PropTypes.bool
 };
 
 export default Form;
