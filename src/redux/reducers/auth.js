@@ -27,18 +27,21 @@ export default function authReducer(state = initialState, action) {
       return {
         ...initialState,
         isProcessing: true,
+        isError: false
       };
     case LOGIN_USER_END:
       return {
         ...state,
         ...payload,
         isProcessing: false,
+        isError: false
       };
     case ERROR_USER_LOGIN:
       return {
         ...state,
         ...payload,
         isProcessing: false,
+        isError: true
       };
     case SIGNUP_USER_START:
       return {
