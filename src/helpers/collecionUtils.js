@@ -40,7 +40,18 @@ export function getFileObject({ fileObject = {}, id = null, isProcessing = false
   };
 }
 
+export function getCardNumberFormat(month, year) {
+  let number = '';
+  if (parseInt(month, 10) < 10) {
+    number = `0${String(month)} / ${year}`;
+  } else {
+    number = `${String(month)} / ${year}`;
+  }
+  return number;
+}
+
 export default {
   cloneDeep,
   getFileObject,
+  getCardNumberFormat
 };

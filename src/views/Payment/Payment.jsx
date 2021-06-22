@@ -20,7 +20,7 @@ import Modal from '../../components/Modal';
 import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
-import './cards.scss';
+import ConfirmModal from '../../components/Modal/ConfirmModal';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -45,6 +45,7 @@ const useOptions = () => {
   const fontSize = useResponsiveFontSize();
   const options = useMemo(
     () => ({
+      showIcon: true,
       style: {
         base: {
           fontSize,
@@ -80,6 +81,10 @@ const Cards = ({
   const { isFetching, isError, info } = card || {};
   const { defaultCard } = info || {};
   const { id: defaultCardPmId } = defaultCard || {};
+  const [cardDeleteModal, setCardDeleteModal] = useState({
+    isVisible: false,
+    id: null
+  });
 
   const [paymentStatus, setPaymentStatus] = useState('');
   const [paymentSuccessData, setPaymentSuccessData] = useState({});
@@ -182,7 +187,7 @@ const Cards = ({
       });
   };
 
-  function handleCardDeleteClick(delVal) {
+  function handleDeleteModalConfirm(delVal) {
     deleteCard({ fingerprint: delVal })
       .then(() => {
         fetchCardAction();
@@ -190,10 +195,29 @@ const Cards = ({
           isError: false,
           message: 'Card deleted successfully',
         });
+        setCardDeleteModal({
+          isVisible: false,
+          id: null
+        });
       })
       .catch((err) => {
         notifyAction(err);
+        setCardDeleteModal({
+          isVisible: false,
+          id: null
+        });
       });
+    setCardDeleteModal({
+      isVisible: false,
+      id: null
+    });
+  }
+
+  function handleCardDeleteClick(delVal) {
+    setCardDeleteModal({
+      isVisible: true,
+      id: delVal
+    });
   }
 
   return (
@@ -210,7 +234,7 @@ const Cards = ({
               role="button"
             >
               <Icon
-                name="cil-arrow-left"
+                name="cil-x"
                 size="xl"
                 className="font-weight-bold"
               />
@@ -248,6 +272,22 @@ const Cards = ({
             }}
           />
         </Modal>
+        {
+          cardDeleteModal.isVisible && (
+            <ConfirmModal
+              onSubmit={handleDeleteModalConfirm}
+              isVisible={cardDeleteModal.isVisible}
+              onCancel={() => {
+                setCardDeleteModal({
+                  isVisible: false,
+                  id: null
+                });
+              }}
+              content="Are you sure you want to delete this card?"
+              submitLabel="Delete"
+            />
+          )
+        }
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { fetchSubscription } from '../../redux/actions/subscription';
 import './plans.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
 import svg from '../../assets/img/svg';
+import { currencySign } from '../../libs/constants';
 
 function Plans({
   fetchPlans: fetchPlansAction,
@@ -57,7 +58,7 @@ function Plans({
                 role="button"
               >
                 <Icon
-                  name="cil-arrow-left"
+                  name="cil-x"
                   size="xl"
                   className="font-weight-bold"
                 />
@@ -77,7 +78,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="mt-2 ml-2">
-                        Unlimited patient diagnosis with AI Assiatance
+                        Unlimited patient diagnosis with AI Assistant
                       </span>
                     </p>
                     <p>
@@ -109,7 +110,7 @@ function Plans({
                     }
                   >
                     <Link
-                      to={`${endpoints.cards}?id=${basicMonthly.id}`}
+                      to={`${endpoints.payment}?id=${basicMonthly.id}`}
                       className="text-decoration-none text-white"
                     >
                       <Button
@@ -126,7 +127,8 @@ function Plans({
                           !isCancel
                         }
                       >
-                        {basicMonthly.currency} {basicMonthly.amount / 100}
+                        {currencySign[basicMonthly.currency]}{' '}
+                        {basicMonthly.amount / 100}
                       </Button>
                     </Link>
                   </div>
@@ -147,7 +149,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Unlimited patient diagnosis with AI Assiatance
+                        Unlimited patient diagnosis with AI Assistant
                       </span>
                     </p>
                     <p>
@@ -176,7 +178,7 @@ function Plans({
                     }
                   >
                     <Link
-                      to={`${endpoints.cards}?id=${basicAnually.id}`}
+                      to={`${endpoints.payment}?id=${basicAnually.id}`}
                       className="text-decoration-none text-white"
                     >
                       <Button
@@ -190,7 +192,8 @@ function Plans({
                           !isCancel
                         }
                       >
-                        {basicAnually.currency} {basicAnually.amount / 100}
+                        {currencySign[basicMonthly.currency]}{' '}
+                        {basicAnually.amount / 100}
                       </Button>
                     </Link>
                   </div>

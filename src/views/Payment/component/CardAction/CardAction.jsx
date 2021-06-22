@@ -40,7 +40,7 @@ const CardAction = ({
               {(card && card.exp_year) || 'NA'}
             </div>
           </div>
-          <div className="col-2 justify-content-end d-flex align-items-center">
+          <div className="col-2 justify-content-center d-flex pt-0 mb-3">
             <Radio
               name={name}
               checked={checked}

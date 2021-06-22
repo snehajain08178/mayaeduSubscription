@@ -14,6 +14,7 @@ import Form from './Form';
 import { notify } from '../../redux/actions/notification';
 import { deleteCard, updateCard } from '../../api/card';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
+import ConfirmModal from '../../components/Modal/ConfirmModal';
 import endpoints from '../../routes/endpoints';
 
 function useResponsiveFontSize() {
@@ -39,6 +40,7 @@ const useOptions = () => {
   const fontSize = useResponsiveFontSize();
   const options = useMemo(
     () => ({
+      showIcon: true,
       style: {
         base: {
           fontSize,
@@ -70,6 +72,10 @@ const UpdateCard = ({
   notify: notifyAction,
   history,
 }) => {
+  const [cardDeleteModal, setCardDeleteModal] = useState({
+    isVisible: false,
+    id: null
+  });
   const [isLoading, setLoading] = useState(false);
   const { isFetching, isError, info } = card || {};
   const { defaultCard } = info || {};
@@ -117,12 +123,16 @@ const UpdateCard = ({
       });
   };
 
-  function handleCardDeleteClick(delVal) {
+  function handleDeleteModalConfirm() {
     setLoading(true);
-    deleteCard({ fingerprint: delVal })
+    deleteCard({ fingerprint: cardDeleteModal.id })
       .then(() => {
         fetchCardAction();
         setLoading(false);
+        setCardDeleteModal({
+          isVisible: false,
+          id: null
+        });
         notifyAction({
           isError: false,
           message: 'Card deleted successfully',
@@ -131,7 +141,22 @@ const UpdateCard = ({
       .catch((err) => {
         notifyAction(err);
         setLoading(false);
+        setCardDeleteModal({
+          isVisible: false,
+          id: null
+        });
       });
+    setCardDeleteModal({
+      isVisible: false,
+      id: null
+    });
+  }
+
+  function handleCardDeleteClick(delVal) {
+    setCardDeleteModal({
+      isVisible: true,
+      id: delVal
+    });
   }
 
   return (
@@ -148,7 +173,7 @@ const UpdateCard = ({
                 role="button"
               >
                 <Icon
-                  name="cil-arrow-left"
+                  name="cil-x"
                   size="xl"
                   className="font-weight-bold mt-2"
                 />
@@ -165,6 +190,22 @@ const UpdateCard = ({
             />
           </div>
         </ContentWrap>
+        {
+          cardDeleteModal.isVisible && (
+            <ConfirmModal
+              onSubmit={handleDeleteModalConfirm}
+              isVisible={cardDeleteModal.isVisible}
+              onCancel={() => {
+                setCardDeleteModal({
+                  isVisible: false,
+                  id: null
+                });
+              }}
+              content="Are you sure you want to delete this card?"
+              submitLabel="Delete"
+            />
+          )
+        }
       </div>
     </div>
   );

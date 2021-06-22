@@ -1,9 +1,7 @@
 import { CImg } from '@coreui/react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import img from '../../assets/img';
-import endpoints from '../../routes/endpoints';
 import './footer.scss';
 import { termsAndConditions } from '../../libs/strings';
 import TermAndConditions from '../../components/TermsAndConditions';
@@ -26,9 +24,12 @@ export default function Footer() {
           {'Terms & Conditions'}
         </div>
         <div className="text-primary font-weight-bold p-1 px-2 text-decoration-none">
-          <Link className="text-decoration-none" to={endpoints.signup}>
+          <a
+            className="text-decoration-none"
+            href="https://www.mayamd.ai/about"
+          >
             About Us
-          </Link>
+          </a>
         </div>
       </div>
       <Modal
