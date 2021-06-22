@@ -124,7 +124,7 @@ export default function SelectDrop({
                     <CInput
                       title=""
                       autoComplete="new-password"
-                      className={`Select ${errorText ? 'Error-Border' : ''}`}
+                      className={`Select Input ${errorText ? 'Error-Border' : ''}`}
                       value={isDropVisible
                         ? text
                         : (selectedItem.name || 'Select')}

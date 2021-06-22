@@ -47,6 +47,8 @@ import {
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import TermAndConditions from '../../components/TermsAndConditions';
+import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
+import { stringEllipisis } from '../../libs/common';
 
 let passwordCriteria = {
   upper: false,
@@ -134,7 +136,7 @@ function validate({ values = {} }) {
 function CriteriaView(label, check = false) {
   return (
     <CCol>
-      <CRow>
+      <CRow className="mt-1">
         <CImg
           src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
         />
@@ -143,6 +145,8 @@ function CriteriaView(label, check = false) {
     </CCol>
   );
 }
+
+const CountryWithData = withStaticSearchProvider(countries, SelectDrop);
 
 function Form({ isProcessing, ...restProps }) {
   const {
@@ -206,19 +210,17 @@ function Form({ isProcessing, ...restProps }) {
                   <h1 className="font-weight-bold text-center">{signup}</h1>
                   <CForm>
                     <CInputGroup className="my-4">
-                      <SelectDrop
-                        id="Country"
-                        labelText="Country*"
-                        name={fieldNames.COUNTRY}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={values[fieldNames.COUNTRY]}
-                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
-                        value={values[fieldNames.COUNTRY] || ''}
-                        errorText={errors[fieldNames.COUNTRY]}
-                        MultiSelectDrop
-                        dropListValues={countries}
-                      />
+                    <CountryWithData
+                      id="Country"
+                      labelText="Country*"
+                      name={fieldNames.COUNTRY}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      selectedItem={stringEllipisis(values[fieldNames.COUNTRY], 40) || ''}
+                      onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                      value={values[fieldNames.COUNTRY] || ''}
+                      errorText={errors[fieldNames.COUNTRY]}
+                    />
                     </CInputGroup>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend>
@@ -346,7 +348,7 @@ function Form({ isProcessing, ...restProps }) {
                     <CRow
                       className="my-3 justify-content-center pt-4"
                     >
-                      <CRow>
+                      <CRow className="TermsAndConditions">
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
                           onClick={() => setTermsAccepted(!termsAccepted)}
