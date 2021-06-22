@@ -67,6 +67,7 @@ export default function SelectDrop({
     setText('');
   }
   function handleFocus() {
+    setText('');
     if (!disabled) {
       setDropVisible(true);
     }
