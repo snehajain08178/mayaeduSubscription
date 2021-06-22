@@ -13,6 +13,12 @@ function withStaticSearchProvider(_dropListValues, Component) {
       }
     }, []);
 
+    React.useEffect(() => {
+      if (!text) {
+        setDroplistValues(_dropListValues);
+      }
+    }, [text]);
+
     function handleTextChange(event) {
       const { value } = event.target;
       const filterValue = _dropListValues.filter((val) => val.name
