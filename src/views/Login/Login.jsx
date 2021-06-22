@@ -9,7 +9,7 @@ import './login.scss';
 
 function Login(props) {
   const { history, auth } = props;
-  const { isProcessing } = auth;
+  const { isProcessing, isError } = auth;
   function handleLoginSubmit(values) {
     props.loginUser(values, () => {
       redirectTo(history, endpoints.profile);
@@ -21,6 +21,7 @@ function Login(props) {
       <Form
         onSubmit={handleLoginSubmit}
         isProcessing={isProcessing}
+        isError={isError}
       />
     </div>
   );

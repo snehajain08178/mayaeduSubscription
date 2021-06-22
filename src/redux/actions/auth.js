@@ -41,8 +41,7 @@ export function loginUser(payload = {}, callBack) {
         localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
         callBack();
       })
-      .catch((error) => {
-        dispatch(notify(error));
+      .catch(() => {
         dispatch(raiseErrorLoginUser());
       });
   };
