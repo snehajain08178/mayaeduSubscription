@@ -136,7 +136,7 @@ function validate({ values = {} }) {
 function CriteriaView(label, check = false) {
   return (
     <CCol>
-      <CRow>
+      <CRow className="mt-1">
         <CImg
           src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
         />
@@ -348,7 +348,7 @@ function Form({ isProcessing, ...restProps }) {
                     <CRow
                       className="my-3 justify-content-center pt-4"
                     >
-                      <CRow>
+                      <CRow className="TermsAndConditions">
                         <CImg
                           src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
                           onClick={() => setTermsAccepted(!termsAccepted)}
