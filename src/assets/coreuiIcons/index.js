@@ -1,5 +1,6 @@
-import { cilArrowLeft } from '@coreui/icons';
+import { cilArrowLeft, cilX } from '@coreui/icons';
 
 export default {
-  cilArrowLeft
+  cilArrowLeft,
+  cilX
 };

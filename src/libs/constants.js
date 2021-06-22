@@ -742,6 +742,11 @@ export const professionalCategory = [
   { name: 'Intern' }
 ];
 
+export const currencySign = {
+  inr: '₹',
+  usd: '$'
+};
+
 export const dateFormat = 'MM/DD/YYYY';
 
 export const timeFormat = 'HH:mm A';
@@ -750,5 +755,6 @@ export default {
   countries,
   professionalCategory,
   dateFormat,
-  timeFormat
+  timeFormat,
+  currencySign,
 };

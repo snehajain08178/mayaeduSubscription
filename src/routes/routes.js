@@ -10,8 +10,8 @@ import Plans from '../views/Plans';
 import LoginContainer from '../layouts/LoginContainer';
 import Profile from '../views/Profile';
 import withPropProvider from '../common/providers/withPropProvider';
-import Cards from '../views/Cards';
-import UpdateCard from '../views/Cards/UpdateCard';
+import UpdateCard from '../views/Payment/UpdateCard';
+import Payment from '../views/Payment';
 
 export default [
   {
@@ -24,7 +24,9 @@ export default [
         routes: [
           {
             path: '/',
-            component: LoginContainer,
+            component: withPropProvider(LoginContainer, {
+              isSignUp: true,
+            }),
             exact: true,
             routes: [
               {
@@ -119,16 +121,16 @@ export default [
         ],
       },
       {
-        path: endpoints.cards,
+        path: endpoints.payment,
         component: LoginRequired,
         routes: [
           {
-            path: endpoints.cards,
+            path: endpoints.payment,
             component: LogoutContainer,
             exact: true,
             routes: [
               {
-                component: Cards,
+                component: Payment,
               },
             ],
           },

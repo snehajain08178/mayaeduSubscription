@@ -37,9 +37,8 @@ function validate() {
 const Form = ({
   info, options, initialValues, ...restProps
 }) => {
-  const [isAddFormVisible, setAddFormVisible] = useState(false);
   const [cardErrors, setCardErrors] = useState({
-    cardNumber: '',
+    cardNumber: {},
     cardExpiry: '',
   });
   const { values, events } = useForm({
@@ -50,7 +49,6 @@ const Form = ({
   });
 
   const { onChange, onSubmit } = events;
-
   return (
     <div className="row shadow p-3 bg-white rounded">
       <div className="col-md-6">
@@ -71,54 +69,69 @@ const Form = ({
             <div className="col-8">
               <h6>Add Debit/Credit Card</h6>
             </div>
-            <div className="col-4 d-flex justify-content-end">
+            <div
+              className="col-4 d-flex justify-content-end"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
               <Radio
                 onChange={onChange}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
                 name={fieldNames.PM_ID}
-                onClick={() => {
-                  setAddFormVisible(!isAddFormVisible);
-                }}
               />
             </div>
           </div>
         </div>
-        <div className="row mt-4">
-          {isAddFormVisible && (
-            <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
-              <form onSubmit={onSubmit} className="flex-column d-flex">
-                <label>
-                  Card number
-                  <CardNumberElement
-                    options={options}
-                    onChange={(e) => {
-                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
-                    }}
-                  />
-                  {cardErrors.cardNumber && (
-                    <div className="text-danger mt-2 font-xs">{cardErrors.cardNumber}</div>
-                  )}
-                </label>
-                <label>
-                  Expiration date
-                  <CardExpiryElement
-                    options={options}
-                    onChange={(e) => {
-                      setCardErrors({ ...cardErrors, [e.elementType]: e.error.message });
-                    }}
-                  />
-                  {cardErrors.cardNumber && (
-                    <div className="text-danger mt-2 font-xs">{cardErrors.cardExpiry}</div>
-                  )}
-                </label>
-                <label>
-                  CVC
-                  <CardCvcElement options={options} />
-                </label>
-              </form>
-            </div>
-          )}
+        <div className="row mt-4 collapse" id="collapseExample">
+          <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
+            <form onSubmit={onSubmit} className="flex-column d-flex">
+              <label>
+                Card number
+                <CardNumberElement
+                  options={options}
+                  onChange={(e) => {
+                    setCardErrors({
+                      ...cardErrors,
+                      [e.elementType]: e,
+                    });
+                  }}
+                />
+                {cardErrors.cardNumber && (
+                  <div className="text-danger mt-2 font-xs">
+                    {cardErrors.cardNumber
+                      && cardErrors.cardNumber.error
+                      && cardErrors.cardNumber.error.message}
+                  </div>
+                )}
+              </label>
+              <label>
+                Expiry date
+                <CardExpiryElement
+                  options={options}
+                  onChange={(e) => {
+                    setCardErrors({
+                      ...cardErrors,
+                      [e.elementType]: e,
+                    });
+                  }}
+                />
+                {cardErrors.cardNumber && (
+                  <div className="text-danger mt-2 font-xs">
+                    {cardErrors.cardExpiry
+                      && cardErrors.cardExpiry.error
+                      && cardErrors.cardExpiry.error.message}
+                  </div>
+                )}
+              </label>
+              <label>
+                CVC
+                <CardCvcElement options={options} />
+              </label>
+            </form>
+          </div>
         </div>
         <div className="row w-100 mt-4">
           <div className="container w-75 d-flex justify-content-center Width__Phablet--100">

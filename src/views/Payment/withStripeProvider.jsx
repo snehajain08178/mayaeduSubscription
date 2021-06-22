@@ -2,9 +2,8 @@ import React from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLocation } from 'react-router';
-import { getStripePublicKey } from '../../libs/auth';
 
-const stripePromise = loadStripe(getStripePublicKey());
+const stripePromise = loadStripe(localStorage.getItem('STRIPE_PUBLIC_KEY'));
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

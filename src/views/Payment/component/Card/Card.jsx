@@ -25,9 +25,9 @@ const Card = ({ details }) => {
           <div className="col-4 justify-content-end d-flex">
             <CImg
               className="mt-2 ml-lg-2"
-              src={img.cardsIcon[brand]}
+              src={img.cardsIcon[brand === 'visa' ? 'visa-white' : brand]}
               width={50}
-              height={25}
+              height={28}
             />
           </div>
         </div>

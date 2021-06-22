@@ -17,9 +17,11 @@ import './profile.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
 import img from '../../assets/img';
 import { deleteSubscription } from '../../api/subscription';
+import { getCardNumberFormat } from '../../helpers/collecionUtils';
+import ConfirmModal from '../../components/Modal/ConfirmModal';
 
 const basicPlanString = [
-  'Unlimited patient diagnosis with AI Assiatance.',
+  'Unlimited patient diagnosis with AI Assistant.',
   'Clinical Cases with feedback everyday to prepare you for the unpredictable.',
   'Active Cases to help you improve diagnosis skills.',
 ];
@@ -34,6 +36,9 @@ function Profile({
   notify: notifyAction,
 }) {
   const [isLoading, setLoading] = useState(false);
+  const [isSubscriptionDeleteModal, setSubscriptionDeleteModal] =
+    useState(false);
+
   useEffect(() => {
     fetchCardAction();
     fetchUserDetailsAction();
@@ -57,12 +62,13 @@ function Profile({
     isCancel,
   } = (subscriptions && subscriptions.length && subscriptions[0]) || {};
 
-  function handleDelete() {
+  function handleSubscriptionDeleteClick() {
     setLoading(true);
     deleteSubscription({
       subsId: [subscriptionId],
     }).then(() => {
       setLoading(false);
+      setSubscriptionDeleteModal(false);
       fetchSubscriptionAction();
       notifyAction({
         isError: false,
@@ -70,9 +76,15 @@ function Profile({
       }).catch((err) => {
         notifyAction(err);
         setLoading(false);
+        setSubscriptionDeleteModal(false);
       });
     });
     setLoading(true);
+    setSubscriptionDeleteModal(false);
+  }
+
+  function handleDelete() {
+    setSubscriptionDeleteModal(true);
   }
 
   return (
@@ -92,7 +104,7 @@ function Profile({
               <h2 className="font-weight-bold">Profile</h2>
               {planType === 'freeTrial' ? (
                 <h5 className="text-primary font-weight-bold">
-                  Freee Trial {' - '}
+                  Free Trial {' - '}
                   {moment
                     .duration(
                       moment(endDate, 'YYYY-MM-DD').diff(
@@ -155,7 +167,7 @@ function Profile({
                       <span className="text-primary font-weight-bold">
                         Plan Type:{' '}
                       </span>
-                      {planType}
+                      {planType === 'freeTrial' ? 'Free Trial' : planType}
                     </h6>
                     <h6>
                       <span className="text-primary font-weight-bold">
@@ -207,8 +219,9 @@ function Profile({
                         type="link"
                         className="m-0 Button"
                       >
-                        {moment().date() > moment(endDate).date() ||
-                        planType === 'freeTrial'
+                        {moment() > moment(endDate) ||
+                        planType === 'freeTrial' ||
+                        isCancel === true
                           ? 'Buy'
                           : 'Upgrade'}
                       </Button>
@@ -255,9 +268,10 @@ function Profile({
                         </h6>
                         <h6>
                           Valid Till:{' '}
-                          {(cardDetails && cardDetails.exp_month) || 'NA'}
-                          {' / '}
-                          {(cardDetails && cardDetails.exp_year) || 'NA'}
+                          {getCardNumberFormat(
+                            cardDetails && cardDetails.exp_month,
+                            cardDetails && cardDetails.exp_year
+                          ) || 'NA'}
                         </h6>
                       </>
                     ) : (
@@ -269,7 +283,7 @@ function Profile({
                       to={endpoints.updateCard}
                       className="text-decoration-none text-white"
                     >
-                      <Button color="primary text-white m-0 Button" type="link">
+                      <Button color="primary text-white m-0 Button" className="mr-lg-3" type="link">
                         {defaultCard && Object.keys(defaultCard).length
                           ? 'Update'
                           : 'Add'}
@@ -282,6 +296,17 @@ function Profile({
           </div>
         </ContentWrap>
       </div>
+      {isSubscriptionDeleteModal && (
+        <ConfirmModal
+          isVisible={isSubscriptionDeleteModal}
+          onCancel={() => {
+            setSubscriptionDeleteModal(false);
+          }}
+          onSubmit={handleSubscriptionDeleteClick}
+          submitLabel="Delete"
+          content="Are you sure you want to delete your subscription?"
+        />
+      )}
     </div>
   );
 }
