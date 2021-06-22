@@ -136,7 +136,7 @@ function validate({ values = {} }) {
 function CriteriaView(label, check = false) {
   return (
     <CCol>
-      <CRow>
+      <CRow className="mt-1">
         <CImg
           src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
         />
