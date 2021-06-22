@@ -11,11 +11,11 @@ export default function Footer() {
   return (
     <div className="Layouts__Footer">
       <div className="d-flex">
-        <div className="text-primary font-weight-bold p-1 px-2">
+        <div className="text-primary font-weight-bold p-1 px-2 d-flex align-items-center">
           <CImg src={img.footerIcon} width={100} height={20} />
         </div>
         <div
-          className="text-primary font-weight-bold p-1 px-2"
+          className="text-primary font-weight-bold p-1 px-2 text-center"
           role="button"
           onClick={() => {
             settermConditionVisible(true);
@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
         <div className="text-primary font-weight-bold p-1 px-2 text-decoration-none">
           <a
-            className="text-decoration-none"
+            className="text-decoration-none text-center"
             href="https://www.mayamd.ai/about"
           >
             About Us
