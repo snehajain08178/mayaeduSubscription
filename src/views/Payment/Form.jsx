@@ -37,6 +37,7 @@ function validate() {
 const Form = ({
   info, options, initialValues, ...restProps
 }) => {
+  const [isFormVisible, setFormVisible] = useState(false);
   const [cardErrors, setCardErrors] = useState({
     cardNumber: {},
     cardExpiry: '',
@@ -51,7 +52,7 @@ const Form = ({
   const { onChange, onSubmit } = events;
   return (
     <div className="row shadow p-3 bg-white rounded">
-      <div className="col-md-6">
+      <div className="col-md-6 p-0 p-lg-2">
         <List
           details={info}
           name={fieldNames.PM_ID}
@@ -66,18 +67,15 @@ const Form = ({
             type="button"
             className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100"
           >
-            <div className="col-8">
+            <div className="col-10">
               <h6>Add Debit/Credit Card</h6>
             </div>
-            <div
-              className="col-4 d-flex justify-content-end"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              aria-controls="collapseExample"
-            >
+            <div className="col-2 d-flex justify-content-center">
               <Radio
                 onChange={onChange}
+                onClick={() => {
+                  setFormVisible(!isFormVisible);
+                }}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
                 name={fieldNames.PM_ID}
@@ -85,53 +83,55 @@ const Form = ({
             </div>
           </div>
         </div>
-        <div className="row mt-4 collapse" id="collapseExample">
-          <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
-            <form onSubmit={onSubmit} className="flex-column d-flex">
-              <label>
-                Card number
-                <CardNumberElement
-                  options={options}
-                  onChange={(e) => {
-                    setCardErrors({
-                      ...cardErrors,
-                      [e.elementType]: e,
-                    });
-                  }}
-                />
-                {cardErrors.cardNumber && (
-                  <div className="text-danger mt-2 font-xs">
-                    {cardErrors.cardNumber
-                      && cardErrors.cardNumber.error
-                      && cardErrors.cardNumber.error.message}
-                  </div>
-                )}
-              </label>
-              <label>
-                Expiry date
-                <CardExpiryElement
-                  options={options}
-                  onChange={(e) => {
-                    setCardErrors({
-                      ...cardErrors,
-                      [e.elementType]: e,
-                    });
-                  }}
-                />
-                {cardErrors.cardNumber && (
-                  <div className="text-danger mt-2 font-xs">
-                    {cardErrors.cardExpiry
-                      && cardErrors.cardExpiry.error
-                      && cardErrors.cardExpiry.error.message}
-                  </div>
-                )}
-              </label>
-              <label>
-                CVC
-                <CardCvcElement options={options} />
-              </label>
-            </form>
-          </div>
+        <div className="row mt-4">
+          {isFormVisible && (
+            <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
+              <form onSubmit={onSubmit} className="flex-column d-flex">
+                <label>
+                  Card number
+                  <CardNumberElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({
+                        ...cardErrors,
+                        [e.elementType]: e,
+                      });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">
+                      {cardErrors.cardNumber &&
+                        cardErrors.cardNumber.error &&
+                        cardErrors.cardNumber.error.message}
+                    </div>
+                  )}
+                </label>
+                <label>
+                  Expiry date
+                  <CardExpiryElement
+                    options={options}
+                    onChange={(e) => {
+                      setCardErrors({
+                        ...cardErrors,
+                        [e.elementType]: e,
+                      });
+                    }}
+                  />
+                  {cardErrors.cardNumber && (
+                    <div className="text-danger mt-2 font-xs">
+                      {cardErrors.cardExpiry &&
+                        cardErrors.cardExpiry.error &&
+                        cardErrors.cardExpiry.error.message}
+                    </div>
+                  )}
+                </label>
+                <label>
+                  CVC
+                  <CardCvcElement options={options} />
+                </label>
+              </form>
+            </div>
+          )}
         </div>
         <div className="row w-100 mt-4">
           <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
