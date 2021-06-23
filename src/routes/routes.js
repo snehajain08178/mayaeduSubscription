@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogoutRequired, LoginRequired } from 'components/RouteWrappers';
 import App from 'app/App';
 import endpoints from './endpoints';
@@ -7,13 +6,13 @@ import LogoutContainer from '../layouts/LogoutContainer';
 import LoginContainer from '../layouts/LoginContainer';
 import withPropProvider from '../common/providers/withPropProvider';
 
-const Home = React.lazy(() => import('../views/Home'));
-const Login = React.lazy(() => import('../views/Login'));
-const SignUp = React.lazy(() => import('../views/SignUp'));
-const Plans = React.lazy(() => import('../views/Plans'));
-const Profile = React.lazy(() => import('../views/Profile'));
-const UpdateCard = React.lazy(() => import('../views/Payment/UpdateCard'));
-const Payment = React.lazy(() => import('../views/Payment'));
+import Payment from '../views/Payment';
+import UpdateCard from '../views/Payment/UpdateCard';
+import Profile from '../views/Profile';
+import Plans from '../views/Plans';
+import Home from '../views/Home';
+import Login from '../views/Login';
+import SignUp from '../views/SignUp';
 
 export default [
   {
