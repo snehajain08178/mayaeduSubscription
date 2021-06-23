@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "mayaedu-web"
+    "production": "mayaedu-webapp-production",
+    "development": "mayaedu-web"
   }
 }
