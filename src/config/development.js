@@ -1,5 +1,6 @@
 const API = {
   BASE_URL: 'https://edu-dev.mayamd.ai',
+  TOKEN_EXPIRE_TIME: '1800000', // time in milliseconds
   WEB_API_KEY: 'android'
 };
 
