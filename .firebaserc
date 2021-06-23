@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "production": "mayaedu-webapp-production",
+    "development": "mayaedu-web"
+  }
+}

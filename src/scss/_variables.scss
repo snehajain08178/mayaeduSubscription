@@ -1,0 +1,20 @@
+// Your variable overrides
+$primary: #69013b;
+$secondary: #f7f2f5;
+$color: #69013b;
+$text-primary:black;
+$dark : black;
+$info: #69013b;
+$bg-secondary: #f7f2f5;
+$light-gray: #898989; // CoreUI and its default variables
+$error: red;
+$light-primary: #f7f2f5;
+$shadow: rgba(0, 0, 0, 0.2);
+$input-color: black;
+$input-background: white;
+$input-border: #d8dbe0;
+$grey: rgba(19, 19, 19, 0.50);
+$success: #379a3a;
+
+// CoreUI and its default variables
+@import "../node_modules/@coreui/coreui/scss/coreui";

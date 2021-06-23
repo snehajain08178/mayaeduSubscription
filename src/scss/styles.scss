@@ -1,0 +1,112 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import CoreUI styles
+@import "~@coreui/coreui/scss/coreui.scss";
+
+@import "./mixins";
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  color: $text-primary;
+  min-height: 100vh;
+  height: 100%;
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Display--Flex {
+  display: flex;
+}
+
+.Border-Bottom--Gray {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.Font-Size--14px {
+  font-size: 14px;
+}
+
+.Font-Size--16px {
+  font-size: 16px;
+}
+
+.Font-Size--20px {
+  font-size: 20px;
+}
+
+.Font-Size--22px {
+  font-size: 22px;
+}
+
+.Font-Size--40 {
+  font-size: 40px;
+}
+
+.Font-Weight--Bold {
+  font-weight: bold;
+}
+
+// margins
+
+.Mt--8 {
+  margin-top: 8px;
+}
+
+.Mt--10 {
+  margin-top: 10px;
+}
+
+.Ml--10 {
+  margin-left: 10px;
+}
+
+.Mt--5 {
+  margin-top: 5px;
+}
+
+.Mt--20 {
+  margin-top: 20px;
+}
+
+// paddings
+.Pt--10 {
+  padding-top: 10px;
+}
+
+.Bg--Color-lightPink {
+  background-color: $secondary;
+  background-size: cover;
+}
+
+.Color-LightGray {
+  color: $light-gray;
+}
+
+.Border-Radius--12px {
+  border-radius: 12px;
+}
+
+.Width__Phablet--100 {
+  @include breakpoint(phablet) {
+    width: 100% !important;
+  }
+
+  @include breakpoint(mobileonly) {
+    width: 100% !important;
+  }
+
+  @include breakpoint(tablet) {
+    width: 75% !important;
+  }
+}

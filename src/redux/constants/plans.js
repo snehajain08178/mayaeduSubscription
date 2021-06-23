@@ -1,0 +1,3 @@
+export const FETCH_PLANS_START = 'FETCH_PLANS_START';
+export const FETCH_PLANS_END = 'FETCH_PLANS_END';
+export const ERROR_PLANS = 'ERROR_PLANS';
