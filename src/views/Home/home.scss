@@ -1,4 +1,5 @@
 @import '../../scss/mixins';
+@import '../../scss/variables';
 
 .View__Home {
   width: 100%;
@@ -12,6 +13,7 @@
     background: url('/public/landingBackground.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: $secondary;
     height: 100%;
     left: 0;
     right: 0;
