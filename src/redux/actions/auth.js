@@ -1,3 +1,4 @@
+import config from 'config';
 import {
   login as loginApi,
 } from '../../api/login';
@@ -18,6 +19,10 @@ import {
   SIGNUP_USER_END,
   ERROR_USER_SIGNUP
 } from '../constants/auth';
+import { setLocalStorageWithExpiry } from '../../libs/auth';
+
+const { API } = config;
+const { TOKEN_EXPIRE_TIME } = API;
 
 export function loginUserStart() {
   return ({ type: LOGIN_USER_START });
@@ -37,8 +42,8 @@ export function loginUser(payload = {}, callBack) {
     loginApi({ payload })
       .then((res = {}) => {
         dispatch(loginUserEnd(res.header.authorization));
-        localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
-        localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
+        setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
+        setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
         callBack();
       })
       .catch(() => {
@@ -72,8 +77,8 @@ export function signUpUser(payload = {}, callBack) {
     dispatch(signupUserStart());
     signupApi(data)
       .then((res = {}) => {
-        localStorage.setItem('AUTH_ACCESS_TOKEN', res.header.authorization);
-        localStorage.setItem('STRIPE_PUBLIC_KEY', res.body.paymentMode);
+        setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
+        setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
         dispatch(signupUserEnd(res.body));
         callBack();
       })
