@@ -304,7 +304,7 @@ function Profile({
           }}
           onSubmit={handleSubscriptionDeleteClick}
           submitLabel="Delete"
-          content="Are you sure you want to delete your subscription?"
+          content="Are you sure you want to cancel your subscription?"
         />
       )}
     </div>

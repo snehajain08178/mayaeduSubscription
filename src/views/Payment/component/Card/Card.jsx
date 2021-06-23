@@ -24,6 +24,7 @@ const Card = ({ details }) => {
                 card && card.exp_year
               ) || 'NA'}
             </div>
+            {card.warning && <div className="p-2">{card.warning}</div>}
           </div>
           <div className="col-4 justify-content-end d-flex">
             <CImg

@@ -31,8 +31,15 @@ const List = ({
               )
             )
           ) : (
-          <div className="text-primary font-weight-bold justify-content-center text-center">
-            No Card Available
+          <div>
+              <Card details={{
+                card: {
+                  last4: 'XXXX',
+                  exp_month: '0',
+                  exp_year: '0000',
+                  warning: 'No card available!'
+                }
+              }} />
           </div>
           )}
       </div>
