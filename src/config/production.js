@@ -1,5 +1,6 @@
 const API = {
-  BASE_URL: '/api/v1',
+  BASE_URL: 'https://wsedu.mayamd.ai',
+  WEB_API_KEY: 'android'
 };
 
 const DEV_TOOLS = {
