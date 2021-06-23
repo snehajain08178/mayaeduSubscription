@@ -7,9 +7,9 @@ import { renderRoutes } from 'react-router-config';
 function App(props) {
   const { route } = props;
   return (
-    <React.Suspense fallback={<div>Please wait...</div>}>
+    <>
       {renderRoutes(route.routes)}
-    </React.Suspense>
+    </>
   );
 }
 
