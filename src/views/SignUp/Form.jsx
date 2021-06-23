@@ -8,7 +8,7 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CRow,
-  CImg
+  CImg,
 } from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -22,7 +22,7 @@ import {
   validateUpperCase,
   validateLowerCase,
   validateSpecialCharacters,
-  validateNumberExist
+  validateNumberExist,
 } from '../../helpers/validators';
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
 import { countries, professionalCategory } from '../../libs/constants';
@@ -43,7 +43,7 @@ import {
   passwordCreteriaStat,
   passwordNotMatched,
   acceptThe,
-  termsAndConditions
+  termsAndConditions,
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import TermAndConditions from '../../components/TermsAndConditions';
@@ -77,8 +77,12 @@ function handleSelect(event, preValues) {
   const { name, value } = event || {};
   return {
     ...preValues,
-    [name]: name === fieldNames.COUNTRY ? { name: value.name, code: value.code } :
-      name === fieldNames.PROFESSIONAL_DETAILS ? value.name : value
+    [name]:
+      name === fieldNames.COUNTRY
+        ? { name: value.name, code: value.code }
+        : name === fieldNames.PROFESSIONAL_DETAILS
+          ? value.name
+          : value,
   };
 }
 
@@ -103,7 +107,7 @@ const fields = {
   },
   [fieldNames.PROFESSIONAL_DETAILS]: {
     handleSelect,
-  }
+  },
 };
 
 function handleSubmit(values) {
@@ -118,16 +122,27 @@ function validate({ values = {} }) {
   if (!validateName(values[fieldNames.FULL_NAME])) {
     errors[fieldNames.FULL_NAME] = nameValidation;
   }
-  if ((values[fieldNames.CONTACT_INFO] && values[fieldNames.CONTACT_INFO] < 9)
-    || ((!validateNumber(values[fieldNames.CONTACT_INFO])
-    && (values[fieldNames.CONTACT_INFO].length > 1)))) {
+  if (
+    (values[fieldNames.CONTACT_INFO] && values[fieldNames.CONTACT_INFO] < 9) ||
+    (!validateNumber(values[fieldNames.CONTACT_INFO]) &&
+      values[fieldNames.CONTACT_INFO].length > 1)
+  ) {
     errors[fieldNames.CONTACT_INFO] = invalidNumber;
   }
-  if (!(passwordCriteria.textLen && passwordCriteria.specialCharacter
-      && passwordCriteria.upper && passwordCriteria.lower && passwordCriteria.number)) {
+  if (
+    !(
+      passwordCriteria.textLen &&
+      passwordCriteria.specialCharacter &&
+      passwordCriteria.upper &&
+      passwordCriteria.lower &&
+      passwordCriteria.number
+    )
+  ) {
     errors[fieldNames.NEW_PASSWORD] = passwordFormat;
   }
-  if (values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]) {
+  if (
+    values[fieldNames.NEW_PASSWORD] !== values[fieldNames.CONFIRM_NEW_PASSWORD]
+  ) {
     errors[fieldNames.CONFIRM_NEW_PASSWORD] = passwordNotMatched;
   }
   return errors;
@@ -136,11 +151,13 @@ function validate({ values = {} }) {
 function CriteriaView(label, check = false) {
   return (
     <CCol>
-      <CRow className="mt-1">
-        <CImg
-          src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon}
-        />
-        <p className="pl-2">{label}</p>
+      <CRow className="d-flex">
+        <div>
+          <CImg src={check ? SVG.checkCircleIcon : SVG.uncheckCircleIcon} />
+        </div>
+        <div>
+          <p className="pl-2">{label}</p>
+        </div>
       </CRow>
     </CCol>
   );
@@ -149,9 +166,7 @@ function CriteriaView(label, check = false) {
 const CountryWithData = withStaticSearchProvider(countries, SelectDrop);
 
 function Form({ isProcessing, ...restProps }) {
-  const {
-    values, errors, events,
-  } = useForm({
+  const { values, errors, events } = useForm({
     initialValues: {},
     handleSubmit: handleSubmit.bind(restProps),
     fields,
@@ -164,7 +179,7 @@ function Form({ isProcessing, ...restProps }) {
   const [forceUpdate, setForceUpdate] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState({
     newPassword: false,
-    confirmNewPassword: false
+    confirmNewPassword: false,
   });
   const [visible, setVisible] = useState(false);
 
@@ -190,7 +205,12 @@ function Form({ isProcessing, ...restProps }) {
       textLen = true;
     }
     passwordCriteria = {
-      ...passwordCriteria, upper, lower, number, specialCharacter, textLen
+      ...passwordCriteria,
+      upper,
+      lower,
+      number,
+      specialCharacter,
+      textLen,
     };
     setForceUpdate(!forceUpdate);
   };
@@ -210,21 +230,22 @@ function Form({ isProcessing, ...restProps }) {
                   <h1 className="font-weight-bold text-center">{signup}</h1>
                   <CForm>
                     <CInputGroup className="my-4">
-                    <CountryWithData
-                      id="Country"
-                      labelText="Country*"
-                      name={fieldNames.COUNTRY}
-                      onBlur={onBlur}
-                      onKeyUp={onKeyUp}
-                      selectedItem={stringEllipisis(values[fieldNames.COUNTRY], 40) || ''}
-                      onChangeSelect={onSelect(fieldNames.COUNTRY)}
-                      value={values[fieldNames.COUNTRY] || ''}
-                      errorText={errors[fieldNames.COUNTRY]}
-                    />
+                      <CountryWithData
+                        id="Country"
+                        labelText="Country*"
+                        name={fieldNames.COUNTRY}
+                        onBlur={onBlur}
+                        onKeyUp={onKeyUp}
+                        selectedItem={
+                          stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
+                        }
+                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                        value={values[fieldNames.COUNTRY] || ''}
+                        errorText={errors[fieldNames.COUNTRY]}
+                      />
                     </CInputGroup>
                     <CInputGroup className="my-4">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
+                      <CInputGroupPrepend></CInputGroupPrepend>
                       <Input
                         name={fieldNames.FULL_NAME}
                         labelText="Full Name*"
@@ -239,8 +260,7 @@ function Form({ isProcessing, ...restProps }) {
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
+                      <CInputGroupPrepend></CInputGroupPrepend>
                       <Input
                         name={fieldNames.CONTACT_INFO}
                         labelText="Contact info"
@@ -256,8 +276,7 @@ function Form({ isProcessing, ...restProps }) {
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
+                      <CInputGroupPrepend></CInputGroupPrepend>
                       <Input
                         name={fieldNames.EMAIL}
                         labelText="Email*"
@@ -273,8 +292,7 @@ function Form({ isProcessing, ...restProps }) {
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
+                      <CInputGroupPrepend></CInputGroupPrepend>
                       <Input
                         name={fieldNames.NEW_PASSWORD}
                         labelText="New Password*"
@@ -285,34 +303,45 @@ function Form({ isProcessing, ...restProps }) {
                         onKeyUp={onKeyUp}
                         onChange={onChange}
                         disabled={isProcessing}
-                        icon={passwordVisibility.newPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
+                        icon={
+                          passwordVisibility.newPassword
+                            ? 'viewPasswordSvgIcon'
+                            : 'hidePasswordSvgIcon'
+                        }
                         type={!passwordVisibility.newPassword ? 'password' : ''}
                         setPasswordVisibility={() => setPasswordVisibility({
-                          newPassword: !passwordVisibility.newPassword
-                        })}
+                          newPassword: !passwordVisibility.newPassword,
+                        })
+                        }
                       />
                     </CInputGroup>
                     <div className="my-4 Criteria">
-                      <CRow className="my-2 font-weight-bold justify-content-center">{passwordCreteriaStat}</CRow>
-                      <CRow className="ml-1 justify-content-between">
-                        {(CriteriaView(uppercase, passwordCriteria.upper))}
-                        {(CriteriaView(lowercase, passwordCriteria.lower))}
+                      <CRow className="my-2 font-weight-bold justify-content-center">
+                        {passwordCreteriaStat}
                       </CRow>
                       <CRow className="ml-1 justify-content-between">
-                        {(CriteriaView(numeric, passwordCriteria.number))}
-                        {(CriteriaView(minCharacters, passwordCriteria.textLen))}
+                        {CriteriaView(uppercase, passwordCriteria.upper)}
+                        {CriteriaView(lowercase, passwordCriteria.lower)}
                       </CRow>
                       <CRow className="ml-1 justify-content-between">
-                        {(CriteriaView(specialChar, passwordCriteria.specialCharacter))}
-                        {(CriteriaView(passwordMismatch,
+                        {CriteriaView(numeric, passwordCriteria.number)}
+                        {CriteriaView(minCharacters, passwordCriteria.textLen)}
+                      </CRow>
+                      <CRow className="ml-1 justify-content-between">
+                        {CriteriaView(
+                          specialChar,
+                          passwordCriteria.specialCharacter
+                        )}
+                        {CriteriaView(
+                          passwordMismatch,
                           values[fieldNames.NEW_PASSWORD] &&
-                          values[fieldNames.NEW_PASSWORD] ===
-                          values[fieldNames.CONFIRM_NEW_PASSWORD]))}
+                            values[fieldNames.NEW_PASSWORD] ===
+                              values[fieldNames.CONFIRM_NEW_PASSWORD]
+                        )}
                       </CRow>
-                      </div>
+                    </div>
                     <CInputGroup className="my-4">
-                      <CInputGroupPrepend>
-                      </CInputGroupPrepend>
+                      <CInputGroupPrepend></CInputGroupPrepend>
                       <Input
                         name={fieldNames.CONFIRM_NEW_PASSWORD}
                         labelText="Confirm New Password*"
@@ -323,11 +352,21 @@ function Form({ isProcessing, ...restProps }) {
                         onKeyUp={onKeyUp}
                         onChange={onChange}
                         disabled={isProcessing}
-                        icon={passwordVisibility.confirmNewPassword ? 'viewPasswordSvgIcon' : 'hidePasswordSvgIcon'}
-                        type={!passwordVisibility.confirmNewPassword ? 'password' : ''}
+                        icon={
+                          passwordVisibility.confirmNewPassword
+                            ? 'viewPasswordSvgIcon'
+                            : 'hidePasswordSvgIcon'
+                        }
+                        type={
+                          !passwordVisibility.confirmNewPassword
+                            ? 'password'
+                            : ''
+                        }
                         setPasswordVisibility={() => setPasswordVisibility({
-                          confirmNewPassword: !passwordVisibility.confirmNewPassword
-                        })}
+                          confirmNewPassword:
+                              !passwordVisibility.confirmNewPassword,
+                        })
+                        }
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
@@ -338,42 +377,69 @@ function Form({ isProcessing, ...restProps }) {
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
                         selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
-                        onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
+                        onChangeSelect={onSelect(
+                          fieldNames.PROFESSIONAL_DETAILS
+                        )}
                         value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
                         errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
                         MultiSelectDrop
                         dropListValues={professionalCategory}
                       />
                     </CInputGroup>
-                    <CRow
-                      className="my-3 justify-content-center pt-4"
-                    >
-                      <CRow className="TermsAndConditions">
-                        <CImg
-                          src={termsAccepted ? SVG.checkSquareIcon : SVG.uncheckSquareIcon}
-                          onClick={() => setTermsAccepted(!termsAccepted)}
-                        />
-                        <p className="pl-2" onClick={() => setVisible(true)}>{acceptThe}<u className="font-weight-bold pl-1" >{termsAndConditions}</u></p>
-                      </CRow>
+                    <CRow className="my-3 justify-content-center pt-4">
+                      <div className="d-flex">
+                        <div>
+                          <CImg
+                            src={
+                              termsAccepted
+                                ? SVG.checkSquareIcon
+                                : SVG.uncheckSquareIcon
+                            }
+                            onClick={() => setTermsAccepted(!termsAccepted)}
+                          />
+                        </div>
+                        <div className="pl-2" onClick={() => setVisible(true)}>
+                          {acceptThe}
+                          <u className="font-weight-bold pl-1">
+                            {termsAndConditions}
+                          </u>
+                        </div>
+                      </div>
                     </CRow>
                     <CRow className="my-4 justify-content-center">
                       <Button
                         style={{
-                          opacity: isProcessing || !(values[fieldNames.COUNTRY] &&
-                            values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
-                            && values[fieldNames.NEW_PASSWORD] &&
-                            values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted) ? 0.5 : 1
+                          opacity:
+                            isProcessing ||
+                            !(
+                              values[fieldNames.COUNTRY] &&
+                              values[fieldNames.EMAIL] &&
+                              values[fieldNames.FULL_NAME] &&
+                              values[fieldNames.NEW_PASSWORD] &&
+                              values[fieldNames.CONFIRM_NEW_PASSWORD] &&
+                              termsAccepted
+                            )
+                              ? 0.5
+                              : 1,
                         }}
-                        color='primary'
+                        color="primary"
                         className="Button__Signup"
                         onClick={onSubmit}
-                        disabled={isProcessing || !(values[fieldNames.COUNTRY] &&
-                        values[fieldNames.EMAIL] && values[fieldNames.FULL_NAME]
-                        && values[fieldNames.NEW_PASSWORD] &&
-                        values[fieldNames.CONFIRM_NEW_PASSWORD] && termsAccepted)}
-                        >{signup}
+                        disabled={
+                          isProcessing ||
+                          !(
+                            values[fieldNames.COUNTRY] &&
+                            values[fieldNames.EMAIL] &&
+                            values[fieldNames.FULL_NAME] &&
+                            values[fieldNames.NEW_PASSWORD] &&
+                            values[fieldNames.CONFIRM_NEW_PASSWORD] &&
+                            termsAccepted
+                          )
+                        }
+                      >
+                        {signup}
                       </Button>
-                      </CRow>
+                    </CRow>
                   </CForm>
                 </CCardBody>
               </Card>

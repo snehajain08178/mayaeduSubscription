@@ -41,6 +41,7 @@ const Form = ({
   const [cardErrors, setCardErrors] = useState({
     cardNumber: {},
     cardExpiry: '',
+    cardCvc: {},
   });
   const { values, events } = useForm({
     initialValues: initialValues || {},
@@ -66,6 +67,9 @@ const Form = ({
           <div
             type="button"
             className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100"
+            onClick={() => {
+              setFormVisible(!isFormVisible);
+            }}
           >
             <div className="col-10">
               <h6>Add Debit/Credit Card</h6>
@@ -73,18 +77,16 @@ const Form = ({
             <div className="col-2 d-flex justify-content-center">
               <Radio
                 onChange={onChange}
-                onClick={() => {
-                  setFormVisible(!isFormVisible);
-                }}
                 value="NEW_PM_ID"
                 id="NEW_PM_ID"
+                checked={values[fieldNames.PM_ID] === 'NEW_PM_ID'}
                 name={fieldNames.PM_ID}
               />
             </div>
           </div>
         </div>
         <div className="row mt-4">
-          {isFormVisible && (
+          {(isFormVisible || values[fieldNames.PM_ID] === 'NEW_PM_ID') && (
             <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
               <form onSubmit={onSubmit} className="flex-column d-flex">
                 <label>
@@ -127,7 +129,12 @@ const Form = ({
                 </label>
                 <label>
                   CVC
-                  <CardCvcElement options={options} />
+                  <CardCvcElement options={options} onChange={(e) => {
+                    setCardErrors({
+                      ...cardErrors,
+                      [e.elementType]: e,
+                    });
+                  }} />
                 </label>
               </form>
             </div>
@@ -135,8 +142,21 @@ const Form = ({
         </div>
         <div className="row w-100 mt-4">
           <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
-            <Button color="primary" className="w-100" onClick={onSubmit}>
-              {restProps.isUpdate ? 'Update' : 'Pay'}
+            <Button
+              color="primary"
+              className="w-100"
+              onClick={onSubmit}
+              disabled={
+                values[fieldNames.PM_ID] === 'NEW_PM_ID' &&
+                ((cardErrors.cardNumber &&
+                !cardErrors.cardNumber.complete) ||
+                (cardErrors.cardExpiry &&
+                !cardErrors.cardExpiry.complete) ||
+                (cardErrors.cardCvc &&
+                !cardErrors.cardCvc.complete))
+              }
+            >
+              {restProps.isUpdate ? (!info.defaultCard ? 'Add' : 'Update') : 'Pay'}
             </Button>
           </div>
         </div>

@@ -1,17 +1,19 @@
+import React from 'react';
 import { LogoutRequired, LoginRequired } from 'components/RouteWrappers';
 import App from 'app/App';
-
-import Home from 'views/Home';
-import Login from 'views/Login';
 import endpoints from './endpoints';
-import SignUp from '../views/SignUp';
+
 import LogoutContainer from '../layouts/LogoutContainer';
-import Plans from '../views/Plans';
 import LoginContainer from '../layouts/LoginContainer';
-import Profile from '../views/Profile';
 import withPropProvider from '../common/providers/withPropProvider';
-import UpdateCard from '../views/Payment/UpdateCard';
-import Payment from '../views/Payment';
+
+const Home = React.lazy(() => import('../views/Home'));
+const Login = React.lazy(() => import('../views/Login'));
+const SignUp = React.lazy(() => import('../views/SignUp'));
+const Plans = React.lazy(() => import('../views/Plans'));
+const Profile = React.lazy(() => import('../views/Profile'));
+const UpdateCard = React.lazy(() => import('../views/Payment/UpdateCard'));
+const Payment = React.lazy(() => import('../views/Payment'));
 
 export default [
   {

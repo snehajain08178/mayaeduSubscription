@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
 import Radio from '../../../../components/Radio/Radio';
+import { getCardNumberFormat } from '../../../../helpers/collecionUtils';
 
 const CardAction = ({
   details,
@@ -35,9 +36,11 @@ const CardAction = ({
             <div className="">XXXX XXXX XXXX {card.last4}</div>
             <div className="">
               {' '}
-              Valid Till: {(card && card.exp_month) || 'NA'}
-              {' / '}
-              {(card && card.exp_year) || 'NA'}
+              Valid Till: {' '}
+              {getCardNumberFormat(
+                card && card.exp_month,
+                card && card.exp_year
+              ) || 'NA'}
             </div>
           </div>
           <div className="col-2 justify-content-center d-flex pt-0 mb-3">
