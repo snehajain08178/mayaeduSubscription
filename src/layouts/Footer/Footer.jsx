@@ -23,6 +23,8 @@ export default function Footer() {
               <Button
                 color="primary"
                 className="Button_Playstore"
+                href="https://play.google.com/store/apps/details?id=ai.mayamd.mayaedu"
+                target="__blank"
               >
                 <CImg src={img.playStoreIcon} width={17} height={17} className="Svg_Playstore"/>
                 {googlePay}
@@ -30,6 +32,8 @@ export default function Footer() {
               <Button
                 color="primary"
                 className="Button_Playstore"
+                href="https://apps.apple.com/us/app/maya-edu/id1453506418"
+                target="__blank"
               >
                 <CImg src={img.appStoreIcon} width={20} height={20} className="Svg_Playstore"/>
                 {appStore}

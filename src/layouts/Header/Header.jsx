@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
+import { institutionalSignIn } from '../../libs/strings';
 
 export default function Header({ isLogin, isSignUp }) {
   return (
@@ -41,6 +42,14 @@ export default function Header({ isLogin, isSignUp }) {
                   </Link>
                 </li>
               )}
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-white font-weight-bold"
+                  to={endpoints.signup}
+                >
+                  <h6 className="font-weight-bold px-4">{institutionalSignIn}</h6>
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
