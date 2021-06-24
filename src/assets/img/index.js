@@ -13,6 +13,9 @@ import dinersClubIcon from './dinersClub.png';
 import jcbIcon from './jcb.png';
 import visaWhiteIcon from './visaWhite.png';
 import unionPayIcon from './uninonPay.png';
+import playStoreIcon from './playStore.png';
+import appStoreIcon from './appStore.png';
+import logoIcon from './logo.png';
 
 const cardsIcon = {
   master: mastercardIcon,
@@ -35,4 +38,7 @@ export default {
   cardsIcon,
   chipIcon,
   deleteIcon,
+  playStoreIcon,
+  appStoreIcon,
+  logoIcon
 };

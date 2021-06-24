@@ -12,7 +12,8 @@ export default function Header({ isLogin, isSignUp }) {
         <nav className="navbar  navbar-dark bg-dark row-inverse">
           <Link className="navbar-brand mt-2" to={endpoints.home}>
             <h4 className="font-weight-bold">
-              <CImg src={img.headerIcon} width={110} height={20} />
+              <CImg src={img.logoIcon} />
+              <CImg src={img.headerIcon} width={110} height={24} style={{ marginLeft: '15px' }} />
             </h4>
           </Link>
           <div

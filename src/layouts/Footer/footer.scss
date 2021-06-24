@@ -1,6 +1,19 @@
 .Layouts__Footer {
   width: 100%;
-  background-color: #f7f2f5;
+  // background-color: #f7f2f5;
   min-height: 20px;
   padding: 10px;
+  background-color: black;
+
+  .Button_Playstore {
+    width: 150px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .Svg_Playstore {
+    margin-right: 15px;
+  }
+
 }
