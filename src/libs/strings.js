@@ -24,3 +24,7 @@ export const paymentSuccessful = 'Payment Successful';
 export const paymentFail = 'Payment Failed';
 export const monthly = 'Monthly';
 export const yearly = 'Yearly';
+export const downloadApp = 'Download the Maya EDU App';
+export const googlePay = 'Google Play';
+export const appStore = 'App Store';
+export const copyright = 'Copyright ©2021 Maya EDU. All rights are reserved';

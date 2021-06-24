@@ -12,7 +12,7 @@ function Home() {
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
-              <h1 className="text-white font-weight-bold">MayaEDU, a unique interactive</h1>
+              <h1 className="text-white font-weight-bold">Maya EDU, a unique interactive</h1>
               <h1 className="text-white font-weight-bold">flip clinical-education tool</h1>
               <span className="mt-5">
                 <h4 className="text-white">
