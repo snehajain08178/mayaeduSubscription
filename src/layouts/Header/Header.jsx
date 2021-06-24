@@ -43,12 +43,13 @@ export default function Header({ isLogin, isSignUp }) {
                 </li>
               )}
               <li className="nav-item">
-                <Link
+                <a
                   className="nav-link text-white font-weight-bold"
-                  to={endpoints.signup}
+                  href='https://maya-edu-production.web.app/'
+                  target="__blank"
                 >
                   <h6 className="font-weight-bold px-4">{institutionalSignIn}</h6>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
