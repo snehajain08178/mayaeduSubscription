@@ -6,6 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLocation } from 'react-router';
 import { notify } from '../../redux/actions/notification';
 import ContentWrap from '../../components/ContentWrap';
+import { getLocalStorageWithExpiry } from '../../libs/auth';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -18,7 +19,7 @@ function withStripeProvider(Component, restProps) {
 
     useEffect(() => {
       setLoading(true);
-      loadStripe(localStorage.getItem('STRIPE_PUBLIC_KEY')).then((res) => {
+      loadStripe(getLocalStorageWithExpiry('STRIPE_PUBLIC_KEY')).then((res) => {
         stripe.current = res;
         setLoading(false);
       }).catch((err) => {
