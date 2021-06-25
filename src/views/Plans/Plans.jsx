@@ -78,7 +78,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="mt-2 ml-2">
-                        Unlimited patient diagnosis with AI Assistant
+                        Unlimited patient diagnosis with AI assistance.
                       </span>
                     </p>
                     <p>
@@ -91,7 +91,13 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Active Cases to help you improve diagnosis skills
+                        Active Cases to help your improve diagnostic skills.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                      Study Material to help you prepare for the exams.
                       </span>
                     </p>
                   </div>
@@ -149,7 +155,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Unlimited patient diagnosis with AI Assistant
+                        Unlimited patient diagnosis with AI assistance.
                       </span>
                     </p>
                     <p>
@@ -162,7 +168,13 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Active Cases to help you improve diagnosis skills
+                        Active Cases to help your improve diagnostic skills.
+                      </span>
+                    </p>
+                    <p>
+                      <CImg src={svg.checkCircleIcon} />
+                      <span className="ml-2 mt-2">
+                      Study Material to help you prepare for the exams.
                       </span>
                     </p>
                   </div>
