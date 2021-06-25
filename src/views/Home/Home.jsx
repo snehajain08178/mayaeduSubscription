@@ -31,7 +31,7 @@ function Home() {
               </CButton>
             </div>
             <div className="col-md-3 d-flex justify-content-center justify-content-sm-end mt-4 mt-md-0">
-            <CImg src={img.landingMobileImg} width={250} height={550} />
+            <CImg src={img.landingMobileImg} width={250} height={500} />
             </div>
           </div>
         </div>
