@@ -101,7 +101,9 @@ const TermAndConditions = () => (
         <br/>
         The satisfaction of any government regulations requiring disclosure of information
         on prescription drug products or the approval or compliance of any software tools
-        with regard to the Content contained on the MayaMD Site and Apps.\nIn no event shall
+        with regard to the Content contained on the MayaMD Site and Apps.
+        <br/>
+        In no event shall
         MayaMD, its licensors, its suppliers, or any third parties mentioned on the MayaMD
         Site and Apps be liable for any damages (including, without limitation, incidental and
         consequential damages, personal injury/wrongful death, lost profits, or damages resulting
@@ -319,14 +321,14 @@ const TermAndConditions = () => (
         the communication(s).
         <br/>
         Remove communications which are abusive, illegal, or disruptive, or that otherwise fail
-        to conform with these Terms and Conditions.\nTerminate a user&apos;s access to any or all
+        to conform with these Terms and Conditions.Terminate a user&apos;s access to any or all
         Public Areas and/or the MayaMD Site upon any breach of these Terms and Conditions.
         <br/>
         Monitor, edit, or disclose any communication in the Public Areas or on a
         Social Media Platform.
         <br/>
         Edit or delete any communication(s) posted on the MayaMD Site, regardless of whether such
-        communication(s) violate these standards.\nMayaMD or its licensors have no liability or
+        communication(s) violate these standards.MayaMD or its licensors have no liability or
         responsibility to users of the MayaMD Site or any other person or entity for performance
         or nonperformance of the aforementioned activities.
       </p>
@@ -369,7 +371,7 @@ const TermAndConditions = () => (
         the Content are appropriate or may be downloaded outside of the United States. Access
         to the Content may not be legal by certain persons or in certain countries. If you access
         the MayaMD Network from outside the United States, you do so at your own risk and are
-        responsible for compliance with the laws of your jurisdiction.\nThe following provisions
+        responsible for compliance with the laws of your jurisdiction.The following provisions
         survive the expiration or termination of this Agreement for any reason whatsoever:
         Liability, User Submissions, User Submissions - image, video, audio files, Indemnity,
         Jurisdiction, and Complete Agreement.
@@ -393,7 +395,7 @@ const TermAndConditions = () => (
         and effect. No waiver of any of these Terms and Conditions shall be deemed a further
         or continuing waiver of such term or condition or any other term or condition.
         <br/>
-        Notice and Takedown Procedures; and Copyright Agent\nIf you believe any materials
+        Notice and Takedown Procedures; and Copyright Agent.If you believe any materials
         accessible on or from the MayaMD Site and Apps infringe your copyright, you may
         request removal of those materials (or access thereto) from this web site by
         contacting MayaMD&apos;s copyright agent (identified below) and providing the following
@@ -402,7 +404,7 @@ const TermAndConditions = () => (
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Identification of the
         copyrighted work that you believe to be infringed.
         Please describe the work, and where possible include a copy or the location
-        (e.g., URL) of an authorized version of the work.\nIdentification of the material
+        (e.g., URL) of an authorized version of the work.Identification of the material
         that you believe to be infringing and its location. Please describe the material and
         provide us with its URL or any other pertinent information that will allow
         us to locate the material.

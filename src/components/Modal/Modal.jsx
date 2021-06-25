@@ -15,7 +15,11 @@ function Modal({
   show, onClose, title, children, closeButton
 }) {
   return (
-    <CModal show={show} onClose={() => onClose()}>
+    <CModal
+      show={show}
+      onClose={() => onClose()}
+      centered
+    >
       {title &&
         <CModalHeader closeButton={closeButton}>
           <CModalTitle>
