@@ -17,7 +17,8 @@ import {
   LOGOUT_USER,
   SIGNUP_USER_START,
   SIGNUP_USER_END,
-  ERROR_USER_SIGNUP
+  ERROR_USER_SIGNUP,
+  SIGNNUP_RESET
 } from '../constants/auth';
 import { setLocalStorageWithExpiry } from '../../libs/auth';
 
@@ -68,6 +69,10 @@ export function raiseErrorSignupUser() {
   return ({ type: ERROR_USER_SIGNUP });
 }
 
+export function signupUserDetailsReset() {
+  return ({ type: SIGNNUP_RESET });
+}
+
 export function signUpUser(payload = {}, callBack) {
   const data = payload;
   if (!payload.mobileNumber) {
@@ -88,6 +93,10 @@ export function signUpUser(payload = {}, callBack) {
       });
   };
 }
+
+export const resetSignupDetails = () => (dispatch) => {
+  dispatch({ type: SIGNNUP_RESET });
+};
 
 // Logout /Clear Profile
 export const logoutUser = () => (dispatch) => {

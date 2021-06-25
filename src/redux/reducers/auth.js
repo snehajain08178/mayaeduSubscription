@@ -8,7 +8,8 @@ import {
   LOGOUT_USER,
   SIGNUP_USER_START,
   SIGNUP_USER_END,
-  ERROR_USER_SIGNUP
+  ERROR_USER_SIGNUP,
+  SIGNNUP_RESET
 } from '../constants/auth';
 
 // ------------------------------------
@@ -18,6 +19,7 @@ export const initialState = {
   isProcessing: false,
   isError: false,
   info: {},
+  signupInfo: null
 };
 
 export default function authReducer(state = initialState, action) {
@@ -48,18 +50,28 @@ export default function authReducer(state = initialState, action) {
         ...initialState,
         isProcessing: false,
         isError: true,
+        signupInfo: null
       };
     case SIGNUP_USER_END:
       return {
         ...state,
         ...payload,
         isProcessing: false,
+        signupInfo: payload
       };
     case ERROR_USER_SIGNUP:
       return {
         ...state,
         isProcessing: false,
         isError: true,
+        signupInfo: null
+      };
+    case SIGNNUP_RESET:
+      return {
+        ...state,
+        isProcessing: false,
+        isError: false,
+        signupInfo: null
       };
     case LOGOUT_USER:
       localStorage.removeItem('AUTH_ACCESS_TOKEN');
