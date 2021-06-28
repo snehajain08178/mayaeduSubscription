@@ -102,7 +102,7 @@ function Profile({
       {isLoading && <SpinnerWithOverLay />}
       <Modal show={showModal} closeButton={false} >
         <h1 className="text-center">Welcome to Maya EDU</h1>
-        <p className="text-center">{`Let's get started. You can now use Maya Edu for free for ${auth.subscription && auth.subscription[0] && auth.subscription[0].planSession} days.`}</p>
+        <p className="text-center">{`Let's get started. You can now use Maya EDU free trial for ${auth.subscription && auth.subscription[0] && auth.subscription[0].planSession} days.`}</p>
         <CRow className="my-4 justify-content-center">
       <Button
         color="primary"
