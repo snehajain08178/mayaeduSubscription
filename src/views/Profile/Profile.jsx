@@ -24,8 +24,8 @@ import { resetSignupDetails } from '../../redux/actions/auth';
 const basicPlanString = [
   'Unlimited patient diagnosis with AI assistance.',
   'Clinical Cases with feedback everyday to prepare you for the unpredictable.',
+  'Study Material to help you prepare for the exams.',
   'Active Cases to help you improve your diagnostic skills.',
-  'Study Material to help you prepare for the exams.'
 ];
 
 function Profile({
