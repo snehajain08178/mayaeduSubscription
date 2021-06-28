@@ -91,7 +91,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Active Cases to help your improve diagnostic skills.
+                      Active Cases to help you improve your diagnostic skills.
                       </span>
                     </p>
                     <p>
@@ -168,7 +168,7 @@ function Plans({
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="ml-2 mt-2">
-                        Active Cases to help your improve diagnostic skills.
+                      Active Cases to help you improve your diagnostic skills.
                       </span>
                     </p>
                     <p>
