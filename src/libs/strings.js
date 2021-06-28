@@ -28,4 +28,4 @@ export const downloadApp = 'Download the Maya EDU App';
 export const googlePay = 'Google Play';
 export const appStore = 'App Store';
 export const copyright = 'Copyright ©2021 Maya EDU. All rights are reserved';
-export const institutionalSignIn = 'Institute Sign In';
+export const institutionalSignIn = 'Institutional Sign In';
