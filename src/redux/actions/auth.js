@@ -42,10 +42,18 @@ export function loginUser(payload = {}, callBack) {
     dispatch(loginUserStart());
     loginApi({ payload })
       .then((res = {}) => {
-        dispatch(loginUserEnd(res.header.authorization));
-        setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
-        setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
-        callBack();
+        if (res.body && !res.body.isUniversityStudent) {
+          dispatch(loginUserEnd(res.header.authorization));
+          setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
+          setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
+          callBack();
+        } else {
+          dispatch(notify({
+            isError: true,
+            message: 'Please contact your university admin to manage your subscription.'
+          }));
+          dispatch(loginUserEnd());
+        }
       })
       .catch(() => {
         dispatch(raiseErrorLoginUser());
