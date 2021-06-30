@@ -6,7 +6,7 @@
   height: 100% !important;
 
   .View__Home__Image__Wrapper {
-    background-image: -webkit-linear-gradient(80deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
+    background-image: -webkit-linear-gradient(75deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
     background-repeat: no-repeat;
     background-size: cover;
     background-color: $secondary;
@@ -34,16 +34,24 @@
   }
 
   .View__Feature__Card {
+    margin: 50px 20px;
+    margin-top: 50px;
     background-color: white !important;
-    margin-right: 20px;
-    margin-left: 20px;
+  }
+
+  .ribbon {
+    width: 100%;
+    background-color: $primary;
+    height: 30px;
+    color: white;
+    margin-top: 10px
   }
 
   @include breakpoint(laptop) {
     // height: calc(100vh - 110px) !important;
     .View__Feature__Card:hover {
       transform: scale(1.3);
-      z-index: 1;
+      z-index: 1000 !important;
     }
   }
 }
