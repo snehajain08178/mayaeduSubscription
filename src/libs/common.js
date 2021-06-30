@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function deepCloneObject(object = {}) {
   const stringifiedobject = JSON.stringify(object);
   return JSON.parse(stringifiedobject);
@@ -16,6 +18,18 @@ export function stringEllipisis(string = '', limit) {
     return `${string.substr(0, limit)} ...`;
   }
   return string;
+}
+
+export function subscriptionDateFormat(
+  date,
+  checkKey,
+  defaultKey = 'freeTrial',
+  dateFormat = 'MM-DD-YYYY',
+) {
+  if (defaultKey === checkKey) {
+    return moment(date).utcOffset(0).format(dateFormat);
+  }
+  return moment(date).format(dateFormat);
 }
 
 export default {
