@@ -47,8 +47,6 @@ export default function Form({ ...restProps }) {
     onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
 
-  console.log(values);
-
   return (
     <div className="container">
       <div className="card  mx-auto p-5 shadow rounded-lg Form__Width">
