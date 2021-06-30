@@ -1,12 +1,14 @@
 import { CImg } from '@coreui/react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import img from '../../assets/img';
 import './footer.scss';
 import { termsAndConditions } from '../../libs/strings';
 import TermAndConditions from '../../components/TermsAndConditions';
+import endpoints from '../../routes/endpoints';
 
-export default function Footer() {
+export default function Footer({ ...restProps }) {
   const [termConditionVisible, settermConditionVisible] = useState(false);
   return (
     <div className="Layouts__Footer">
@@ -31,6 +33,16 @@ export default function Footer() {
             About Us
           </a>
         </div>
+        {restProps.isLogin && (
+          <div className="text-primary font-weight-bold p-1 px-2 text-decoration-none">
+            <Link
+              className="text-decoration-none text-center"
+              to={endpoints.contactUs}
+            >
+              Contact Us
+            </Link>
+          </div>
+        )}
       </div>
       <Modal
         show={termConditionVisible}

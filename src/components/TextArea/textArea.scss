@@ -1,0 +1,67 @@
+@import '../../scss/variables';
+
+.TextArea {
+  position: relative;
+  width: 100%;
+
+  .Box--Shadow {
+    box-shadow: 0 4px 8px 0 $shadow;
+  }
+
+  .TextArea__Label {
+    margin-bottom: 4px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-left: 16px;
+  }
+
+  .form-control:disabled,
+  .form-control[readonly] {
+    background: white;
+    box-shadow: none;
+    color: #000;
+  }
+
+  .Error {
+    color: $error;
+  }
+
+  .Error--Border {
+    border: 1px solid $error;
+  }
+
+  .TextArea__Error {
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: -19px;
+    left: 0;
+    color: $error;
+  }
+
+  .TextArea__Input {
+    outline: none !important;
+    padding: .375rem .75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-clip: padding-box;
+    border: 1px solid !important;
+    border-radius: 22px;
+    border-color: $input-border !important;
+    color: $input-color;
+    background-color: $input-background;
+  }
+
+  .TextArea__Input:focus {
+    border-color: $primary !important;
+    box-shadow: none;
+  }
+
+
+  .TextArea__Value {
+    background: white;
+    box-shadow: none;
+    white-space: pre-wrap;
+    color: #000;
+  }
+}

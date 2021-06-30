@@ -1,0 +1,202 @@
+import React from 'react';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import SelectDrop from '../../components/SelectDrop/SelectDrop';
+import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
+import { countries } from '../../libs/constants';
+import { fieldNames, fields, personTitle } from './formConfig';
+import useForm from '../../common/hooks/form';
+import { stringEllipisis } from '../../libs/common';
+import { validateEmail, validateNumber } from '../../helpers/validators';
+import { invalidEmail } from '../../libs/strings';
+import TextArea from '../../components/TextArea';
+
+const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
+
+function validate({ values = {} }) {
+  const errors = {};
+  if (!validateEmail(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL_ID] = invalidEmail;
+  }
+  if (!validateNumber(values[fieldNames.CONTACT_NUMBER])) {
+    errors[fieldNames.EMAIL_ID] = invalidEmail;
+  }
+  return errors;
+}
+
+function handleSubmit(values) {
+  this.onSubmit({
+    ...values,
+    personTitle: values.personTitle.name,
+    country: values.country.name,
+  });
+}
+
+export default function Form({ ...restProps }) {
+  const { values, errors, events } = useForm({
+    initialValues: {},
+    handleSubmit: handleSubmit.bind({
+      ...restProps,
+    }),
+    fields,
+    validate: validate.bind(restProps),
+  });
+
+  const {
+    onBlur, onKeyUp, onChange, onSubmit, onSelect
+  } = events;
+
+  return (
+    <div className="container">
+      <div className="card  mx-auto p-5 shadow rounded-lg Form__Width">
+        <div className="row d-flex flex-column">
+          <div className="col">
+            <Input
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.NAME] || ''}
+              labelText="University/Institution's Name"
+              name={fieldNames.NAME}
+              errorText={errors[fieldNames.NAME]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4 d-flex">
+            <SelectDrop
+              labelText="Contact Person Title"
+              name={fieldNames.PERSON_TITLE}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              selectedItem={values[fieldNames.PERSON_TITLE] || ''}
+              errorText={errors[fieldNames.PERSON_TITLE]}
+              maxLength={35}
+              dropListValues={personTitle}
+              id="title"
+              onChangeSelect={onSelect(fieldNames.PERSON_TITLE)}
+            />
+          </div>
+          <div className="col mt-4 d-flex">
+            <Input
+              labelText="Contact Person"
+              name={fieldNames.CONTACT_PERSON}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.CONTACT_PERSON] || ''}
+              errorText={errors[fieldNames.CONTACT_PERSON]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4">
+            <Input
+              labelText="Email Id"
+              name={fieldNames.EMAIL}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.EMAIL] || ''}
+              errorText={errors[fieldNames.EMAIL]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4">
+            <Input
+              labelText="Contact Number"
+              name={fieldNames.CONTACT_NUMBER}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.CONTACT_NUMBER] || ''}
+              errorText={errors[fieldNames.CONTACT_NUMBER]}
+              maxLength={12}
+              type="number"
+            />
+          </div>
+          <div className="col mt-4">
+            <TextArea
+              labelText="Address Line 1"
+              name={fieldNames.ADDRESS_1}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.ADDRESS_1] || ''}
+              errorText={errors[fieldNames.ADDRESS_1]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4">
+            <TextArea
+              labelText="Address Line 2"
+              name={fieldNames.ADDRESS_2}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.ADDRESS_2] || ''}
+              errorText={errors[fieldNames.ADDRESS_2]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4">
+            <Input
+              labelText="Town"
+              name={fieldNames.TOWN}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.TOWN] || ''}
+              errorText={errors[fieldNames.TOWN]}
+              maxLength={35}
+            />
+          </div>
+          <div className="col mt-4">
+            <CountryWithSearch
+              labelText="Country"
+              name={fieldNames.COUNTRY}
+              id="country"
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChangeSelect={onSelect(fieldNames.COUNTRY)}
+              selectedItem={
+                stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
+              }
+              errorText={errors[fieldNames.COUNTRY]}
+            />
+          </div>
+          <div className="col mt-4">
+            <TextArea
+              labelText="Message"
+              name={fieldNames.MESSAGE}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.MESSAGE] || ''}
+              errorText={errors[fieldNames.MESSAGE]}
+            />
+          </div>
+          <div className="col d-flex justify-content-center mt-4 w-100">
+            <Button
+              color="primary"
+              className="Button w-100"
+              onClick={onSubmit}
+              disabled={restProps.isFetching ||
+                !(
+                  values[fieldNames.EMAIL] &&
+                  values[fieldNames.NAME] &&
+                  values[fieldNames.PERSON_TITLE] &&
+                  values[fieldNames.CONTACT_PERSON] &&
+                  values[fieldNames.CONTACT_NUMBER] &&
+                  values[fieldNames.ADDRESS_1] &&
+                  values[fieldNames.COUNTRY] &&
+                  values[fieldNames.MESSAGE]
+                )
+              }
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

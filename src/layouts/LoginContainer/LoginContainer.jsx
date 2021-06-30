@@ -10,7 +10,7 @@ const LoginContainer = ({ route, isLogin, isSignUp }) => (
       <div className="h-100">
       {renderRoutes(route.routes)}
       </div>
-      <Footer />
+      <Footer isLogin={isLogin}/>
     </>
 );
 

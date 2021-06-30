@@ -5,5 +5,6 @@ export default {
   card: 'users/transaction/card',
   subscription: 'users/subscription',
   transactionSubscription: 'users/transaction/subscription',
-  signup: 'public/users/web'
+  signup: 'public/users/web',
+  contactUs: 'public/users/contactus'
 };
