@@ -7,11 +7,15 @@ import Footer from '../Footer';
 const LoginContainer = ({
   route, isLogin, isSignUp, ...restProps
 }) => (
-  <>
-    <Header isLogin={isLogin} isSignUp={isSignUp} />
-    <div className="h-100">{renderRoutes(route.routes)}</div>
-    <Footer isLogin={isLogin} isSignUp={isSignUp} {...restProps} />
-  </>
+    <>
+      <div style={{ position: 'absolute', width: '100%' }}>
+        <Header isLogin={isLogin} isSignUp={isSignUp}/>
+      </div>
+      <div className="h-100">
+      {renderRoutes(route.routes)}
+      </div>
+      <Footer isLogin={isLogin} isSignUp={isSignUp} {...restProps} />
+    </>
 );
 
 LoginContainer.propTypes = {

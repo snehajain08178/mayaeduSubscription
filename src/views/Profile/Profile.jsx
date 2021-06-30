@@ -4,6 +4,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { CImg, CRow } from '@coreui/react';
 import { Link } from 'react-router-dom';
+import Confetti from 'react-confetti';
 import Button from '../../components/Button';
 import { fetchCard } from '../../redux/actions/card';
 import { fetchUserDetails } from '../../redux/actions/userDetails';
@@ -101,18 +102,28 @@ function Profile({
   return (
     <div className="w-100 h-100 Views__Profile">
       {isLoading && <SpinnerWithOverLay />}
+      {showModal &&
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
+      }
       <Modal show={showModal} closeButton={false} >
-        <h1 className="text-center">Welcome to Maya EDU</h1>
+        <h1 className="text-center ml10">
+          <span className="text-wrapper">
+            <span className="letters"> Welcome to Maya EDU</span>
+          </span>
+        </h1>
         <p className="text-center">{`Let's get started. You can now use Maya EDU free trial for ${auth.subscription && auth.subscription[0] && auth.subscription[0].planSession} days.`}</p>
         <CRow className="my-4 justify-content-center">
-      <Button
-        color="primary"
-        className="Button__Done"
-        onClick={() => {
-          setShowModal(false);
-          resetSignup();
-        }}
-      >
+        <Button
+          color="primary"
+          className="Button__Done"
+          onClick={() => {
+            setShowModal(false);
+            resetSignup();
+          }}
+        >
         Done
       </Button>
     </CRow>

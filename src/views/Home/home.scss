@@ -5,12 +5,8 @@
   width: 100%;
   height: 100% !important;
 
-  @include breakpoint(laptop) {
-    height: calc(100vh - 110px) !important;
-  }
-
   .View__Home__Image__Wrapper {
-    background: url('/public/landingBackground.png');
+    background-image: -webkit-linear-gradient(80deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
     background-repeat: no-repeat;
     background-size: cover;
     background-color: $secondary;
@@ -35,5 +31,19 @@
 
   .View__Home__Container__Left {
     margin-top: 30px;
+  }
+
+  .View__Feature__Card {
+    background-color: white !important;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  @include breakpoint(laptop) {
+    // height: calc(100vh - 110px) !important;
+    .View__Feature__Card:hover {
+      transform: scale(1.3);
+      z-index: 1;
+    }
   }
 }

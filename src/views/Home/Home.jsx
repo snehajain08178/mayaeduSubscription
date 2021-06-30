@@ -5,11 +5,23 @@ import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 import './home.scss';
 import '../../scss/styles.scss';
+import {
+  conversationalInterface,
+  clinicalAlgorithms,
+  medicalKnowledge,
+  conversationalInterface1,
+  conversationalInterface2,
+  clinicalAlgorithms1,
+  clinicalAlgorithms2,
+  medicalKnowledge1,
+  medicalKnowledge2
+} from '../../libs/strings';
 
 function Home() {
   return (
     <div className="View__Home">
       <div className="View__Home__Image__Wrapper">
+        <div className="Pt--60"></div>
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
@@ -35,6 +47,25 @@ function Home() {
             </div>
           </div>
         </div>
+        <div className="container">
+            <div className="row">
+              <div className="col-sm View__Feature__Card border">
+                <p>{conversationalInterface}</p>
+                <p>{conversationalInterface1}</p>
+                <p>{conversationalInterface2}</p>
+              </div>
+              <div className="col-sm View__Feature__Card border">
+                <p>{clinicalAlgorithms}</p>
+                <p>{clinicalAlgorithms1}</p>
+                <p>{clinicalAlgorithms2}</p>
+              </div>
+              <div className="col-sm View__Feature__Card border">
+                <p>{medicalKnowledge}</p>
+                <p>{medicalKnowledge1}</p>
+                <p>{medicalKnowledge2}</p>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   );
