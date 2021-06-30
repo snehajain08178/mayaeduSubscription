@@ -6,7 +6,9 @@ import Footer from '../Footer';
 
 const LoginContainer = ({ route, isLogin, isSignUp }) => (
     <>
-    <Header isLogin={isLogin} isSignUp={isSignUp} />
+      <div style={{ position: 'absolute', width: '100%' }}>
+        <Header isLogin={isLogin} isSignUp={isSignUp}/>
+      </div>
       <div className="h-100">
       {renderRoutes(route.routes)}
       </div>

@@ -6,7 +6,7 @@
   height: 100% !important;
 
   .View__Home__Image__Wrapper {
-    background: url('/public/landingBackground.png');
+    background-image: -webkit-linear-gradient(80deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
     background-repeat: no-repeat;
     background-size: cover;
     background-color: $secondary;

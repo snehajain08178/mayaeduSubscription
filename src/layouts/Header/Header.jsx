@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 import { institutionalSignIn } from '../../libs/strings';
+import './Header.scss';
 
 export default function Header({ isLogin, isSignUp }) {
   return (
     <>
       <div className="Layouts__Header">
-        <nav className="navbar  navbar-dark bg-dark row-inverse">
+        <nav className="navbar row-inverse HeaderView">
           <Link className="navbar-brand mt-2" to={endpoints.home}>
             <h4 className="font-weight-bold">
               <CImg src={img.logoIcon} />
