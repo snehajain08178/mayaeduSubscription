@@ -4,7 +4,9 @@ import { renderRoutes } from 'react-router-config';
 import Header from '../Header/Header';
 import Footer from '../Footer';
 
-const LoginContainer = ({ route, isLogin, isSignUp }) => (
+const LoginContainer = ({
+  route, isLogin, isSignUp, ...restProps
+}) => (
     <>
       <div style={{ position: 'absolute', width: '100%' }}>
         <Header isLogin={isLogin} isSignUp={isSignUp}/>
@@ -12,7 +14,7 @@ const LoginContainer = ({ route, isLogin, isSignUp }) => (
       <div className="h-100">
       {renderRoutes(route.routes)}
       </div>
-      <Footer />
+      <Footer isLogin={isLogin} isSignUp={isSignUp} {...restProps} />
     </>
 );
 

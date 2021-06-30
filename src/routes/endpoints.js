@@ -7,5 +7,6 @@ export default {
   profile: '/profile',
   plans: '/plans',
   cards: '/cards',
-  updateCard: '/update-card'
+  updateCard: '/update-card',
+  contactUs: '/contact-us'
 };
