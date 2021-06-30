@@ -21,6 +21,7 @@ import { deleteSubscription } from '../../api/subscription';
 import { getCardNumberFormat } from '../../helpers/collecionUtils';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import { resetSignupDetails } from '../../redux/actions/auth';
+import { subscriptionDateFormat } from '../../libs/common';
 
 const basicPlanString = [
   'Unlimited patient diagnosis with AI assistance.',
@@ -100,7 +101,7 @@ function Profile({
   }, [auth]);
 
   return (
-    <div className="w-100 h-100 Views__Profile">
+    <div className="w-100 Views__Profile">
       {isLoading && <SpinnerWithOverLay />}
       {showModal &&
         <Confetti
@@ -223,7 +224,7 @@ function Profile({
                       <span className="text-primary font-weight-bold">
                         Valid Till:{' '}
                       </span>
-                      {moment(endDate).format('MM-DD-YYYY')}
+                      {subscriptionDateFormat(endDate, planType)}
                     </h6>
                     {planType !== 'freeTrial' && (
                       <h6>

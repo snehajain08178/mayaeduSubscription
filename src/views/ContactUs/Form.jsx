@@ -8,18 +8,18 @@ import { fieldNames, fields, personTitle } from './formConfig';
 import useForm from '../../common/hooks/form';
 import { stringEllipisis } from '../../libs/common';
 import { validateEmail, validateNumber } from '../../helpers/validators';
-import { invalidEmail } from '../../libs/strings';
+import { invalidEmail, invalidNumber } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
 
 const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
 
 function validate({ values = {} }) {
   const errors = {};
-  if (!validateEmail(values[fieldNames.EMAIL])) {
-    errors[fieldNames.EMAIL_ID] = invalidEmail;
+  if (values[fieldNames.EMAIL] && !validateEmail(values[fieldNames.EMAIL])) {
+    errors[fieldNames.EMAIL] = invalidEmail;
   }
   if (!validateNumber(values[fieldNames.CONTACT_NUMBER])) {
-    errors[fieldNames.EMAIL_ID] = invalidEmail;
+    errors[fieldNames.CONTACT_NUMBER] = invalidNumber;
   }
   return errors;
 }
@@ -40,6 +40,7 @@ export default function Form({ ...restProps }) {
     }),
     fields,
     validate: validate.bind(restProps),
+    validateOnBlur: true,
   });
 
   const {
@@ -78,7 +79,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4 d-flex">
             <Input
-              labelText="Contact Person"
+              labelText="Contact Person Name"
               name={fieldNames.CONTACT_PERSON}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -98,19 +99,6 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.EMAIL] || ''}
               errorText={errors[fieldNames.EMAIL]}
               maxLength={35}
-            />
-          </div>
-          <div className="col mt-4">
-            <Input
-              labelText="Contact Number"
-              name={fieldNames.CONTACT_NUMBER}
-              onBlur={onBlur}
-              onKeyUp={onKeyUp}
-              onChange={onChange}
-              value={values[fieldNames.CONTACT_NUMBER] || ''}
-              errorText={errors[fieldNames.CONTACT_NUMBER]}
-              maxLength={12}
-              type="number"
             />
           </div>
           <div className="col mt-4">
@@ -139,7 +127,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Town"
+              labelText="Town/ City"
               name={fieldNames.TOWN}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -164,6 +152,18 @@ export default function Form({ ...restProps }) {
             />
           </div>
           <div className="col mt-4">
+            <Input
+              labelText="Contact Number"
+              name={fieldNames.CONTACT_NUMBER}
+              onBlur={onBlur}
+              onKeyUp={onKeyUp}
+              onChange={onChange}
+              value={values[fieldNames.CONTACT_NUMBER] || ''}
+              errorText={errors[fieldNames.CONTACT_NUMBER]}
+              maxLength={12}
+            />
+          </div>
+          <div className="col mt-4">
             <TextArea
               labelText="Message"
               name={fieldNames.MESSAGE}
@@ -179,7 +179,8 @@ export default function Form({ ...restProps }) {
               color="primary"
               className="Button w-100"
               onClick={onSubmit}
-              disabled={restProps.isFetching ||
+              disabled={
+                restProps.isFetching ||
                 !(
                   values[fieldNames.EMAIL] &&
                   values[fieldNames.NAME] &&
