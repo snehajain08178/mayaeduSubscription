@@ -13,6 +13,7 @@ import Plans from '../views/Plans';
 import Home from '../views/Home';
 import Login from '../views/Login';
 import SignUp from '../views/SignUp';
+import ContactUs from '../views/ContactUs';
 
 export default [
   {
@@ -32,6 +33,26 @@ export default [
             routes: [
               {
                 component: Home,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: endpoints.contactUs,
+        component: LogoutRequired,
+        exact: true,
+        routes: [
+          {
+            path: endpoints.contactUs,
+            component: withPropProvider(LoginContainer, {
+              isSignUp: true,
+              isContactUs: true,
+            }),
+            exact: true,
+            routes: [
+              {
+                component: ContactUs,
               },
             ],
           },

@@ -1,0 +1,110 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.View__ContactUs {
+  min-height: calc(100vh - 110px);
+  height: 100%;
+  width: 100%;
+  color: #000;
+
+  .background {
+    width: 100%;
+    min-height: calc(100vh - 110px);
+    height: 100%;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  // CSS only animate color mapping
+  .background--color-map {
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: animation-colors;
+    animation-timing-function: linear;
+  }
+
+  $colormap: (one: $primary,
+    two: $secondary,
+    three: $light-primary,
+    four: $primary,
+    five: $bg-secondary,
+  );
+
+  @function map-reach($map, $keys...) {
+    @each $key in $keys {
+      $map: map-get($map, $key);
+    }
+
+    @return $map;
+  }
+
+  @keyframes animation-colors {
+    0% {
+      background-color: map-reach($colormap, one);
+    }
+
+    25% {
+      background-color: map-reach($colormap, two);
+    }
+
+    50% {
+      background-color: map-reach($colormap, three);
+    }
+
+    75% {
+      background-color: map-reach($colormap, four);
+    }
+
+    100% {
+      background-color: map-reach($colormap, one);
+    }
+  }
+
+  .card {
+    border-radius: 30px;
+  }
+
+  .Button {
+    width: 300px;
+  }
+
+  .ContactUs__Name {
+    display: flex !important;
+
+    .SelectDrop {
+      width: 20% !important;
+
+      .Select {
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+      }
+    }
+
+    .Components___Input {
+      .Input {
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+      }
+    }
+  }
+
+  .Font-Size--Header {
+    @include breakpoint(phablet) {
+      font-size: 2.8em !important;
+    }
+
+    @include breakpoint(laptop) {
+      font-size: 3.4em !important;
+    }
+  }
+
+  .Form__Width {
+    @include breakpoint(phablet) {
+      width: 100% !important;
+    }
+
+    @include breakpoint(laptop) {
+      width: 50% !important;
+    }
+  }
+}
