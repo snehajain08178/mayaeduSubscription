@@ -47,6 +47,7 @@ export default [
             path: endpoints.contactUs,
             component: withPropProvider(LoginContainer, {
               isSignUp: true,
+              isContactUs: true,
             }),
             exact: true,
             routes: [

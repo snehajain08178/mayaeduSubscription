@@ -79,15 +79,16 @@ export default function Footer({ ...restProps }) {
               >
                 {'Terms & Conditions'}
               </div>
-              {!restProps.isLogin && (
-                <div className="pb-2">
-                  <Link
-                    className="text-decoration-none text-white Font-Size--16px"
-                    to={endpoints.contactUs}
-                  >
-                    Contact Us
-                  </Link>
-                </div>
+              {(restProps.isLogin || restProps.isSignUp) &&
+                !restProps.isContactUs && (
+                  <div className="pb-2">
+                    <Link
+                      className="text-decoration-none text-white Font-Size--16px"
+                      to={endpoints.contactUs}
+                    >
+                      Contact Us
+                    </Link>
+                  </div>
               )}
             </div>
           </div>
