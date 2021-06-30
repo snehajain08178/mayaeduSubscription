@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
+import { institutionalSignIn } from '../../libs/strings';
 
 export default function Header({ isLogin, isSignUp }) {
   return (
@@ -12,7 +13,8 @@ export default function Header({ isLogin, isSignUp }) {
         <nav className="navbar  navbar-dark bg-dark row-inverse">
           <Link className="navbar-brand mt-2" to={endpoints.home}>
             <h4 className="font-weight-bold">
-              <CImg src={img.headerIcon} width={110} height={20} />
+              <CImg src={img.logoIcon} />
+              <CImg src={img.headerIcon} width={110} height={24} style={{ marginLeft: '15px' }} />
             </h4>
           </Link>
           <div
@@ -40,6 +42,15 @@ export default function Header({ isLogin, isSignUp }) {
                   </Link>
                 </li>
               )}
+              <li className="nav-item">
+                <a
+                  className="nav-link text-white font-weight-bold"
+                  href='https://maya-edu-production.web.app/'
+                  target="__blank"
+                >
+                  <h6 className="font-weight-bold px-4">{institutionalSignIn}</h6>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>

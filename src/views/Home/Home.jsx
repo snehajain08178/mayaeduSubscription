@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 import './home.scss';
+import '../../scss/styles.scss';
 
 function Home() {
   return (
@@ -12,13 +13,13 @@ function Home() {
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
-              <h1 className="text-white font-weight-bold">MayaEDU, a unique interactive</h1>
-              <h1 className="text-white font-weight-bold">flip clinical-education tool</h1>
+              <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
+              <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
               <span className="mt-5">
-                <h4 className="text-white">
+                <h3 className="text-white">
                   AI healthcare in your hands, accessible 24/7. Analyze <br />
                   symptoms, get healthcare insights & the right care.
-                </h4>
+                </h3>
               </span>
               <CButton
                 color="info"
@@ -30,7 +31,7 @@ function Home() {
               </CButton>
             </div>
             <div className="col-md-3 d-flex justify-content-center justify-content-sm-end mt-4 mt-md-0">
-              <CImg src={img.landingMobileImg} width={250} height={450} />
+            <CImg src={img.landingMobileImg} width={250} height={500} />
             </div>
           </div>
         </div>

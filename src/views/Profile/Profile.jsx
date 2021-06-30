@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { CImg } from '@coreui/react';
+import { CImg, CRow } from '@coreui/react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import { fetchCard } from '../../redux/actions/card';
@@ -12,18 +12,20 @@ import { notify } from '../../redux/actions/notification';
 import endpoints from '../../routes/endpoints';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 import svgImg from '../../assets/img/svg';
-
+import Modal from '../../components/Modal';
 import './profile.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
 import img from '../../assets/img';
 import { deleteSubscription } from '../../api/subscription';
 import { getCardNumberFormat } from '../../helpers/collecionUtils';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
+import { resetSignupDetails } from '../../redux/actions/auth';
 
 const basicPlanString = [
-  'Unlimited patient diagnosis with AI Assistant.',
+  'Unlimited patient diagnosis with AI assistance.',
   'Clinical Cases with feedback everyday to prepare you for the unpredictable.',
-  'Active Cases to help you improve diagnosis skills.',
+  'Study Material to help you prepare for the exams.',
+  'Active Cases to help you improve your diagnostic skills.',
 ];
 
 function Profile({
@@ -34,6 +36,8 @@ function Profile({
   subscriptionDetails,
   userDetails,
   notify: notifyAction,
+  auth,
+  resetSignupDetails: resetSignup
 }) {
   const [isLoading, setLoading] = useState(false);
   const [isSubscriptionDeleteModal, setSubscriptionDeleteModal] =
@@ -61,6 +65,7 @@ function Profile({
     subscriptionId,
     isCancel,
   } = (subscriptions && subscriptions.length && subscriptions[0]) || {};
+  const [showModal, setShowModal] = useState(false);
 
   function handleSubscriptionDeleteClick() {
     setLoading(true);
@@ -87,9 +92,31 @@ function Profile({
     setSubscriptionDeleteModal(true);
   }
 
+  React.useEffect(() => {
+    if (auth.signupInfo && auth.signupInfo.subscription && auth.signupInfo.subscription[0] && auth.signupInfo.subscription[0].planType === 'freeTrial') {
+      setShowModal(true);
+    }
+  }, [auth]);
+
   return (
     <div className="w-100 h-100 Views__Profile">
       {isLoading && <SpinnerWithOverLay />}
+      <Modal show={showModal} closeButton={false} >
+        <h1 className="text-center">Welcome to Maya EDU</h1>
+        <p className="text-center">{`Let's get started. You can now use Maya EDU free trial for ${auth.subscription && auth.subscription[0] && auth.subscription[0].planSession} days.`}</p>
+        <CRow className="my-4 justify-content-center">
+      <Button
+        color="primary"
+        className="Button__Done"
+        onClick={() => {
+          setShowModal(false);
+          resetSignup();
+        }}
+      >
+        Done
+      </Button>
+    </CRow>
+      </Modal>
       <div className="container h-100">
         <ContentWrap
           style={{ margin: '0 auto', width: '10%' }}
@@ -319,9 +346,15 @@ Profile.propTypes = {
   subscriptionDetails: PropTypes.object.isRequired,
   userDetails: PropTypes.object.isRequired,
   notify: PropTypes.func.isRequired,
+  auth: PropTypes.object,
+  resetSignupDetails: PropTypes.func
 };
-function mapStateToProps({ card, subscriptionDetails, userDetails }) {
-  return { card, subscriptionDetails, userDetails };
+function mapStateToProps({
+  card, subscriptionDetails, userDetails, auth
+}) {
+  return {
+    card, subscriptionDetails, userDetails, auth
+  };
 }
 
 export default connect(mapStateToProps, {
@@ -329,4 +362,5 @@ export default connect(mapStateToProps, {
   fetchSubscription,
   fetchUserDetails,
   notify,
+  resetSignupDetails
 })(Profile);

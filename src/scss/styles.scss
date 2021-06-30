@@ -7,7 +7,7 @@
 @import "./mixins";
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   font-weight: 400;
   background: #fff;
   margin: 0;
@@ -51,6 +51,10 @@ ol {
 
 .Font-Size--40 {
   font-size: 40px;
+}
+
+.Font-Size--48px {
+  font-size: 48px;
 }
 
 .Font-Weight--Bold {
