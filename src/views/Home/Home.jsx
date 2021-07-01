@@ -48,7 +48,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container" style={{ marginTop: '50px' }}>
             <div className="row">
               <div className="col-sm View__Feature__Card border">
                 <div className="ribbon mb-5">{conversationalInterface}</div>
