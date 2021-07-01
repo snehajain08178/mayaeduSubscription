@@ -25,35 +25,35 @@ export default function Header({ isLogin, isSignUp }) {
             id="navbarNav"
           >
             <ul className="navbar-nav d-flex flex-row">
-              {isSignUp && (
-                <li className="nav-item ButtonView">
-                  <Link
-                    className="nav-link text-white font-weight-bold"
-                    to={endpoints.login}
-                  >
-                    <h6 className="px-4 font-weight-bold">Sign In</h6>
-                  </Link>
-                </li>
-              )}
-              {isLogin && (
-                <li className="nav-item">
-                  <Link
-                    className="nav-link text-white font-weight-bold"
-                    to={endpoints.signup}
-                  >
-                    <h6 className="font-weight-bold px-4">Sign Up</h6>
-                  </Link>
-                </li>
-              )}
               <li className="nav-item">
                 <a
                   className="nav-link text-white font-weight-bold"
                   href='https://maya-edu-production.web.app/'
                   target="__blank"
                 >
-                  <h6 className="font-weight-bold px-4">{institutionalSignIn}</h6>
+                  <h6 className="font-weight-bold px-4 ButtonView">{institutionalSignIn}</h6>
                 </a>
               </li>
+              {isLogin && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white font-weight-bold"
+                    to={endpoints.signup}
+                  >
+                    <h6 className="font-weight-bold px-4 ButtonView">Sign Up</h6>
+                  </Link>
+                </li>
+              )}
+              {isSignUp && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white font-weight-bold"
+                    to={endpoints.login}
+                  >
+                    <h6 className="px-4 font-weight-bold ButtonView">Sign In</h6>
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
