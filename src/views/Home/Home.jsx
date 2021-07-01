@@ -31,7 +31,7 @@ function Home() {
                 <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
                 <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
                 <span className="mt-5">
-                  <h3 className="text-white">
+                  <h3 className="text-primary">
                     AI healthcare in your hands, accessible 24/7. Analyze <br />
                     symptoms, get healthcare insights & the right care.
                   </h3>
