@@ -11,6 +11,8 @@ export default function Header({ isLogin, isSignUp }) {
   return (
     <>
       <div className="Layouts__Header">
+        <div className="VerticalLine v1"></div>
+        <div className="VerticalLine v2"></div>
         <nav className="navbar row-inverse HeaderView">
           <Link className="navbar-brand mt-2" to={endpoints.home}>
             <h4 className="font-weight-bold">
@@ -24,7 +26,7 @@ export default function Header({ isLogin, isSignUp }) {
           >
             <ul className="navbar-nav d-flex flex-row">
               {isSignUp && (
-                <li className="nav-item">
+                <li className="nav-item ButtonView">
                   <Link
                     className="nav-link text-white font-weight-bold"
                     to={endpoints.login}
@@ -55,6 +57,8 @@ export default function Header({ isLogin, isSignUp }) {
             </ul>
           </div>
         </nav>
+        <hr className="one"></hr>
+        <hr className="two"></hr>
       </div>
     </>
   );

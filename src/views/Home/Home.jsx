@@ -22,7 +22,7 @@ function Home() {
   return (
     <div className="View__Home">
       <div className="View__Home__Image__Wrapper">
-        <div className="Pt--70"></div>
+        <div className="Pt--130"></div>
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">

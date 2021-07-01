@@ -1,5 +1,45 @@
+@import '../../scss/variables';
+
 .HeaderView {
-    opacity: 1;
     width: 100% !important;
     z-index: 100 !important;
+    box-shadow: 0 4px 8px 0 $shadow;
+    background-color: rgba(252, 252, 252, 0);
+}
+
+.VerticalLine {
+    height: 400px;
+    position: absolute;
+    top: 0;
+    border-right: 5px solid white;
+}
+
+.v1 {
+    right: 10px;
+}
+
+.v2 {
+    right: 30px;
+}
+
+hr {
+    border: 2px solid white !important;
+    width: 400px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    z-index: 2000 !important;
+}
+
+hr.one {
+    top: 70px;
+}
+
+hr.two {
+    top: 90px;
+}
+
+.ButtonView {
+    background-color: $primary;
+    z-index: 1000 !important;
 }
