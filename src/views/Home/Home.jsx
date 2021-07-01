@@ -16,6 +16,7 @@ import {
   medicalKnowledge1,
   medicalKnowledge2
 } from '../../libs/strings';
+import SVG from '../../assets/img/svg';
 
 function Home() {
   return (
@@ -50,22 +51,25 @@ function Home() {
         <div className="container">
             <div className="row">
               <div className="col-sm View__Feature__Card border">
-                <div className="ribbon">{conversationalInterface}</div>
-                <div className="Pt--70">
+                <div className="ribbon mb-5">{conversationalInterface}</div>
+                <CImg src={SVG.conversationalIcon} />
+                <div className="mt-5 mb-3">
                   <p>{conversationalInterface1}</p>
                   <p>{conversationalInterface2}</p>
                 </div>
               </div>
               <div className="col-sm View__Feature__Card border">
-                <div className="ribbon">{clinicalAlgorithms}</div>
-                <div className="Pt--70">
+                <div className="ribbon mb-5">{clinicalAlgorithms}</div>
+                <CImg src={SVG.algorithmIcon} />
+                <div className="mt-5 mb-3">
                   <p>{clinicalAlgorithms1}</p>
                   <p>{clinicalAlgorithms2}</p>
                 </div>
               </div>
               <div className="col-sm View__Feature__Card border">
-                <div className="ribbon">{medicalKnowledge}</div>
-                <div className="Pt--70">
+                <div className="ribbon mb-5">{medicalKnowledge}</div>
+                <CImg src={SVG.medicalKnowledgeIcon} />
+                <div className="mt-5 mb-3">
                   <p>{medicalKnowledge1}</p>
                   <p>{medicalKnowledge2}</p>
                 </div>
