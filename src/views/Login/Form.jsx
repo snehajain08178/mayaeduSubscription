@@ -77,8 +77,8 @@ function Form({ isProcessing, isError, ...restProps }) {
               <Card>
                 <CCardBody>
                   <CForm>
-                  <h1 className="font-weight-bold pb-4 text-center">{signIn}</h1>
-                  <p className="errorMessage">{showError ? invalidEmailPassword : '' }</p>
+                    <h1 className="font-weight-bold pb-4 text-center">{signIn}</h1>
+                    <p className="errorMessage">{showError ? invalidEmailPassword : '' }</p>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend>
                       </CInputGroupPrepend>
