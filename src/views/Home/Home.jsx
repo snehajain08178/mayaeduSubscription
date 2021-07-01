@@ -1,6 +1,7 @@
 import { CButton, CImg } from '@coreui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Animista, { AnimistaTypes } from 'react-animista';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 import './home.scss';
@@ -26,14 +27,16 @@ function Home() {
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
-              <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
-              <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
-              <span className="mt-5">
-                <h3 className="text-white">
-                  AI healthcare in your hands, accessible 24/7. Analyze <br />
-                  symptoms, get healthcare insights & the right care.
-                </h3>
-              </span>
+              <Animista type={AnimistaTypes.ROTATE_CENTER}>
+                <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
+                <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
+                <span className="mt-5">
+                  <h3 className="text-white">
+                    AI healthcare in your hands, accessible 24/7. Analyze <br />
+                    symptoms, get healthcare insights & the right care.
+                  </h3>
+                </span>
+              </Animista>
               <CButton
                 color="info"
                 size="lg"

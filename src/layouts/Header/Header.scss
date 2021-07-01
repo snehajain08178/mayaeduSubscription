@@ -18,7 +18,7 @@ hr {
         height: 400px;
         position: absolute;
         top: 0;
-        border-right: 5px solid white;
+        border-right: 5px solid $primary;
     }
     
     .v1 {
@@ -30,7 +30,7 @@ hr {
     }
     
     hr {
-        border: 2px solid white !important;
+        border: 2px solid $primary !important;
         width: 400px;
         position: absolute;
         top: 70px;
