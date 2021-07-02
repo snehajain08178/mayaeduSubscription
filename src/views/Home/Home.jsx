@@ -15,7 +15,17 @@ import {
   clinicalAlgorithms1,
   clinicalAlgorithms2,
   medicalKnowledge1,
-  medicalKnowledge2
+  medicalKnowledge2,
+  patientDiagnosis,
+  patientDiagnosis1,
+  practiceCases,
+  practiceCases1,
+  prepareExams,
+  prepareExams1,
+  activeCases,
+  activeCases1,
+  universityCirculum,
+  universityCirculum1
 } from '../../libs/strings';
 import SVG from '../../assets/img/svg';
 
@@ -47,39 +57,126 @@ function Home() {
               </CButton>
             </div>
             <div className="col-md-3 d-flex justify-content-center justify-content-sm-end mt-4 mt-md-0">
-            <CImg src={img.landingMobileImg} width={250} height={500} />
+              <CImg src={img.landingMobileImg} width={350} height={480} />
             </div>
           </div>
         </div>
         <div className="container" style={{ marginTop: '50px' }}>
-            <div className="row">
-              <div className="col-sm View__Feature__Card border">
-                <div className="ribbon mb-5">{conversationalInterface}</div>
-                <CImg src={SVG.conversationalIcon} />
-                <div className="mt-5 mb-3">
-                  <p>{conversationalInterface1}</p>
-                  <p>{conversationalInterface2}</p>
-                </div>
+          <div className="row">
+            <div className="col-sm View__Feature__Card border">
+              <div className="ribbon mb-5">{conversationalInterface}</div>
+              <CImg src={SVG.conversationalIcon} />
+              <div className="mt-5 mb-3">
+                <p>{conversationalInterface1}</p>
+                <p>{conversationalInterface2}</p>
               </div>
-              <div className="col-sm View__Feature__Card border">
-                <div className="ribbon mb-5">{clinicalAlgorithms}</div>
-                <CImg src={SVG.algorithmIcon} />
-                <div className="mt-5 mb-3">
-                  <p>{clinicalAlgorithms1}</p>
-                  <p>{clinicalAlgorithms2}</p>
-                </div>
+            </div>
+            <div className="col-sm View__Feature__Card border">
+              <div className="ribbon mb-5">{clinicalAlgorithms}</div>
+              <CImg src={SVG.algorithmIcon} />
+              <div className="mt-5 mb-3">
+                <p>{clinicalAlgorithms1}</p>
+                <p>{clinicalAlgorithms2}</p>
               </div>
-              <div className="col-sm View__Feature__Card border">
-                <div className="ribbon mb-5">{medicalKnowledge}</div>
-                <CImg src={SVG.medicalKnowledgeIcon} />
-                <div className="mt-5 mb-3">
-                  <p>{medicalKnowledge1}</p>
-                  <p>{medicalKnowledge2}</p>
-                </div>
+            </div>
+            <div className="col-sm View__Feature__Card border">
+              <div className="ribbon mb-5">{medicalKnowledge}</div>
+              <CImg src={SVG.medicalKnowledgeIcon} />
+              <div className="mt-5 mb-3">
+                <p>{medicalKnowledge1}</p>
+                <p>{medicalKnowledge2}</p>
               </div>
             </div>
           </div>
+        </div>
       </div>
+      <div className="Layouts__HomePage text-primary">
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-6 text-center align-self-center">
+            <Animista type={AnimistaTypes.ROTATE_CENTER}>
+              <div>
+                <h1 className="font-weight-bold mb-4">
+                  {patientDiagnosis}
+                </h1>
+              </div>
+              <div className="d-flex w-75 mx-auto mt-4">
+                <p>{patientDiagnosis1}</p>
+              </div>
+            </Animista>
+          </div>
+          <div className="col-md-4 justify-content-sm-end featureImagesBackground">
+              <CImg src={img.patientDiagnosis} width={290} height={480}/>
+          </div>
+        </div>
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-4 featureImagesBackground">
+              <CImg src={img.praticeCasesImg} width={290} height={480}/>
+          </div>
+          <div className="col-md-6 justify-content-sm-end text-center align-self-center">
+            <Animista type={AnimistaTypes.ROTATE_CENTER}>
+              <div>
+                <h1 className="font-weight-bold mb-4">
+                  {practiceCases}
+                </h1>
+              </div>
+              <div className="d-flex w-75 mx-auto mt-4">
+                <p>{practiceCases1}</p>
+              </div>
+            </Animista>
+          </div>
+        </div>
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-6 text-center align-self-center">
+            <Animista type={AnimistaTypes.ROTATE_CENTER}>
+              <div>
+                <h1 className="font-weight-bold mb-4">
+                  {prepareExams}
+                </h1>
+              </div>
+              <div className="d-flex w-75 mx-auto mt-4">
+                <p>{prepareExams1}</p>
+              </div>
+            </Animista>
+          </div>
+          <div className="col-md-4 justify-content-sm-end featureImagesBackground">
+              <CImg src={img.prepareExamsImg} width={290} height={480}/>
+          </div>
+        </div>
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-4 featureImagesBackground">
+              <CImg src={img.activeCasesImg} width={290} height={480}/>
+          </div>
+          <div className="col-md-6 justify-content-sm-end text-center align-self-center">
+            <Animista type={AnimistaTypes.ROTATE_CENTER}>
+              <div>
+                <h1 className="font-weight-bold mb-4">
+                  {activeCases}
+                </h1>
+              </div>
+              <div className="d-flex w-75 mx-auto mt-4">
+                <p>{activeCases1}</p>
+              </div>
+            </Animista>
+          </div>
+        </div>
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-6 text-center align-self-center">
+            <Animista type={AnimistaTypes.ROTATE_CENTER}>
+              <div>
+                <h1 className="font-weight-bold mb-4">
+                  {universityCirculum}
+                </h1>
+              </div>
+              <div className="d-flex w-75 mx-auto mt-4">
+                <p>{universityCirculum1}</p>
+              </div>
+            </Animista>
+          </div>
+          <div className="col-md-4 justify-content-sm-end featureImagesBackground">
+              <CImg src={img.universityCirculumImg} width={290} height={480}/>
+          </div>
+        </div>
+    </div>
     </div>
   );
 }
