@@ -56,6 +56,40 @@
     padding: 7px 0px;
   }
 
+  .ViewFeatureContainer {
+    position: relative;
+    margin: 0;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .ViewFeature {
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    text-justify: auto;
+  }
+
+  .featureImagesBackground {
+    background-image: -webkit-linear-gradient(-30deg,$primary 50%, $bg-tertiary 50%);
+    height: 400px;
+    justify-content: center !important;
+    align-items: center !important;
+    align-content: center;
+    text-align: center;
+    display: flex;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 10px;
+  }
+
+  .Layouts__HomePage {
+    width: 100%;
+    min-height: 20px;
+    padding: 10px;
+    background-color:white;
+  }
+ 
   @include breakpoint(laptop) {
     // height: calc(100vh - 110px) !important;
     .View__Feature__Card:hover {
