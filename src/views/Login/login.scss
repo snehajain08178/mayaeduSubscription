@@ -73,9 +73,26 @@
 
         @media (max-width: 1199px) {
             .Main_Card_View.two {
-                border-radius: 30px;
+                border-radius: 30px !important;
             }
         }
 
     }
+
+    @media (max-width: 689px) {
+        .View__Empty {
+            padding-top: 162px;
+        }
+        .Card_View {
+            background-color: transparent !important;
+        }
+        .card {
+            border-radius: 30px !important;
+        }
+        .Main_Card_View {
+            box-shadow: none !important;
+            border-radius: 30px !important;
+        }
+    }
+
 }
