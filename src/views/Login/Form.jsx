@@ -88,7 +88,7 @@ function Form({ isProcessing, isError, ...restProps }) {
       <CContainer>
         <CRow className="justify-content-center row-eq-height" >
           <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
-            className="Card_View d-none d-lg-block Main_Card_View one" style={{
+            className="Card_View d-none d-xl-block Main_Card_View one" style={{
               backgroundColor: '#eddfe6'
             }}>
             <div>
@@ -127,7 +127,9 @@ function Form({ isProcessing, isError, ...restProps }) {
           <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
               <Card>
                 <CCardBody>
-                  <CForm>
+                  <CForm style={{
+                    display: 'flex', alignItems: 'space-between', flexDirection: 'column', justifyContent: 'space-between', height: '100%'
+                  }}>
                     <h1 className="font-weight-bold pb-4 text-center">{signIn}</h1>
                     <p className="errorMessage">{showError ? invalidEmailPassword : '' }</p>
                     <CInputGroup className="my-4">
