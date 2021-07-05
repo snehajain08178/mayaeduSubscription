@@ -16,6 +16,11 @@ import unionPayIcon from './uninonPay.png';
 import playStoreIcon from './playStore.png';
 import appStoreIcon from './appStore.png';
 import logoIcon from './logo.png';
+import patientDiagnosis from './PatientDiagnosis.png';
+import praticeCasesImg from './practiceCases.png';
+import prepareExamsImg from './prepareExams.png';
+import activeCasesImg from './activeCases.png';
+import universityCirculumImg from './universityCirculum.png';
 
 const cardsIcon = {
   master: mastercardIcon,
@@ -40,5 +45,10 @@ export default {
   deleteIcon,
   playStoreIcon,
   appStoreIcon,
-  logoIcon
+  logoIcon,
+  patientDiagnosis,
+  praticeCasesImg,
+  prepareExamsImg,
+  activeCasesImg,
+  universityCirculumImg
 };

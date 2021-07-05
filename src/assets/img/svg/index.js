@@ -21,6 +21,10 @@ import dollarGreenIcon from './DollarGreen.svg';
 import algorithmIcon from './Algorithm.svg';
 import conversationalIcon from './Conversational.svg';
 import medicalKnowledgeIcon from './MedicalKnowledge.svg';
+import booksIcon from './Books.svg';
+import practiceDiagnosisIcon from './PracticeDiagnosis.svg';
+import clinicalCasesIcon from './ClinicalCases.svg';
+import aiIcon from './Ai.svg';
 
 export default {
   checkCircleIcon,
@@ -41,5 +45,9 @@ export default {
   dollarGreenIcon,
   algorithmIcon,
   conversationalIcon,
-  medicalKnowledgeIcon
+  medicalKnowledgeIcon,
+  booksIcon,
+  practiceDiagnosisIcon,
+  clinicalCasesIcon,
+  aiIcon
 };

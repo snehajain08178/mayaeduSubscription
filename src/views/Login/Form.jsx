@@ -2,21 +2,36 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
-  CCardGroup,
   CCol,
   CContainer,
   CInputGroup,
   CInputGroupPrepend,
-  CRow
+  CRow,
+  CImg
 } from '@coreui/react';
+import { Slide } from 'react-slideshow-image';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import CForm from '../../components/Form';
 import useForm from '../../common/hooks/form';
 import { validateEmail } from '../../helpers/validators';
-import { signIn, invalidEmailPassword, invalidEmail } from '../../libs/strings';
+import {
+  signIn,
+  invalidEmailPassword,
+  invalidEmail,
+  helpsYouStudy,
+  helpsYouStudy1,
+  practiceDiagnosis,
+  practiceDiagnosis1,
+  clinicalCases,
+  clinicalCases1,
+  poweredByAi,
+  poweredByAi1
+} from '../../libs/strings';
 import './login.scss';
+import 'react-slideshow-image/dist/styles.css';
+import SVG from '../../assets/img/svg';
 
 const fieldNames = {
   EMAIL_ID: 'email',
@@ -71,9 +86,45 @@ function Form({ isProcessing, isError, ...restProps }) {
   return (
     <div className="Login__Form">
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
-            <CCardGroup>
+        <CRow className="justify-content-center row-eq-height" >
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
+            className="Card_View d-none d-lg-block Main_Card_View one" style={{
+              backgroundColor: '#eddfe6'
+            }}>
+            <div>
+              <Slide autoplay={true} indicators={true} arrows={false}>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.booksIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{helpsYouStudy}</h1>
+                  <p className="slideText">{helpsYouStudy1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.practiceDiagnosisIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{practiceDiagnosis}</h1>
+                  <p className="slideText">{practiceDiagnosis1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.clinicalCasesIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{clinicalCases}</h1>
+                  <p className="slideText">{clinicalCases1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.aiIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{poweredByAi}</h1>
+                  <p className="slideText">{poweredByAi1}</p>
+                </div>
+              </Slide>
+            </div>
+          </CCol>
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
               <Card>
                 <CCardBody>
                   <CForm>
@@ -141,7 +192,6 @@ function Form({ isProcessing, isError, ...restProps }) {
                     </CForm>
                   </CCardBody>
                 </Card>
-              </CCardGroup>
             </CCol>
           </CRow>
         </CContainer>
