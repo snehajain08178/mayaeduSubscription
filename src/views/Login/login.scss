@@ -71,5 +71,11 @@
             margin: 0 auto;
         }
 
+        @media (max-width: 1199px) {
+            .Main_Card_View.two {
+                border-radius: 30px;
+            }
+        }
+
     }
 }
