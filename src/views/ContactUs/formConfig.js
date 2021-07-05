@@ -8,30 +8,29 @@ export const fieldNames = {
   ADDRESS_2: 'address2',
   TOWN: 'town',
   COUNTRY: 'country',
-  MESSAGE: 'message'
+  MESSAGE: 'message',
 };
 
-export const personTitle = [{ id: 'MR', name: 'Mr' }, { id: 'MS', name: 'Ms' }, { id: 'MRS', name: 'Mrs' }];
+export const personTitle = [
+  { id: 'MR', name: 'Mr' },
+  { id: 'MS', name: 'Ms' },
+  { id: 'MRS', name: 'Mrs' },
+  { id: 'DR', name: 'Dr' },
+];
 
 function handleChange(event, preValues) {
-  const {
-    name,
-    value
-  } = event.target || {};
+  const { name, value } = event.target || {};
   return {
     ...preValues,
-    [name]: value
+    [name]: value,
   };
 }
 
 function handleSelect(event, preValues) {
-  const {
-    name,
-    value
-  } = event || {};
+  const { name, value } = event || {};
   return {
     ...preValues,
-    [name]: value
+    [name]: value,
   };
 }
 
@@ -64,6 +63,6 @@ export const fields = {
     handleSelect,
   },
   [fieldNames.MESSAGE]: {
-    handleChange
-  }
+    handleChange,
+  },
 };
