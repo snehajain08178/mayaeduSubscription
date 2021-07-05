@@ -16,11 +16,11 @@ function ContactUs({ saveContactUs: saveContactUsAction, contactUs }) {
   };
   return (
     <div className="View__ContactUs">
-      <div className="background background--color-map">
+      <div className="background background--color">
       <div className="Pt--130"></div>
       <div className="container">
         <div className="View__ContactUs__Header text-center p-5">
-          <h1 className="Font-Size--Header">Contact Us</h1>
+          <h1 className="Font-Size--Header text-white">Contact Us</h1>
         </div>
         {!isSuccess ? (
           <Form onSubmit={handleSubmit} isFetching={isFetching} />

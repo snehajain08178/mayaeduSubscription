@@ -40,7 +40,6 @@ export default function Form({ ...restProps }) {
     }),
     fields,
     validate: validate.bind(restProps),
-    validateOnBlur: true,
   });
 
   const {
@@ -57,7 +56,7 @@ export default function Form({ ...restProps }) {
               onKeyUp={onKeyUp}
               onChange={onChange}
               value={values[fieldNames.NAME] || ''}
-              labelText="University/Institution's Name"
+              labelText="University/Institution's Name*"
               name={fieldNames.NAME}
               errorText={errors[fieldNames.NAME]}
               maxLength={35}
@@ -65,7 +64,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4 d-flex">
             <SelectDrop
-              labelText="Contact Person Title"
+              labelText="Contact Person Title*"
               name={fieldNames.PERSON_TITLE}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -79,7 +78,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4 d-flex">
             <Input
-              labelText="Contact Person Name"
+              labelText="Contact Person Name*"
               name={fieldNames.CONTACT_PERSON}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -91,7 +90,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Email Id"
+              labelText="Email Id*"
               name={fieldNames.EMAIL}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -103,7 +102,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <TextArea
-              labelText="Address Line 1"
+              labelText="Address Line 1*"
               name={fieldNames.ADDRESS_1}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -127,7 +126,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Town/ City"
+              labelText="Town/ City*"
               name={fieldNames.TOWN}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -139,7 +138,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <CountryWithSearch
-              labelText="Country"
+              labelText="Country*"
               name={fieldNames.COUNTRY}
               id="country"
               onBlur={onBlur}
@@ -153,7 +152,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Contact Number"
+              labelText="Contact Number*"
               name={fieldNames.CONTACT_NUMBER}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -167,6 +166,7 @@ export default function Form({ ...restProps }) {
             <TextArea
               labelText="Message"
               name={fieldNames.MESSAGE}
+              placeholder="If you want to mention some other details"
               onBlur={onBlur}
               onKeyUp={onKeyUp}
               onChange={onChange}
@@ -187,9 +187,9 @@ export default function Form({ ...restProps }) {
                   values[fieldNames.PERSON_TITLE] &&
                   values[fieldNames.CONTACT_PERSON] &&
                   values[fieldNames.CONTACT_NUMBER] &&
+                  values[fieldNames.TOWN] &&
                   values[fieldNames.ADDRESS_1] &&
-                  values[fieldNames.COUNTRY] &&
-                  values[fieldNames.MESSAGE]
+                  values[fieldNames.COUNTRY]
                 )
               }
             >
