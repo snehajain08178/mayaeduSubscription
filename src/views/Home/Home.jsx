@@ -1,7 +1,7 @@
 import { CButton, CImg } from '@coreui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Animista, { AnimistaTypes } from 'react-animista';
+import Typist from 'react-typist';
 import img from '../../assets/img';
 import endpoints from '../../routes/endpoints';
 import './home.scss';
@@ -37,7 +37,7 @@ function Home() {
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
-              <Animista type={AnimistaTypes.ROTATE_CENTER}>
+            <Typist className="mt-5 text-primary" cursor={{ show: false }} avgTypingDelay={100}>
                 <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
                 <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
                 <span className="mt-5">
@@ -46,7 +46,7 @@ function Home() {
                     symptoms, get healthcare insights & the right care.
                   </h3>
                 </span>
-              </Animista>
+                </Typist>
               <CButton
                 color="info"
                 size="lg"
@@ -93,7 +93,6 @@ function Home() {
       <div className="Layouts__HomePage text-primary">
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-            <Animista type={AnimistaTypes.ROTATE_CENTER}>
               <div>
                 <h1 className="font-weight-bold mb-4">
                   {patientDiagnosis}
@@ -102,7 +101,6 @@ function Home() {
               <div className="d-flex w-75 mx-auto mt-4">
                 <p>{patientDiagnosis1}</p>
               </div>
-            </Animista>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
               <CImg src={img.patientDiagnosis} width={290} height={480}/>
@@ -113,7 +111,6 @@ function Home() {
               <CImg src={img.praticeCasesImg} width={290} height={480}/>
           </div>
           <div className="col-md-6 justify-content-sm-end text-center align-self-center">
-            <Animista type={AnimistaTypes.ROTATE_CENTER}>
               <div>
                 <h1 className="font-weight-bold mb-4">
                   {practiceCases}
@@ -122,12 +119,10 @@ function Home() {
               <div className="d-flex w-75 mx-auto mt-4">
                 <p>{practiceCases1}</p>
               </div>
-            </Animista>
           </div>
         </div>
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-            <Animista type={AnimistaTypes.ROTATE_CENTER}>
               <div>
                 <h1 className="font-weight-bold mb-4">
                   {prepareExams}
@@ -136,7 +131,6 @@ function Home() {
               <div className="d-flex w-75 mx-auto mt-4">
                 <p>{prepareExams1}</p>
               </div>
-            </Animista>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
               <CImg src={img.prepareExamsImg} width={290} height={480}/>
@@ -147,7 +141,6 @@ function Home() {
               <CImg src={img.activeCasesImg} width={290} height={480}/>
           </div>
           <div className="col-md-6 justify-content-sm-end text-center align-self-center">
-            <Animista type={AnimistaTypes.ROTATE_CENTER}>
               <div>
                 <h1 className="font-weight-bold mb-4">
                   {activeCases}
@@ -156,12 +149,10 @@ function Home() {
               <div className="d-flex w-75 mx-auto mt-4">
                 <p>{activeCases1}</p>
               </div>
-            </Animista>
           </div>
         </div>
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-            <Animista type={AnimistaTypes.ROTATE_CENTER}>
               <div>
                 <h1 className="font-weight-bold mb-4">
                   {universityCirculum}
@@ -170,7 +161,6 @@ function Home() {
               <div className="d-flex w-75 mx-auto mt-4">
                 <p>{universityCirculum1}</p>
               </div>
-            </Animista>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
               <CImg src={img.universityCirculumImg} width={290} height={480}/>
