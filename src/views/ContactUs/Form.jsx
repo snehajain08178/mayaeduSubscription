@@ -7,8 +7,8 @@ import { countries } from '../../libs/constants';
 import { fieldNames, fields, personTitle } from './formConfig';
 import useForm from '../../common/hooks/form';
 import { stringEllipisis } from '../../libs/common';
-import { validateEmail, validateNumber } from '../../helpers/validators';
-import { invalidEmail, invalidNumber } from '../../libs/strings';
+import { validateEmail, validateName, validateNumber } from '../../helpers/validators';
+import { invalidEmail, invalidNumber, nameValidation } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
 
 const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
@@ -18,6 +18,15 @@ function validate({ values = {} }) {
   if (values[fieldNames.EMAIL] && !validateEmail(values[fieldNames.EMAIL])) {
     errors[fieldNames.EMAIL] = invalidEmail;
   }
+
+  if (!validateName(values[fieldNames.NAME])) {
+    errors[fieldNames.CONTACT_PERSON] = nameValidation;
+  }
+
+  if (!validateName(values[fieldNames.CONTACT_PERSON])) {
+    errors[fieldNames.CONTACT_PERSON] = nameValidation;
+  }
+
   if (!validateNumber(values[fieldNames.CONTACT_NUMBER])) {
     errors[fieldNames.CONTACT_NUMBER] = invalidNumber;
   }
