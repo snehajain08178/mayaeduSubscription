@@ -50,6 +50,7 @@
     border-color: $input-border !important;
     color: $input-color;
     background-color: $input-background;
+    resize: none;
   }
 
   .TextArea__Input:focus {

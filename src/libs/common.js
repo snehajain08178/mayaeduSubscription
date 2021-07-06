@@ -5,6 +5,16 @@ export function deepCloneObject(object = {}) {
   return JSON.parse(stringifiedobject);
 }
 
+export function removeBlankFromObject(object = {}) {
+  const _object = {};
+  Object.keys(object).forEach((key) => {
+    if (object[key]) {
+      _object[key] = object[key];
+    }
+  });
+  return _object;
+}
+
 export function redirectTo(history, location, query) {
   let redirect = location;
   if (query) {

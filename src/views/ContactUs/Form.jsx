@@ -6,9 +6,9 @@ import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticS
 import { countries } from '../../libs/constants';
 import { fieldNames, fields, personTitle } from './formConfig';
 import useForm from '../../common/hooks/form';
-import { stringEllipisis } from '../../libs/common';
-import { validateEmail, validateNumber } from '../../helpers/validators';
-import { invalidEmail, invalidNumber } from '../../libs/strings';
+import { removeBlankFromObject, stringEllipisis } from '../../libs/common';
+import { validateEmail, validateName, validateNumber } from '../../helpers/validators';
+import { invalidEmail, invalidNumber, nameValidation } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
 
 const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
@@ -18,6 +18,15 @@ function validate({ values = {} }) {
   if (values[fieldNames.EMAIL] && !validateEmail(values[fieldNames.EMAIL])) {
     errors[fieldNames.EMAIL] = invalidEmail;
   }
+
+  if (!validateName(values[fieldNames.NAME])) {
+    errors[fieldNames.CONTACT_PERSON] = nameValidation;
+  }
+
+  if (!validateName(values[fieldNames.CONTACT_PERSON])) {
+    errors[fieldNames.CONTACT_PERSON] = nameValidation;
+  }
+
   if (!validateNumber(values[fieldNames.CONTACT_NUMBER])) {
     errors[fieldNames.CONTACT_NUMBER] = invalidNumber;
   }
@@ -25,11 +34,11 @@ function validate({ values = {} }) {
 }
 
 function handleSubmit(values) {
-  this.onSubmit({
+  this.onSubmit(removeBlankFromObject({
     ...values,
     personTitle: values.personTitle.name,
     country: values.country.name,
-  });
+  }));
 }
 
 export default function Form({ ...restProps }) {
@@ -40,7 +49,6 @@ export default function Form({ ...restProps }) {
     }),
     fields,
     validate: validate.bind(restProps),
-    validateOnBlur: true,
   });
 
   const {
@@ -57,7 +65,7 @@ export default function Form({ ...restProps }) {
               onKeyUp={onKeyUp}
               onChange={onChange}
               value={values[fieldNames.NAME] || ''}
-              labelText="University/Institution's Name"
+              labelText="University/Institution's Name*"
               name={fieldNames.NAME}
               errorText={errors[fieldNames.NAME]}
               maxLength={35}
@@ -65,7 +73,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4 d-flex">
             <SelectDrop
-              labelText="Contact Person Title"
+              labelText="Contact Person Title*"
               name={fieldNames.PERSON_TITLE}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -79,7 +87,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4 d-flex">
             <Input
-              labelText="Contact Person Name"
+              labelText="Contact Person Name*"
               name={fieldNames.CONTACT_PERSON}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -91,7 +99,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Email Id"
+              labelText="Email Id*"
               name={fieldNames.EMAIL}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -103,7 +111,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <TextArea
-              labelText="Address Line 1"
+              labelText="Address Line 1*"
               name={fieldNames.ADDRESS_1}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -127,7 +135,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Town/ City"
+              labelText="Town/ City*"
               name={fieldNames.TOWN}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -139,7 +147,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <CountryWithSearch
-              labelText="Country"
+              labelText="Country*"
               name={fieldNames.COUNTRY}
               id="country"
               onBlur={onBlur}
@@ -153,7 +161,7 @@ export default function Form({ ...restProps }) {
           </div>
           <div className="col mt-4">
             <Input
-              labelText="Contact Number"
+              labelText="Contact Number*"
               name={fieldNames.CONTACT_NUMBER}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -167,6 +175,7 @@ export default function Form({ ...restProps }) {
             <TextArea
               labelText="Message"
               name={fieldNames.MESSAGE}
+              placeholder="If you want to mention some other details"
               onBlur={onBlur}
               onKeyUp={onKeyUp}
               onChange={onChange}
@@ -187,9 +196,9 @@ export default function Form({ ...restProps }) {
                   values[fieldNames.PERSON_TITLE] &&
                   values[fieldNames.CONTACT_PERSON] &&
                   values[fieldNames.CONTACT_NUMBER] &&
+                  values[fieldNames.TOWN] &&
                   values[fieldNames.ADDRESS_1] &&
-                  values[fieldNames.COUNTRY] &&
-                  values[fieldNames.MESSAGE]
+                  values[fieldNames.COUNTRY]
                 )
               }
             >
