@@ -36,7 +36,7 @@
     .card {
       border-radius: 16px;
       height: calc(100vh - 270px) !important;
-      overflow: scroll;
+      overflow-y: scroll
     }
 
     .slideText {
