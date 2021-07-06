@@ -6,7 +6,7 @@ import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticS
 import { countries } from '../../libs/constants';
 import { fieldNames, fields, personTitle } from './formConfig';
 import useForm from '../../common/hooks/form';
-import { stringEllipisis } from '../../libs/common';
+import { removeBlankFromObject, stringEllipisis } from '../../libs/common';
 import { validateEmail, validateName, validateNumber } from '../../helpers/validators';
 import { invalidEmail, invalidNumber, nameValidation } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
@@ -34,11 +34,11 @@ function validate({ values = {} }) {
 }
 
 function handleSubmit(values) {
-  this.onSubmit({
+  this.onSubmit(removeBlankFromObject({
     ...values,
     personTitle: values.personTitle.name,
     country: values.country.name,
-  });
+  }));
 }
 
 export default function Form({ ...restProps }) {
