@@ -10,6 +10,7 @@ import {
   CRow,
   CImg,
 } from '@coreui/react';
+import { Slide } from 'react-slideshow-image';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
@@ -44,11 +45,20 @@ import {
   passwordNotMatched,
   acceptThe,
   termsAndConditions,
+  helpsYouStudy,
+  helpsYouStudy1,
+  practiceDiagnosis,
+  practiceDiagnosis1,
+  clinicalCases,
+  clinicalCases1,
+  poweredByAi,
+  poweredByAi1
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import TermAndConditions from '../../components/TermsAndConditions';
 import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
 import { stringEllipisis } from '../../libs/common';
+import 'react-slideshow-image/dist/styles.css';
 
 let passwordCriteria = {
   upper: false,
@@ -222,8 +232,45 @@ function Form({ isProcessing, ...restProps }) {
   return (
     <div className="Signup_Form">
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
+        <CRow className="justify-content-center row-eq-height">
+        <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
+            className="Card_View d-none d-xl-block Main_Card_View one" style={{
+              backgroundColor: '#eddfe6'
+            }}>
+            <div>
+              <Slide autoplay={true} indicators={true} arrows={false}>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.booksIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{helpsYouStudy}</h1>
+                  <p className="slideText">{helpsYouStudy1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.practiceDiagnosisIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{practiceDiagnosis}</h1>
+                  <p className="slideText">{practiceDiagnosis1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.clinicalCasesIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{clinicalCases}</h1>
+                  <p className="slideText">{clinicalCases1}</p>
+                </div>
+                <div className="text-center">
+                  <CImg
+                    src={SVG.aiIcon}
+                  />
+                  <h1 className="mt-5 mb-3">{poweredByAi}</h1>
+                  <p className="slideText">{poweredByAi1}</p>
+                </div>
+              </Slide>
+            </div>
+          </CCol>
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
             <CCardGroup>
               <Card>
                 <CCardBody>
