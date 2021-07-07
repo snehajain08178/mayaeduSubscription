@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
-  CCardGroup,
   CCol,
   CContainer,
   CInputGroup,
@@ -271,11 +270,12 @@ function Form({ isProcessing, ...restProps }) {
             </div>
           </CCol>
           <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
-            <CCardGroup>
               <Card>
                 <CCardBody>
-                  <h1 className="font-weight-bold text-center">{signup}</h1>
-                  <CForm>
+                  <CForm style={{
+                    display: 'flex', alignItems: 'space-between', flexDirection: 'column', justifyContent: 'space-between', height: '100%'
+                  }}>
+                    <h1 className="font-weight-bold text-center">{signup}</h1>
                     <CInputGroup className="my-4">
                       <CountryWithData
                         id="Country"
@@ -490,7 +490,6 @@ function Form({ isProcessing, ...restProps }) {
                   </CForm>
                 </CCardBody>
               </Card>
-            </CCardGroup>
           </CCol>
         </CRow>
         <Modal

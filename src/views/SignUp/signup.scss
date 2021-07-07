@@ -5,14 +5,16 @@
   height: 100%;
   background: url('/public/landingBackground1.png');
   background-color: $secondary;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
 
   .Signup_Form {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 
     .Card_View {
         padding: 20px 20px;
@@ -22,21 +24,24 @@
       box-shadow: 0 4px 8px 0 $shadow;
       z-index: 1000 !important;
     }
-
+  
     .Main_Card_View.one {
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
     }
-
+  
     .Main_Card_View.two {
         border-top-right-radius: 30px;
         border-bottom-right-radius: 30px;
     }
 
     .card {
-      border-radius: 16px;
-      height: calc(100vh - 270px) !important;
-      overflow: scroll;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+      height: calc(100vh - 290px) !important;
+      overflow-y: scroll;
+      box-shadow: 0 4px 8px 0 $shadow;
+      margin: 0 auto !important;
     }
 
     .slideText {
@@ -47,11 +52,16 @@
     .Button__Signup {
       padding: 6px 32px !important;
       border-radius: 22px !important;
+      margin-bottom: 20px;
     }
 
     .TermsAndConditions {
       width: 100%;
       justify-content: center;
+    }
+
+    .View__Empty {
+      padding-top: 50%;
     }
 
     @media (max-width: 1199px) {

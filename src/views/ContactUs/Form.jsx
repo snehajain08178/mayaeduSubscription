@@ -1,4 +1,5 @@
 import React from 'react';
+import { CRow, CContainer, CCol } from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
@@ -56,9 +57,12 @@ export default function Form({ ...restProps }) {
   } = events;
 
   return (
-    <div className="container">
-      <div className="card  mx-auto p-5 shadow rounded-lg Form__Width">
-        <div className="row d-flex flex-column">
+    <div className="Contact__Us__Form">
+      <CContainer>
+        <CRow className="justify-content-center">
+        <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
+            className="Card_View d-none d-xl-block Main_Card_View one" style={{ backgroundColor: 'white' }}>
+          <h1 className="font-weight-bold text-center">Contact Us</h1>
           <div className="col">
             <Input
               onBlur={onBlur}
@@ -183,10 +187,10 @@ export default function Form({ ...restProps }) {
               errorText={errors[fieldNames.MESSAGE]}
             />
           </div>
-          <div className="col d-flex justify-content-center mt-4 w-100">
+          <CRow className="my-4 justify-content-center">
             <Button
               color="primary"
-              className="Button w-100"
+              className="Button"
               onClick={onSubmit}
               disabled={
                 restProps.isFetching ||
@@ -204,9 +208,10 @@ export default function Form({ ...restProps }) {
             >
               Submit
             </Button>
-          </div>
-        </div>
-      </div>
+          </CRow>
+        </CCol>
+        </CRow>
+      </CContainer>
     </div>
   );
 }
