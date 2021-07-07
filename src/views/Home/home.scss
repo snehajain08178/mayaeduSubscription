@@ -73,13 +73,11 @@
   .featureImagesBackground {
     background-image: -webkit-linear-gradient(-30deg,$primary 50%, $bg-tertiary 50%);
     height: 400px;
-    justify-content: center !important;
-    align-items: center !important;
-    align-content: center;
-    text-align: center;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
-    margin-left: 50px;
-    margin-right: 50px;
+    align-items: center !important;
+    justify-content: center !important;
     border-radius: 10px;
   }
 
