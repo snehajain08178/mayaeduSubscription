@@ -66,4 +66,10 @@
     white-space: pre-wrap;
     color: #000;
   }
+
+  ::placeholder {
+    font-size: 12px !important;
+    font-weight: 300;
+  }
+
 }

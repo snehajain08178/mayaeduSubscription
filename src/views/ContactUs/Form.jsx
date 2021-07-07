@@ -61,7 +61,7 @@ export default function Form({ ...restProps }) {
   return (
     <div className="Contact__Us__Form">
       <CContainer>
-        <CRow className="justify-content-center">
+        <CRow className="justify-content-center" style={{ margin: '120px 0 32px 0' }}>
         <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
             className="Card_View">
           <h1 className="font-weight-bold text-center pb-4">Contact Us</h1>
