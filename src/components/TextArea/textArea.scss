@@ -33,8 +33,8 @@
   .TextArea__Error {
     font-size: 0.75rem;
     position: absolute;
-    bottom: -19px;
-    left: 0;
+    bottom: -18px;
+    left: 16px;
     color: $error;
   }
 
@@ -51,6 +51,7 @@
     color: $input-color;
     background-color: $input-background;
     resize: none;
+    height: 74px;
   }
 
   .TextArea__Input:focus {
@@ -65,4 +66,10 @@
     white-space: pre-wrap;
     color: #000;
   }
+
+  ::placeholder {
+    font-size: 12px !important;
+    font-weight: 300;
+  }
+
 }

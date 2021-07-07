@@ -23,7 +23,7 @@ export default function Header({ isLogin, isSignUp }) {
             </h4>
           </Link>
           <div
-            className="d-none d-xl-block"
+            className="d-none d-lg-block"
             id="navbarNav"
           >
             <ul className="navbar-nav d-flex flex-row">
@@ -66,7 +66,7 @@ export default function Header({ isLogin, isSignUp }) {
               </li>
             </ul>
           </div>
-          <div className=".d-xl-none d-lg-none .d-xl-block" style={{ position: 'relative', marginRight: '-15px' }}>
+          <div className="d-lg-none d-block" style={{ position: 'relative', marginRight: '-15px' }}>
             <HamburgerMenu
               isOpen={isMenuOpen}
               menuClicked={() => setIsMenuOpen(!isMenuOpen)}
@@ -80,8 +80,8 @@ export default function Header({ isLogin, isSignUp }) {
             />
           </div>
           {isMenuOpen &&
-            <div className=".d-xl-none d-lg-none .d-xl-block" style={{
-              position: 'absolute', zIndex: 2000, backgroundColor: 'white', right: '15px', top: '80%', width: '70%', borderRadius: '15px'
+            <div className="d-lg-none d-block Hamburger_Options" style={{
+              position: 'absolute', zIndex: 3000, backgroundColor: '#f7f2f5', right: '15px', top: '80%', width: '70%', borderRadius: '15px'
             }}>
               <a
                 className="nav-link font-weight-bold"
@@ -91,12 +91,12 @@ export default function Header({ isLogin, isSignUp }) {
                 <h6 className="font-weight-bold px-4 text-primary mt-2">{institutionalSignIn}</h6>
               </a>
               {isLogin && (
-                <a
+                <Link
                   className="nav-link font-weight-bold"
                   to={endpoints.signup}
                 >
                   <h6 className="font-weight-bold px-4 text-primary">Sign Up</h6>
-                </a>
+                </Link>
               )}
               {isSignUp && (
                   <Link

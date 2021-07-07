@@ -1,5 +1,7 @@
 import React from 'react';
-import { CRow, CContainer, CCol } from '@coreui/react';
+import {
+  CRow, CContainer, CCol, CInputGroup
+} from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import SelectDrop from '../../components/SelectDrop/SelectDrop';
@@ -59,11 +61,11 @@ export default function Form({ ...restProps }) {
   return (
     <div className="Contact__Us__Form">
       <CContainer>
-        <CRow className="justify-content-center">
+        <CRow className="justify-content-center" style={{ margin: '120px 0 32px 0' }}>
         <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
-            className="Card_View d-none d-xl-block Main_Card_View one" style={{ backgroundColor: 'white' }}>
-          <h1 className="font-weight-bold text-center">Contact Us</h1>
-          <div className="col">
+            className="Card_View">
+          <h1 className="font-weight-bold text-center pb-4">Contact Us</h1>
+          <CInputGroup className="my-4">
             <Input
               onBlur={onBlur}
               onKeyUp={onKeyUp}
@@ -73,9 +75,10 @@ export default function Form({ ...restProps }) {
               name={fieldNames.NAME}
               errorText={errors[fieldNames.NAME]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4 d-flex">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <SelectDrop
               labelText="Contact Person Title*"
               name={fieldNames.PERSON_TITLE}
@@ -88,8 +91,8 @@ export default function Form({ ...restProps }) {
               id="title"
               onChangeSelect={onSelect(fieldNames.PERSON_TITLE)}
             />
-          </div>
-          <div className="col mt-4 d-flex">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <Input
               labelText="Contact Person Name*"
               name={fieldNames.CONTACT_PERSON}
@@ -99,9 +102,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.CONTACT_PERSON] || ''}
               errorText={errors[fieldNames.CONTACT_PERSON]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <Input
               labelText="Email Id*"
               name={fieldNames.EMAIL}
@@ -111,9 +115,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.EMAIL] || ''}
               errorText={errors[fieldNames.EMAIL]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <TextArea
               labelText="Address Line 1*"
               name={fieldNames.ADDRESS_1}
@@ -123,9 +128,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.ADDRESS_1] || ''}
               errorText={errors[fieldNames.ADDRESS_1]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <TextArea
               labelText="Address Line 2"
               name={fieldNames.ADDRESS_2}
@@ -135,9 +141,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.ADDRESS_2] || ''}
               errorText={errors[fieldNames.ADDRESS_2]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <Input
               labelText="Town/ City*"
               name={fieldNames.TOWN}
@@ -147,9 +154,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.TOWN] || ''}
               errorText={errors[fieldNames.TOWN]}
               maxLength={35}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <CountryWithSearch
               labelText="Country*"
               name={fieldNames.COUNTRY}
@@ -161,9 +169,10 @@ export default function Form({ ...restProps }) {
                 stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
               }
               errorText={errors[fieldNames.COUNTRY]}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <Input
               labelText="Contact Number*"
               name={fieldNames.CONTACT_NUMBER}
@@ -173,9 +182,10 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.CONTACT_NUMBER] || ''}
               errorText={errors[fieldNames.CONTACT_NUMBER]}
               maxLength={12}
+              placeholder="Enter University's Detail"
             />
-          </div>
-          <div className="col mt-4">
+          </CInputGroup>
+          <CInputGroup className="my-4">
             <TextArea
               labelText="Message"
               name={fieldNames.MESSAGE}
@@ -186,7 +196,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.MESSAGE] || ''}
               errorText={errors[fieldNames.MESSAGE]}
             />
-          </div>
+          </CInputGroup>
           <CRow className="my-4 justify-content-center">
             <Button
               color="primary"
