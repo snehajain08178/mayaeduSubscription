@@ -2,29 +2,20 @@
 @import '../../scss/variables';
 
 .View__ContactUs {
-  min-height: calc(100vh - 110px);
-  height: 100%;
   width: 100%;
-  color: #000;
+  height: 100%;
+  background: url('/public/landingBackground1.png') !important;
+  background-color: $secondary;
+  background-size: contain;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 
-  .background {
-    width: 100%;
-    min-height: calc(100vh - 110px);
-    height: 100%;
-    position: relative;
-    padding-bottom: 10px;
-  }
-
-  .background--color {
-    background-image: -webkit-linear-gradient(65deg, white 15%, white 30%, rgba(105, 1, 59, 0.32) 55%, );
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: $secondary;
-    height: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+  .Contact__Us__Form {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
   }
 
   .card {
@@ -32,7 +23,9 @@
   }
 
   .Button {
-    width: 300px;
+    border-radius: 22px !important;
+    padding: 6px 32px !important;
+    margin-top: 30px;
   }
 
   .ContactUs__Name {

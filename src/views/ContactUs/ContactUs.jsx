@@ -5,6 +5,7 @@ import { saveContactUs } from '../../redux/actions/contactUs';
 import Form from './Form';
 import './contact.scss';
 import SuccessCard from './SuccessCard';
+import '../../scss/styles.scss';
 
 function ContactUs({ saveContactUs: saveContactUsAction, contactUs }) {
   const [isSuccess, setSuccess] = useState(false);
@@ -16,19 +17,12 @@ function ContactUs({ saveContactUs: saveContactUsAction, contactUs }) {
   };
   return (
     <div className="View__ContactUs">
-      <div className="background background--color">
-      <div className="Pt--130"></div>
-      <div className="container">
-        <div className="View__ContactUs__Header text-center p-5">
-          <h1 className="Font-Size--Header text-white">Contact Us</h1>
-        </div>
+      <div className="Pt--180 View__Empty"></div>
         {!isSuccess ? (
           <Form onSubmit={handleSubmit} isFetching={isFetching} />
         ) : (
           <SuccessCard />
         )}
-      </div>
-      </div>
     </div>
   );
 }
