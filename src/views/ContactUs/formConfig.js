@@ -12,10 +12,10 @@ export const fieldNames = {
 };
 
 export const personTitle = [
-  { id: 'MR', name: 'Mr' },
-  { id: 'MS', name: 'Ms' },
-  { id: 'MRS', name: 'Mrs' },
-  { id: 'DR', name: 'Dr' },
+  { id: 'MR', name: 'Mr.' },
+  { id: 'MS', name: 'Ms.' },
+  { id: 'MRS', name: 'Mrs.' },
+  { id: 'DR', name: 'Dr.' },
 ];
 
 function handleChange(event, preValues) {
