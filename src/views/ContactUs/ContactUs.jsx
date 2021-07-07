@@ -8,7 +8,7 @@ import SuccessCard from './SuccessCard';
 
 function ContactUs({ saveContactUs: saveContactUsAction, contactUs }) {
   const [isSuccess, setSuccess] = useState(false);
-  const { isFetching } = contactUs;
+  const { isProcessing: isFetching } = contactUs;
   const handleSubmit = (val) => {
     saveContactUsAction(val, () => {
       setSuccess(true);
