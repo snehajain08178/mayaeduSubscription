@@ -22,26 +22,13 @@
 
     .Main_Card_View {
       box-shadow: 0 4px 8px 0 $shadow;
-      height: 500px !important;
-    }
-  
-    .Main_Card_View.one {
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
-    }
-  
-    .Main_Card_View.two {
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
+      border-radius: 30px;
     }
 
     .card {
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
       box-shadow: 0 4px 8px 0 $shadow;
       margin: 0 auto !important;
-      height: 100%;
-      overflow-y: auto !important;
+      border-radius: 16px;
     }
 
     .slideText {
@@ -62,13 +49,6 @@
 
     .View__Empty {
       padding-top: 20%;
-    }
-
-    @media (max-width: 991px) {
-      .Main_Card_View.two {
-          border-radius: 30px !important;
-          height: 100% !important;
-      }
     }
 
   }
