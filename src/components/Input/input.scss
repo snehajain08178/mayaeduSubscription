@@ -49,6 +49,12 @@
     left: 16px;
     color: $error;
   }
+
+  ::placeholder {
+    font-size: 12px !important;
+    font-weight: 300;
+  }
+
 }
 
 .svgInputIcons {

@@ -5,7 +5,7 @@
   height: 100%;
   background: url('/public/landingBackground1.png');
   background-color: $secondary;
-  background-size: contain;
+  background-size: cover;
   left: 0;
   right: 0;
   bottom: 0;
@@ -22,7 +22,6 @@
 
     .Main_Card_View {
       box-shadow: 0 4px 8px 0 $shadow;
-      z-index: 1000 !important;
     }
   
     .Main_Card_View.one {
@@ -38,7 +37,7 @@
     .card {
       border-top-right-radius: 16px;
       border-bottom-right-radius: 16px;
-      height: calc(100vh - 290px) !important;
+      height: calc(100vh - 290px);
       overflow-y: scroll;
       box-shadow: 0 4px 8px 0 $shadow;
       margin: 0 auto !important;
@@ -61,7 +60,7 @@
     }
 
     .View__Empty {
-      padding-top: 50%;
+      padding-top: 20%;
     }
 
     @media (max-width: 1199px) {
@@ -74,17 +73,21 @@
 
   @media (max-width: 689px) {
     .View__Empty {
-        padding-top: 162px;
+        padding-top: 88px;
     }
     .Card_View {
         background-color: transparent !important;
+        height: 100% !important;
     }
     .card {
         border-radius: 30px !important;
+        height: 100% !important;
+        flex: 1
     }
     .Main_Card_View {
         box-shadow: none !important;
         border-radius: 30px !important;
+        height: 100% !important;
     }
   }
 

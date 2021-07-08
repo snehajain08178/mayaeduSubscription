@@ -106,7 +106,7 @@ function Home() {
               <CImg src={img.patientDiagnosis} width={290} height={480}/>
           </div>
         </div>
-        <div className="d-flex row justify-content-center Mt--50">
+        <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
           <div className="col-md-4 featureImagesBackground">
               <CImg src={img.praticeCasesImg} width={290} height={480}/>
           </div>
@@ -136,7 +136,7 @@ function Home() {
               <CImg src={img.prepareExamsImg} width={290} height={480}/>
           </div>
         </div>
-        <div className="d-flex row justify-content-center Mt--50">
+        <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
           <div className="col-md-4 featureImagesBackground">
               <CImg src={img.activeCasesImg} width={290} height={480}/>
           </div>
