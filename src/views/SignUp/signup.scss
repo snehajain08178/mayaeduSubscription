@@ -33,7 +33,6 @@
     .Main_Card_View.two {
         border-top-right-radius: 30px;
         border-bottom-right-radius: 30px;
-        overflow-y: auto !important;
     }
 
     .card {
@@ -41,6 +40,8 @@
       border-bottom-right-radius: 16px;
       box-shadow: 0 4px 8px 0 $shadow;
       margin: 0 auto !important;
+      height: 100%;
+      overflow-y: auto !important;
     }
 
     .slideText {
