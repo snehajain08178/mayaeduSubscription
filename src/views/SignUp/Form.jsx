@@ -231,9 +231,9 @@ function Form({ isProcessing, ...restProps }) {
   return (
     <div className="Signup_Form">
       <CContainer>
-        <CRow className="justify-content-center row-eq-height">
-        <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
-            className="Card_View d-none d-xl-block Main_Card_View one" style={{
+        <CRow className="justify-content-center row-eq-height" style={{ margin: '120px 0 32px 0' }}>
+        <CCol sm="12" md="9" lg="6" xl="6" xxl="5"
+            className="Card_View d-none d-lg-block Main_Card_View one" style={{
               backgroundColor: '#eddfe6'
             }}>
             <div>
@@ -269,12 +269,10 @@ function Form({ isProcessing, ...restProps }) {
               </Slide>
             </div>
           </CCol>
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
+          <CCol sm="12" md="9" lg="6" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
               <Card>
                 <CCardBody>
-                  <CForm style={{
-                    display: 'flex', alignItems: 'space-between', flexDirection: 'column', justifyContent: 'space-between', height: '100%'
-                  }}>
+                  <CForm className="justify-content-center">
                     <h1 className="font-weight-bold text-center">{signup}</h1>
                     <CInputGroup className="my-4">
                       <CountryWithData

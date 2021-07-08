@@ -86,9 +86,9 @@ function Form({ isProcessing, isError, ...restProps }) {
   return (
     <div className="Login__Form">
       <CContainer>
-        <CRow className="justify-content-center row-eq-height" >
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5"
-            className="Card_View d-none d-xl-block Main_Card_View one" style={{
+        <CRow className="justify-content-center row-eq-height" style={{ margin: '120px 0 32px 0' }}>
+          <CCol sm="12" md="9" lg="6" xl="6" xxl="5"
+            className="Card_View d-none d-lg-block Main_Card_View one" style={{
               backgroundColor: '#eddfe6'
             }}>
             <div>
@@ -124,7 +124,7 @@ function Form({ isProcessing, isError, ...restProps }) {
               </Slide>
             </div>
           </CCol>
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
+          <CCol sm="12" md="9" lg="6" xl="6" xxl="5" className="Card_View Main_Card_View two" style={{ backgroundColor: 'white' }}>
               <Card>
                 <CCardBody>
                   <CForm style={{

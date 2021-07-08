@@ -19,7 +19,6 @@ function SignUp(props) {
   return (
     <>
       <div className="View__SignUp">
-        <div className="Pt--50 View__Empty"></div>
         <Form
           onSubmit={handleSignUpSubmit}
           isProcessing={isProcessing}

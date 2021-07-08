@@ -22,6 +22,7 @@
 
     .Main_Card_View {
       box-shadow: 0 4px 8px 0 $shadow;
+      height: 500px !important;
     }
   
     .Main_Card_View.one {
@@ -32,13 +33,12 @@
     .Main_Card_View.two {
         border-top-right-radius: 30px;
         border-bottom-right-radius: 30px;
+        overflow-y: auto !important;
     }
 
     .card {
       border-top-right-radius: 16px;
       border-bottom-right-radius: 16px;
-      height: calc(100vh - 290px);
-      overflow-y: scroll;
       box-shadow: 0 4px 8px 0 $shadow;
       margin: 0 auto !important;
     }
@@ -63,31 +63,27 @@
       padding-top: 20%;
     }
 
-    @media (max-width: 1199px) {
+    @media (max-width: 991px) {
       .Main_Card_View.two {
           border-radius: 30px !important;
+          height: 100% !important;
       }
     }
 
   }
 
-  @media (max-width: 689px) {
+  @media (max-width: 768px) {
     .View__Empty {
         padding-top: 88px;
     }
     .Card_View {
         background-color: transparent !important;
-        height: 100% !important;
     }
     .card {
         border-radius: 30px !important;
-        height: 100% !important;
-        flex: 1
     }
     .Main_Card_View {
         box-shadow: none !important;
-        border-radius: 30px !important;
-        height: 100% !important;
     }
   }
 
@@ -98,13 +94,13 @@
 }
 
 .Criteria {
-  width: 85%;
+  width: 80%;
   margin: 0 auto;
 }
 
 @media (max-width: 480px) {
   .Criteria {
     width: 90%;
-    font-size: 10px;
+    font-size: 8px;
   }
 }
