@@ -75,7 +75,7 @@ export default function Form({ ...restProps }) {
               name={fieldNames.NAME}
               errorText={errors[fieldNames.NAME]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter your institute's name"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -102,7 +102,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.CONTACT_PERSON] || ''}
               errorText={errors[fieldNames.CONTACT_PERSON]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter the name of contact person"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -115,7 +115,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.EMAIL] || ''}
               errorText={errors[fieldNames.EMAIL]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter email ID here"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -128,7 +128,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.ADDRESS_1] || ''}
               errorText={errors[fieldNames.ADDRESS_1]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter your address"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -141,7 +141,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.ADDRESS_2] || ''}
               errorText={errors[fieldNames.ADDRESS_2]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter your address"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -154,7 +154,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.TOWN] || ''}
               errorText={errors[fieldNames.TOWN]}
               maxLength={35}
-              placeholder="Enter University's Detail"
+              placeholder="Enter the name of your city"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
@@ -169,7 +169,7 @@ export default function Form({ ...restProps }) {
                 stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
               }
               errorText={errors[fieldNames.COUNTRY]}
-              placeholder="Enter University's Detail"
+              placeholder="Enter contact number"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
