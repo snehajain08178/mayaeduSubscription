@@ -18,7 +18,6 @@ function Login(props) {
 
   return (
     <div className="View__Login">
-      <div className="Pt--50 View__Empty"></div>
       <Form
         onSubmit={handleLoginSubmit}
         isProcessing={isProcessing}

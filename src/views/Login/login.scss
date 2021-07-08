@@ -70,7 +70,7 @@
             margin: 0 auto;
         }
 
-        @media (max-width: 1199px) {
+        @media (max-width: 991px) {
             .Main_Card_View.two {
                 border-radius: 30px !important;
             }
@@ -82,7 +82,7 @@
 
     }
 
-    @media (max-width: 689px) {
+    @media (max-width: 768px) {
         .View__Empty {
             padding-top: 80px;
         }
