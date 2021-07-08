@@ -18,7 +18,7 @@ function ContactUs({ saveContactUs: saveContactUsAction, contactUs, notify: noti
   };
   return (
     <div className="View__ContactUs">
-        {!isSuccess ? (
+        {isSuccess ? (
           <Form onSubmit={handleSubmit} isFetching={isFetching} notify={notifyAction} />
         ) : (
           <SuccessCard />
