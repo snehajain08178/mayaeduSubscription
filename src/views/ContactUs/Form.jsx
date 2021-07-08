@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CRow, CContainer, CCol } from '@coreui/react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -55,6 +55,15 @@ export default function Form({ ...restProps }) {
   const {
     onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
+
+  useEffect(() => {
+    if (errors && Object.keys(errors).length) {
+      restProps.notify({
+        message: 'Please fill all fields correctly!',
+        isError: true
+      });
+    }
+  }, [errors]);
 
   return (
     <div className="Contact__Us__Form">
