@@ -7,8 +7,8 @@ import svg from '../../assets/img/svg';
 export default function SuccessCard() {
   return (
     <div className="container">
-      <div style={{ padding: '120px 0 32px 0' }}>
-      <div className="card mx-auto p-2 shadow rounded-lg Form__Width">
+      <div className="d-flex align-items-center" style={{ padding: '120px 0 32px 0', minHeight: 'calc(100vh - 150px)' }}>
+      <div className="card mx-auto p-2 shadow rounded-lg col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
         <div className="mx-auto my-5">
           <CImg src={svg.tickIcon} width="100%" height="100%" />
         </div>

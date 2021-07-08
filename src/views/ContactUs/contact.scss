@@ -64,14 +64,5 @@
       font-size: 3.4em !important;
     }
   }
-
-  .Form__Width {
-    @include breakpoint(phablet) {
-      width: 100% !important;
-    }
-
-    @include breakpoint(laptop) {
-      width: 50% !important;
-    }
-  }
+  
 }
