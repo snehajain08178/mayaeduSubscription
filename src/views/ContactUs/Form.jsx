@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CRow, CContainer, CCol, CInputGroup
 } from '@coreui/react';
@@ -33,6 +33,7 @@ function validate({ values = {} }) {
   if (!validateNumber(values[fieldNames.CONTACT_NUMBER])) {
     errors[fieldNames.CONTACT_NUMBER] = invalidNumber;
   }
+
   return errors;
 }
 
@@ -45,6 +46,7 @@ function handleSubmit(values) {
 }
 
 export default function Form({ ...restProps }) {
+  const [isNotifyError, setNotifyError] = useState(false);
   const { values, errors, events } = useForm({
     initialValues: {},
     handleSubmit: handleSubmit.bind({
@@ -58,12 +60,18 @@ export default function Form({ ...restProps }) {
     onBlur, onKeyUp, onChange, onSubmit, onSelect
   } = events;
 
+  function handleFormSubmit() {
+    setNotifyError(true);
+    onSubmit();
+  }
+
   useEffect(() => {
-    if (errors && Object.keys(errors).length) {
+    if (errors && Object.keys(errors).length && isNotifyError) {
       restProps.notify({
         message: 'Please fill all fields correctly!',
         isError: true
       });
+      setNotifyError(false);
     }
   }, [errors]);
 
@@ -210,7 +218,7 @@ export default function Form({ ...restProps }) {
             <Button
               color="primary"
               className="Button"
-              onClick={onSubmit}
+              onClick={handleFormSubmit}
               disabled={
                 restProps.isFetching ||
                 !(
