@@ -199,7 +199,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.CONTACT_NUMBER] || ''}
               errorText={errors[fieldNames.CONTACT_NUMBER]}
               maxLength={12}
-              placeholder="Enter University's Detail"
+              placeholder="Enter contact number"
             />
           </CInputGroup>
           <CInputGroup className="my-4">
