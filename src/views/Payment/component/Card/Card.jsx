@@ -8,8 +8,8 @@ const Card = ({ details }) => {
   const { card } = details || {};
   const { brand } = card || {};
   return (
-    <div className="w-100">
-      <div className="container bg-primary text-white font-weight-bold shadow w-75 Width__Phablet--100 Border-Radius--12px">
+    <div className="w-100" >
+      <div className="bg-primary text-white font-weight-bold shadow w-80 Border-Radius--12px mx-auto" style={{ maxWidth: '320px' }}>
         <div className="row">
           <div className="col-8">
             <div className="p-2">
