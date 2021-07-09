@@ -13,6 +13,7 @@ import { removeBlankFromObject, stringEllipisis } from '../../libs/common';
 import { validateEmail, validateName, validateNumber } from '../../helpers/validators';
 import { invalidEmail, invalidNumber, nameValidation } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
+import notificationMessages from '../../libs/notificationMessages';
 
 const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
 
@@ -67,10 +68,7 @@ export default function Form({ ...restProps }) {
 
   useEffect(() => {
     if (errors && Object.keys(errors).length && isNotifyError) {
-      restProps.notify({
-        message: 'Please fill all fields correctly!',
-        isError: true
-      });
+      restProps.notify(notificationMessages.FILL_ALL_FIELD_CORRECTLY);
       setNotifyError(false);
     }
   }, [errors]);

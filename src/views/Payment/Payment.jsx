@@ -21,6 +21,7 @@ import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
+import notificationMessages from '../../libs/notificationMessages';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -107,25 +108,16 @@ const Cards = ({
         setLoading(false);
         if (result.paymentIntent.status === 'succeeded') {
           setPaymentStatus(paymentSuccessful);
-          notifyAction({
-            isError: false,
-            message: 'Payment succeeded',
-          });
+          notifyAction(notificationMessages.PAYMENT_SUCCESS);
         } else {
-          notifyAction({
-            isError: true,
-            message: 'Payment failure',
-          });
+          notifyAction(notificationMessages.PAYMENT_FAILURE);
           setPaymentStatus(paymentFail);
         }
       })
       .catch((error) => {
         setLoading(false);
         if (error.code !== 'cancelled') {
-          notifyAction({
-            isError: true,
-            message: 'Payment failure',
-          });
+          notifyAction(notificationMessages.PAYMENT_FAILURE);
           setPaymentStatus(paymentFail);
         } else {
           notifyAction();
@@ -162,7 +154,7 @@ const Cards = ({
         setLoading(false);
         if (payment[0].status === 'active') {
           fetchCardAction();
-          notifyAction({ isError: false, message: 'Payment Success' });
+          notifyAction(notificationMessages.PAYMENT_SUCCESS);
           setPaymentStatus(paymentSuccessful);
         } else if (
           payment[0].latest_invoice.payment_intent.status === 'requires_action'
@@ -174,10 +166,7 @@ const Cards = ({
           payment[0].latest_invoice.payment_intent.status ===
           'requires_payment_method'
         ) {
-          notifyAction({
-            isError: true,
-            message: 'Payment decline',
-          });
+          notifyAction(notificationMessages.PAYMENT_DECLINE);
           setPaymentStatus(paymentFail);
         }
       })
@@ -191,10 +180,7 @@ const Cards = ({
     deleteCard({ fingerprint: delVal })
       .then(() => {
         fetchCardAction();
-        notifyAction({
-          isError: false,
-          message: 'Card deleted successfully',
-        });
+        notifyAction(notificationMessages.CARD_DELETED_SUCCESS);
         setCardDeleteModal({
           isVisible: false,
           id: null
