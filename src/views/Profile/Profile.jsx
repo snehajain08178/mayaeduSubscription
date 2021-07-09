@@ -194,7 +194,7 @@ function Profile({
               <div className="d-flex align-items-center w-100 Main_View">
                 <div className="bg-white d-flex flex-column w-100 P--20 Border-Radius--30px">
                   <h5 className="text-primary font-weight-bold text-capitalize">
-                    Payment Method ({(cardDetails && cardDetails.funding) || 'Unknown'}{' '} Card)
+                    Payment Method { planType !== 'freeTrial' && cardDetails && cardDetails.funding ? `(${cardDetails.funding} Card)` : ''}
                   </h5>
                   <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View">
                     {defaultCard && Object.keys(defaultCard).length ? (
@@ -204,20 +204,22 @@ function Profile({
                         </div>
                       </>
                     ) : (
-                      <h6>Not Available!</h6>
+                      <h5 className="mx-auto my-auto py-2 text-dark">Not Available!</h5>
                     )}
-                    <div className="d-flex justify-content-center align-items-center Mt--20">
-                      <Link
-                        to={endpoints.updateCard}
-                        className="text-decoration-none text-white"
-                      >
-                        <Button color="primary text-white m-0 Button" className="mr-lg-3" type="link">
-                          {defaultCard && Object.keys(defaultCard).length
-                            ? 'Update'
-                            : 'Add'}
-                        </Button>
-                      </Link>
-                    </div>
+                    {planType !== 'freeTrial' &&
+                      <div className="d-flex justify-content-center align-items-center Mt--20">
+                        <Link
+                          to={endpoints.updateCard}
+                          className="text-decoration-none text-white"
+                        >
+                          <Button color="primary text-white m-0 Button" className="mr-lg-3" type="link">
+                            {defaultCard && Object.keys(defaultCard).length
+                              ? 'Update'
+                              : 'Add'}
+                          </Button>
+                        </Link>
+                      </div>
+                    }
                   </div>
                 </div>
               </div>
@@ -276,26 +278,28 @@ function Profile({
                             textColor: '#000000',
                             trailColor: '#C094AC',
                           })}/>
-                      <p className="text-center text-dark mt-2">DAYS REMAINING TOGO</p>
+                      <p className="text-center text-dark mt-2">DAYS REMAINING</p>
                     </div>
                   </div>
                   <div className="d-flex flex-column flex-md-row justify-content-center w-80 mx-auto">
-                    <Link
+                    {(planSession !== 'year' || isCancel) && (
+                      <Link
                       to={endpoints.plans}
                       className="text-decoration-none text-white"
-                    >
-                      <Button
-                        color="primary"
-                        type="link"
-                        className="m-2 Button"
                       >
-                        {moment() > moment(endDate) ||
-                        planType === 'freeTrial' ||
-                        isCancel === true
-                          ? 'Buy'
-                          : 'Upgrade'}
-                      </Button>
-                    </Link>
+                        <Button
+                          color="primary"
+                          type="link"
+                          className="m-2 Button"
+                        >
+                          {moment() > moment(endDate) ||
+                          planType === 'freeTrial' ||
+                          isCancel === true
+                            ? 'Buy'
+                            : 'Upgrade'}
+                        </Button>
+                      </Link>
+                    )}
                     {!isCancel && planType !== 'freeTrial' && (
                       <Button
                         color="secondary"
@@ -308,20 +312,23 @@ function Profile({
                     )}
                   </div>
                 </div>
-
-                <h5 className="font-weight-bold text-primary" style={{ margin: '20px 0' }}>
-                  Plan Features
-                </h5>
-                <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
-                  {basicPlanString.map((data, index) => (
-                    <div div className="d-flex" key={index * 2 + 1}>
-                      <span className="d-flex align-items-center">
-                        <CImg src={svgImg.checkCircleIcon} />
-                      </span>
-                      <h6 className="ml-2 mt-2 text-dark">{data}</h6>
+                {planType !== 'freeTrial' && (
+                  <>
+                    <h5 className="font-weight-bold text-primary" style={{ margin: '20px 0' }}>
+                    Plan Features
+                    </h5>
+                    <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
+                      {basicPlanString.map((data, index) => (
+                        <div div className="d-flex" key={index * 2 + 1}>
+                          <span className="d-flex align-items-center">
+                            <CImg src={svgImg.checkCircleIcon} />
+                          </span>
+                          <h6 className="ml-2 mt-2 text-dark">{data}</h6>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
