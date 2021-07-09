@@ -4,7 +4,7 @@
   min-height: 100vh;
 
   .Main_View {
-    padding: 50px 20px 0px 20px;
+    margin-top: 24px;
   }
 
   .Inner_View {
@@ -18,7 +18,6 @@
     padding: 20px;
     background-color: $bg-slides;
     border-radius: 15px;
-    margin-top: 20px;
   }
 
   .Button {
