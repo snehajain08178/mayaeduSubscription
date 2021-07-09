@@ -2,42 +2,42 @@ export default {
   UNIVERSITY_LOGIN_BLOCKED: {
     isError: true,
     message:
-      'Please contact your university admin to manage your subscription!',
+  'Please contact your university admin to manage your subscription!',
   },
   LOGOUT_SUCCESS: {
-    isError: false,
-    message: 'You logout sucessfully!'
+    isError: true,
+    message: 'You have successfully logged out!'
   },
   SUBSCRIPTION_CANCELLED: {
     isError: false,
-    message: 'Subscription cancelled successfully',
+    message: 'Your subscription has been cancelled successfully',
   },
   FILL_ALL_FIELD_CORRECTLY: {
-    message: 'Please fill all fields correctly!',
+    message: 'Please fill all fields in a correct format!',
     isError: true
   },
   CONTACT_SAVED_SUCCESS: {
     isError: false,
-    message: 'Contact data saved successfully!'
+    message: 'Your details have been submitted successfully!'
   },
   PAYMENT_SUCCESS: {
     isError: false,
-    message: 'Payment succeeded',
+    message: 'Payment succeeded!',
   },
   PAYMENT_FAILURE: {
     isError: true,
-    message: 'Payment failure!'
+    message: 'Payment failed!'
   },
   PAYMENT_DECLINE: {
     isError: true,
-    message: 'Payment decline!'
+    message: 'Payment declined!'
   },
   CARD_DELETED_SUCCESS: {
     isError: false,
-    message: 'Card deleted successfully',
+    message: 'Card has been deleted successfully!',
   },
   CARD_UPDATED_SUCCESS: {
     isError: false,
-    message: 'Card updated successfully',
+    message: 'Card has been updated successfully!',
   }
 };
