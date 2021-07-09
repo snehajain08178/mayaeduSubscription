@@ -21,6 +21,7 @@ import {
   SIGNNUP_RESET
 } from '../constants/auth';
 import { setLocalStorageWithExpiry } from '../../libs/auth';
+import notificationMessages from '../../libs/notificationMessages';
 
 const { API } = config;
 const { TOKEN_EXPIRE_TIME } = API;
@@ -48,10 +49,7 @@ export function loginUser(payload = {}, callBack) {
           setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
           callBack();
         } else {
-          dispatch(notify({
-            isError: true,
-            message: 'Please contact your university admin to manage your subscription.'
-          }));
+          dispatch(notify(notificationMessages.UNIVERSITY_LOGIN_BLOCKED));
           dispatch(loginUserEnd());
         }
       })
@@ -110,5 +108,5 @@ export const resetSignupDetails = () => (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   history.push('/');
   dispatch({ type: LOGOUT_USER });
-  dispatch(notify({ message: 'You logout sucessfully', isError: false }));
+  dispatch(notify(notificationMessages.LOGOUT_SUCCESS));
 };
