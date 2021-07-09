@@ -278,26 +278,28 @@ function Profile({
                             textColor: '#000000',
                             trailColor: '#C094AC',
                           })}/>
-                      <p className="text-center text-dark mt-2">DAYS REMAINING TOGO</p>
+                      <p className="text-center text-dark mt-2">DAYS REMAINING</p>
                     </div>
                   </div>
                   <div className="d-flex flex-column flex-md-row justify-content-center w-80 mx-auto">
-                    <Link
+                    {planSession !== 'year' && (
+                      <Link
                       to={endpoints.plans}
                       className="text-decoration-none text-white"
-                    >
-                      <Button
-                        color="primary"
-                        type="link"
-                        className="m-2 Button"
                       >
-                        {moment() > moment(endDate) ||
-                        planType === 'freeTrial' ||
-                        isCancel === true
-                          ? 'Buy'
-                          : 'Upgrade'}
-                      </Button>
-                    </Link>
+                        <Button
+                          color="primary"
+                          type="link"
+                          className="m-2 Button"
+                        >
+                          {moment() > moment(endDate) ||
+                          planType === 'freeTrial' ||
+                          isCancel === true
+                            ? 'Buy'
+                            : 'Upgrade'}
+                        </Button>
+                      </Link>
+                    )}
                     {!isCancel && planType !== 'freeTrial' && (
                       <Button
                         color="secondary"
