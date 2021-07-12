@@ -1,8 +1,29 @@
+@import '../../scss/variables';
+
 .Views__Plans {
-  padding-bottom: 20px;
+  background-image: -webkit-linear-gradient(270deg,$secondary 50%, $primary 50%, );
+  min-height: 100vh;
+  justify-content: center !important;
+  align-content: center !important;;
+  align-items: center !important;;
 
   .Button {
     width: 120px;
     text-transform: uppercase;
   }
+
+  .card {
+    background-color: $bg-slides;
+    border-radius: 30px;
+  }
+
+  .View_Plans {
+    border-radius: 30px;
+  }
+
+  .View_Plans:hover {
+    transform: scale(1.05);
+    z-index: 1000 !important;
+  }
+
 }
