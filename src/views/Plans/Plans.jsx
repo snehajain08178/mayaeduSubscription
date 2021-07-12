@@ -51,7 +51,7 @@ function Plans({
           isFetching={isFetching || subscriptionDetails.isFetching}
           isError={isError}
         >
-          <div className="w-75 d-flex justify-content-between mx-auto">
+          <div className="w-75 d-flex justify-content-between mx-auto Mt--50">
             <h2 className="font-weight-bold">Choose Plan</h2>
             <div
               onClick={() => {
