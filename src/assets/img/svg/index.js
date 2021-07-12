@@ -25,6 +25,7 @@ import booksIcon from './Books.svg';
 import practiceDiagnosisIcon from './PracticeDiagnosis.svg';
 import clinicalCasesIcon from './ClinicalCases.svg';
 import aiIcon from './Ai.svg';
+import clockIcon from './Clock.svg';
 
 export default {
   checkCircleIcon,
@@ -49,5 +50,6 @@ export default {
   booksIcon,
   practiceDiagnosisIcon,
   clinicalCasesIcon,
-  aiIcon
+  aiIcon,
+  clockIcon
 };
