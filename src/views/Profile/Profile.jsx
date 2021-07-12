@@ -54,7 +54,7 @@ function Profile({
   }, []);
 
   const { email, name, country } = (userDetails && userDetails.info) || {};
-  const { subscriptions = [] } =
+  const { subscriptions = [], freeTrialStatus } =
     (subscriptionDetails && subscriptionDetails.info) || {};
 
   const { defaultCard } = (card && card.info) || {};
@@ -158,9 +158,11 @@ function Profile({
                   Days Remaining
                 </h5>
               ) : (
+                subscriptions && subscriptions.length ?
                 <h5 className="text-dark font-weight-bold">
                   Purchased on {moment(startDate).format('MM-DD-YYYY')}
                 </h5>
+                  : null
               )}
             </div>
           </div>
@@ -228,109 +230,133 @@ function Profile({
             </div>
             <div className="col-12 col-sm-7 col-md-6 d-flex align-items-center Main_View">
               <div className="bg-white d-flex flex-column w-100 P--20 Border-Radius--30px">
-                <h5 className="text-primary font-weight-bold" style={{ margin: '0 0 20px 0' }}>
-                  Plan Information
-                </h5>
-                <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
-                  <div className="d-flex flex-row align-items-center justify-content-between">
-                    <div className="col-6 col-md-8">
-                      <h6 className="text-dark">
-                        <span className="text-primary font-weight-bold">
-                          Plan Type:{' '}
-                        </span>
-                        {planType === 'freeTrial' ? 'Free Trial' : planType}
-                      </h6>
-                      <h6 className="text-dark">
-                        <span className="text-primary font-weight-bold">
-                          Status:{' '}
-                        </span>
-                        {status}
-                      </h6>
-                      <h6 className="text-dark">
-                        <span className="text-primary font-weight-bold">
-                          Currency:{' '}
-                        </span>
-                        <span className="text-uppercase">{planCurrency}</span>
-                      </h6>
-                      <h6 className="text-dark">
-                        <span className="text-primary font-weight-bold">
-                          Valid Till:{' '}
-                        </span>
-                        {subscriptionDateFormat(endDate, planType)}
-                      </h6>
-                      {planType !== 'freeTrial' && (
-                        <h6 className="text-dark">
-                          <span className="text-primary font-weight-bold">
-                            Plan Session:{' '}
-                          </span>
-                          {planSession}ly
-                        </h6>
-                      )}
-                      <h6 className="text-dark">
-                        <span className="text-primary font-weight-bold">
-                          Plan Type:{' '}
-                        </span>
-                        {planType === 'freeTrial' ? 'Free Trial' : planType}
-                      </h6>
-                    </div>
-                    <div className="col-6 col-md-4">
-                        <CircularProgressbar value={remainingDays} maxValue={totalDays}
-                          text={remainingDays} styles={buildStyles({
-                            pathColor: '#69013b',
-                            textColor: '#000000',
-                            trailColor: '#C094AC',
-                          })}/>
-                      <p className="text-center text-dark mt-2">DAYS REMAINING</p>
-                    </div>
-                  </div>
-                  <div className="d-flex flex-column flex-md-row justify-content-center w-80 mx-auto">
-                    {(planSession !== 'year' || isCancel) && (
-                      <Link
-                      to={endpoints.plans}
-                      className="text-decoration-none text-white"
-                      >
-                        <Button
-                          color="primary"
-                          type="link"
-                          className="m-2 Button"
-                        >
-                          {moment() > moment(endDate) ||
-                          planType === 'freeTrial' ||
-                          isCancel === true
-                            ? 'Buy'
-                            : 'Upgrade'}
-                        </Button>
-                      </Link>
-                    )}
-                    {!isCancel && planType !== 'freeTrial' && (
-                      <Button
-                        color="secondary"
-                        type="link"
-                        className="m-2 Button"
-                        onClick={handleDelete}
-                      >
-                        Cancel
-                      </Button>
-                    )}
-                  </div>
-                </div>
-                {planType !== 'freeTrial' && (
-                  <>
-                    <h5 className="font-weight-bold text-primary" style={{ margin: '20px 0' }}>
-                    Plan Features
-                    </h5>
-                    <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
-                      {basicPlanString.map((data, index) => (
-                        <div div className="d-flex" key={index * 2 + 1}>
-                          <span className="d-flex align-items-center">
-                            <CImg src={svgImg.checkCircleIcon} />
-                          </span>
-                          <h6 className="ml-2 mt-2 text-dark">{data}</h6>
+                { subscriptions && !subscriptions.length ?
+                    <>
+                      <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
+                        <CImg src={svgImg.clockIcon} height={200} width={291} className="mx-auto" />
+                        <h2 className="text-primary py-4 mx-auto text-justify text-center">{freeTrialStatus !== 'Paid' ? 'Trial Period is Complete.' : 'Your Subscription has expired.' }</h2>
+                        <p className="text-dark w-75 mx-auto text-justify text-center">{ freeTrialStatus !== 'Paid' ? 'You have completed the free trial. To continue using our unlimited features, kindly buy a subscription' : 'To continue using our unlimited features, kindly renew your subscription.'}</p>
+                        <Link
+                          to={endpoints.plans}
+                          className="text-decoration-none text-white mx-auto"
+                          >
+                            <Button
+                              color="primary"
+                              type="link"
+                              className="m-2 Button"
+                            >
+                              Buy
+                            </Button>
+                          </Link>
+                      </div>
+                    </>
+                  :
+                    <>
+                      <h5 className="text-primary font-weight-bold" style={{ margin: '0 0 20px 0' }}>
+                        Plan Information
+                      </h5>
+                      <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
+                        <div className="d-flex flex-row align-items-center justify-content-between">
+                          <div className="col-6 col-md-8">
+                            <h6 className="text-dark">
+                              <span className="text-primary font-weight-bold">
+                                Plan Type:{' '}
+                              </span>
+                              {planType === 'freeTrial' ? 'Free Trial' : planType}
+                            </h6>
+                            <h6 className="text-dark">
+                              <span className="text-primary font-weight-bold">
+                                Status:{' '}
+                              </span>
+                              {status}
+                            </h6>
+                            <h6 className="text-dark">
+                              <span className="text-primary font-weight-bold">
+                                Currency:{' '}
+                              </span>
+                              <span className="text-uppercase">{planCurrency}</span>
+                            </h6>
+                            <h6 className="text-dark">
+                              <span className="text-primary font-weight-bold">
+                                Valid Till:{' '}
+                              </span>
+                              {subscriptionDateFormat(endDate, planType)}
+                            </h6>
+                            {planType !== 'freeTrial' && (
+                              <h6 className="text-dark">
+                                <span className="text-primary font-weight-bold">
+                                  Plan Session:{' '}
+                                </span>
+                                {planSession}ly
+                              </h6>
+                            )}
+                            <h6 className="text-dark">
+                              <span className="text-primary font-weight-bold">
+                                Plan Type:{' '}
+                              </span>
+                              {planType === 'freeTrial' ? 'Free Trial' : planType}
+                            </h6>
+                          </div>
+                          <div className="col-6 col-md-4">
+                              <CircularProgressbar value={remainingDays} maxValue={totalDays}
+                                text={remainingDays} styles={buildStyles({
+                                  pathColor: '#69013b',
+                                  textColor: '#000000',
+                                  trailColor: '#C094AC',
+                                })}/>
+                            <p className="text-center text-dark mt-2">DAYS REMAINING</p>
+                          </div>
                         </div>
-                      ))}
-                    </div>
-                  </>
-                )}
+                        <div className="d-flex flex-column flex-md-row justify-content-center w-80 mx-auto">
+                          {(planSession !== 'year' || isCancel) && (
+                            <Link
+                            to={endpoints.plans}
+                            className="text-decoration-none text-white"
+                            >
+                              <Button
+                                color="primary"
+                                type="link"
+                                className="m-2 Button"
+                              >
+                                {moment() > moment(endDate) ||
+                                planType === 'freeTrial' ||
+                                isCancel === true
+                                  ? 'Buy'
+                                  : 'Upgrade'}
+                              </Button>
+                            </Link>
+                          )}
+                          {!isCancel && planType !== 'freeTrial' && (
+                            <Button
+                              color="secondary"
+                              type="link"
+                              className="m-2 Button"
+                              onClick={handleDelete}
+                            >
+                              Cancel
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                      {planType !== 'freeTrial' && (
+                        <>
+                          <h5 className="font-weight-bold text-primary" style={{ margin: '20px 0' }}>
+                          Plan Features
+                          </h5>
+                          <div className="d-flex w-100 flex-column align-self-center justify-content-center Inner_View_Features">
+                            {basicPlanString.map((data, index) => (
+                              <div div className="d-flex" key={index * 2 + 1}>
+                                <span className="d-flex align-items-center">
+                                  <CImg src={svgImg.checkCircleIcon} />
+                                </span>
+                                <h6 className="ml-2 mt-2 text-dark">{data}</h6>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  }
               </div>
             </div>
           </div>
