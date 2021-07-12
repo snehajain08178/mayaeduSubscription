@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Icon from '@coreui/icons-react';
 import PropTypes from 'prop-types';
-import img from '../../assets/img';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import Button from '../../components/Button';
 import endpoints from '../../routes/endpoints';
 import { fetchPlans } from '../../redux/actions/plans';
@@ -13,6 +13,9 @@ import './plans.scss';
 import ContentWrap from '../../components/ContentWrap/ContentWrap';
 import svg from '../../assets/img/svg';
 import { currencySign } from '../../libs/constants';
+import Card from '../../components/Card';
+import 'react-circular-progressbar/dist/styles.css';
+import '../../scss/styles.scss';
 
 function Plans({
   fetchPlans: fetchPlansAction,
@@ -48,33 +51,38 @@ function Plans({
           isFetching={isFetching || subscriptionDetails.isFetching}
           isError={isError}
         >
-          <div className="row flex-column pt-lg-5">
-            <div className="col w-100 d-flex justify-content-between">
-              <h2 className="font-weight-bold">Choose Plan</h2>
-              <div
-                onClick={() => {
-                  history.push(endpoints.profile);
-                }}
-                role="button"
-              >
-                <Icon
-                  name="cil-x"
-                  size="xl"
-                  className="font-weight-bold"
-                />
-              </div>
+          <div className="w-75 d-flex justify-content-between mx-auto">
+            <h2 className="font-weight-bold">Choose Plan</h2>
+            <div
+              onClick={() => {
+                history.push(endpoints.profile);
+              }}
+              role="button"
+            >
+              <Icon
+                name="cil-x"
+                size="xl"
+                className="font-weight-bold"
+              />
             </div>
-            <div className="col pt-lg-2">
-              <div className="shadow p-3 bg-white rounded">
-                <div className="pt-2 d-flex align-items-center">
-                  <span>
-                    <CImg src={img.bookImg} width={30} height={36} />
-                  </span>
-                  <h4 className="font-weight-bold ml-2 mt-1">Basic-Monthly</h4>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-md-9">
+          </div>
+          <Card className="w-75 mx-auto">
+            <div className="d-flex flex-column flex-md-row justify-content-between">
+              <div className="col-12 col-md-6 px-4">
+                <Card className="px-6 my-4 bg-white View_Plans">
+                  <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Monthly</h4>
+                  <div className="col-6 col-md-4 mx-auto py-4">
+                    <CircularProgressbar
+                      value={1}
+                      maxValue={1}
+                      text={`${currencySign[basicMonthly.currency]} ${basicMonthly.amount / 100}`}
+                      styles={buildStyles({
+                        pathColor: '#69013b',
+                        textColor: '#000000',
+                        trailColor: '#C094AC',
+                      })}/>
+                  </div>
+                  <div className="w-75 text-jusitify mx-auto">
                     <p>
                       <CImg src={svg.checkCircleIcon} />
                       <span className="mt-2 ml-2">
@@ -102,7 +110,6 @@ function Plans({
                     </p>
                   </div>
                   <div
-                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
                     style={
                       ((planType === 'basic' &&
                         status === 'Active' &&
@@ -114,6 +121,7 @@ function Plans({
                         ? { pointerEvents: 'none' }
                         : {}
                     }
+                    className="mx-auto my-4"
                   >
                     <Link
                       to={`${endpoints.payment}?id=${basicMonthly.id}`}
@@ -133,34 +141,33 @@ function Plans({
                           !isCancel
                         }
                       >
-                        {currencySign[basicMonthly.currency]}{' '}
-                        {basicMonthly.amount / 100}
+                        Get A Plan
                       </Button>
                     </Link>
                   </div>
-                </div>
+                </Card>
               </div>
-            </div>
-            <div className="col pt-2">
-              <div className="shadow p-3 bg-white rounded">
-                <div className="pt-2 d-flex align-items-center">
-                  <span>
-                    <CImg src={img.bookImg} width={30} height={36} />
-                  </span>
-                  <h4 className="font-weight-bold ml-2 mt-1">Basic-Anually</h4>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-md-9">
+              <div className="col-12 col-md-6 px-4">
+                <Card className="p-6 my-4 bg-white View_Plans">
+                  <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Anually</h4>
+                  <div className="col-6 col-md-4 mx-auto py-4">
+                    <CircularProgressbar value={1} maxValue={1} text={`${currencySign[basicMonthly.currency]} ${basicAnually.amount / 100}`}
+                      styles={buildStyles({
+                        pathColor: '#69013b',
+                        textColor: '#000000',
+                        trailColor: '#C094AC',
+                      })}/>
+                  </div>
+                  <div className="w-75 text-jusitify mx-auto">
                     <p>
                       <CImg src={svg.checkCircleIcon} />
-                      <span className="ml-2 mt-2">
+                      <span className="mt-2 ml-2">
                         Unlimited patient diagnosis with AI assistance.
                       </span>
                     </p>
                     <p>
                       <CImg src={svg.checkCircleIcon} />
-                      <span className="ml-2 mt-2">
+                      <span className="mt-2 ml-2">
                         Clinical Cases with feedback everyday to prepare you for
                         the unpredictable.
                       </span>
@@ -179,7 +186,6 @@ function Plans({
                     </p>
                   </div>
                   <div
-                    className="col-md-3 d-flex justify-content-center justify-content-md-end h-100"
                     style={
                       planType === 'basic' &&
                       status === 'Active' &&
@@ -188,6 +194,7 @@ function Plans({
                         ? { pointerEvents: 'none' }
                         : {}
                     }
+                    className="mx-auto my-4"
                   >
                     <Link
                       to={`${endpoints.payment}?id=${basicAnually.id}`}
@@ -204,15 +211,14 @@ function Plans({
                           !isCancel
                         }
                       >
-                        {currencySign[basicMonthly.currency]}{' '}
-                        {basicAnually.amount / 100}
+                        Get A Plan
                       </Button>
                     </Link>
                   </div>
-                </div>
+                </Card>
               </div>
             </div>
-          </div>
+          </Card>
         </ContentWrap>
       </div>
     </div>
