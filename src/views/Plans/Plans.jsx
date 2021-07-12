@@ -51,7 +51,7 @@ function Plans({
           isFetching={isFetching || subscriptionDetails.isFetching}
           isError={isError}
         >
-          <div className="w-75 d-flex justify-content-between mx-auto">
+          <div className="w-75 d-flex justify-content-between mx-auto Mt--50">
             <h2 className="font-weight-bold">Choose Plan</h2>
             <div
               onClick={() => {
@@ -69,7 +69,7 @@ function Plans({
           <Card className="w-75 mx-auto">
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <div className="col-12 col-md-6 px-4">
-                <Card className="px-6 my-4 bg-white View_Plans">
+                <Card className="px-6 my-4 bg-white View_Plan">
                   <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Monthly</h4>
                   <div className="col-6 col-md-4 mx-auto py-4">
                     <CircularProgressbar
@@ -148,7 +148,7 @@ function Plans({
                 </Card>
               </div>
               <div className="col-12 col-md-6 px-4">
-                <Card className="p-6 my-4 bg-white View_Plans">
+                <Card className="p-6 my-4 bg-white View_Plan">
                   <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Anually</h4>
                   <div className="col-6 col-md-4 mx-auto py-4">
                     <CircularProgressbar value={1} maxValue={1} text={`${currencySign[basicMonthly.currency]} ${basicAnually.amount / 100}`}
