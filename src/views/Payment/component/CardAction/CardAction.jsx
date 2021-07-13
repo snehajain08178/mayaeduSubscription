@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import img from '../../../../assets/img';
 import Radio from '../../../../components/Radio/Radio';
 import { getCardNumberFormat } from '../../../../helpers/collecionUtils';
+import './card.scss';
 
 const CardAction = ({
   details,
@@ -20,8 +21,7 @@ const CardAction = ({
   }
   return (
     <div className="w-100 mt-4">
-      <div className="container text-primary font-weight-bold rounded shadow-sm w-75 Width__Phablet--100">
-        <div className="row d-flex align-items-center">
+        <div className="w-75 mx-auto Border-radius bg-white row d-flex align-items-center shadow-sm py-1">
           <div className="col-2">
             {!isDefault && (
               <CImg
@@ -43,7 +43,7 @@ const CardAction = ({
               ) || 'NA'}
             </div>
           </div>
-          <div className="col-2 justify-content-center d-flex pt-0 mb-3">
+          <div className="col-2 justify-content-center d-flex mb-2">
             <Radio
               name={name}
               checked={checked}
@@ -53,7 +53,6 @@ const CardAction = ({
             />
           </div>
         </div>
-      </div>
     </div>
   );
 };
