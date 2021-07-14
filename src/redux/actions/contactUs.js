@@ -7,6 +7,7 @@ import {
 import {
   saveContactUs as saveContactUsApi,
 } from '../../api/contactUs';
+import notificationMessages from '../../libs/notificationMessages';
 
 export function saveContactUsStart() {
   return ({ type: SAVE_CONTACT_US_START });
@@ -26,10 +27,7 @@ export function saveContactUs(payload, callBack) {
     saveContactUsApi({ payload })
       .then((res = {}) => {
         dispatch(saveContactUsEnd(res.body));
-        dispatch(notify({
-          isError: false,
-          message: 'Contact data saved successfully'
-        }));
+        dispatch(notify(notificationMessages.CONTACT_SAVED_SUCCESS));
         callBack();
       })
       .catch((error = {}) => {

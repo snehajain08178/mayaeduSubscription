@@ -24,6 +24,7 @@ import { subscriptionDateFormat } from '../../libs/common';
 import '../../scss/styles.scss';
 import Card from '../Payment/component/Card';
 import 'react-circular-progressbar/dist/styles.css';
+import notificationMessages from '../../libs/notificationMessages';
 
 const basicPlanString = [
   'Unlimited patient diagnosis with AI assistance.',
@@ -81,14 +82,11 @@ function Profile({
       setLoading(false);
       setSubscriptionDeleteModal(false);
       fetchSubscriptionAction();
-      notifyAction({
-        isError: false,
-        message: 'Subscription cancelled successfully',
-      }).catch((err) => {
-        notifyAction(err);
-        setLoading(false);
-        setSubscriptionDeleteModal(false);
-      });
+      notifyAction(notificationMessages.SUBSCRIPTION_CANCELLED);
+    }).catch((err) => {
+      notifyAction(err);
+      setLoading(false);
+      setSubscriptionDeleteModal(false);
     });
     setLoading(true);
     setSubscriptionDeleteModal(false);
