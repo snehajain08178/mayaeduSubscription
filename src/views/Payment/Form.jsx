@@ -54,7 +54,7 @@ const Form = ({
   const { onChange, onSubmit } = events;
   return (
     <div className="d-flex flex-sm-row flex-column p-3 rounded justify-content-between View_Main">
-      <div className="col-12 col-md-5 View_Inner">
+      <div className="col-12 col-md-5 View_Inner d-flex justify-content-center align-items-center">
         <List
           details={info}
           name={fieldNames.PM_ID}

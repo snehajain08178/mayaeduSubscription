@@ -21,7 +21,7 @@ const CardAction = ({
   }
   return (
     <div className="w-100 mt-4">
-        <div className="w-75 mx-auto Border-radius bg-white row d-flex align-items-center shadow-sm py-1">
+        <div className="w-100 mx-auto Border-radius bg-white row d-flex align-items-center shadow-sm py-1">
           <div className="col-2">
             {!isDefault && (
               <CImg
@@ -43,7 +43,7 @@ const CardAction = ({
               ) || 'NA'}
             </div>
           </div>
-          <div className="col-2 justify-content-center d-flex mb-2">
+          <div className="col-1 justify-content-center d-flex mb-2">
             <Radio
               name={name}
               checked={checked}

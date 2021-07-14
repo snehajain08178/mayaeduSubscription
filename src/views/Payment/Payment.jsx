@@ -226,7 +226,7 @@ const Cards = ({
       {isLoading && <SpinnerWithOverLay />}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 d-flex justify-content-between px-5">
+          <div className="col w-100 d-flex justify-content-between px-5 mt-4">
             <h2 className="font-weight-bold">Payment</h2>
             <div
               onClick={() => {
