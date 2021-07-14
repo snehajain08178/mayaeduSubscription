@@ -9,6 +9,7 @@ import List from './List';
 import Button from '../../components/Button';
 import useForm from '../../common/hooks/form';
 import Radio from '../../components/Radio/Radio';
+import './form.scss';
 
 const fieldNames = {
   PM_ID: 'pmId',
@@ -52,8 +53,8 @@ const Form = ({
 
   const { onChange, onSubmit } = events;
   return (
-    <div className="row shadow p-3 bg-white rounded">
-      <div className="col-md-6 p-0 p-lg-2">
+    <div className="d-flex flex-sm-row flex-column p-3 rounded justify-content-between View_Main">
+      <div className="col-12 col-md-5 View_Inner d-flex justify-content-center align-items-center">
         <List
           details={info}
           name={fieldNames.PM_ID}
@@ -62,11 +63,11 @@ const Form = ({
           onDeleteClick={restProps.onDeleteClick}
         />
       </div>
-      <div className="col-md-6">
+      <div className="col-12 col-md-5 View_Inner">
         <div className="row">
           <div
             type="button"
-            className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100"
+            className="container w-75 shadow-sm p-3 pointer d-flex Width__Phablet--100 bg-white Border-radius"
             onClick={() => {
               setFormVisible(!isFormVisible);
             }}
@@ -87,7 +88,7 @@ const Form = ({
         </div>
         <div className="row mt-4">
           {(isFormVisible || values[fieldNames.PM_ID] === 'NEW_PM_ID') && (
-            <div className="container w-75 shadow-sm p-3 Width__Phablet--100">
+            <div className="container w-75 shadow-sm p-3 Width__Phablet--100 bg-white Border-radius">
               <form onSubmit={onSubmit} className="flex-column d-flex">
                 <label>
                   Card number
@@ -140,8 +141,8 @@ const Form = ({
             </div>
           )}
         </div>
-        <div className="row w-100 mt-4">
-          <div className="container w-75 d-flex justify-content-center Width__Phablet--100">
+        <div className="row w-100 mt-4 mx-auto">
+          <div className="container w-50 d-flex justify-content-center Width__Phablet--100">
             <Button
               color="primary"
               className="w-100"

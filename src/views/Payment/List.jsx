@@ -14,7 +14,7 @@ const List = ({
           <Card details={defaultCard || {}} />
         )}
       </div>
-      <div className="mt-4">
+      <div className="mt-4 px-2">
         {(cardsList && cardsList.length) ||
         (defaultCard && Object.keys(defaultCard).length) ? (
             [{ ...defaultCard, isDefault: true }, ...cardsList].map(
@@ -32,14 +32,7 @@ const List = ({
             )
           ) : (
           <div>
-              <Card details={{
-                card: {
-                  last4: 'XXXX',
-                  exp_month: '0',
-                  exp_year: '0000',
-                  warning: 'No card available!'
-                }
-              }} />
+            <h4 className="text-primary">No card available!</h4>
           </div>
           )}
       </div>

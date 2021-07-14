@@ -21,6 +21,7 @@ import PaymentStatus from './component/PaymentStatus';
 import { paymentSuccessful, paymentFail } from '../../libs/strings';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
+import './form.scss';
 import notificationMessages from '../../libs/notificationMessages';
 
 function useResponsiveFontSize() {
@@ -207,12 +208,12 @@ const Cards = ({
   }
 
   return (
-    <div className="w-100">
+    <div className="w-100 View_Outer">
       {isLoading && <SpinnerWithOverLay />}
       <div className="container">
         <ContentWrap isFetching={isFetching} isError={isError}>
-          <div className="col w-100 p-0 pt-3 d-flex justify-content-between">
-            <h2 className="font-weight-bold p-0 pt-2">Payment</h2>
+          <div className="col w-100 d-flex justify-content-between px-5 mt-4">
+            <h2 className="font-weight-bold">Payment</h2>
             <div
               onClick={() => {
                 history.push(endpoints.plans);
