@@ -5,7 +5,7 @@ export default {
   'Please contact your university admin to manage your subscription!',
   },
   LOGOUT_SUCCESS: {
-    isError: true,
+    isError: false,
     message: 'You have successfully logged out!'
   },
   SUBSCRIPTION_CANCELLED: {
