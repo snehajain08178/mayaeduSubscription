@@ -5,12 +5,8 @@
   width: 100%;
   height: 100% !important;
 
-  @include breakpoint(laptop) {
-    height: calc(100vh - 110px) !important;
-  }
-
   .View__Home__Image__Wrapper {
-    background: url('/public/landingBackground.png');
+    background-image: -webkit-linear-gradient(65deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
     background-repeat: no-repeat;
     background-size: cover;
     background-color: $secondary;
@@ -28,12 +24,75 @@
   }
 
   .View__Home__Button {
-    max-width: 350px;
+    max-width: 370px;
     border-radius: 25px;
-    min-width: 200px;
+    min-width: 220px;
   }
 
   .View__Home__Container__Left {
     margin-top: 30px;
+  }
+
+  .View__Feature__Card {
+    margin: 50px 20px;
+    margin-top: 0px;
+    background-color: white !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    text-justify: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 $shadow;
+  }
+
+  .ribbon {
+    width: 100%;
+    background-color: $primary;
+    color: white;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7px 0px;
+  }
+
+  .ViewFeatureContainer {
+    position: relative;
+    margin: 0;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .ViewFeature {
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    text-justify: auto;
+  }
+
+  .featureImagesBackground {
+    background-image: -webkit-linear-gradient(-30deg,$primary 50%, $bg-tertiary 50%);
+    height: 400px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 10px;
+  }
+
+  .Layouts__HomePage {
+    width: 100%;
+    min-height: 20px;
+    padding: 10px;
+    background-color:white;
+  }
+ 
+  @include breakpoint(laptop) {
+    // height: calc(100vh - 110px) !important;
+    .View__Feature__Card:hover {
+      transform: scale(1.2);
+      z-index: 1000 !important;
+    }
   }
 }

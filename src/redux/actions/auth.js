@@ -17,9 +17,11 @@ import {
   LOGOUT_USER,
   SIGNUP_USER_START,
   SIGNUP_USER_END,
-  ERROR_USER_SIGNUP
+  ERROR_USER_SIGNUP,
+  SIGNNUP_RESET
 } from '../constants/auth';
 import { setLocalStorageWithExpiry } from '../../libs/auth';
+import notificationMessages from '../../libs/notificationMessages';
 
 const { API } = config;
 const { TOKEN_EXPIRE_TIME } = API;
@@ -41,10 +43,15 @@ export function loginUser(payload = {}, callBack) {
     dispatch(loginUserStart());
     loginApi({ payload })
       .then((res = {}) => {
-        dispatch(loginUserEnd(res.header.authorization));
-        setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
-        setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
-        callBack();
+        if (res.body && !res.body.isUniversityStudent) {
+          dispatch(loginUserEnd(res.header.authorization));
+          setLocalStorageWithExpiry('AUTH_ACCESS_TOKEN', res.header.authorization, TOKEN_EXPIRE_TIME);
+          setLocalStorageWithExpiry('STRIPE_PUBLIC_KEY', res.body.paymentMode, TOKEN_EXPIRE_TIME);
+          callBack();
+        } else {
+          dispatch(notify(notificationMessages.UNIVERSITY_LOGIN_BLOCKED));
+          dispatch(loginUserEnd());
+        }
       })
       .catch(() => {
         dispatch(raiseErrorLoginUser());
@@ -68,6 +75,10 @@ export function raiseErrorSignupUser() {
   return ({ type: ERROR_USER_SIGNUP });
 }
 
+export function signupUserDetailsReset() {
+  return ({ type: SIGNNUP_RESET });
+}
+
 export function signUpUser(payload = {}, callBack) {
   const data = payload;
   if (!payload.mobileNumber) {
@@ -89,9 +100,13 @@ export function signUpUser(payload = {}, callBack) {
   };
 }
 
+export const resetSignupDetails = () => (dispatch) => {
+  dispatch({ type: SIGNNUP_RESET });
+};
+
 // Logout /Clear Profile
 export const logoutUser = () => (dispatch) => {
   history.push('/');
   dispatch({ type: LOGOUT_USER });
-  dispatch(notify({ message: 'You logout sucessfully', isError: false }));
+  dispatch(notify(notificationMessages.LOGOUT_SUCCESS));
 };

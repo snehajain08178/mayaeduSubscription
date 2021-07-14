@@ -7,7 +7,7 @@
 @import "./mixins";
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   font-weight: 400;
   background: #fff;
   margin: 0;
@@ -53,18 +53,22 @@ ol {
   font-size: 40px;
 }
 
+.Font-Size--48px {
+  font-size: 48px;
+}
+
 .Font-Weight--Bold {
   font-weight: bold;
 }
 
 // margins
 
-.Mt--8 {
-  margin-top: 8px;
+.M {
+  margin: auto;
 }
 
-.Mt--10 {
-  margin-top: 10px;
+.Mt--8 {
+  margin-top: 8px;
 }
 
 .Ml--10 {
@@ -75,13 +79,57 @@ ol {
   margin-top: 5px;
 }
 
+.Mt--15 {
+  margin-top: 15px;
+}
+
 .Mt--20 {
   margin-top: 20px;
+}
+
+.Mt--50 {
+  margin-top: 50px;
+}
+
+.M--50 {
+  margin: 50px 50px 0px 50px;
 }
 
 // paddings
 .Pt--10 {
   padding-top: 10px;
+}
+
+.Pt--100 {
+  padding-top: 100px;
+}
+
+.Pt--130 {
+  padding-top: 130px;
+}
+
+.Pt--180 {
+  padding-top: 180px;
+}
+
+.Pt--50 {
+  padding-top: 50px;
+}
+
+.Pl--20 {
+  padding-left: 20px;
+}
+
+.P--20 {
+  padding: 20px;
+}
+
+.Px--40 {
+  padding: 0px 40px;
+}
+
+.P--10 {
+  padding: 10px;
 }
 
 .Bg--Color-lightPink {
@@ -95,6 +143,10 @@ ol {
 
 .Border-Radius--12px {
   border-radius: 12px;
+}
+
+.Border-Radius--30px {
+  border-radius: 30px;
 }
 
 .Width__Phablet--100 {

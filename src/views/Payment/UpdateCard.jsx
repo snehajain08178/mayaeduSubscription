@@ -16,6 +16,7 @@ import { deleteCard, updateCard } from '../../api/card';
 import { SpinnerWithOverLay } from '../../components/Spinner/SpinnerWithOverlay';
 import ConfirmModal from '../../components/Modal/ConfirmModal';
 import endpoints from '../../routes/endpoints';
+import notificationMessages from '../../libs/notificationMessages';
 
 function useResponsiveFontSize() {
   const getFontSize = () => (window.innerWidth < 450 ? '16px' : '18px');
@@ -112,10 +113,7 @@ const UpdateCard = ({
       .then(() => {
         setLoading(false);
         fetchCardAction();
-        notifyAction({
-          isError: false,
-          message: 'Card updated successfully',
-        });
+        notifyAction(notificationMessages.CARD_UPDATED_SUCCESS);
       })
       .catch((err) => {
         notifyAction(err);
@@ -133,10 +131,7 @@ const UpdateCard = ({
           isVisible: false,
           id: null
         });
-        notifyAction({
-          isError: false,
-          message: 'Card deleted successfully',
-        });
+        notifyAction(notificationMessages.CARD_DELETED_SUCCESS);
       })
       .catch((err) => {
         notifyAction(err);

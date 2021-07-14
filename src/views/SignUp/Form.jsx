@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CCardBody,
-  CCardGroup,
   CCol,
   CContainer,
   CInputGroup,
@@ -43,12 +42,13 @@ import {
   passwordCreteriaStat,
   passwordNotMatched,
   acceptThe,
-  termsAndConditions,
+  termsAndConditions
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import TermAndConditions from '../../components/TermsAndConditions';
 import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
 import { stringEllipisis } from '../../libs/common';
+import 'react-slideshow-image/dist/styles.css';
 
 let passwordCriteria = {
   upper: false,
@@ -222,13 +222,12 @@ function Form({ isProcessing, ...restProps }) {
   return (
     <div className="Signup_Form">
       <CContainer>
-        <CRow className="justify-content-center">
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View">
-            <CCardGroup>
+        <CRow className="justify-content-center" style={{ margin: '120px 0 32px 0' }}>
+          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View" style={{ backgroundColor: 'white' }}>
               <Card>
                 <CCardBody>
-                  <h1 className="font-weight-bold text-center">{signup}</h1>
-                  <CForm>
+                  <CForm className="justify-content-center">
+                    <h1 className="font-weight-bold text-center">{signup}</h1>
                     <CInputGroup className="my-4">
                       <CountryWithData
                         id="Country"
@@ -443,7 +442,6 @@ function Form({ isProcessing, ...restProps }) {
                   </CForm>
                 </CCardBody>
               </Card>
-            </CCardGroup>
           </CCol>
         </CRow>
         <Modal

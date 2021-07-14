@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useForm = ({
-  initialValues, fields, handleSubmit: _handleSubmit, validate,
+  initialValues, fields, handleSubmit: _handleSubmit, validate, validateOnBlur
 }) => {
   const [values, setValues] = useState(initialValues || {});
   const [errors, setErrors] = useState({});
@@ -51,6 +51,9 @@ const useForm = ({
   };
 
   const handleBlur = (key) => {
+    if (validateOnBlur) {
+      setFormDirty(true);
+    }
     if (isFormDirty) {
       const validationErrors = validate({ values }, key) || {};
       setErrors(validationErrors);

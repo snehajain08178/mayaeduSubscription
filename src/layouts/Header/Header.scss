@@ -1,0 +1,55 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.HeaderView {
+    width: 100% !important;
+    z-index: 100 !important;
+    box-shadow: 0 4px 8px 0 $shadow;
+    background-color: rgba(252, 252, 252, 0);
+    padding-right: 35px !important;
+}
+
+hr {
+    border: 0px !important;
+}
+
+@include breakpoint(laptop) {
+    .VerticalLine {
+        height: 400px;
+        position: absolute;
+        top: 0;
+        border-right: 5px solid $primary;
+    }
+    
+    .v1 {
+        right: 10px;
+    }
+    
+    .v2 {
+        right: 30px;
+    }
+    
+    hr {
+        border: 2px solid $primary !important;
+        width: 400px;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        z-index: 2000 !important;
+    }
+    
+    hr.one {
+        top: 70px;
+    }
+    
+    hr.two {
+        top: 90px;
+    }
+  }
+
+.ButtonView {
+    background-color: $primary;
+    padding: 10px 0px;
+    margin: 0px 15px;
+    border-radius: 5px;
+}

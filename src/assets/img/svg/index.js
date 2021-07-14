@@ -18,6 +18,14 @@ import dollarRedIcon from './DollarRed.svg';
 import rupeeGreenIcon from './RupeeGreen.svg';
 import rupeeRedIcon from './RupeeRed.svg';
 import dollarGreenIcon from './DollarGreen.svg';
+import algorithmIcon from './Algorithm.svg';
+import conversationalIcon from './Conversational.svg';
+import medicalKnowledgeIcon from './MedicalKnowledge.svg';
+import booksIcon from './Books.svg';
+import practiceDiagnosisIcon from './PracticeDiagnosis.svg';
+import clinicalCasesIcon from './ClinicalCases.svg';
+import aiIcon from './Ai.svg';
+import clockIcon from './Clock.svg';
 
 export default {
   checkCircleIcon,
@@ -35,5 +43,13 @@ export default {
   dollarRedIcon,
   rupeeGreenIcon,
   rupeeRedIcon,
-  dollarGreenIcon
+  dollarGreenIcon,
+  algorithmIcon,
+  conversationalIcon,
+  medicalKnowledgeIcon,
+  booksIcon,
+  practiceDiagnosisIcon,
+  clinicalCasesIcon,
+  aiIcon,
+  clockIcon
 };

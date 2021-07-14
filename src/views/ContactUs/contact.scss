@@ -1,0 +1,68 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.View__ContactUs {
+  width: 100%;
+  height: 100%;
+  background: url('/public/landingBackground1.png') !important;
+  background-color: $secondary;
+  background-size: cover;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  .Contact__Us__Form {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .Card_View {
+    padding: 20px 20px;
+    background-color: white !important;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px 0 $shadow;
+  }
+
+  .card {
+    border-radius: 30px !important;
+  }
+
+  .Button {
+    border-radius: 22px !important;
+    padding: 6px 32px !important;
+    margin-top: 30px;
+  }
+
+  .ContactUs__Name {
+    display: flex !important;
+
+    .SelectDrop {
+      width: 20% !important;
+
+      .Select {
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+      }
+    }
+
+    .Components___Input {
+      .Input {
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+      }
+    }
+  }
+
+  .Font-Size--Header {
+    @include breakpoint(phablet) {
+      font-size: 2.8em !important;
+    }
+
+    @include breakpoint(laptop) {
+      font-size: 3.4em !important;
+    }
+  }
+  
+}

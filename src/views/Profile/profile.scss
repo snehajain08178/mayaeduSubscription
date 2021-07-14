@@ -1,5 +1,33 @@
+@import '../../scss/variables';
+
 .Views__Profile {
+  min-height: 100vh;
+
+  .Main_View {
+    margin-top: 24px;
+  }
+
+  .Inner_View {
+    padding: 20px;
+    margin: 10px;
+    background-color: $bg-slides;
+    border-radius: 15px;
+  }
+
+  .Inner_View_Features {
+    padding: 20px;
+    background-color: $bg-slides;
+    border-radius: 15px;
+  }
+
   .Button {
     width: 120px !important;
+  }
+
+  .Button__Done {
+    border-radius: 22px !important;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -1,0 +1,25 @@
+@import '../../scss/variables';
+
+.View_Main {
+
+    background-color: '#f7f2f5';
+
+    .View_Inner {
+        background-color: $bg-slides;
+        padding: 40px 20px !important;
+        border-radius: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .Border-radius {
+        border-radius: 16px;
+    }
+}
+
+.View_Outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}

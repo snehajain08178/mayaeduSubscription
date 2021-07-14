@@ -1,5 +1,5 @@
 import { CImg } from '@coreui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import PropTypes from 'prop-types';
@@ -7,10 +7,12 @@ import { ImSwitch } from 'react-icons/im';
 import { connect } from 'react-redux';
 import img from '../../assets/img';
 import { logoutUser } from '../../redux/actions/auth';
+import ConfirmModal from '../../components/Modal/ConfirmModal';
 
 function LogoutHeader({ logoutUser: logoutUserAction }) {
+  const [isConfirmModal, setConfirmModal] = useState(false);
   function handleLogout() {
-    logoutUserAction();
+    setConfirmModal(true);
   }
   return (
     <>
@@ -54,6 +56,19 @@ function LogoutHeader({ logoutUser: logoutUserAction }) {
           </div>
         </nav>
       </div>
+      {isConfirmModal && (
+        <ConfirmModal
+          isVisible={isConfirmModal}
+          onCancel={() => {
+            setConfirmModal(false);
+          }}
+          onSubmit={() => {
+            logoutUserAction();
+          }}
+          submitLabel="Delete"
+          content="Are you sure you want to logout?"
+        />
+      )}
     </>
   );
 }
