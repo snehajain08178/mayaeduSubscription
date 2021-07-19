@@ -14,6 +14,7 @@ import { validateEmail, validateName, validateNumber } from '../../helpers/valid
 import { invalidEmail, invalidNumber, nameValidation } from '../../libs/strings';
 import TextArea from '../../components/TextArea';
 import notificationMessages from '../../libs/notificationMessages';
+import PhoneInput from '../../components/Input/PhoneInput';
 
 const CountryWithSearch = withStaticSearchProvider(countries, SelectDrop);
 
@@ -188,15 +189,19 @@ export default function Form({ ...restProps }) {
             />
           </CInputGroup>
           <CInputGroup className="my-4">
-            <Input
+            <PhoneInput
               labelText="Contact Number*"
+              country={values[fieldNames.COUNTRY]
+                && (values[fieldNames.COUNTRY].code).toLowerCase()}
+              disableDropdown
               name={fieldNames.CONTACT_NUMBER}
               onBlur={onBlur}
               onKeyUp={onKeyUp}
-              onChange={onChange}
+              onChange={(val) => {
+                onChange({ target: { name: fieldNames.CONTACT_NUMBER, value: val } });
+              }}
               value={values[fieldNames.CONTACT_NUMBER] || ''}
               errorText={errors[fieldNames.CONTACT_NUMBER]}
-              maxLength={12}
               placeholder="Enter contact number"
             />
           </CInputGroup>

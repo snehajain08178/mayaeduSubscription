@@ -45,6 +45,7 @@ import {
   termsAndConditions
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
+import PhoneInput from '../../components/Input/PhoneInput';
 import TermAndConditions from '../../components/TermsAndConditions';
 import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
 import { stringEllipisis } from '../../libs/common';
@@ -79,7 +80,7 @@ function handleSelect(event, preValues) {
     ...preValues,
     [name]:
       name === fieldNames.COUNTRY
-        ? { name: value.name, code: value.code }
+        ? { name: value.name, code: value.code, }
         : name === fieldNames.PROFESSIONAL_DETAILS
           ? value.name
           : value,
@@ -219,6 +220,8 @@ function Form({ isProcessing, ...restProps }) {
     isPassCriteriaMatch(values[fieldNames.NEW_PASSWORD]);
   }, [values[fieldNames.NEW_PASSWORD]]);
 
+  console.log(values);
+
   return (
     <div className="Signup_Form">
       <CContainer>
@@ -260,15 +263,20 @@ function Form({ isProcessing, ...restProps }) {
                     </CInputGroup>
                     <CInputGroup className="my-4">
                       <CInputGroupPrepend></CInputGroupPrepend>
-                      <Input
+                      <PhoneInput
+                        disableDropdown
+                        country={values[fieldNames.COUNTRY]
+                          && (values[fieldNames.COUNTRY].code).toLowerCase()}
                         name={fieldNames.CONTACT_INFO}
                         labelText="Contact info"
                         placeholder="Enter Contact no."
-                        value={values[fieldNames.CONTACT_INFO] || ''}
+                        value={values[fieldNames.CONTACT_INFO]}
                         errorText={errors[fieldNames.CONTACT_INFO]}
                         onBlur={onBlur}
                         onKeyUp={onKeyUp}
-                        onChange={onChange}
+                        onChange={(val) => {
+                          onChange({ target: { name: fieldNames.CONTACT_INFO, value: val } });
+                        }}
                         disabled={isProcessing}
                         icon={'CallIcon'}
                         maxLength={12}
