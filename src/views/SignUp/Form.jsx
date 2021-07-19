@@ -220,8 +220,6 @@ function Form({ isProcessing, ...restProps }) {
     isPassCriteriaMatch(values[fieldNames.NEW_PASSWORD]);
   }, [values[fieldNames.NEW_PASSWORD]]);
 
-  console.log(values);
-
   return (
     <div className="Signup_Form">
       <CContainer>
