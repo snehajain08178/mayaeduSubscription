@@ -42,13 +42,13 @@ import {
   passwordCreteriaStat,
   passwordNotMatched,
   acceptThe,
-  termsAndConditions
+  termsAndConditions,
 } from '../../libs/strings';
 import Modal from '../../components/Modal';
 import PhoneInput from '../../components/Input/PhoneInput';
 import TermAndConditions from '../../components/TermsAndConditions';
 import withStaticSearchProvider from '../../common/hocs/multiSelects/withStaticSearchProvider';
-import { stringEllipisis } from '../../libs/common';
+import { generateRandomPassword, stringEllipisis } from '../../libs/common';
 import 'react-slideshow-image/dist/styles.css';
 
 let passwordCriteria = {
@@ -80,7 +80,7 @@ function handleSelect(event, preValues) {
     ...preValues,
     [name]:
       name === fieldNames.COUNTRY
-        ? { name: value.name, code: value.code, }
+        ? { name: value.name, code: value.code }
         : name === fieldNames.PROFESSIONAL_DETAILS
           ? value.name
           : value,
@@ -167,7 +167,9 @@ function CriteriaView(label, check = false) {
 const CountryWithData = withStaticSearchProvider(countries, SelectDrop);
 
 function Form({ isProcessing, ...restProps }) {
-  const { values, errors, events } = useForm({
+  const {
+    values, errors, events, setValues
+  } = useForm({
     initialValues: {},
     handleSubmit: handleSubmit.bind(restProps),
     fields,
@@ -220,218 +222,226 @@ function Form({ isProcessing, ...restProps }) {
     isPassCriteriaMatch(values[fieldNames.NEW_PASSWORD]);
   }, [values[fieldNames.NEW_PASSWORD]]);
 
+  function handleSuggestPasswordClick() {
+    const password = generateRandomPassword();
+    const _values = { ...values };
+    _values[fieldNames.NEW_PASSWORD] = password;
+    setValues(_values);
+  }
+
   return (
     <div className="Signup_Form">
       <CContainer>
-        <CRow className="justify-content-center" style={{ margin: '120px 0 32px 0' }}>
-          <CCol sm="12" md="9" lg="7" xl="6" xxl="5" className="Card_View Main_Card_View" style={{ backgroundColor: 'white' }}>
-              <Card>
-                <CCardBody>
-                  <CForm className="justify-content-center">
-                    <h1 className="font-weight-bold text-center">{signup}</h1>
-                    <CInputGroup className="my-4">
-                      <CountryWithData
-                        id="Country"
-                        labelText="Country*"
-                        name={fieldNames.COUNTRY}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={
-                          stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
-                        }
-                        onChangeSelect={onSelect(fieldNames.COUNTRY)}
-                        value={values[fieldNames.COUNTRY] || ''}
-                        errorText={errors[fieldNames.COUNTRY]}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="my-4">
-                      <CInputGroupPrepend></CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.FULL_NAME}
-                        labelText="Full Name*"
-                        placeholder="Enter full name"
-                        value={values[fieldNames.FULL_NAME] || ''}
-                        errorText={errors[fieldNames.FULL_NAME]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        disabled={isProcessing}
-                        icon={'profileIcon'}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="my-4">
-                      <CInputGroupPrepend></CInputGroupPrepend>
-                      <PhoneInput
-                        disableDropdown
-                        country={values[fieldNames.COUNTRY]
-                          && (values[fieldNames.COUNTRY].code).toLowerCase()}
-                        name={fieldNames.CONTACT_INFO}
-                        labelText="Contact info"
-                        placeholder="Enter Contact no."
-                        value={values[fieldNames.CONTACT_INFO]}
-                        errorText={errors[fieldNames.CONTACT_INFO]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        onChange={(val) => {
-                          onChange({ target: { name: fieldNames.CONTACT_INFO, value: val } });
-                        }}
-                        disabled={isProcessing}
-                        icon={'CallIcon'}
-                        maxLength={12}
-                        countryCodeEditable={false}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="my-4">
-                      <CInputGroupPrepend></CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.EMAIL}
-                        labelText="Email*"
-                        placeholder="Enter Email"
-                        value={values[fieldNames.EMAIL] || ''}
-                        errorText={errors[fieldNames.EMAIL]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        disabled={isProcessing}
-                        icon={'emailIcon'}
-                        maxLength={100}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="my-4">
-                      <CInputGroupPrepend></CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.NEW_PASSWORD}
-                        labelText="New Password*"
-                        placeholder="Enter Password"
-                        value={values[fieldNames.NEW_PASSWORD] || ''}
-                        errorText={errors[fieldNames.NEW_PASSWORD]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        disabled={isProcessing}
-                        icon={
-                          passwordVisibility.newPassword
-                            ? 'viewPasswordSvgIcon'
-                            : 'hidePasswordSvgIcon'
-                        }
-                        type={!passwordVisibility.newPassword ? 'password' : ''}
-                        setPasswordVisibility={() => setPasswordVisibility({
-                          newPassword: !passwordVisibility.newPassword,
-                        })
-                        }
-                      />
-                    </CInputGroup>
-                    <div className="my-4 Criteria">
-                      <CRow className="my-2 font-weight-bold justify-content-center">
-                        {passwordCreteriaStat}
-                      </CRow>
-                      <CRow className="ml-1 justify-content-between">
-                        {CriteriaView(uppercase, passwordCriteria.upper)}
-                        {CriteriaView(lowercase, passwordCriteria.lower)}
-                      </CRow>
-                      <CRow className="ml-1 justify-content-between">
-                        {CriteriaView(numeric, passwordCriteria.number)}
-                        {CriteriaView(minCharacters, passwordCriteria.textLen)}
-                      </CRow>
-                      <CRow className="ml-1 justify-content-between">
-                        {CriteriaView(
-                          specialChar,
-                          passwordCriteria.specialCharacter
-                        )}
-                        {CriteriaView(
-                          passwordMismatch,
-                          values[fieldNames.NEW_PASSWORD] &&
-                            values[fieldNames.NEW_PASSWORD] ===
-                              values[fieldNames.CONFIRM_NEW_PASSWORD]
-                        )}
-                      </CRow>
+        <CRow
+          className="justify-content-center"
+          style={{ margin: '120px 0 32px 0' }}
+        >
+          <CCol
+            sm="12"
+            md="9"
+            lg="7"
+            xl="6"
+            xxl="5"
+            className="Card_View Main_Card_View"
+            style={{ backgroundColor: 'white' }}
+          >
+            <Card>
+              <CCardBody>
+                <CForm className="justify-content-center">
+                  <h1 className="font-weight-bold text-center">{signup}</h1>
+                  <CInputGroup className="my-4">
+                    <CountryWithData
+                      id="Country"
+                      labelText="Country*"
+                      name={fieldNames.COUNTRY}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      selectedItem={
+                        stringEllipisis(values[fieldNames.COUNTRY], 40) || ''
+                      }
+                      onChangeSelect={onSelect(fieldNames.COUNTRY)}
+                      value={values[fieldNames.COUNTRY] || ''}
+                      errorText={errors[fieldNames.COUNTRY]}
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="my-4">
+                    <CInputGroupPrepend></CInputGroupPrepend>
+                    <Input
+                      name={fieldNames.FULL_NAME}
+                      labelText="Full Name*"
+                      placeholder="Enter full name"
+                      value={values[fieldNames.FULL_NAME] || ''}
+                      errorText={errors[fieldNames.FULL_NAME]}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      onChange={onChange}
+                      disabled={isProcessing}
+                      icon={'profileIcon'}
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="my-4">
+                    <CInputGroupPrepend></CInputGroupPrepend>
+                    <PhoneInput
+                      disableDropdown
+                      country={
+                        values[fieldNames.COUNTRY] &&
+                        values[fieldNames.COUNTRY].code.toLowerCase()
+                      }
+                      name={fieldNames.CONTACT_INFO}
+                      labelText="Contact info"
+                      placeholder="Enter Contact no."
+                      value={values[fieldNames.CONTACT_INFO]}
+                      errorText={errors[fieldNames.CONTACT_INFO]}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      onChange={(val) => {
+                        onChange({
+                          target: { name: fieldNames.CONTACT_INFO, value: val },
+                        });
+                      }}
+                      disabled={isProcessing || !values[fieldNames.COUNTRY]}
+                      icon={'CallIcon'}
+                      maxLength={12}
+                      countryCodeEditable={false}
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="my-4">
+                    <CInputGroupPrepend></CInputGroupPrepend>
+                    <Input
+                      name={fieldNames.EMAIL}
+                      labelText="Email*"
+                      placeholder="Enter Email"
+                      value={values[fieldNames.EMAIL] || ''}
+                      errorText={errors[fieldNames.EMAIL]}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      onChange={onChange}
+                      disabled={isProcessing}
+                      icon={'emailIcon'}
+                      maxLength={100}
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="my-4 d-flex justify-content-end">
+                    <CInputGroupPrepend></CInputGroupPrepend>
+                    <Input
+                      name={fieldNames.NEW_PASSWORD}
+                      labelText="New Password*"
+                      placeholder="Enter Password"
+                      value={values[fieldNames.NEW_PASSWORD] || ''}
+                      errorText={errors[fieldNames.NEW_PASSWORD]}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      onChange={onChange}
+                      disabled={isProcessing}
+                      icon={
+                        passwordVisibility.newPassword
+                          ? 'viewPasswordSvgIcon'
+                          : 'hidePasswordSvgIcon'
+                      }
+                      type={!passwordVisibility.newPassword ? 'password' : ''}
+                      setPasswordVisibility={() => setPasswordVisibility({
+                        newPassword: !passwordVisibility.newPassword,
+                      })
+                      }
+                    />
+                    <div
+                      className="text-right Cusor--Pointer Font-Size--12px mt-1 mr-3 font-weight-bold"
+                      onClick={handleSuggestPasswordClick}
+                    >
+                      Auto-generate Password
                     </div>
-                    <CInputGroup className="my-4">
-                      <CInputGroupPrepend></CInputGroupPrepend>
-                      <Input
-                        name={fieldNames.CONFIRM_NEW_PASSWORD}
-                        labelText="Confirm New Password*"
-                        placeholder="Enter Confirm Password"
-                        value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
-                        errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        onChange={onChange}
-                        disabled={isProcessing}
-                        icon={
-                          passwordVisibility.confirmNewPassword
-                            ? 'viewPasswordSvgIcon'
-                            : 'hidePasswordSvgIcon'
-                        }
-                        type={
-                          !passwordVisibility.confirmNewPassword
-                            ? 'password'
-                            : ''
-                        }
-                        setPasswordVisibility={() => setPasswordVisibility({
-                          confirmNewPassword:
-                              !passwordVisibility.confirmNewPassword,
-                        })
-                        }
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="my-4">
-                      <SelectDrop
-                        id="ProfesionalDetails"
-                        labelText="Professional Details"
-                        name={fieldNames.PROFESSIONAL_DETAILS}
-                        onBlur={onBlur}
-                        onKeyUp={onKeyUp}
-                        selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
-                        onChangeSelect={onSelect(
-                          fieldNames.PROFESSIONAL_DETAILS
-                        )}
-                        value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
-                        errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
-                        MultiSelectDrop
-                        dropListValues={professionalCategory}
-                      />
-                    </CInputGroup>
-                    <CRow className="my-3 justify-content-center pt-4">
-                      <div className="d-flex">
-                        <div>
-                          <CImg
-                            src={
-                              termsAccepted
-                                ? SVG.checkSquareIcon
-                                : SVG.uncheckSquareIcon
-                            }
-                            onClick={() => setTermsAccepted(!termsAccepted)}
-                          />
-                        </div>
-                        <div className="pl-2" onClick={() => setVisible(true)}>
-                          {acceptThe}
-                          <u className="font-weight-bold pl-1">
-                            {termsAndConditions}
-                          </u>
-                        </div>
-                      </div>
+                  </CInputGroup>
+                  <div className="my-4 Criteria">
+                    <CRow className="my-2 font-weight-bold justify-content-center">
+                      {passwordCreteriaStat}
                     </CRow>
-                    <CRow className="my-4 justify-content-center">
-                      <Button
-                        style={{
-                          opacity:
-                            isProcessing ||
-                            !(
-                              values[fieldNames.COUNTRY] &&
-                              values[fieldNames.EMAIL] &&
-                              values[fieldNames.FULL_NAME] &&
-                              values[fieldNames.NEW_PASSWORD] &&
-                              values[fieldNames.CONFIRM_NEW_PASSWORD] &&
-                              termsAccepted
-                            )
-                              ? 0.5
-                              : 1,
-                        }}
-                        color="primary"
-                        className="Button__Signup"
-                        onClick={onSubmit}
-                        disabled={
+                    <CRow className="ml-1 justify-content-between">
+                      {CriteriaView(uppercase, passwordCriteria.upper)}
+                      {CriteriaView(lowercase, passwordCriteria.lower)}
+                    </CRow>
+                    <CRow className="ml-1 justify-content-between">
+                      {CriteriaView(numeric, passwordCriteria.number)}
+                      {CriteriaView(minCharacters, passwordCriteria.textLen)}
+                    </CRow>
+                    <CRow className="ml-1 justify-content-between">
+                      {CriteriaView(
+                        specialChar,
+                        passwordCriteria.specialCharacter
+                      )}
+                      {CriteriaView(
+                        passwordMismatch,
+                        values[fieldNames.NEW_PASSWORD] &&
+                          values[fieldNames.NEW_PASSWORD] ===
+                            values[fieldNames.CONFIRM_NEW_PASSWORD]
+                      )}
+                    </CRow>
+                  </div>
+                  <CInputGroup className="my-4">
+                    <CInputGroupPrepend></CInputGroupPrepend>
+                    <Input
+                      name={fieldNames.CONFIRM_NEW_PASSWORD}
+                      labelText="Confirm New Password*"
+                      placeholder="Enter Confirm Password"
+                      value={values[fieldNames.CONFIRM_NEW_PASSWORD] || ''}
+                      errorText={errors[fieldNames.CONFIRM_NEW_PASSWORD]}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      onChange={onChange}
+                      disabled={isProcessing}
+                      icon={
+                        passwordVisibility.confirmNewPassword
+                          ? 'viewPasswordSvgIcon'
+                          : 'hidePasswordSvgIcon'
+                      }
+                      type={
+                        !passwordVisibility.confirmNewPassword ? 'password' : ''
+                      }
+                      setPasswordVisibility={() => setPasswordVisibility({
+                        confirmNewPassword:
+                            !passwordVisibility.confirmNewPassword,
+                      })
+                      }
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="my-4">
+                    <SelectDrop
+                      id="ProfesionalDetails"
+                      labelText="Professional Details"
+                      name={fieldNames.PROFESSIONAL_DETAILS}
+                      onBlur={onBlur}
+                      onKeyUp={onKeyUp}
+                      selectedItem={values[fieldNames.PROFESSIONAL_DETAILS]}
+                      onChangeSelect={onSelect(fieldNames.PROFESSIONAL_DETAILS)}
+                      value={values[fieldNames.PROFESSIONAL_DETAILS] || ''}
+                      errorText={errors[fieldNames.PROFESSIONAL_DETAILS]}
+                      MultiSelectDrop
+                      dropListValues={professionalCategory}
+                    />
+                  </CInputGroup>
+                  <CRow className="my-3 justify-content-center pt-4">
+                    <div className="d-flex">
+                      <div>
+                        <CImg
+                          src={
+                            termsAccepted
+                              ? SVG.checkSquareIcon
+                              : SVG.uncheckSquareIcon
+                          }
+                          onClick={() => setTermsAccepted(!termsAccepted)}
+                        />
+                      </div>
+                      <div className="pl-2" onClick={() => setVisible(true)}>
+                        {acceptThe}
+                        <u className="font-weight-bold pl-1">
+                          {termsAndConditions}
+                        </u>
+                      </div>
+                    </div>
+                  </CRow>
+                  <CRow className="my-4 justify-content-center">
+                    <Button
+                      style={{
+                        opacity:
                           isProcessing ||
                           !(
                             values[fieldNames.COUNTRY] &&
@@ -441,14 +451,30 @@ function Form({ isProcessing, ...restProps }) {
                             values[fieldNames.CONFIRM_NEW_PASSWORD] &&
                             termsAccepted
                           )
-                        }
-                      >
-                        {signup}
-                      </Button>
-                    </CRow>
-                  </CForm>
-                </CCardBody>
-              </Card>
+                            ? 0.5
+                            : 1,
+                      }}
+                      color="primary"
+                      className="Button__Signup"
+                      onClick={onSubmit}
+                      disabled={
+                        isProcessing ||
+                        !(
+                          values[fieldNames.COUNTRY] &&
+                          values[fieldNames.EMAIL] &&
+                          values[fieldNames.FULL_NAME] &&
+                          values[fieldNames.NEW_PASSWORD] &&
+                          values[fieldNames.CONFIRM_NEW_PASSWORD] &&
+                          termsAccepted
+                        )
+                      }
+                    >
+                      {signup}
+                    </Button>
+                  </CRow>
+                </CForm>
+              </CCardBody>
+            </Card>
           </CCol>
         </CRow>
         <Modal
