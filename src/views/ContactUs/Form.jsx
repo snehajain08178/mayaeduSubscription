@@ -203,6 +203,7 @@ export default function Form({ ...restProps }) {
               value={values[fieldNames.CONTACT_NUMBER] || ''}
               errorText={errors[fieldNames.CONTACT_NUMBER]}
               placeholder="Enter contact number"
+              countryCodeEditable={false}
             />
           </CInputGroup>
           <CInputGroup className="my-4">

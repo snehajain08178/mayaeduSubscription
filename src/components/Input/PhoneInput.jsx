@@ -28,7 +28,10 @@ function PhoneInput({
               <Input
                 dropdownClass="Dropdown"
                 inputClass={`Input Box--Shadow ${errorText && 'Error--Border'} ${className}`}
-                inputStyle={{ fontWeight: 'bold', fontSize: '0.875rem' }}
+                inputStyle={{
+                  fontWeight: '400',
+                  fontSize: '0.875rem',
+                }}
                 dropdownStyle={restProps.disableDropdown ? { pointerEvents: 'none' } : {}}
                 {...restProps}
               />
