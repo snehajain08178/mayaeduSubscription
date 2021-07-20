@@ -278,6 +278,7 @@ function Form({ isProcessing, ...restProps }) {
                         disabled={isProcessing}
                         icon={'CallIcon'}
                         maxLength={12}
+                        countryCodeEditable={false}
                       />
                     </CInputGroup>
                     <CInputGroup className="my-4">
