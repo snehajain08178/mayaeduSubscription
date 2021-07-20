@@ -33,6 +33,10 @@ ol {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.Font-Size--12px {
+  font-size: 12px;
+}
+
 .Font-Size--14px {
   font-size: 14px;
 }
@@ -161,4 +165,8 @@ ol {
   @include breakpoint(tablet) {
     width: 75% !important;
   }
+}
+
+.Cusor--Pointer {
+  cursor: pointer;
 }

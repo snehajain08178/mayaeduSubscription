@@ -34,12 +34,33 @@ export function subscriptionDateFormat(
   date,
   checkKey,
   defaultKey = 'freeTrial',
-  dateFormat = 'MM-DD-YYYY',
+  dateFormat = 'MM-DD-YYYY'
 ) {
   if (defaultKey === checkKey) {
     return moment(date).utcOffset(0).format(dateFormat);
   }
   return moment(date).format(dateFormat);
+}
+
+export function generateRandomPassword() {
+  const capitalLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const smallLetters = 'acdefghijklmnopqrstuvwxyz';
+  const numbers = '0123456789';
+  const special = '@#$%^&*';
+  let password = '';
+  for (let i = 0; i < 3; i += 1) {
+    const generateCaptial = capitalLetters[Math.floor(Math.random() * 25)];
+    const generateSmall = smallLetters[Math.floor(Math.random() * 25)];
+    const generateNumber = numbers[Math.floor(Math.random() * 9)];
+    const generateSpecial = special[Math.floor(Math.random() * 6)];
+    password =
+      password +
+      generateCaptial +
+      generateSmall +
+      generateNumber +
+      generateSpecial;
+  }
+  return password;
 }
 
 export default {
