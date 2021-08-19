@@ -226,6 +226,7 @@ function Form({ isProcessing, ...restProps }) {
     const password = generateRandomPassword();
     const _values = { ...values };
     _values[fieldNames.NEW_PASSWORD] = password;
+    _values[fieldNames.CONFIRM_NEW_PASSWORD] = password;
     setValues(_values);
   }
 
