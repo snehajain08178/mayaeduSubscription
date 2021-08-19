@@ -6,7 +6,7 @@
   height: 100% !important;
 
   .View__Home__Image__Wrapper {
-    background-image: -webkit-linear-gradient(65deg, white 15%,white 30%, rgba(105,1,59,0.32) 55%, );
+    background-image: -webkit-linear-gradient(65deg, white 15%, white 30%, rgba(105, 1, 59, 0.32) 55%, );
     background-repeat: no-repeat;
     background-size: cover;
     background-color: $secondary;
@@ -71,7 +71,7 @@
   }
 
   .featureImagesBackground {
-    background-image: -webkit-linear-gradient(-30deg,$primary 50%, $bg-tertiary 50%);
+    background-image: -webkit-linear-gradient(-30deg, $primary 50%, $bg-tertiary 50%);
     height: 400px;
     width: 80%;
     margin: 0 auto;
@@ -85,10 +85,13 @@
     width: 100%;
     min-height: 20px;
     padding: 10px;
-    background-color:white;
+    background-color: white;
+    display: flex;
+    flex-direction: column-reverse;
   }
- 
+
   @include breakpoint(laptop) {
+
     // height: calc(100vh - 110px) !important;
     .View__Feature__Card:hover {
       transform: scale(1.2);

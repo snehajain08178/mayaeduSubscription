@@ -25,7 +25,7 @@ import {
   activeCases,
   activeCases1,
   universityCirculum,
-  universityCirculum1
+  universityCirculum1,
 } from '../../libs/strings';
 import SVG from '../../assets/img/svg';
 
@@ -37,23 +37,34 @@ function Home() {
         <div className="View__Home__Container container">
           <div className="row mx-auto">
             <div className="col-md-9 mt-lg-5 d-flex justify-content-center justify-content-sm-start flex-column text-center text-md-left align-items-center align-items-md-start View__Home__Container__Left">
-            <Typist className="mt-5 text-primary" cursor={{ show: false }} avgTypingDelay={100}>
-                <p className="text-white font-weight-bold Font-Size--48px">Maya EDU, a unique interactive</p>
-                <p className="text-white font-weight-bold Font-Size--48px">flip clinical-education tool</p>
+              <Typist
+                className="mt-5 text-primary"
+                cursor={{ show: false }}
+                avgTypingDelay={100}
+              >
+                <p className="text-white font-weight-bold Font-Size--48px">
+                  MayaEDU, a unique clinical reasoning tool
+                </p>
                 <span className="mt-5">
                   <h3 className="text-primary">
-                    AI healthcare in your hands, accessible 24/7. Analyze <br />
-                    symptoms, get healthcare insights & the right care.
+                    Medical schools now have a truly engaging learning tool <br /> for
+                    their students utilizing AI & an innovative flipped <br />
+                    classroom method.
                   </h3>
                 </span>
-                </Typist>
+              </Typist>
               <CButton
                 color="info"
                 size="lg"
                 className="View__Home__Button mt-4 text-decoration-none"
                 type="link"
               >
-                <Link to={endpoints.signup} className="text-white text-decoration-none">Get Started</Link>
+                <Link
+                  to={endpoints.signup}
+                  className="text-white text-decoration-none"
+                >
+                  Get Started
+                </Link>
               </CButton>
             </div>
             <div className="col-md-3 d-flex justify-content-center justify-content-sm-end mt-4 mt-md-0">
@@ -93,80 +104,70 @@ function Home() {
       <div className="Layouts__HomePage text-primary">
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-              <div>
-                <h1 className="font-weight-bold mb-4">
-                  {patientDiagnosis}
-                </h1>
-              </div>
-              <div className="d-flex w-75 mx-auto mt-4">
-                <p>{patientDiagnosis1}</p>
-              </div>
+            <div>
+              <h1 className="font-weight-bold mb-4">{patientDiagnosis}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{patientDiagnosis1}</p>
+            </div>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
-              <CImg src={img.patientDiagnosis} width={290} height={480}/>
+            <CImg src={img.patientDiagnosis} width={290} height={480} />
           </div>
         </div>
         <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
           <div className="col-md-4 featureImagesBackground">
-              <CImg src={img.praticeCasesImg} width={290} height={480}/>
+            <CImg src={img.praticeCasesImg} width={290} height={480} />
           </div>
           <div className="col-md-6 justify-content-sm-end text-center align-self-center">
-              <div>
-                <h1 className="font-weight-bold mb-4">
-                  {practiceCases}
-                </h1>
-              </div>
-              <div className="d-flex w-75 mx-auto mt-4">
-                <p>{practiceCases1}</p>
-              </div>
+            <div>
+              <h1 className="font-weight-bold mb-4">{practiceCases}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{practiceCases1}</p>
+            </div>
           </div>
         </div>
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-              <div>
-                <h1 className="font-weight-bold mb-4">
-                  {prepareExams}
-                </h1>
-              </div>
-              <div className="d-flex w-75 mx-auto mt-4">
-                <p>{prepareExams1}</p>
-              </div>
+            <div>
+              <h1 className="font-weight-bold mb-4">{prepareExams}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{prepareExams1}</p>
+            </div>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
-              <CImg src={img.prepareExamsImg} width={290} height={480}/>
+            <CImg src={img.prepareExamsImg} width={290} height={480} />
           </div>
         </div>
         <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
           <div className="col-md-4 featureImagesBackground">
-              <CImg src={img.activeCasesImg} width={290} height={480}/>
+            <CImg src={img.activeCasesImg} width={290} height={480} />
           </div>
           <div className="col-md-6 justify-content-sm-end text-center align-self-center">
-              <div>
-                <h1 className="font-weight-bold mb-4">
-                  {activeCases}
-                </h1>
-              </div>
-              <div className="d-flex w-75 mx-auto mt-4">
-                <p>{activeCases1}</p>
-              </div>
+            <div>
+              <h1 className="font-weight-bold mb-4">{activeCases}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{activeCases1}</p>
+            </div>
           </div>
         </div>
         <div className="d-flex row justify-content-center Mt--50">
           <div className="col-md-6 text-center align-self-center">
-              <div>
-                <h1 className="font-weight-bold mb-4">
-                  {universityCirculum}
-                </h1>
-              </div>
-              <div className="d-flex w-75 mx-auto mt-4">
-                <p>{universityCirculum1}</p>
-              </div>
+            <div>
+              <h1 className="font-weight-bold mb-4">{universityCirculum}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{universityCirculum1}</p>
+            </div>
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
-              <CImg src={img.universityCirculumImg} width={290} height={480}/>
+            <CImg src={img.universityCirculumImg} width={290} height={480} />
           </div>
         </div>
-    </div>
+      </div>
     </div>
   );
 }
