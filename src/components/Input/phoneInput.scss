@@ -1,7 +1,8 @@
 @import '../../scss/variables';
 
-.Components___Input {
+.Components___PhoneInput {
   position: relative;
+  width: 100%;
 
   .Input__Label {
     margin-bottom: 4px;
@@ -60,22 +61,10 @@
     color: $error;
   }
 
-  ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
+  input::-webkit-input-placeholder {
     font-size: 12px !important;
-    font-weight: 300 !important;
-  }
-
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    font-size: 12px !important;
-    font-weight: 300 !important;
-  }
-
-  ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    font-size: 12px !important;
-    font-weight: 300 !important;
+    font: 300 !important;
+    font-family: 'Open Sans', sans-serif !important;
   }
 
 }

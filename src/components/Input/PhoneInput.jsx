@@ -10,7 +10,7 @@ function PhoneInput({
   icon, labelText, className, errorText, isReadonly, ...restProps
 }) {
   return (
-    <div className="Components___Input">
+    <div className="Components___PhoneInput">
       {
         labelText
         && <div className={`Input__Label ${errorText && 'Error'}`}>{labelText}</div>
