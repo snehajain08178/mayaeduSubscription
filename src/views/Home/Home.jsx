@@ -136,7 +136,7 @@ function Home() {
             <div>
               <h1 className="font-weight-bold mb-4">{activeCases}</h1>
             </div>
-            <div className="d-flex w-75 mx-auto mt-4">
+            <div className="d-flex w-50 mx-auto mt-4 text-center">
               <p>{activeCases1}</p>
             </div>
           </div>
