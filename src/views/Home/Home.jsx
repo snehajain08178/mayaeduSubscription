@@ -43,13 +43,13 @@ function Home() {
                 avgTypingDelay={100}
               >
                 <p className="text-white font-weight-bold Font-Size--48px">
-                  MayaEDU, a unique clinical reasoning tool
+                  MayaEDU clinical reasoning
                 </p>
                 <span className="mt-5">
                   <h3 className="text-primary">
-                    Medical schools now have a truly engaging learning tool <br /> for
-                    their students utilizing AI & an innovative flipped <br />
-                    classroom method.
+                    Medical schools now have a truly engaging learning tool
+                    <br /> utilizing AI & an innovative flipped <br />
+                    classroom design.
                   </h3>
                 </span>
               </Typist>
@@ -78,8 +78,8 @@ function Home() {
               <div className="ribbon mb-5">{conversationalInterface}</div>
               <CImg src={SVG.conversationalIcon} />
               <div className="mt-5 mb-3">
-                <p>{conversationalInterface1}</p>
                 <p>{conversationalInterface2}</p>
+                <p>{conversationalInterface1}</p>
               </div>
             </div>
             <div className="col-sm View__Feature__Card border">
@@ -102,19 +102,6 @@ function Home() {
         </div>
       </div>
       <div className="Layouts__HomePage text-primary">
-        <div className="d-flex row justify-content-center Mt--50">
-          <div className="col-md-6 text-center align-self-center">
-            <div>
-              <h1 className="font-weight-bold mb-4">{patientDiagnosis}</h1>
-            </div>
-            <div className="d-flex w-75 mx-auto mt-4">
-              <p>{patientDiagnosis1}</p>
-            </div>
-          </div>
-          <div className="col-md-4 justify-content-sm-end featureImagesBackground">
-            <CImg src={img.patientDiagnosis} width={290} height={480} />
-          </div>
-        </div>
         <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
           <div className="col-md-4 featureImagesBackground">
             <CImg src={img.praticeCasesImg} width={290} height={480} />
@@ -142,7 +129,7 @@ function Home() {
           </div>
         </div>
         <div className="d-flex flex-column-reverse flex-sm-row justify-content-center Mt--50">
-          <div className="col-md-4 featureImagesBackground">
+        <div className="col-md-4 featureImagesBackground">
             <CImg src={img.activeCasesImg} width={290} height={480} />
           </div>
           <div className="col-md-6 justify-content-sm-end text-center align-self-center">
@@ -165,6 +152,19 @@ function Home() {
           </div>
           <div className="col-md-4 justify-content-sm-end featureImagesBackground">
             <CImg src={img.universityCirculumImg} width={290} height={480} />
+          </div>
+        </div>
+        <div className="d-flex row justify-content-center Mt--50">
+          <div className="col-md-4 justify-content-sm-end featureImagesBackground">
+            <CImg src={img.patientDiagnosis} width={290} height={480} />
+          </div>
+          <div className="col-md-6 text-center align-self-center">
+            <div>
+              <h1 className="font-weight-bold mb-4">{patientDiagnosis}</h1>
+            </div>
+            <div className="d-flex w-75 mx-auto mt-4">
+              <p>{patientDiagnosis1}</p>
+            </div>
           </div>
         </div>
       </div>
