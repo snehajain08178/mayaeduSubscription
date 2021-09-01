@@ -7,11 +7,8 @@ import endpoints from '../../routes/endpoints';
 import './home.scss';
 import '../../scss/styles.scss';
 import {
-  conversationalInterface,
   clinicalAlgorithms,
   medicalKnowledge,
-  conversationalInterface1,
-  conversationalInterface2,
   clinicalAlgorithms1,
   clinicalAlgorithms2,
   medicalKnowledge1,
@@ -43,7 +40,7 @@ function Home() {
                 avgTypingDelay={100}
               >
                 <p className="text-white font-weight-bold Font-Size--48px">
-                  MayaEDU clinical reasoning
+                  MayaEDU, clinical reasoning
                 </p>
                 <span className="mt-5">
                   <h3 className="text-primary">
@@ -74,14 +71,6 @@ function Home() {
         </div>
         <div className="container" style={{ marginTop: '50px' }}>
           <div className="row">
-            <div className="col-sm View__Feature__Card border">
-              <div className="ribbon mb-5">{conversationalInterface}</div>
-              <CImg src={SVG.conversationalIcon} />
-              <div className="mt-5 mb-3">
-                <p>{conversationalInterface2}</p>
-                <p>{conversationalInterface1}</p>
-              </div>
-            </div>
             <div className="col-sm View__Feature__Card border">
               <div className="ribbon mb-5">{clinicalAlgorithms}</div>
               <CImg src={SVG.algorithmIcon} />
@@ -136,7 +125,7 @@ function Home() {
             <div>
               <h1 className="font-weight-bold mb-4">{activeCases}</h1>
             </div>
-            <div className="d-flex w-75 mx-auto mt-4">
+            <div className="d-flex w-50 mx-auto mt-4 text-center">
               <p>{activeCases1}</p>
             </div>
           </div>
