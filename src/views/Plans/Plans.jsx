@@ -149,7 +149,7 @@ function Plans({
               </div>
               <div className="col-12 col-md-6 px-4">
                 <Card className="p-6 my-4 bg-white View_Plan">
-                  <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Anually</h4>
+                  <h4 className="font-weight-bold text-primary mx-auto mt-4">Basic-Annually</h4>
                   <div className="col-6 col-md-4 mx-auto py-4">
                     <CircularProgressbar value={1} maxValue={1} text={`${currencySign[basicMonthly.currency]} ${basicAnually.amount / 100}`}
                       styles={buildStyles({

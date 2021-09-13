@@ -133,12 +133,15 @@ const Cards = ({
     }
     if (val.pmId === 'NEW_PM_ID') {
       setLoading(true);
-      const { paymentMethod } = await stripe.createPaymentMethod({
+      stripe.createPaymentMethod({
         type: 'card',
         card: elements.getElement(CardNumberElement),
+      }).then((paymentMethodValue) => {
+        pmId = paymentMethodValue.id;
+      }).catch((err) => {
+        notifyAction(err);
       });
       setLoading(false);
-      pmId = paymentMethod.id;
     } else if (val.pmId) {
       pmId = val.pmId;
     } else {

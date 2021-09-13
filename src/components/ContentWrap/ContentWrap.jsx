@@ -29,4 +29,5 @@ ContentWrap.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   children: PropTypes.element.isRequired,
   style: PropTypes.object,
+  isError: PropTypes.bool,
 };
